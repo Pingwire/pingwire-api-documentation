@@ -1,61 +1,84 @@
 openapi: 3.0.0
 info:
-  title: Moank Broker API
+  title: Pingwire API
   version: 1.0.0
   description: |
-    The Moank Broker API can be used by loan brokers with an active collaboration with Moank. With this API a broker will be able to send Moank new applications and receive from Moank a loan offer. Once the end customer has accepted Moank's offer, the broker can use the API to notify Moank and trigger the final part of the customer's journey.
+    The Pingwire API can be used by companies in active collaboration with Pingwire AB.
 
-    Some optional endpoints are provided to enable a broker to update an existing application as well as notifying Moank when an end customer has rejected Moank's offer.
-
-    # Test objects
-
-    Test objects can be used in the staging environment in order to test specific flow. If one of the applicant of the application has its `nationalId` equal to one of the test object, the decision returned by Moank will always be the same one as described in the following table:
-
-    National id  |Decision
-    -------------|--------
-    199001011114 |`granted`
-    199001019992 |`declined`
-
-    # Callbacks
-
-    Moank can send callbacks to a Broker when an application status is updated. The events that can be reported via callbacks are described in the following table:
-
-    Event |Description  |Extra information
-    ------|-------------|-----------------
-    `debt-notice-sent`  |Triggered when Moank sends the debt notice to the customer. This mean that the customer went through all the routine checks performed by Moank's underwriters.|-
-    `debt-notice-signed`|Triggered when the customer has signed his debt notice using BankID.  |-
-    `paid-out`          |Triggered when Moank has paid out the money to the end customer.  |Paid out amount
-    `denied`            |Triggered when Moank denies a customer because of one of the routine checks performed by Moank's underwriters. |-
-
-    The actual payload and event names sent during the callback can be customised for each broker in order to match their own specifications.
-
-    # Sequence Diagram
-    <a href="./broker-sequence-diagram.svg" target="_blank">![Sequence Diagram](./broker-sequence-diagram.svg)</a>
+  x-logo:
+    url: './assets/pingwire-green.png'
+    altText: Pingwire
 servers:
-- url: https://api.moank.se/api/hooks/{brokerName}
+- url: https://api.pingwire.io/
   description: Production server
   variables:
     brokerName:
       default: generic
       description: Same as the basic auth username
-- url: https://staging.api.moank.se/api/hooks/{brokerName}
+- url: https:/api.pingwire.io/
   description: Staging server
   variables:
     brokerName:
       default: generic
       description: Same as the basic auth username
+x-tagGroups:
+  - name: Entities
+    tags:
+      - Individuals
+      - Businesses
 paths:
-  /:
-    post:
+  /individuals/: 
+    get: 
       tags:
-      - Required endpoints
-      summary: Create application
-      description: Send a new application to Moank and receive Moank's decision and offer
-      requestBody:
-        $ref: "#/components/requestBodies/create"
+        - Individuals
+      summary: List inviduals
+      description: Recive list of indiviuduals saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - firstName
+          - lastName
+          - swedishSocialSecurityNumber
+          - riskScore
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: _start
+        description: The start number of the individuals list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the individuals list.
+        required: false
+        example: '10'
+        schema:
+          type: number
       responses:
         200:
-          $ref: "#/components/responses/create"
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/individual"
         400:
           description: Invalid parameters
           content:
@@ -70,44 +93,37 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - basic_auth: []
-
-  /{applicationId}/accept:
     post:
       tags:
-      - Required endpoints
-      summary: Accept offer
-      description: Notify that customer accepted the offer. Possible to provide bank account information.
-      parameters:
-      - name: applicationId
-        in: path
-        description: Application's id as set in the create response object
-        required: true
-        schema:
-          type: string
+      - Individuals
+      summary: Create individual
+      description: Create a new individual.
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               type: object
+              required:
+              - customId
               properties:
-                clearingNumber:
-                  type: string
-                  description: Clearing number of the customer's bank account. 4 or 5 digits depending of the bank (e.g 7428 or 86439)
-                  pattern: /^\d{4,5}$/
-                  deprecated: true
-                accountNumber:
-                  type: string
-                  description: Customer's bank account number, excluding the clearing number
-                  pattern: /^\d{7,10}$/
-                  deprecated: true
+                    customId:
+                      type: string
+                      description: The custom id can be any id that the creater would like to identify the individual with.
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    swedishSocialSecurityNumber:
+                      type: string
+                      format: YYYYMMDDXXXX
+                
       responses:
         200:
           description: Successful operation
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/individual"
         400:
           description: Invalid parameters
           content:
@@ -122,33 +138,85 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - basic_auth: []
-
-  /{applicationId}/reject:
-    post:
+  /individuals/{id}: 
+    get: 
       tags:
-      - Optional endpoints
-      summary: Reject offer
-      description: Notify that customer rejected the offer when possible to know
+        - Individuals
+      summary: Indvidual
+      description: Recive individual by id saved in the database.
       parameters:
-      - name: applicationId
-        in: path
-        description: Application's id as set in the create response object
+      - in: path
+        name: id
+        description: Individual objectId
+        example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
           type: string
-      requestBody:
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/individual"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - basic_auth: []
+    put:
+      tags:
+      - Individuals
+      summary: Update individual
+      parameters:
+      - in: path
+        name: id
+        description: Individual objectId
+        example: 620a2958bfc1d7a803398a6d
         required: true
+        schema:
+          type: string
+      description: Create a new individual.
+      requestBody:
         content:
           application/json:
             schema:
               type: object
+              required:
+              - customId
+              properties:
+                    customId:
+                      type: string
+                      description: The custom id can be any id that the creater would like to identify the individual with.
+                    firstName:
+                      type: string
+                    lastName:
+                      type: string
+                    swedishSocialSecurityNumber:
+                      type: string
+                      format: YYYYMMDDXXXX
+                    status:
+                      type: string
+                      enum:
+                      - Avilable
+                      - Blocked
+                
       responses:
         200:
           description: Successful operation
           content:
             application/json:
               schema:
-                type: object
+                $ref: "#/components/schemas/individual"
         400:
           description: Invalid parameters
           content:
@@ -163,25 +231,133 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - basic_auth: []
-
-  /{applicationId}/update:
+  /businesses/: 
+    get: 
+      tags:
+        - Businesses
+      summary: List businesses
+      description: Recive list of businesses saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - name
+          - swedishOrganisationNumber
+          - riskScore
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: _start
+        description: The start number of the businesses list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the businesses list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/business"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - basic_auth: []
     post:
       tags:
-      - Optional endpoints
-      summary: Update application
-      description: Update an application already sent if a customer wishes to update his details
+      - Businesses
+      summary: Create business
+      description: Create a new business.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customId
+              properties:
+                    customId:
+                      type: string
+                      description: The custom id can be any id that the creater would like to identify the business with.
+                    name:
+                      type: string
+                    swedishOrganisationNumber:
+                      type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/business"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - basic_auth: []
+  /businesses/{id}: 
+    get: 
+      tags:
+        - Businesses
+      summary: Business
+      description: Recive business by id saved in the database.
       parameters:
-      - name: applicationId
-        in: path
-        description: Application's id as set in the create response object
+      - in: path
+        name: id
+        description: Business objectId
+        example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
           type: string
-      requestBody:
-        $ref: "#/components/requestBodies/create"
       responses:
         200:
-          $ref: "#/components/responses/create"
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/business"
         400:
           description: Invalid parameters
           content:
@@ -196,271 +372,163 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - basic_auth: []
-
+    put:
+      tags:
+      - Businesses
+      summary: Update businesses
+      parameters:
+      - in: path
+        name: id
+        description: Business objectId
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      description: Create a new businesses.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - customId
+              properties:
+                    customId:
+                      type: string
+                      description: The custom id can be any id that the creater would like to identify the business with.
+                    name:
+                      type: string
+                    swedishOrganisationNumber:
+                      type: string
+                    status:
+                      type: string
+                      enum:
+                      - Avilable
+                      - Blocked
+                
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/business"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - basic_auth: []
 components:
-  requestBodies:
-    create:
-      required: true
-      description: Success
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - referenceId
-            - amount
-            - amountToRefinance
-            - repaymentTime
-            - applicant
-            properties:
-              referenceId:
-                type: string
-                description: Broker reference id for the application
-              amount:
-                type: number
-                description: Amount requested to borrow in SEK (including refinancing)
-                minimum: 0
-                exclusiveMinimum: true
-                example: 100000
-              amountToRefinance:
-                type: number
-                description: Amount used exclusively to refinance existing loans in SEK
-                minimum: 0
-                example: 100000
-              repaymentTime:
-                type: number
-                description: Repayment time requested in months
-                minimum: 0
-                exclusiveMinimum: true
-                example: 24
-              purpose:
-                type: string
-                description: Purpose of the loan. The enum values will be provided by the broker so that Moank can receive the raw data.
-                enum:
-                - down-payment
-                - consolidate-loans
-                - vehicle
-                - rennovation
-                - travel
-                - shopping
-                - studies
-                - services
-                - financial-security
-                - health
-                - other
-              applicant:
-                $ref: "#/components/schemas/applicant"
-              coApplicant:
-                $ref: "#/components/schemas/applicant"
-
-  responses:
-    create:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            type: object
-            required:
-            - id
-            - decision
-            properties:
-              id:
-                type: string
-                description: Reference id of the application in Moank's system
-              decision:
-                type: string
-                description: Moank's decision regarding the application
-                enum:
-                - granted
-                - declined
-              signLink:
-                type: string
-                description: Link that can be used to redirect the applicant if he/she chooses to go further with the offer
-              loanTerms:
-                $ref: "#/components/schemas/loanTerms"
-
   schemas:
-    loanTerms:
-      type: object
-      required:
-      - amount
-      - amountToRefinance
-      - nominalRate
-      - effectiveRate
-      - repaymentTime
-      - monthlyPayment
-      - startupFee
-      - monthlyFee
-      - invoiceFee
-      - administrationFee
-      - totalCost
-      properties:
-        amount:
-          type: number
-          description: Amount to be paid out (including refinancing)
-          minimum: 0
-          exclusiveMinimum: true
-        amountToRefinance:
-          type: number
-          description: Amount to be used for refinancing previous debts
-          minimum: 0
-        nominalRate:
-          type: number
-          description: Yearly nominal rate of the loan in percent
-          minimum: 0
-          exclusiveMinimum: true
-        effectiveRate:
-          type: number
-          description: Yearly effective rate of the loan in percent
-          minimum: 0
-          exclusiveMinimum: true
-        repaymentTime:
-          type: number
-          description: Repayment time of the loan in months
-          minimum: 0
-          exclusiveMinimum: true
-        monthlyPayment:
-          type: number
-          description: Monthly payment in SEK
-          minimum: 0
-          exclusiveMinimum: true
-        startupFee:
-          type: number
-          description: One time fee to be paid at the beginning of the loan in SEK
-          minimum: 0
-        monthlyFee:
-          type: number
-          description: Fee to be paid every month until loan fully re-paid in SEK
-          minimum: 0
-          deprecated: true
-        administrationFee:
-          type: number
-          description: Fee to be paid every month until loan fully re-paid in SEK
-          minimum: 0
-        invoiceFee:
-          type: number
-          description: Fee that will be charged for each invoice if the customer does not allow direct debit from their bank account
-          minimum: 0
-        totalCost:
-          type: number
-          description: Total cost of loan including all fees, amortisation and interest if following the payment plan
-          minimum: 0
-          exclusiveMinimum: true
-    applicant:
-      type: object
-      required:
-      - nationalId
-      - email
-      - phone
-      properties:
-        nationalId:
-          type: string
-          format: YYYYMMDDXXXX
-          description: Swedish personnummer in format YYYYMMDDXXXX
-          example: "197202104332"
-        email:
-          type: string
-          description: Email of the applicant. Used to communicate loan agreement
-          pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i
-          example: test@example.com
-        phone:
-          type: string
-          description: Phone number of the applicant (preferably mobile phone). Used to communicate loan agreement if it is a mobile phone number
-          format: international or swedish format
-          example: "+46731234567"
-        firstName:
-          type: string
-          description: First name of the applicant
-          example: Anna
-        lastName:
-          type: string
-          description: Last name of the applicant
-          example: Testsson
-        streetAddress:
-          type: string
-          description: Street part of the applicant's address
-          example: Kungsgatan 10
-        postalCode:
-          type: string
-          description: Postal code of the applicant
-          example: "10000"
-        city:
-          type: string
-          description: Town of the applicant
-          example: Stockholm
-        monthlyIncome:
-          type: number
-          description: Monthly income of the applicant before taxes in SEK
-          example: 30000
-          minimum: 0
-        housingCost:
-          type: number
-          description: Monthly cost related to housing in SEK (e.g. monthly rent, monthly housing fees and monthly cost of mortgage). In case the applicant shares the cost with someone else, only his part should be reported.
-          example: 8000
-          minimum: 0
-        loanCost:
-          type: number
-          description: Monthly cost for repaying other loans in SEK (Does not include mortgage as it is already included in the housing cost)
-          example: 1500
-          minimum: 0
-        mortgage:
-          type: number
-          description: Total amount of mortgage for that customer in SEK
-          example: 2500000
-          minimum: 0
-        kids:
-          type: number
-          description: Number of children of the applicant under 18
-          example: 2
-          minimum: 0
-        civilStatus:
-          type: string
-          description: Civil status of the applicant. The enum values will be provided by the broker so that Moank can receive the raw data.
-          enum:
-          - single
-          - partner
-          - married
-          - divorced
-          - widowed
-        accomodationType:
-          type: string
-          description: Type of accomodation of the applicant. The enum values will be provided by the broker so that Moank can receive the raw data.
-          enum:
-          - apartment
-          - house
-          - rent
-          - roommate
-        employmentType:
-          type: string
-          description: Type of employment of the applicant. The enum values will be provided by the broker so that Moank can receive the raw data.
-          enum:
-          - employee (deprecated)
-          - extra-job
-          - other
-          - pensioner
-          - permanent-employment
-          - probation-employment
-          - selfemployed
-          - student
-          - temporary-employment
-          - unemployed
-        employmentSince:
-          type: string
-          description: Since when was the applicant is in this employment situation
-          format: date
-        employmentTo:
-          type: string
-          description: Date until when the applicant is employed
-          format: date
-        employerName:
-          type: string
-          description: Name of the employer
-          example: Moank AB
-        employerPhone:
-          type: string
-          description: Phone of the employer
-          format: international or swedish format
-          example: "0731234567"
+    individual:
+     type: object
+     properties:
+      id:
+        type: string
+      customId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      swedishSocialSecurityNumber:
+        type: string
+      riskScore:
+        type: integer
+        minimum: 1
+        maximum: 10
+      pep:
+        type: string
+        enum: 
+        - Yes
+        - No 
+      sanctionList:
+        type: string
+        enum: 
+        - Avilable
+        - None 
+      spar:
+        type: boolean
+      kycOnboarding:
+        description: Date, iso 8601 format
+        type: string
+      kycLatestRequest:
+        description: Date, iso 8601 format
+        type: string
+      transactions:
+        description: Date, iso 8601 format
+        type: string
+      status: 
+        type: string
+        enum: 
+        - Avilable
+        - Blocked 
+      relatedCompanies: 
+        type: array
+        items: 
+          type: object
+          properties: 
+            name:
+              type: string
+            companyId:
+              type: string
+            id:
+              type: string
+            roles:
+              type: array
+              items: 
+                type: string
+    business:
+     type: object
+     properties:
+      id:
+        type: string
+      customId:
+        type: string
+      name:
+        type: string
+      swedishOrganisationNumber:
+        type: string
+      riskScore:
+        type: integer
+        minimum: 1
+        maximum: 10
+      kycOnboarding:
+        description: Date, iso 8601 format
+        type: string
+      kycLatestRequest:
+        description: Date, iso 8601 format
+        type: string
+      transactions:
+        description: Date, iso 8601 format
+        type: string
+      status: 
+        type: string
+        enum: 
+        - Avilable
+        - Blocked 
+      relatedIndividuals: 
+        type: array
+        items: 
+          type: object
+          properties: 
+            name:
+              type: string
+            id:
+              type: string
+            relation:
+              type: array
+              items: 
+                type: string
     invalidBody:
       type: object
       required:

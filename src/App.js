@@ -11,7 +11,16 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <RedocStandalone specUrl="open-api.yml" />
+      <RedocStandalone
+        specUrl="open-api.yml"
+        options={{
+          nativeScrollbars: true,
+          theme: {
+            colors: { primary: { main: '#388e3c' } },
+            logo: { gutter: '15%' },
+          },
+        }}
+      />
     </>
   );
 }
