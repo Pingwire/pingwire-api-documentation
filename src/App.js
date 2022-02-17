@@ -2,7 +2,7 @@ import { RedocStandalone } from 'redoc';
 
 function App() {
   return (
-    <RedocStandalone specUrl="https://docs.moank.se/brokers.yml"/>
+    <RedocStandalone specUrl="open-api.yml"/>
   );
 }
 
