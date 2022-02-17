@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <RedocStandalone specUrl="open-api.yml"/>
+      <RedocStandalone specUrl="open-api.yml" />
     </>
   );
 }
