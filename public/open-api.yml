@@ -22,6 +22,9 @@ servers:
       default: generic
       description: Same as the basic auth username
 x-tagGroups:
+  - name: Get started
+    tags:
+      - Auth
   - name: Entities
     tags:
       - Individuals
@@ -33,6 +36,52 @@ x-tagGroups:
       - Cases
       - Requests
 paths:
+  auth/login/: 
+    post:
+      tags:
+      - Auth
+      summary: Recive access token
+      description: |
+       The Pingwire API uses OAuth as an authentication mechanism. This operation allows you to retrieve an access token by posting clientId and clientSecret as request body. 
+       
+       This token can be used on subsequent API calls to authenticate you. Operations that support or require authentication will expect the access token in an HTTP Authorization header like this: `Authorization: Bearer <access token>`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - clientId
+              - clientSecret
+              properties:
+                    clientId:
+                      type: string
+                    clientSecret:
+                      type: string
+                
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                token:
+                  type: string
+                 
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
   /individuals/: 
     get: 
       tags:
@@ -98,7 +147,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Individuals
@@ -143,7 +192,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /individuals/{id}: 
     get: 
       tags:
@@ -178,7 +227,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     put:
       tags:
       - Individuals
@@ -236,7 +285,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /businesses/: 
     get: 
       tags:
@@ -301,7 +350,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Businesses
@@ -342,7 +391,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /businesses/{id}: 
     get: 
       tags:
@@ -377,7 +426,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     put:
       tags:
       - Businesses
@@ -431,7 +480,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /cars/: 
     get: 
       tags:
@@ -496,7 +545,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Cars
@@ -539,7 +588,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /cars/{id}: 
     get: 
       tags:
@@ -574,7 +623,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     put:
       tags:
       - Cars
@@ -630,7 +679,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /pings/: 
     get: 
       tags:
@@ -707,7 +756,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Pings
@@ -749,7 +798,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /pings/{id}: 
     get: 
       tags:
@@ -784,7 +833,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /pings/{id}/status:
     put:
       tags:
@@ -841,7 +890,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /pings/{id}/comment:
     put:
       tags:
@@ -885,7 +934,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /cases/: 
     get: 
       tags:
@@ -959,7 +1008,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
 
   /cases/{id}: 
     get: 
@@ -995,7 +1044,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /cases/{id}/status:
     put:
       tags:
@@ -1042,7 +1091,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /cases/{id}/comment:
     put:
       tags:
@@ -1086,7 +1135,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /requests/: 
     get: 
       tags:
@@ -1162,7 +1211,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Requests
@@ -1193,7 +1242,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /requests/{id}: 
     get: 
       tags:
@@ -1228,7 +1277,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /requests/{id}/recommendation:
     put:
       tags:
@@ -1279,7 +1328,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /requests/{id}/comment:
     put:
       tags:
@@ -1323,7 +1372,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
 
 components:
   schemas:
@@ -1588,7 +1637,6 @@ components:
           items:
             type: string
             description: Optional list of errors
-            example: applicant.0.phone is a required field and must be a valid phone number in swedish or international format
     errorBody:
       type: object
       required:
@@ -1881,6 +1929,7 @@ components:
 
 
   securitySchemes:
-    basic_auth:
+    bearerAuth:
       type: "http"
-      scheme: "basic"
+      scheme: "bearerToken"
+    
