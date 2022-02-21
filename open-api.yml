@@ -22,11 +22,66 @@ servers:
       default: generic
       description: Same as the basic auth username
 x-tagGroups:
+  - name: Get started
+    tags:
+      - Auth
   - name: Entities
     tags:
       - Individuals
       - Businesses
+      - Cars
+  - name: Other resources
+    tags:
+      - Pings
+      - Cases
+      - Requests
 paths:
+  auth/login/: 
+    post:
+      tags:
+      - Auth
+      summary: Recive access token
+      description: |
+       The Pingwire API uses OAuth as an authentication mechanism. This operation allows you to retrieve an access token by posting clientId and clientSecret as request body. 
+       
+       This token can be used on subsequent API calls to authenticate you. Operations that support or require authentication will expect the access token in an HTTP Authorization header like this: `Authorization: Bearer <access token>`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - clientId
+              - clientSecret
+              properties:
+                    clientId:
+                      type: string
+                    clientSecret:
+                      type: string
+                
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               type: object
+               properties:
+                token:
+                  type: string
+                 
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
   /individuals/: 
     get: 
       tags:
@@ -92,7 +147,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Individuals
@@ -137,7 +192,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /individuals/{id}: 
     get: 
       tags:
@@ -147,7 +202,7 @@ paths:
       parameters:
       - in: path
         name: id
-        description: Individual objectId
+        description: Individual object id
         example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
@@ -172,7 +227,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     put:
       tags:
       - Individuals
@@ -180,12 +235,12 @@ paths:
       parameters:
       - in: path
         name: id
-        description: Individual objectId
+        description: Individual object id
         example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
           type: string
-      description: Create a new individual.
+      description: Update a individual.
       requestBody:
         content:
           application/json:
@@ -230,7 +285,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /businesses/: 
     get: 
       tags:
@@ -295,7 +350,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     post:
       tags:
       - Businesses
@@ -336,7 +391,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
   /businesses/{id}: 
     get: 
       tags:
@@ -346,7 +401,7 @@ paths:
       parameters:
       - in: path
         name: id
-        description: Business objectId
+        description: Business object id
         example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
@@ -371,7 +426,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
     put:
       tags:
       - Businesses
@@ -379,12 +434,12 @@ paths:
       parameters:
       - in: path
         name: id
-        description: Business objectId
+        description: Business object id
         example: 620a2958bfc1d7a803398a6d
         required: true
         schema:
           type: string
-      description: Create a new businesses.
+      description: Update a businesses.
       requestBody:
         content:
           application/json:
@@ -405,7 +460,6 @@ paths:
                       enum:
                       - Avilable
                       - Blocked
-                
       responses:
         200:
           description: Successful operation
@@ -426,7 +480,900 @@ paths:
               schema:
                 $ref: "#/components/schemas/errorBody"
       security:
-      - basic_auth: []
+      - bearerAuth: []
+  /cars/: 
+    get: 
+      tags:
+        - Cars
+      summary: List cars
+      description: Recive list of cars saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - registrationNumber
+          - registrationCountry
+          - carModel
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: _start
+        description: The start number of the cars list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the cars list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/car"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Cars
+      summary: Create cars
+      description: Create a new cars.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - registrationNumber
+              - registrationCountry
+              properties:
+                    registrationNumber:
+                      type: string
+                    registrationCountry:
+                      type: string
+                    vinCode:
+                      type: string
+                    carModel:
+                      type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /cars/{id}: 
+    get: 
+      tags:
+        - Cars
+      summary: Car
+      description: Recive car by id saved in the database.
+      parameters:
+      - in: path
+        name: id
+        description: Car object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/car"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+    put:
+      tags:
+      - Cars
+      summary: Update car
+      parameters:
+      - in: path
+        name: id
+        description: Car object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      description: Update car.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - registrationNumber
+              - registrationCountry
+              properties:
+                  registrationNumber:
+                    type: string
+                  registrationCountry:
+                    type: string
+                  vinCode:
+                    type: string
+                  carModel:
+                    type: string
+                  status:
+                    type: string
+                    enum:
+                    - Avilable
+                    - Blocked
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /pings/: 
+    get: 
+      tags:
+        - Pings
+      summary: List pings
+      description: Recive list of pings saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - createdAt
+          - description
+          - entities
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: status
+        description: Filter list of pings by status.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum: 
+          - pending
+          - resolved 
+          - confirmed 
+          - ignored 
+      - in: query
+        name: _start
+        description: The start number of the pings list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the pings list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ping"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Pings
+      summary: Create pings
+      description: Create a new pings.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - entities
+              - description
+              properties:
+                    entities:
+                      type: array
+                      description: List of entitity object ids.
+                      items:
+                        type: string
+                    description:
+                      type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ping"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /pings/{id}: 
+    get: 
+      tags:
+        - Pings
+      summary: Ping
+      description: Recive ping by id saved in the database.
+      parameters:
+      - in: path
+        name: id
+        description: Ping object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/ping"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /pings/{id}/status:
+    put:
+      tags:
+      - Pings
+      summary: Update ping status
+      parameters:
+      - in: path
+        name: id
+        description: Ping object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              - comment
+              - numberOfDaysIgnoreRule
+              properties:
+                numberOfDaysIgnoreRule:
+                 type: number
+                 description: Number of days in the future that a similar ping should not be created.
+                 minimum: 0
+                comment:
+                  type: string
+                status:
+                  type: string
+                  enum: 
+                  - pending
+                  - resolved 
+                  - confirmed 
+                  - ignored 
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ping"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /pings/{id}/comment:
+    put:
+      tags:
+      - Pings
+      summary: Comment on ping
+      parameters:
+      - in: path
+        name: id
+        description: Ping object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - comment
+              properties:
+                comment:
+                  type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ping"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /cases/: 
+    get: 
+      tags:
+        - Cases
+      summary: List cases
+      description: Recive list of cases saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - createdAt
+          - entities
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: status
+        description: Filter list of cases by status.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum: 
+          - Open
+          - Closed 
+      - in: query
+        name: _start
+        description: The start number of the cases list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the cases list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/case"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+
+  /cases/{id}: 
+    get: 
+      tags:
+        - Cases
+      summary: Case
+      description: Recive case by id saved in the database.
+      parameters:
+      - in: path
+        name: id
+        description: Case object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/case"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /cases/{id}/status:
+    put:
+      tags:
+        - Cases
+      summary: Update case status
+      parameters:
+      - in: path
+        name: id
+        description: Case object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              properties:
+                status:
+                  type: string
+                  enum: 
+                  - Open
+                  - Closed 
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/case"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /cases/{id}/comment:
+    put:
+      tags:
+        - Cases
+      summary: Comment on case
+      parameters:
+      - in: path
+        name: id
+        description: Case object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - comment
+              properties:
+                comment:
+                  type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/case"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /requests/: 
+    get: 
+      tags:
+        - Requests
+      summary: List requests
+      description: Recive list of requests saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - createdAt
+          - entity
+          - requestType
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: recommendation
+        description: Filter list of requests by recommendation.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum: 
+          - block
+          - review
+          - proceed
+      - in: query
+        name: _start
+        description: The start number of the cases list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the cases list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Request'
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - Requests
+      summary: Create request
+      description: Create a new request.
+      requestBody:
+        content:
+          application/json:
+            schema:
+             $ref: "#/components/schemas/RequestBody"
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /requests/{id}: 
+    get: 
+      tags:
+        - Requests
+      summary: Request
+      description: Recive request by id saved in the database.
+      parameters:
+      - in: path
+        name: id
+        description: Request object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Request"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /requests/{id}/recommendation:
+    put:
+      tags:
+        - Requests
+      summary: Update recommendation
+      description: Update request recommendation from review.
+      parameters:
+      - in: path
+        name: id
+        description: Case object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - recommendation
+              - comment
+              properties:
+                recommendation:
+                  type: string
+                  enum: 
+                  - block
+                  - proceed
+                comment:
+                  type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /requests/{id}/comment:
+    put:
+      tags:
+        - Requests
+      summary: Comment on request
+      parameters:
+      - in: path
+        name: id
+        description: Case object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - comment
+              properties:
+                comment:
+                  type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Request"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+
 components:
   schemas:
     individual:
@@ -529,6 +1476,149 @@ components:
               type: array
               items: 
                 type: string
+    car:
+      type: object
+      properties:
+        id:
+          type: string
+        registrationNumber:
+          type: string
+        registrationCountry:
+          type: string
+        vinCode:
+          type: string
+        carModel:
+          type: string
+        createdAt:
+          description: Date, iso 8601 format
+          type: string
+        riskScore:
+          type: integer
+          minimum: 1
+          maximum: 10
+        status: 
+          type: string
+          enum: 
+          - Avilable
+          - Blocked 
+    ping:
+      type: object
+      properties:
+        id:
+          type: string
+        entities:
+          type: array
+          items: 
+            type: object
+            properties:
+              id: 
+                type: string
+                description: object id
+              type: 
+                type: string
+                enum:
+                - Individual
+                - Business
+                - Car
+        description:
+          type: string
+        comments:
+          type: array
+          items: 
+            type: object
+            properties:
+              member: 
+                type: string
+                description: Object id of the member who created the comment.
+              message: 
+                type: string
+                description: The comment.
+              date:
+                type: string
+                description: Date, iso 8601 format, for when the comment was created.
+        rule:
+          type: string
+          description: Object id of the rule that triggerd the ping creation.
+        expiryDate:
+          type: string
+          description: Date, iso 8601 format, for when the rule should create similar ping.
+        createdAt:
+          description: Date, iso 8601 format
+          type: string
+        score:
+          type: integer
+          minimum: 1
+          maximum: 10
+        status: 
+          type: string
+          enum: 
+          - pending
+          - resolved 
+          - confirmed 
+          - ignored 
+    case:
+      type: object
+      properties:
+        id:
+          type: string
+        entities:
+          type: array
+          items: 
+            type: object
+            properties:
+              id: 
+                type: string
+                description: object id
+              type: 
+                type: string
+                enum:
+                - Individual
+                - Business
+                - Car
+        requests:
+          type: array
+          items: 
+            type: string
+            description: list of request object ids.
+        pings:
+          type: array
+          items: 
+            type: string
+            description: list of pings object ids.
+        comments:
+          type: array
+          items: 
+            type: object
+            properties:
+              member: 
+                type: string
+                description: Object id of the member who created the comment.
+              message: 
+                type: string
+                description: The comment.
+              date:
+                type: string
+                description: Date, iso 8601 format, for when the comment was created.
+        createdAt:
+          description: Date, iso 8601 format
+          type: string
+        files:
+          type: array
+          items: 
+            type: object
+            properties:
+              id: 
+                type: string
+              name: 
+                type: string
+              createdAt:
+                description: Date, iso 8601 format
+                type: string
+        status: 
+          type: string
+          enum: 
+          - Open
+          - Closed 
     invalidBody:
       type: object
       required:
@@ -547,7 +1637,6 @@ components:
           items:
             type: string
             description: Optional list of errors
-            example: applicant.0.phone is a required field and must be a valid phone number in swedish or international format
     errorBody:
       type: object
       required:
@@ -561,8 +1650,286 @@ components:
         message:
           type: string
           description: Main error reason
+    Transaction:
+      description: A representation of a transaction
+      allOf:
+        - $ref: '#/components/schemas/Request'
+        - type: object
+          properties:
+            extraInformation:
+              type: object
+              properties:
+                amount:
+                  type: float
+                  example: 1000
+                date:
+                  type: string
+                  description: Date, iso 8601 format.
+                initiator:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+                  required:
+                  - id
+                  - type
+                  
+                recipient:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+              required:
+               - initiator
+               - recipient
+               - amount
+               - date
+    CarKyc:
+      description: A representation of a dog
+      allOf:
+        - $ref: '#/components/schemas/Request'
+        - type: object
+    CarPurchase:
+      description: A representation of a car purchase request
+      allOf:
+        - $ref: '#/components/schemas/Request'
+        - type: object
+          properties:
+            extraInformation:
+              type: object
+              properties:
+                amount:
+                  type: float
+                date:
+                  type: string
+                  description: Date, iso 8601 format.
+                initiator:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+                  required:
+                  - id
+                  - type
+                  
+                recipient:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+              required:
+               - initiator
+               - recipient
+               - amount
+               - date
+    TransactionBody:
+      description: A representation of a transaction
+      allOf:
+        - $ref: '#/components/schemas/RequestBody'
+        - type: object
+          properties:
+            extraInformation:
+              type: object
+              properties:
+                amount:
+                  type: float
+                  example: 1000
+                date:
+                  type: string
+                  description: Date, iso 8601 format.
+                initiator:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Object id or custom id.
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+                  required:
+                  - id
+                  - type
+                  
+                recipient:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Object id or custom id.
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+              required:
+               - initiator
+               - recipient
+               - amount
+               - date
+    CarKycBody:
+      description: A representation of a dog
+      allOf:
+        - $ref: '#/components/schemas/RequestBody'
+        - type: object
+    CarPurchaseBody:
+      description: A representation of a car purchase request
+      allOf:
+        - $ref: '#/components/schemas/RequestBody'
+        - type: object
+          properties:
+            extraInformation:
+              type: object
+              properties:
+                amount:
+                  type: float
+                date:
+                  type: string
+                  description: Date, iso 8601 format.
+                initiator:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Object id or custom id.
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+                  required:
+                  - id
+                  - type
+                  
+                recipient:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Object id or custom id.
+                    type:
+                      type: string
+                      enum:
+                      - Individual
+                      - Business
+              required:
+               - initiator
+               - recipient
+               - amount
+               - date
+    RequestBody:
+      type: object
+      required:
+        - entity
+        - requestType
+      discriminator:
+        propertyName: requestType
+        mapping:
+          transaction: '#/components/schemas/TransactionBody'
+          carKyc: '#/components/schemas/CarKycBody'
+          carPurchase: '#/components/schemas/CarPurchaseBody'
+      properties:
+        entity:
+          type: object
+          properties:
+            id: 
+              type: string
+              description: Object id or custom id.
+            type: 
+              type: string
+              enum:
+              - Individual
+              - Business
+              - Car
+        requestType:
+          description: Type of request
+          example: carKyc
+          type: string
+    Request:
+      type: object
+      required:
+        - entity
+        - requestType
+      discriminator:
+        propertyName: requestType
+        mapping:
+          transaction: '#/components/schemas/Transaction'
+          carKyc: '#/components/schemas/CarKyc'
+          carPurchase: '#/components/schemas/CarPurchase'
+      properties:
+        entity:
+          type: object
+          properties:
+            id: 
+              type: string
+              description: object id
+            type: 
+              type: string
+              enum:
+              - Individual
+              - Business
+              - Car
+        createdAt: 
+          type: string
+          description: Date, iso 8601 format.
+        step: 
+          type: string
+          enum:
+          - created
+          - info-collected
+          - processed
+          - scored
+          example: scored
+        recommendation:
+          type: string
+          enum:
+          - proceed
+          - review
+          - block
+        comments:
+          type: array
+          items: 
+            type: object
+            properties:
+              member: 
+                type: string
+                description: Object id of the member who created the comment.
+              message: 
+                type: string
+                description: The comment.
+              date:
+                type: string
+                description: Date, iso 8601 format, for when the comment was created.
+
+        requestType:
+          description: Type of request
+          example: carKyc
+          type: string
+
 
   securitySchemes:
-    basic_auth:
+    bearerAuth:
       type: "http"
-      scheme: "basic"
+      scheme: "bearerToken"
+    
