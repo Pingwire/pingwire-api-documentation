@@ -1278,6 +1278,40 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - bearerAuth: []
+    put: 
+      tags:
+        - Requests
+      summary: Reprocess
+      description: Reprocess a request that is under `review`.
+      parameters:
+      - in: path
+        name: id
+        description: Request object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/Request"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
   /requests/{id}/recommendation:
     put:
       tags:
