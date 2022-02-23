@@ -35,6 +35,7 @@ x-tagGroups:
       - Pings
       - Cases
       - Requests
+      - KYC Forms
 paths:
   /auth/login/: 
     post:
@@ -1407,6 +1408,181 @@ paths:
                 $ref: "#/components/schemas/errorBody"
       security:
       - bearerAuth: []
+  /kyc-form/: 
+    get: 
+      tags:
+        - KYC Forms
+      summary: List KYC forms
+      description: Recive list of KYC forms saved in the database.
+      parameters:
+      - in: query
+        name: _sort
+        required: false
+        example: 'id'
+        schema:
+          type: string
+          enum:
+          - id
+          - createdAt
+          - entity
+          - requestType
+      - in: query
+        name: _order
+        description: Order of list (DESC or ASC) based on the sorting parameter.
+        required: false
+        example: 
+        schema:
+          type: string
+          enum:
+          - DESC
+          - ASC
+      - in: query
+        name: entity.id
+        description: Filter list of KYC forms by entity id.
+        required: false
+        example: 
+        schema:
+          type: string
+      - in: query
+        name: _start
+        description: The start number of the KYC forms list.
+        required: false
+        example: '0'
+        schema:
+          type: number
+      - in: query
+        name: _end
+        description: The end number of the KYC forms list.
+        required: false
+        example: '10'
+        schema:
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/kycForm'
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+    post:
+      tags:
+      - KYC Forms
+      summary: Create KYC form
+      description: Create a new KYC form.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - entity
+              properties:
+                  entity:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      type: 
+                        type: string
+                        enum: 
+                        - Individual
+                        - Business
+                  transactions:
+                    type: object
+                    properties:
+                      incoming:
+                        type: object
+                        properties:
+                          monthlyVolume:
+                            type: number
+                          monthlyFrequency:
+                            type: number
+                      outgoing:
+                        type: object
+                        properties:
+                          monthlyVolume:
+                            type: number
+                          monthlyFrequency:
+                            type: number
+                      processed:
+                        type: object
+                        properties:
+                          monthlyVolume:
+                            type: number
+                          monthlyFrequency:
+                            type: number
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/kycForm"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
+  /kyc-form/{id}: 
+    get: 
+      tags:
+        - KYC Forms
+      summary: KYC form
+      description: Recive KYC forms by id saved in the database.
+      parameters:
+      - in: path
+        name: id
+        description: KYC form object id
+        example: 620a2958bfc1d7a803398a6d
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+               $ref: "#/components/schemas/kycForm"
+        400:
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/invalidBody"
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorBody"
+      security:
+      - bearerAuth: []
 
 components:
   schemas:
@@ -1535,6 +1711,46 @@ components:
           enum: 
           - Avilable
           - Blocked 
+    kycForm:
+      type: object
+      properties:
+        entity:
+          type: object
+          properties:
+            id:
+              type: string
+            type: 
+              type: string
+              enum: 
+              - Individual
+              - Business
+        transactions:
+          type: object
+          properties:
+            incoming:
+             type: object
+             properties:
+               monthlyVolume:
+                type: number
+               monthlyFrequency:
+                type: number
+            outgoing:
+             type: object
+             properties:
+               monthlyVolume:
+                type: number
+               monthlyFrequency:
+                type: number
+            processed:
+             type: object
+             properties:
+               monthlyVolume:
+                type: number
+               monthlyFrequency:
+                type: number
+        createdAt:
+          description: Date, iso 8601 format
+          type: string
     ping:
       type: object
       properties:
