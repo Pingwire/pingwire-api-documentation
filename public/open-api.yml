@@ -265,7 +265,25 @@ paths:
                       enum:
                       - Avilable
                       - Blocked
-                
+                    transactionOverrideThresholds:
+                      type: object
+                      description: Override KYC form threseholds
+                      properties:
+                        incoming: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
+                        outgoing: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
+                        processed: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
       responses:
         200:
           description: Successful operation
@@ -461,6 +479,25 @@ paths:
                       enum:
                       - Avilable
                       - Blocked
+                    transactionOverrideThresholds:
+                      type: object
+                      description: Override KYC form threseholds
+                      properties:
+                        incoming: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
+                        outgoing: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
+                        processed: 
+                          type: object
+                          properties: 
+                            monthlyVolume:
+                              type: number
       responses:
         200:
           description: Successful operation
@@ -1644,6 +1681,25 @@ components:
               type: array
               items: 
                 type: string
+      transactionOverrideThresholds:
+        type: object
+        properties:
+          incoming: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
+          outgoing: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
+          processed: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
+          
     business:
      type: object
      properties:
@@ -1686,6 +1742,24 @@ components:
               type: array
               items: 
                 type: string
+      transactionOverrideThresholds:
+        type: object
+        properties:
+          incoming: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
+          outgoing: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
+          processed: 
+           type: object
+           properties: 
+             monthlyVolume:
+               type: number
     car:
       type: object
       properties:
