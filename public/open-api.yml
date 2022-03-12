@@ -1986,6 +1986,9 @@ components:
                 amount:
                   type: float
                   example: 1000
+                currency:
+                  type: string
+                  description: ISO 4217 code.
                 date:
                   type: string
                   description: Date, iso 8601 format.
@@ -2018,6 +2021,7 @@ components:
                - recipient
                - amount
                - date
+               - currency
     CarKyc:
       description: A representation of a dog
       allOf:
@@ -2034,6 +2038,9 @@ components:
               properties:
                 amount:
                   type: float
+                currency:
+                  type: string
+                  description: ISO 4217 code.
                 date:
                   type: string
                   description: Date, iso 8601 format.
@@ -2066,6 +2073,7 @@ components:
                - recipient
                - amount
                - date
+               - currency
     TransactionBody:
       description: A representation of a transaction
       allOf:
@@ -2078,6 +2086,9 @@ components:
                 amount:
                   type: float
                   example: 1000
+                currency:
+                  type: string
+                  description: ISO 4217 code.
                 date:
                   type: string
                   description: Date, iso 8601 format.
@@ -2112,6 +2123,7 @@ components:
                - recipient
                - amount
                - date
+               - currency
     CarKycBody:
       description: A representation of a dog
       allOf:
@@ -2128,6 +2140,9 @@ components:
               properties:
                 amount:
                   type: float
+                currency:
+                  type: string
+                  description: ISO 4217 code.
                 date:
                   type: string
                   description: Date, iso 8601 format.
@@ -2162,6 +2177,7 @@ components:
                - recipient
                - amount
                - date
+               - currency
     RequestBody:
       type: object
       required:
