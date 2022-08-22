@@ -47,6 +47,9 @@ properties:
           type: date
           description: Date, iso 8601 format.
           example: 2022-08-09T17:43:26.650+00:00
+  ruleGroup:
+    description: Rule group name that implies what rules that should be run.
+    type: string
 
   requestType:
     description: Type of request

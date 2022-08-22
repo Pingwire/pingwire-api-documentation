@@ -123,6 +123,8 @@ components:
       $ref: "./components/schemas/RequestBody.yml"
     Request:
       $ref: "./components/schemas/Request.yml"
+    BankData:
+      $ref: "./components/schemas/BankData.yml"
 
 
   securitySchemes:

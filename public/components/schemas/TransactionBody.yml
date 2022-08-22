@@ -44,8 +44,6 @@ allOf:
             required:
             - id
             - type
-            
-            
           processor:
             type: object
             properties:
@@ -57,6 +55,15 @@ allOf:
                 enum:
                 - Individual
                 - Business
+          bankData:
+            type: object
+            properties:
+              initiator:
+                $ref: '#/components/schemas/BankData'
+              recipient:
+                $ref: '#/components/schemas/BankData'
+              processor:
+                $ref: '#/components/schemas/BankData'
         required:
           - initiator
           - recipient

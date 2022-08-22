@@ -1,0 +1,106 @@
+type: object
+properties:
+  fetchedDate:
+    type: date
+    description: Date, iso 8601 format.
+    example: 2022-08-09T17:43:26.650+00:00
+  accounts:
+    type: array
+    items:
+      type: object
+      properties: 
+        id:
+          type: string
+          description: Account id assigned by providing bank
+        iban:
+          description: International Bank Account Number
+          type: string
+        bban:
+          description: Basic Bank Account Number
+          type: string
+        accountNumber:
+          description: Account number according to providing bank.
+          type: string
+        currency:
+          type: string
+          format: ISO 4217 code
+        ownershipRatio:
+          type: string
+          description: Indicates how much of the  account that is owned by the customer. 
+        displayName:
+          type: string
+        product: 
+          type: string
+        type:
+          type: string
+          description: Account type
+        provider:
+          type: string
+          description: Identifier of bank holding the account.
+        balances:
+          type: object
+          properties:
+            available:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            booked:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            creditLimit:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            current:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                    type: number
+        transactions:
+          type: array
+          items:
+            type: object
+            properties: 
+              id: 
+                type: string
+                description: Transaction id assigned by providing bank.
+              transactionAmount:
+                type: object
+                properties:
+                  currency:
+                    type: string
+                    format: ISO 4217 code
+                  value:
+                    type: number
+              date:
+                type: date
+                description: Date, iso 8601 format.
+                example: 2022-08-09T17:43:26.650+00:00
+              status:
+                type: string
+                description: Transaction status.
+                enum:
+                - booked
+                - pending
+              category:
+                type: string
+                description: Transaction category.
+                enum:
+                - expenses
+                - income
