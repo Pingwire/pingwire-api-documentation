@@ -11,7 +11,7 @@ allOf:
             properties:
               id:
                 type: string
-                format: ObjectId | custom id 
+                format: ObjectId
                 example: 62b9437318fe4517089b2833
               type:
                 type: string

@@ -20,59 +20,24 @@ allOf:
             description: Date, iso 8601 format.
             example: 2022-08-09T17:43:26.650+00:00
           buyer:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId | custom id
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
-            required:
-            - id
-            - type
-            
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           seller:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId | custom id
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
-            required:
-            - id
-            - type
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           guarantor:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId | custom id
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
-            
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           car:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId | Registration number  
-              type:
-                type: string
-                enum:
-                - Car
-            required:
-            - id
-            - type
+            oneOf:
+            - $ref: '#/components/schemas/Car'
+            description: 'At least one field must be included of type.'
         required:
           - buyer
           - seller

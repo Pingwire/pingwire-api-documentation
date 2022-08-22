@@ -1,0 +1,14 @@
+type: object
+properties:
+  id: 
+    type: string
+    format: ObjectId
+  type:
+    type: string
+    enum:
+    - Individual
+  customId:
+    type: string
+  swedishSocialSecurityNumber:
+    type: string
+    format: yyyymmddxxxx

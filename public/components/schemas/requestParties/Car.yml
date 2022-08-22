@@ -1,0 +1,11 @@
+type: object
+properties:
+  id: 
+    type: string
+    format: ObjectId
+  type:
+    type: string
+    enum:
+    - Car
+  registrationNumber:
+    type: string
