@@ -1,0 +1,107 @@
+get: 
+  tags:
+    - Cars
+  summary: List cars
+  description: Receive list of cars saved in the database.
+  parameters:
+  - in: query
+    name: _sort
+    required: false
+    example: 'id'
+    schema:
+      type: string
+      enum:
+      - id
+      - registrationNumber
+      - registrationCountry
+      - carModel
+  - in: query
+    name: _order
+    description: Order of list (DESC or ASC) based on the sorting parameter.
+    required: false
+    example: 
+    schema:
+      type: string
+      enum:
+      - DESC
+      - ASC
+  - in: query
+    name: _start
+    description: The start number of the cars list.
+    required: false
+    example: '0'
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the cars list.
+    required: false
+    example: '10'
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Car"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Cars
+  summary: Create cars
+  description: Create a new cars.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - registrationNumber
+          - registrationCountry
+          properties:
+                registrationNumber:
+                  type: string
+                registrationCountry:
+                  type: string
+                vinCode:
+                  type: string
+                carModel:
+                  type: string
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Car"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

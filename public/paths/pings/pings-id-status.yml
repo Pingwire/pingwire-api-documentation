@@ -1,0 +1,57 @@
+put:
+  tags:
+  - Pings
+  summary: Update ping status
+  parameters:
+  - in: path
+    name: id
+    description: Ping object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - status
+          - comment
+          - numberOfDaysIgnoreRule
+          properties:
+            numberOfDaysIgnoreRule:
+              type: number
+              description: Number of days in the future that a similar ping should not be created.
+              minimum: 0
+            comment:
+              type: string
+            status:
+              type: string
+              enum: 
+              - pending
+              - resolved 
+              - confirmed 
+              - ignored 
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Ping"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

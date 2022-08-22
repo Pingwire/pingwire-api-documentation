@@ -1,0 +1,66 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    example: 62b9437318fe4517089b2833
+  registrationNumber:
+    type: string
+    example: ABC123
+  registrationCountry:
+    type: string
+    example: sweden
+  vinCode:
+    type: string
+  carModel:
+    type: string
+  createdAt:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  riskScore:
+    type: number
+    minimum: 1
+    maximum: 10
+  status: 
+    type: string
+    enum: 
+    - Available
+    - Blocked
+  kycLatestRequest:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00 
+  purchaseLatestRequest:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  scoreLatestCalculationDate:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  scoreHistory:
+    type: array
+    items: 
+      type: object
+      properties: 
+        score:
+          type: number
+          minimum: 1
+          maximum: 10
+        date:
+          description: Date, iso 8601 format
+          type: date
+          example: 2022-08-09T17:43:26.650+00:00
+  owner:
+    type: object
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        example: 62b9437318fe4517089b2833
+      type:
+        type: string
+        enum:
+        - Individual
+        - Business

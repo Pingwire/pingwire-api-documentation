@@ -1,0 +1,139 @@
+get: 
+  tags:
+    - KYC Forms
+  summary: List KYC forms
+  description: Receive list of KYC forms saved in the database.
+  parameters:
+  - in: query
+    name: _sort
+    required: false
+    example: 'id'
+    schema:
+      type: string
+      enum:
+      - id
+      - createdAt
+      - entity
+      - requestType
+  - in: query
+    name: _order
+    description: Order of list (DESC or ASC) based on the sorting parameter.
+    required: false
+    example: 
+    schema:
+      type: string
+      enum:
+      - DESC
+      - ASC
+  - in: query
+    name: entity.id
+    description: Filter list of KYC forms by entity id.
+    required: false
+    example: 
+    schema:
+      type: string
+  - in: query
+    name: _start
+    description: The start number of the KYC forms list.
+    required: false
+    example: '0'
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the KYC forms list.
+    required: false
+    example: '10'
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items: 
+              $ref: '#/components/schemas/KycForm'
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - KYC Forms
+  summary: Create KYC form
+  description: Create a new KYC form.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - entity
+          properties:
+              entity:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  type: 
+                    type: string
+                    enum: 
+                    - Individual
+                    - Business
+              transactions:
+                type: object
+                properties:
+                  incoming:
+                    type: object
+                    properties:
+                      monthlyVolume:
+                        type: number
+                      monthlyFrequency:
+                        type: number
+                  outgoing:
+                    type: object
+                    properties:
+                      monthlyVolume:
+                        type: number
+                      monthlyFrequency:
+                        type: number
+                  processed:
+                    type: object
+                    properties:
+                      monthlyVolume:
+                        type: number
+                      monthlyFrequency:
+                        type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/KycForm"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

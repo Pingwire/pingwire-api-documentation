@@ -1,0 +1,16 @@
+type: object
+required:
+  - requestType
+discriminator:
+  propertyName: requestType
+  mapping:
+    transaction: '#/components/schemas/TransactionBody'
+    carKyc: '#/components/schemas/CarKycBody'
+    carPurchase: '#/components/schemas/CarPurchaseBody'
+    individualKyc: '#/components/schemas/IndividualKycBody'
+    businessKyc: '#/components/schemas/BusinessKycBody'
+properties:
+  requestType:
+    description: Type of request
+    example: carKyc
+    type: string
