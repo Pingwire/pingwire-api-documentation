@@ -1,0 +1,82 @@
+description: A representation of a car purchase
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          amount:
+            type: float
+            example: 1000
+          valuation:
+            type: float
+            example: 1000
+          currency:
+            type: string
+            description: ISO 4217 code.
+          date:
+            type: date
+            description: Date, iso 8601 format.
+            example: 2022-08-09T17:43:26.650+00:00
+          buyer:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId | custom id
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+            required:
+            - id
+            - type
+            
+          seller:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId | custom id
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+            required:
+            - id
+            - type
+          guarantor:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId | custom id
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+            
+          car:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId | Registration number  
+              type:
+                type: string
+                enum:
+                - Car
+            required:
+            - id
+            - type
+        required:
+          - buyer
+          - seller
+          - car
+          - amount
+          - date
+          - currency

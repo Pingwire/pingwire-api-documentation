@@ -1,0 +1,105 @@
+get: 
+  tags:
+    - Businesses
+  summary: List businesses
+  description: Receive list of businesses saved in the database.
+  parameters:
+  - in: query
+    name: _sort
+    required: false
+    example: 'id'
+    schema:
+      type: string
+      enum:
+      - id
+      - name
+      - swedishOrganizationNumber
+      - riskScore
+  - in: query
+    name: _order
+    description: Order of list (DESC or ASC) based on the sorting parameter.
+    required: false
+    example: 
+    schema:
+      type: string
+      enum:
+      - DESC
+      - ASC
+  - in: query
+    name: _start
+    description: The start number of the businesses list.
+    required: false
+    example: '0'
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the businesses list.
+    required: false
+    example: '10'
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Business"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Businesses
+  summary: Create business
+  description: Create a new business.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - customId
+          properties:
+            customId:
+              type: string
+              description: The custom id can be any id that the creator would like to identify the business with.
+            name:
+              type: string
+            swedishOrganizationNumber:
+              type: string
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Business"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

@@ -1,0 +1,17 @@
+type: object
+required:
+- status
+- message
+properties:
+  status:
+    type: integer
+    description: HTTP status code
+    example: 400
+  message:
+    type: string
+    description: Main error reason
+  errors:
+    type: array
+    items:
+      type: string
+      description: Optional list of errors

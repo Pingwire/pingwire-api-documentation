@@ -1,0 +1,24 @@
+description: A representation of a individualKyc
+allOf:
+  - $ref: '#/components/schemas/Request'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          entity:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId | custom id 
+                example: 62b9437318fe4517089b2833
+              type:
+                type: string
+                enum:
+                - Individual
+            required:
+            - id
+            - type
+        required:
+          - entity

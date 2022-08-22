@@ -1,0 +1,66 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    example: 62b9437318fe4517089b2833
+  customId:
+    type: string
+  name:
+    type: string
+  swedishOrganizationNumber:
+    type: string
+    format: xxxxxxxxxx
+    example: xxxxxxxxxx
+  riskScore:
+    type: integer
+    minimum: 1
+    maximum: 10
+  kycOnboarding:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  kycLatestRequest:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  transactions:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  status: 
+    type: string
+    enum: 
+    - Available
+    - Blocked 
+  relatedIndividuals: 
+    type: array
+    items: 
+      type: object
+      properties: 
+        name:
+          type: string
+        id:
+          type: string
+        relation:
+          type: array
+          items: 
+            type: string
+  transactionOverrideThresholds:
+    type: object
+    properties:
+      incoming: 
+        type: object
+        properties: 
+          monthlyVolume:
+            type: number
+      outgoing: 
+        type: object
+        properties: 
+          monthlyVolume:
+            type: number
+      processed: 
+        type: object
+        properties: 
+          monthlyVolume:
+            type: number

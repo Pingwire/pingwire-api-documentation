@@ -1,0 +1,59 @@
+description: A representation of a transaction
+allOf:
+  - $ref: '#/components/schemas/Request'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          amount:
+            type: float
+            example: 1000
+          currency:
+            type: string
+            description: ISO 4217 code.
+          date:
+            type: string
+            description: Date, iso 8601 format.
+          initiator:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+            required:
+            - id
+            - type
+          recipient:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+            required:
+            - id
+            - type
+          processor:
+            type: object
+            properties:
+              id:
+                type: string
+              type:
+                type: string
+                enum:
+                - Individual
+                - Business
+        required:
+          - initiator
+          - recipient
+          - amount
+          - date
+          - currency

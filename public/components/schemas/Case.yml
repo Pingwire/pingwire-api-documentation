@@ -1,0 +1,85 @@
+type: object
+properties:
+  id:
+    type: string
+  entities:
+    type: array
+    items: 
+      type: object
+      properties:
+        id: 
+          type: string
+          description: object id
+          format: ObjectId
+          
+        type: 
+          type: string
+          enum:
+          - Individual
+          - Business
+          - Car
+  requests:
+    type: array
+    items: 
+      type: string
+      description: list of request object ids.
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
+  pings:
+    type: array
+    items: 
+      type: string
+      description: list of pings object ids.
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
+  fipoReports:
+    type: array
+    items: 
+      type: string
+      description: list of report object ids.
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
+  comments:
+    type: array
+    items: 
+      type: object
+      properties:
+        member: 
+          type: string
+          description: Object id of the member who created the comment.
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+        message: 
+          type: string
+          description: The comment.
+        date:
+          type: date
+          example: 2022-08-09T17:43:26.650+00:00
+          description: Date, iso 8601 format, for when the comment was created.
+  createdAt:
+    description: Date, iso 8601 format
+    example: 2022-08-09T17:43:26.650+00:00
+    type: date
+  files:
+    type: array
+    items: 
+      type: object
+      properties:
+        key: 
+          type: string
+        name: 
+          type: string
+        createdAt:
+          description: Date, iso 8601 format
+          type: date
+          example: 2022-08-09T17:43:26.650+00:00
+  mergedInto:
+    type: string
+    description: Object id of case that this case have been merged into.
+    format: ObjectId
+    example: 62b9437318fe4517089b2833
+  status: 
+    type: string
+    enum: 
+    - Open
+    - Closed 

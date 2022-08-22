@@ -1,0 +1,33 @@
+type: object
+properties:
+  entity:
+    type: object
+    properties:
+      id:
+        type: string
+      type: 
+        type: string
+      incoming:
+        type: object
+        properties:
+          monthlyVolume:
+            type: number
+          monthlyFrequency:
+            type: number
+      outgoing:
+        type: object
+        properties:
+          monthlyVolume:
+            type: number
+          monthlyFrequency:
+            type: number
+      processed:
+        type: object
+        properties:
+          monthlyVolume:
+            type: number
+          monthlyFrequency:
+            type: number
+  createdAt:
+    description: Date, iso 8601 format
+    type: string
