@@ -14,6 +14,5 @@ properties:
     description: Type of request
     example: carKyc
     type: string
-  ruleGroup:
-    description: Rule group name that implies what rules that should be run.
+  segment:
     type: string
