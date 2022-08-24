@@ -6,37 +6,45 @@ properties:
     example: 2022-08-09T17:43:26.650+00:00
   accounts:
     type: array
+    description: In addition to the required fields, one of [`iban`, `bban`, `accountNumber`] must be included.
     items:
       type: object
       properties: 
-        id:
-          type: string
-          description: Account id assigned by providing bank
         iban:
           description: International Bank Account Number
           type: string
         bban:
           description: Basic Bank Account Number
           type: string
+        bic:
+          description: Bank Identification Code
+          type: string
         accountNumber:
-          description: Account number according to providing bank.
           type: string
         currency:
           type: string
           format: ISO 4217 code
         ownershipRatio:
-          type: string
+          type: number
           description: Indicates how much of the  account that is owned by the customer. 
-        displayName:
+        accountName:
           type: string
         product: 
           type: string
         type:
           type: string
           description: Account type
-        provider:
-          type: string
-          description: Identifier of bank holding the account.
+          enum:
+          - business
+          - checking
+          - credit-line
+          - external
+          - investment
+          - mortgage
+          - loan
+          - other
+          - pension
+          - savings
         balances:
           type: object
           properties:
@@ -72,22 +80,24 @@ properties:
                   format: ISO 4217 code
                 value:
                     type: number
+              required:
+              - currency
+              - value
+          required:
+          - current
         transactions:
           type: array
           items:
             type: object
             properties: 
-              id: 
+              amount: 
+                type: number
+                description: Transaction amount.  
+              description: 
                 type: string
-                description: Transaction id assigned by providing bank.
-              transactionAmount:
-                type: object
-                properties:
-                  currency:
-                    type: string
-                    format: ISO 4217 code
-                  value:
-                    type: number
+              currency:
+                type: string
+                format: ISO 4217 code
               date:
                 type: date
                 description: Date, iso 8601 format.
@@ -98,9 +108,22 @@ properties:
                 enum:
                 - booked
                 - pending
-              category:
+              type:
                 type: string
-                description: Transaction category.
+                description: Transaction type.
                 enum:
-                - expenses
-                - income
+                - card
+                - payment
+                - transfer
+                - withdrawal
+                - other
+            required:
+            - amount
+            - currency
+            - date
+            - description
+      required:
+      - bic
+      - currency
+required:
+- fetchedDate
