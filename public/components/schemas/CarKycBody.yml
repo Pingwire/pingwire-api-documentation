@@ -7,18 +7,8 @@ allOf:
         type: object
         properties:
           entity:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId | Registration number  
-                example: 62b9437318fe4517089b2833
-              type:
-                type: string
-                enum:
-                - Car
-            required:
-            - id
-            - type
+            oneOf:
+            - $ref: '#/components/schemas/Car'
+            description: 'At least one field must be included of type.'
         required:
           - entity

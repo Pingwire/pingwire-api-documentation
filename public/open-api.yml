@@ -83,11 +83,11 @@ paths:
  
 components:
   schemas:
-    Individual:
+    IndividualResponse:
       $ref: "./components/schemas/Individual.yml"
-    Business:
+    BusinessResponse:
       $ref: "./components/schemas/Business.yml"
-    Car:
+    CarResponse:
       $ref: "./components/schemas/Car.yml"
     KycForm:
       $ref: "./components/schemas/KycForm.yml"
@@ -125,6 +125,13 @@ components:
       $ref: "./components/schemas/Request.yml"
     BankData:
       $ref: "./components/schemas/BankData.yml"
+    Individual:
+      $ref: "./components/schemas/requestParties/Individual.yml"
+    Business:
+      $ref: "./components/schemas/requestParties/Business.yml"
+    Car:
+      $ref: "./components/schemas/requestParties/Car.yml"
+
 
 
   securitySchemes:

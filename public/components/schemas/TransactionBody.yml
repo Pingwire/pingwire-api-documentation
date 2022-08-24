@@ -16,45 +16,20 @@ allOf:
             type: string
             description: Date, iso 8601 format.
           initiator:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Object id or custom id.
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
-            required:
-            - id
-            - type
-            
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           recipient:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Object id or custom id.
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
-            required:
-            - id
-            - type
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           processor:
-            type: object
-            properties:
-              id:
-                type: string
-                description: Object id or custom id.
-              type:
-                type: string
-                enum:
-                - Individual
-                - Business
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
           bankData:
             type: object
             properties:

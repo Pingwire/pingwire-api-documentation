@@ -24,7 +24,7 @@ allOf:
             properties:
               id:
                 type: string
-                format: ObjectId | custom id
+                format: ObjectId
               type:
                 type: string
                 enum:
@@ -38,7 +38,7 @@ allOf:
             properties:
               id:
                 type: string
-                format: ObjectId | custom id
+                format: ObjectId
               type:
                 type: string
                 enum:
@@ -52,7 +52,7 @@ allOf:
             properties:
               id:
                 type: string
-                format: ObjectId | custom id
+                format: ObjectId
               type:
                 type: string
                 enum:
@@ -64,7 +64,7 @@ allOf:
             properties:
               id:
                 type: string
-                format: ObjectId | Registration number 
+                format: ObjectId
               type:
                 type: string
                 enum:
