@@ -1,6 +1,8 @@
 type: object
 required:
   - requestType
+  - segment
+  - extraInformation
 discriminator:
   propertyName: requestType
   mapping:
