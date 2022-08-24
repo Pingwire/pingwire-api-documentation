@@ -1,6 +1,8 @@
 type: object
 required:
   - requestType
+  - segment
+  - extraInformation
 discriminator:
   propertyName: requestType
   mapping:
@@ -14,3 +16,6 @@ properties:
     description: Type of request
     example: carKyc
     type: string
+  segment:
+    type: string
+    description: The `name` of an existing segment in our database.

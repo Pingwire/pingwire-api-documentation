@@ -47,6 +47,9 @@ properties:
           type: date
           description: Date, iso 8601 format.
           example: 2022-08-09T17:43:26.650+00:00
+  segment:
+    type: string
+    format: ObjectId
 
   requestType:
     description: Type of request
