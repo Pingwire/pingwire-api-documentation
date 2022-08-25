@@ -1,0 +1,57 @@
+type: object
+required:
+  - requestType
+discriminator:
+  propertyName: requestType
+  mapping:
+    transaction: '#/components/schemas/Transaction'
+    carKyc: '#/components/schemas/CarKyc'
+    carPurchase: '#/components/schemas/CarPurchase'
+    individualKyc: '#/components/schemas/IndividualKyc'
+    businessKyc: '#/components/schemas/BusinessKyc'
+properties:
+  createdAt: 
+    type: date
+    description: Date, iso 8601 format.
+    example: 2022-08-09T17:43:26.650+00:00
+  processStopped:
+    type: boolean
+    example: false
+  step: 
+    type: string
+    enum:
+    - created
+    - info-collected
+    - processed
+    - scored
+    example: scored
+  recommendation:
+    type: string
+    enum:
+    - proceed
+    - review
+    - block
+  comments:
+    type: array
+    items: 
+      type: object
+      properties:
+        member: 
+          type: string
+          format: ObjectId
+          description: Object id of the member who created the comment.
+        message: 
+          type: string
+          description: The comment.
+        date:
+          type: date
+          description: Date, iso 8601 format.
+          example: 2022-08-09T17:43:26.650+00:00
+  segment:
+    type: string
+    format: ObjectId
+
+  requestType:
+    description: Type of request
+    example: carKyc
+    type: string

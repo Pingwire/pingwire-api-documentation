@@ -1,0 +1,47 @@
+description: A representation of a transaction
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          amount:
+            type: float
+            example: 1000
+          currency:
+            type: string
+            description: ISO 4217 code.
+          date:
+            type: string
+            description: Date, iso 8601 format.
+          initiator:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          recipient:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          processor:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          bankData:
+            type: object
+            properties:
+              initiator:
+                $ref: '#/components/schemas/BankData'
+              recipient:
+                $ref: '#/components/schemas/BankData'
+              processor:
+                $ref: '#/components/schemas/BankData'
+        required:
+          - initiator
+          - recipient
+          - amount
+          - date
+          - currency

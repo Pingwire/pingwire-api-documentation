@@ -1,0 +1,47 @@
+description: A representation of a car purchase
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          amount:
+            type: float
+            example: 1000
+          valuation:
+            type: float
+            example: 1000
+          currency:
+            type: string
+            description: ISO 4217 code.
+          date:
+            type: date
+            description: Date, iso 8601 format.
+            example: 2022-08-09T17:43:26.650+00:00
+          buyer:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          seller:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          guarantor:
+            oneOf:
+            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+          car:
+            oneOf:
+            - $ref: '#/components/schemas/Car'
+            description: 'At least one field must be included of type.'
+        required:
+          - buyer
+          - seller
+          - car
+          - amount
+          - date
+          - currency

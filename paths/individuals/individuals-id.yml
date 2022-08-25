@@ -1,0 +1,112 @@
+get: 
+  tags:
+    - Individuals
+  summary: Individual
+  description: Receive individual by id saved in the database.
+  parameters:
+  - in: path
+    name: id
+    description: Individual object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IndividualResponse"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Individuals
+  summary: Update individual
+  parameters:
+  - in: path
+    name: id
+    description: Individual object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  description: Update a individual.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - customId
+          properties:
+              customId:
+                type: string
+                description: The custom id can be any id that the creator would like to identify the individual with.
+              firstName:
+                type: string
+              lastName:
+                type: string
+              swedishSocialSecurityNumber:
+                type: string
+                format: yyyymmddxxxx
+              status:
+                type: string
+                enum:
+                - Available
+                - Blocked
+              transactionOverrideThresholds:
+                type: object
+                description: Override KYC form thresholds
+                properties:
+                  incoming: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
+                  outgoing: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
+                  processed: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
+    responses:
+      200:
+        description: Successful operation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IndividualResponse"
+      400:
+        description: Invalid parameters
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvalidBody"
+      500:
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorBody"
+    security:
+    - bearerAuth: []

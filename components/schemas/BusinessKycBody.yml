@@ -1,0 +1,14 @@
+description: A representation of a businessKyc
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        properties:
+          entity:
+            oneOf:
+            - $ref: '#/components/schemas/Business'
+            description: 'At least one field must be included independent of type.'
+        required:
+          - entity

@@ -1,0 +1,111 @@
+get: 
+  tags:
+    - Individuals
+  summary: List individuals
+  description: Receive list of individuals saved in the database.
+  parameters:
+  - in: query
+    name: _sort
+    required: false
+    example: 'id'
+    schema:
+      type: string
+      enum:
+      - id
+      - firstName
+      - lastName
+      - swedishSocialSecurityNumber
+      - riskScore
+  - in: query
+    name: _order
+    description: Order of list (DESC or ASC) based on the sorting parameter.
+    required: false
+    example: 
+    schema:
+      type: string
+      enum:
+      - DESC
+      - ASC
+  - in: query
+    name: _start
+    description: The start number of the individuals list.
+    required: false
+    example: '0'
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the individuals list.
+    required: false
+    example: '10'
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/IndividualResponse"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+
+post:
+  tags:
+  - Individuals
+  summary: Create individual
+  description: Create a new individual.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - customId
+          properties:
+                customId:
+                  type: string
+                  description: The custom id can be any id that the created would like to identify the individual with.
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                swedishSocialSecurityNumber:
+                  type: string
+                  format: yyyymmddxxxx
+            
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/IndividualResponse"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

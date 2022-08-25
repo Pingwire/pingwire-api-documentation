@@ -1,0 +1,92 @@
+get: 
+  tags:
+    - Cars
+  summary: Car
+  description: Receive car by id saved in the database.
+  parameters:
+  - in: path
+    name: id
+    description: Car object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Car"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Cars
+  summary: Update car
+  parameters:
+  - in: path
+    name: id
+    description: Car object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  description: Update car.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - registrationNumber
+          - registrationCountry
+          properties:
+              registrationNumber:
+                type: string
+              registrationCountry:
+                type: string
+              vinCode:
+                type: string
+              carModel:
+                type: string
+              status:
+                type: string
+                enum:
+                - Available
+                - Blocked
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Car"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

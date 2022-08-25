@@ -1,0 +1,129 @@
+type: object
+properties:
+  fetchedDate:
+    type: date
+    description: Date, iso 8601 format.
+    example: 2022-08-09T17:43:26.650+00:00
+  accounts:
+    type: array
+    description: In addition to the required fields, one of [`iban`, `bban`, `accountNumber`] must be included.
+    items:
+      type: object
+      properties: 
+        iban:
+          description: International Bank Account Number
+          type: string
+        bban:
+          description: Basic Bank Account Number
+          type: string
+        bic:
+          description: Bank Identification Code
+          type: string
+        accountNumber:
+          type: string
+        currency:
+          type: string
+          format: ISO 4217 code
+        ownershipRatio:
+          type: number
+          description: Indicates how much of the  account that is owned by the customer. 
+        accountName:
+          type: string
+        product: 
+          type: string
+        type:
+          type: string
+          description: Account type
+          enum:
+          - business
+          - checking
+          - credit-line
+          - external
+          - investment
+          - mortgage
+          - loan
+          - other
+          - pension
+          - savings
+        balances:
+          type: object
+          properties:
+            available:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            booked:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            creditLimit:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                  type: number
+            current:
+              type: object
+              properties:
+                currency:
+                  type: string
+                  format: ISO 4217 code
+                value:
+                    type: number
+              required:
+              - currency
+              - value
+          required:
+          - current
+        transactions:
+          type: array
+          items:
+            type: object
+            properties: 
+              amount: 
+                type: number
+                description: Transaction amount.  
+              description: 
+                type: string
+              currency:
+                type: string
+                format: ISO 4217 code
+              date:
+                type: date
+                description: Date, iso 8601 format.
+                example: 2022-08-09T17:43:26.650+00:00
+              status:
+                type: string
+                description: Transaction status.
+                enum:
+                - booked
+                - pending
+              type:
+                type: string
+                description: Transaction type.
+                enum:
+                - card
+                - payment
+                - transfer
+                - withdrawal
+                - other
+            required:
+            - amount
+            - currency
+            - date
+            - description
+      required:
+      - bic
+      - currency
+required:
+- fetchedDate

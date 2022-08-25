@@ -1,0 +1,60 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+  entities:
+    type: array
+    items: 
+      type: object
+      properties:
+        id: 
+          type: string
+          format: ObjectId
+        type: 
+          type: string
+          enum:
+          - Individual
+          - Business
+          - Car
+  description:
+    type: string
+  comments:
+    type: array
+    items: 
+      type: object
+      properties:
+        member: 
+          type: string
+          format: ObjectId
+          description: Object id of the member who created the comment.
+        message: 
+          type: string
+          description: The comment.
+        date:
+          type: string
+          example: 2022-08-09T17:43:26.650+00:00
+          description: Date, iso 8601 format, for when the comment was created.
+  rule:
+    type: string
+    format: ObjectId
+    description: Object id of the rule that triggered the ping creation.
+  expiryDate:
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+    description: Date, iso 8601 format, for when the rule should create similar ping.
+  createdAt:
+    description: Date, iso 8601 format
+    type: date
+    example: 2022-08-09T17:43:26.650+00:00
+  score:
+    type: number
+    minimum: 1
+    maximum: 10
+  status: 
+    type: string
+    enum: 
+    - pending
+    - resolved 
+    - confirmed 
+    - ignored 
