@@ -13,30 +13,8 @@ For making the integration to Pingwire as seamless as possible, we have included
 - `CASE` Provides the main user interface. A Case collects sets of Pings and related Entities and provides means to investigate and report suspicious activities in bulk.
 
 ## Sequence Diagram
-```mermaid
-%%{init: {'theme': 'forest' } }%%
-sequenceDiagram
-    participant Customer
-    participant You
-    participant Pingwire
-    Customer->>You: Service usage
-    You->>Pingwire: Send usage request
-    Note over Pingwire: Rule analysis
-    alt
-        Pingwire->>You: Proceed
-        You->>Customer: Accept usage
-        else
-        Pingwire->>You: Block
-        You->>Customer: Reject usage
-        else
-        Pingwire->>You: Review
-        Note over Pingwire,You: Manually investigate case and pings
-        You->>Pingwire: Manually update pings and case statuses
-        Pingwire->>Pingwire: Reprocess
-        Pingwire->>You: Notify new recommendation
-        You ->> Customer: Accept or reject usage
-        end
-```
+
+<img src="assets/seq-diagram.svg"  />
 
 ## Request flowchart
 The following flowchart illustrates a typical request process.
