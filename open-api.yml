@@ -2,8 +2,8 @@ openapi: 3.0.0
 info:
   title: Pingwire API
   version: 1.0.0
-  description: |
-    The Pingwire API can be used by companies in active collaboration with Pingwire AB.
+  description:
+    $ref: description.md
   x-logo:
     url: './assets/pingwire-green.png'
     altText: Pingwire
@@ -24,6 +24,7 @@ x-tagGroups:
   - name: Get started
     tags:
       - Auth
+      - Test
   - name: Entities
     tags:
       - Individuals
