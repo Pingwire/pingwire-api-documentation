@@ -30,6 +30,10 @@ post:
            properties:
             token:
               type: string
+            expires:
+              description: Date, iso 8601 format
+              type: date
+              example: 2022-08-09T17:43:26.650+00:00
              
     400:
       description: Invalid parameters
