@@ -1,8 +1,8 @@
 get: 
   tags:
-    - Requests
-  summary: List requests
-  description: Receive list of requests saved in the database.
+    - Segments
+  summary: List segments
+  description: Receive list of segments saved in the database.
   parameters:
   - in: query
     name: _sort
@@ -13,8 +13,7 @@ get:
       enum:
       - id
       - createdAt
-      - entity
-      - requestType
+      - name
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -26,26 +25,22 @@ get:
       - DESC
       - ASC
   - in: query
-    name: recommendation
-    description: Filter list of requests by recommendation.
+    name: active
+    description: Filter list of segments by active status.
     required: false
-    example: 
+    example: true
     schema:
-      type: string
-      enum: 
-      - block
-      - review
-      - proceed
+      type: boolean
   - in: query
     name: _start
-    description: The start number of the requests list.
+    description: The start number of the segments list.
     required: false
     example: '0'
     schema:
       type: number
   - in: query
     name: _end
-    description: The end number of the requests list.
+    description: The end number of the segments list.
     required: false
     example: '10'
     schema:
@@ -58,7 +53,7 @@ get:
           schema:
             type: array
             items: 
-              $ref: '#/components/schemas/Request'
+              $ref: '#/components/schemas/Segment'
     400:
       description: Invalid parameters
       content:
@@ -75,14 +70,14 @@ get:
   - bearerAuth: []
 post:
   tags:
-  - Requests
-  summary: Create request
-  description: Create a new request.
+  - Segments
+  summary: Create segment
+  description: Create a new segment.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/RequestBody"
+          $ref: "#/components/schemas/SegmentBody"
   responses:
     200:
       description: Successful operation

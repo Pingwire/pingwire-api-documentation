@@ -1,0 +1,33 @@
+get: 
+  tags:
+    - Risk Classes
+  summary: Risk class interval coverage
+  description: Receive risk class coverage status.
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              isCoveringAll:
+                type: boolean
+                description: Boolean response if risk classes cover 0 to 100
+              isNotOverlapping:
+                type: boolean
+                description: Boolean response if risk classes are overlapping
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

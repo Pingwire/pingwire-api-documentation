@@ -1,0 +1,22 @@
+type: object
+properties:
+  firstName:
+    type: string
+  lastName:
+    type: string
+  email:
+    type: string
+    format: e-mail    
+  permissionRoles:
+    type: array
+    items: 
+      type: string
+      enum:
+      - ReadOnly
+      - ReadWrite
+      - Manager
+required:
+  - firstName
+  - lastName
+  - email
+  - permissionRoles

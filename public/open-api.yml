@@ -35,7 +35,12 @@ x-tagGroups:
       - Pings
       - Cases
       - Requests
+      - Segments
       - KYC Forms
+      - Risk Classes
+      - Members
+      - API keys
+      - Rules
 paths:
   /auth/login/:
     $ref: './paths/auth/auth.yml' 
@@ -77,10 +82,43 @@ paths:
     $ref: './paths/requests/requests-id-comments.yml'
   /requests/{id}/reprocess:
     $ref: './paths/requests/requests-id-reprocess.yml'
+  /members:
+      $ref: './paths/members/members.yml'
+  /members/{id}:
+      $ref: './paths/members/members-id.yml'
+  /members/activation/{id}:
+      $ref: './paths/members/members-activation-id.yml'
+  /members/{id}/initiate-reset-password:
+      $ref: './paths/members/members-id-initiate-reset-password.yml'
+  /segments:
+      $ref: './paths/segments/segments.yml'
+  /segments/{id}:
+      $ref: './paths/segments/segments-id.yml'
+  /segments/activation/{id}:
+      $ref: './paths/segments/segments-activation-id.yml'
+  /risk-classes:
+      $ref: './paths/riskClasses/risk-classes.yml'
+  /risk-classes/{id}:
+      $ref: './paths/riskClasses/risk-classes-id.yml'
+  /risk-classes/from-score/{score}:
+      $ref: './paths/riskClasses/risk-classes-from-score.yml'
+  /risk-classes/interval-coverage:
+      $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'       
   /kyc-form/: 
     $ref: './paths/kyc-form/kyc-form.yml'
   /kyc-form/{id}: 
     $ref: './paths/kyc-form/kyc-form-id.yml'
+  /api-keys:
+      $ref: './paths/apiKeys/api-keys.yml'
+  /api-keys/{id}:
+      $ref: './paths/apiKeys/api-keys-id.yml'
+  /api-keys/{id}/client-secret:
+      $ref: './paths/apiKeys/api-keys-id-client-secret.yml'
+  /rules:
+      $ref: './paths/rules/rules.yml'
+  /rules/{id}:
+      $ref: './paths/rules/rules-id.yml'
+
  
 components:
   schemas:
@@ -132,6 +170,27 @@ components:
       $ref: "./components/schemas/requestParties/Business.yml"
     Car:
       $ref: "./components/schemas/requestParties/Car.yml"
+    Segment:
+      $ref: "./components/schemas/Segment.yml"
+    SegmentBody:
+      $ref: "./components/schemas/SegmentBody.yml"
+    RiskClass:
+      $ref: "./components/schemas/RiskClass.yml"
+    RiskClassBody:
+      $ref: "./components/schemas/RiskClassBody.yml"
+    Member:
+      $ref: "./components/schemas/Member.yml"
+    MemberBody:
+      $ref: "./components/schemas/MemberBody.yml"
+    ApiKey:
+      $ref: "./components/schemas/ApiKey.yml"
+    ApiKeyBody:
+      $ref: "./components/schemas/ApiKeyBody.yml"
+    Rule:
+      $ref: "./components/schemas/Rule.yml"
+    RuleBody:
+      $ref: "./components/schemas/RuleBody.yml"
+
 
 
 

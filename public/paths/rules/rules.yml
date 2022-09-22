@@ -1,8 +1,8 @@
 get: 
   tags:
-    - Requests
-  summary: List requests
-  description: Receive list of requests saved in the database.
+    - Rules
+  summary: List rules
+  description: Receive list of rules saved in the database.
   parameters:
   - in: query
     name: _sort
@@ -13,8 +13,7 @@ get:
       enum:
       - id
       - createdAt
-      - entity
-      - requestType
+      - name
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -26,26 +25,47 @@ get:
       - DESC
       - ASC
   - in: query
-    name: recommendation
-    description: Filter list of requests by recommendation.
+    name: triggeredBy
+    description: Filter list of rules by triggeredBy.
     required: false
-    example: 
     schema:
       type: string
-      enum: 
-      - block
-      - review
-      - proceed
+      format: ObjectId
+      description: ObjectId or none
+  - in: query
+    name: segments
+    description: Filter list of rules by list of segments.
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+        format: ObjectId
+        description: ObjectId    
+  - in: query
+    name: requestTypes
+    description: Filter list of rules by list of request types.
+    required: false
+    schema:
+      type: array
+      items:
+        type: string
+        enum:
+        - transaction
+        - carKyc
+        - carPurchase
+        - individualKyc
+        - businessKyc  
   - in: query
     name: _start
-    description: The start number of the requests list.
+    description: The start number of the rules list.
     required: false
     example: '0'
     schema:
       type: number
   - in: query
     name: _end
-    description: The end number of the requests list.
+    description: The end number of the rules list.
     required: false
     example: '10'
     schema:
@@ -58,7 +78,7 @@ get:
           schema:
             type: array
             items: 
-              $ref: '#/components/schemas/Request'
+              $ref: '#/components/schemas/Rule'
     400:
       description: Invalid parameters
       content:
@@ -75,21 +95,21 @@ get:
   - bearerAuth: []
 post:
   tags:
-  - Requests
-  summary: Create request
-  description: Create a new request.
+  - Rules
+  summary: Create rule
+  description: Create a new rule.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/RequestBody"
+          $ref: "#/components/schemas/RuleBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Request"
+            $ref: "#/components/schemas/Rule"
     400:
       description: Invalid parameters
       content:
