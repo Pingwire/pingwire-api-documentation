@@ -7,6 +7,13 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+      - run:
+          command: |
+            git config user.email "job@circleci.com"
+            git config user.name "Circle CI"
+      - add_ssh_keys:
+          fingerprints:
+            - "1d:44:69:a1:e4:f3:39:e0:aa:ba:c1:ac:f9:e4:fd:26"
       - run: npm run deploy
 
 workflows:
