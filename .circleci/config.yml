@@ -19,4 +19,8 @@ jobs:
 workflows:
   docs:
     jobs:
-      - deploy
+      - deploy:
+          filters:
+            branches:
+              only:
+              - master
