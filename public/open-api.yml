@@ -24,7 +24,11 @@ x-tagGroups:
   - name: Get started
     tags:
       - Auth
-      - Test
+  - name: Risk Management
+    tags:
+      - Requests
+      - Pings
+      - Cases
   - name: Entities
     tags:
       - Individuals
@@ -32,49 +36,46 @@ x-tagGroups:
       - Cars
   - name: Other resources
     tags:
-      - Pings
-      - Cases
-      - Requests
       - Segments
       - KYC Forms
       - Risk Classes
+      - Rules
       - Members
       - API keys
-      - Rules
 paths:
   /auth/login/:
-    $ref: './paths/auth/auth.yml' 
-  /individuals/: 
+    $ref: './paths/auth/auth.yml'
+  /individuals/:
     $ref: './paths/individuals/individuals.yml'
-  /individuals/{id}: 
+  /individuals/{id}:
     $ref: './paths/individuals/individuals-id.yml'
-  /businesses/: 
+  /businesses/:
     $ref: './paths/businesses/businesses.yml'
-  /businesses/{id}: 
+  /businesses/{id}:
     $ref: './paths/businesses/businesses-id.yml'
-  /cars/: 
+  /cars/:
     $ref: './paths/cars/cars.yml'
-  /cars/{id}: 
+  /cars/{id}:
     $ref: './paths/cars/cars-id.yml'
-  /pings/: 
+  /pings/:
     $ref: './paths/pings/pings.yml'
-  /pings/{id}: 
+  /pings/{id}:
     $ref: './paths/pings/pings-id.yml'
   /pings/{id}/status:
     $ref: './paths/pings/pings-id-status.yml'
   /pings/{id}/comment:
     $ref: './paths/pings/pings-id-comments.yml'
-  /cases/: 
+  /cases/:
     $ref: './paths/cases/cases.yml'
-  /cases/{id}: 
+  /cases/{id}:
     $ref: './paths/cases/cases-id.yml'
   /cases/{id}/status:
     $ref: './paths/cases/cases-id-status.yml'
   /cases/{id}/comment:
     $ref: './paths/cases/cases-id-comments.yml'
-  /requests/: 
+  /requests/:
     $ref: './paths/requests/requests.yml'
-  /requests/{id}: 
+  /requests/{id}:
     $ref: './paths/requests/requests-id.yml'
   /requests/{id}/recommendation:
     $ref: './paths/requests/requests-id-recommendation.yml'
@@ -103,23 +104,23 @@ paths:
   /risk-classes/from-score/{score}:
       $ref: './paths/riskClasses/risk-classes-from-score.yml'
   /risk-classes/interval-coverage:
-      $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'       
-  /kyc-form/: 
+      $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'
+  /kyc-form/:
     $ref: './paths/kyc-form/kyc-form.yml'
-  /kyc-form/{id}: 
+  /kyc-form/{id}:
     $ref: './paths/kyc-form/kyc-form-id.yml'
-  /api-keys:
-      $ref: './paths/apiKeys/api-keys.yml'
-  /api-keys/{id}:
-      $ref: './paths/apiKeys/api-keys-id.yml'
-  /api-keys/{id}/client-secret:
-      $ref: './paths/apiKeys/api-keys-id-client-secret.yml'
+  # /api-keys:
+  #     $ref: './paths/apiKeys/api-keys.yml'
+  # /api-keys/{id}:
+  #     $ref: './paths/apiKeys/api-keys-id.yml'
+  # /api-keys/{id}/client-secret:
+  #     $ref: './paths/apiKeys/api-keys-id-client-secret.yml'
   /rules:
       $ref: './paths/rules/rules.yml'
   /rules/{id}:
       $ref: './paths/rules/rules-id.yml'
 
- 
+
 components:
   schemas:
     IndividualResponse:
@@ -182,10 +183,10 @@ components:
       $ref: "./components/schemas/Member.yml"
     MemberBody:
       $ref: "./components/schemas/MemberBody.yml"
-    ApiKey:
-      $ref: "./components/schemas/ApiKey.yml"
-    ApiKeyBody:
-      $ref: "./components/schemas/ApiKeyBody.yml"
+    # ApiKey:
+    #   $ref: "./components/schemas/ApiKey.yml"
+    # ApiKeyBody:
+    #   $ref: "./components/schemas/ApiKeyBody.yml"
     Rule:
       $ref: "./components/schemas/Rule.yml"
     RuleBody:
@@ -198,4 +199,3 @@ components:
     bearerAuth:
       type: "http"
       scheme: "bearerToken"
-    
