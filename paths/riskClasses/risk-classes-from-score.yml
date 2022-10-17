@@ -1,0 +1,34 @@
+get: 
+  tags:
+    - Risk Classes
+  summary: Risk class by score
+  description: Receive risk class by score.
+  parameters:
+  - in: path
+    name: score
+    example: 23
+    required: true
+    schema:
+      type: integer
+      description: Between 0 and 100
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RiskClass"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

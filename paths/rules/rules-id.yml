@@ -1,12 +1,12 @@
 get: 
   tags:
-    - Cars
-  summary: Car
-  description: Receive car by id saved in the database.
+    - Rules
+  summary: Rule
+  description: Receive rule by id saved in the database.
   parameters:
   - in: path
     name: id
-    description: Car object id
+    description: Rule object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CarResponse"
+            $ref: "#/components/schemas/Rule"
     400:
       description: Invalid parameters
       content:
@@ -35,47 +35,65 @@ get:
   - bearerAuth: []
 put:
   tags:
-  - Cars
-  summary: Update car
+  - Rules
+  summary: Update rule
   parameters:
   - in: path
     name: id
-    description: Car object id
+    description: Rule object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update car.
+  description: Update a rule.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - registrationNumber
-          - registrationCountry
-          properties:
-              registrationNumber:
-                type: string
-              registrationCountry:
-                type: string
-              vinCode:
-                type: string
-              carModel:
-                type: string
-              status:
-                type: string
-                enum:
-                - Available
-                - Blocked
+          $ref: "#/components/schemas/RuleBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CarResponse"
+            $ref: "#/components/schemas/Rule"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+delete:
+  tags:
+  - Rules
+  summary: Delete rule
+  parameters:
+  - in: path
+    name: id
+    description: Rule object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  description: Delete a rule.
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
     400:
       description: Invalid parameters
       content:

@@ -47,7 +47,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Car"
+              $ref: "#/components/schemas/CarResponse"
     400:
       description: Invalid parameters
       content:
@@ -90,7 +90,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Car"
+            $ref: "#/components/schemas/CarResponse"
     400:
       description: Invalid parameters
       content:

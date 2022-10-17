@@ -1,0 +1,16 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+  createdAt:
+    description: Date, iso 8601 format
+    type: string
+  name:
+    type: string
+  max:
+    type: integer
+    description: Between 0 and 100
+  min:
+    type: integer
+    description: Between 0 and 100

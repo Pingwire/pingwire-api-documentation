@@ -1,0 +1,15 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name is unique
+  min:
+    type: integer
+    description: Between 0 and 100
+  max:
+    type: integer
+    description: Between 0 and 100
+required:
+  - name
+  - max
+  - min
