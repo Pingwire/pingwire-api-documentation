@@ -1,12 +1,12 @@
 get: 
   tags:
-    - Cars
-  summary: Car
-  description: Receive car by id saved in the database.
+    - Members
+  summary: Member
+  description: Receive member by id saved in the database.
   parameters:
   - in: path
     name: id
-    description: Car object id
+    description: Member object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CarResponse"
+            $ref: "#/components/schemas/Member"
     400:
       description: Invalid parameters
       content:
@@ -35,47 +35,30 @@ get:
   - bearerAuth: []
 put:
   tags:
-  - Cars
-  summary: Update car
+  - Members
+  summary: Update member
   parameters:
   - in: path
     name: id
-    description: Car object id
+    description: Member object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update car.
+  description: Update a member.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - registrationNumber
-          - registrationCountry
-          properties:
-              registrationNumber:
-                type: string
-              registrationCountry:
-                type: string
-              vinCode:
-                type: string
-              carModel:
-                type: string
-              status:
-                type: string
-                enum:
-                - Available
-                - Blocked
+          $ref: "#/components/schemas/MemberBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CarResponse"
+            $ref: "#/components/schemas/Member"
     400:
       description: Invalid parameters
       content:

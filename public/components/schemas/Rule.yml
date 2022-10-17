@@ -1,0 +1,48 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+  name:
+    type: string
+  recommendation:
+    type: string
+    enum:
+    - block
+    - review
+    - proceed
+  ruleType:
+    type: string
+    enum:
+    - request
+    - ongoing
+  triggeredBy:
+    type: string
+    format: ObjectId
+    description: Rule that trigger the the current rule
+  createPing:
+    type: boolean
+  score:
+    type: integer
+    description: Between 0 and 100
+  requestTypes:
+    description: Request types is required when rule type is request
+    type: array
+    items:
+      type: string
+      enum:
+      - transaction
+      - carKyc
+      - carPurchase
+      - individualKyc
+      - businessKyc
+  ruleParameters:
+    type: object
+    format: Mixed
+    description: Values depend on the selected rule
+  segments:
+    type: array
+    items:
+      type: string
+      format: ObjectId
+

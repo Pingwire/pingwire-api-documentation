@@ -1,0 +1,15 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+  clientId:
+    type: string
+  permissionRoles:
+    type: array
+    items: 
+      type: string
+      enum:
+      - ReadOnly
+      - ReadWrite
+      - Manager

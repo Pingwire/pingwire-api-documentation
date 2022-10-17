@@ -1,0 +1,12 @@
+type: object
+properties: 
+  permissionRoles:
+    type: array
+    items: 
+      type: string
+      enum:
+      - ReadOnly
+      - ReadWrite
+      - Manager
+required:
+  - permissionRoles

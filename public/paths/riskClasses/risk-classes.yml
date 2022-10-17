@@ -1,8 +1,8 @@
 get: 
   tags:
-    - Requests
-  summary: List requests
-  description: Receive list of requests saved in the database.
+    - Risk Classes
+  summary: List risk classes
+  description: Receive list of risk classes saved in the database.
   parameters:
   - in: query
     name: _sort
@@ -13,8 +13,8 @@ get:
       enum:
       - id
       - createdAt
-      - entity
-      - requestType
+      - min
+      - max
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -26,26 +26,15 @@ get:
       - DESC
       - ASC
   - in: query
-    name: recommendation
-    description: Filter list of requests by recommendation.
-    required: false
-    example: 
-    schema:
-      type: string
-      enum: 
-      - block
-      - review
-      - proceed
-  - in: query
     name: _start
-    description: The start number of the requests list.
+    description: The start number of the risk classes list.
     required: false
     example: '0'
     schema:
       type: number
   - in: query
     name: _end
-    description: The end number of the requests list.
+    description: The end number of the risk classes list.
     required: false
     example: '10'
     schema:
@@ -58,7 +47,7 @@ get:
           schema:
             type: array
             items: 
-              $ref: '#/components/schemas/Request'
+              $ref: '#/components/schemas/RiskClass'
     400:
       description: Invalid parameters
       content:
@@ -75,21 +64,21 @@ get:
   - bearerAuth: []
 post:
   tags:
-  - Requests
-  summary: Create request
-  description: Create a new request.
+  - Risk Classes
+  summary: Create risk class
+  description: Create a new risk class.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/RequestBody"
+          $ref: "#/components/schemas/RiskClassBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Request"
+            $ref: "#/components/schemas/RiskClass"
     400:
       description: Invalid parameters
       content:

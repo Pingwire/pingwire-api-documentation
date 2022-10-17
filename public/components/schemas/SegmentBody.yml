@@ -1,0 +1,11 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name is unique
+  baselineScore:
+    type: integer
+    description: Between 0 and 100
+required:
+  - name
+  - baselineScore
