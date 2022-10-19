@@ -14,7 +14,7 @@ servers:
     brokerName:
       default: generic
       description: Same as the basic auth username
-- url: https:/api.pingwire.io/
+- url: https://api.staging.pingwire.io
   description: Staging server
   variables:
     brokerName:
