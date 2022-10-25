@@ -12,6 +12,34 @@ allOf:
           currency:
             type: string
             description: ISO 4217 code.
+          reference: 
+            type: string
+            description: Refers to the regulation (EU) 2015/847 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 20 May 2015 on information accompanying transfers of funds and repealing Regulation (EC) No 1781/2006. If the transaction is not included in the regulation then state another reference which purpose is to trace the transaction, for example a reference for swish or an OCR message.
+          textMessage:
+            type: string
+            description: The text that the sender may have written regarding the transaction.
+          transactionChannel:
+            type: string
+            enum:
+            - BANKG (BankGiro transaction)
+            - MOTF (Money transfer)
+            - CASH (Cash transfer)
+            - ACCT (Account transfer)
+            - CARD (Card transaction)
+            - CRIR (Courier)
+            - UKN (Unknown)
+            - GAMB (Gambling transaction)
+            - SWISH (Swish transaction)
+            - OTH (Other)
+            - TRANS (Transfer)
+            - SECT (Securities transactions)
+          transactionChannelProvider:
+            type: string
+            description: |
+              Provider of transaction channel for specific cases if the information is known.
+              For `Money transfer` state the namne of the organization that provided the money transfer.
+              For `Gambling transactions` state the namne of the organization that provided the game.
+              For `Securities transactions` state the name of the organization that provided the transaction.
           date:
             type: string
             description: Date, iso 8601 format.
@@ -19,17 +47,17 @@ allOf:
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
-            description: 'At least one field must be included independent of type.'
+            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
           recipient:
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
-            description: 'At least one field must be included independent of type.'
+            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
           processor:
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
-            description: 'At least one field must be included independent of type.'
+            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
           bankData:
             type: object
             properties:

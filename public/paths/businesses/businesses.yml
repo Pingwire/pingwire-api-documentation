@@ -82,6 +82,24 @@ post:
               type: string
             swedishOrganizationNumber:
               type: string
+              format: xxxxxxxxxx
+              example: xxxxxxxxxx
+            incorporationLegalForm:
+              type: string
+              description: Type of business.
+              enum:
+              - limited-liability-company
+              - economic-association
+              - sole-proprietorship
+              - branch
+              - general-partnership
+              - non-profit-making-association
+              - limited-partnership
+              - foundation
+              - foreign-company
+              - other
+              - unknown
+
   responses:
     200:
       description: Successful operation

@@ -49,8 +49,8 @@ properties:
     example: 2022-08-09T17:43:26.650+00:00
   score:
     type: number
-    minimum: 1
-    maximum: 10
+    minimum: 0
+    maximum: 100
   status: 
     type: string
     enum: 

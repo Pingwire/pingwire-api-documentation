@@ -1,4 +1,5 @@
 type: object
+title: "Request entity party response"
 properties:
   id: 
     type: string
@@ -7,18 +8,7 @@ properties:
     type: string
     enum:
     - Individual
-  customId:
-    type: string
-  swedishSocialSecurityNumber:
-    type: string
-    format: yyyymmddxxxx
-  firstName: 
-    type: string
-  lastName:
-    type: string
-  birthDate:
-    type: string
-    format: 'yyyy-mm-dd'
+    - Business
   electronicId: 
     type: string
     description: For transactions authorized trough BankId, the serial number of the certificate could be used.
@@ -29,21 +19,21 @@ properties:
     type: string
     description: Channel used to execute the transaction. When no carrier has been used, “Not relevant” should be selected
     enum:
-    - casino-chip
-    - bank-money-order
-    - cheque
-    - card
-    - swish
-    - bank-giro
-    - card-terminal
-    - service-box
-    - agent
-    - other
-    - unknown
-    - not-relevant
+    - CHP (Casino Chips)
+    - BMO (Bank money order)
+    - CHQ (Cheque)
+    - CARD
+    - SWISH
+    - BANKG (BankGiro)
+    - CTERM (Card terminal)
+    - SBOX (Service box)
+    - AGNT (Agent)
+    - UNK (Unknown)
+    - OTH (Other)
+    - NR (Not relevant)
   transactionCarrierReference:
     type: string
-    description: Reference for carrier of transactions. For example, telephone number for swish, card number for car terminal, bankgiro for BankGiro transaction.
+    description: Reference for Carrier of transactions. For example, telephone number for swish, card number for car terminal, bankgiro for BankGiro transaction.
   country: 
     type: string
     description: Country from/to where the transaction was sent
@@ -51,3 +41,6 @@ properties:
   hardwareId:
     type: string
     description: Hardware id used to authorize the transaction.
+required:
+- id
+- type

@@ -109,8 +109,8 @@ post:
                   type: string
                 score:
                   type: number
-                  min: 1
-                  max: 10
+                  min: 0
+                  max: 100
   responses:
     200:
       description: Successful operation

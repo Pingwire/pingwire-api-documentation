@@ -183,6 +183,8 @@ components:
       $ref: "./components/schemas/Member.yml"
     MemberBody:
       $ref: "./components/schemas/MemberBody.yml"
+    PartyResponse:
+      $ref: "./components/schemas/requestParties/PartyResponse.yml"
     # ApiKey:
     #   $ref: "./components/schemas/ApiKey.yml"
     # ApiKeyBody:
