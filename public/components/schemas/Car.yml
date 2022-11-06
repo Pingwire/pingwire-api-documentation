@@ -9,7 +9,7 @@ properties:
     example: ABC123
   registrationCountry:
     type: string
-    example: sweden
+    format: ISO 3166 ALPHA-3
   vinCode:
     type: string
   carModel:
@@ -20,21 +20,13 @@ properties:
     example: 2022-08-09T17:43:26.650+00:00
   riskScore:
     type: number
-    minimum: 1
-    maximum: 10
+    minimum: 0
+    maximum: 100
   status: 
     type: string
     enum: 
     - Available
     - Blocked
-  kycLatestRequest:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00 
-  purchaseLatestRequest:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
   scoreLatestCalculationDate:
     description: Date, iso 8601 format
     type: date
@@ -46,8 +38,8 @@ properties:
       properties: 
         score:
           type: number
-          minimum: 1
-          maximum: 10
+          minimum: 0
+          maximum: 100
         date:
           description: Date, iso 8601 format
           type: date

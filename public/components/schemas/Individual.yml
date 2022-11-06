@@ -14,10 +14,13 @@ properties:
     type: string
     format: yyyymmddxxxx
     example: yyyymmddxxxx
+  birthDate:
+    type: string
+    format: 'yyyy-mm-dd'
   riskScore:
     type: number
-    minimum: 1
-    maximum: 10
+    minimum: 0
+    maximum: 100
   pep:
     type: string
     enum: 
@@ -31,14 +34,6 @@ properties:
   spar:
     type: boolean
   kycOnboarding:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
-  kycLatestRequest:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
-  transactions:
     description: Date, iso 8601 format
     type: date
     example: 2022-08-09T17:43:26.650+00:00

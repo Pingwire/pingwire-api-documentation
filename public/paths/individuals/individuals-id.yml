@@ -65,6 +65,9 @@ put:
               swedishSocialSecurityNumber:
                 type: string
                 format: yyyymmddxxxx
+              birthDate:
+                type: string
+                format: 'yyyy-mm-dd'
               status:
                 type: string
                 enum:
