@@ -87,6 +87,9 @@ post:
                 swedishSocialSecurityNumber:
                   type: string
                   format: yyyymmddxxxx
+                birthDate:
+                  type: string
+                  format: 'yyyy-mm-dd'
             
   responses:
     200:

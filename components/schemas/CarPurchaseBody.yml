@@ -15,6 +15,34 @@ allOf:
           currency:
             type: string
             description: ISO 4217 code.
+          reference: 
+            type: string
+            description: Refers to the regulation (EU) 2015/847 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 20 May 2015 on information accompanying transfers of funds and repealing Regulation (EC) No 1781/2006. If the transaction is not included in the regulation then state another reference which purpose is to trace the transaction, for example a reference for swish or an OCR message.
+          textMessage:
+            type: string
+            description: The text that the sender may have written regarding the transaction.
+          transactionChannel:
+            type: string
+            enum:
+            - bank-giro
+            - money-transfer
+            - cash
+            - account-transfer
+            - card
+            - courier
+            - unknown
+            - gambling-transaction
+            - swish
+            - other
+            - transfer
+            - securities-transactions
+          transactionChannelProvider:
+            type: string
+            description: |
+              Provider of transaction channel for specific cases if the information is known.
+              For `Money transfer` state the namne of the organization that provided the money transfer.
+              For `Gambling transactions` state the namne of the organization that provided the game.
+              For `Securities transactions` state the name of the organization that provided the transaction.
           date:
             type: date
             description: Date, iso 8601 format.

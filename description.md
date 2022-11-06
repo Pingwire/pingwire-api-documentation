@@ -32,9 +32,9 @@ The following test objects can be used to test different request API responses f
 
 |   | Environment | Identification | Entity type  | Recommendation | Create ping |
 |---|------------|--------------------------------|--------------|----------------|-------------|
-| 1 |   staging  |          SSN -> 201912072392          |  Individual  |      block     |     true    |
-| 2 |   staging  |          SSN -> 201912302385          |  Individual  |     review     |     true    |
-| 3 |   staging  |          Org. nr. -> 5599887766          |  Business  |      block     |     true    |
-| 4 |   staging  |          Org. nr. -> 5566778899          |  Business  |     review     |     true    |
-| 5 |   staging  |          Reg. nr. -> AAA111          |  Car  |      block     |     true    |
-| 6 |   staging  |          Reg. nr. -> ABC123          |  Car  |     review     |     true    |
+| 1 |   staging  |          Ssn <span>&#8594;</span>  201912072392          |  Individual  |      block     |     true    |
+| 2 |   staging  |          Ssn <span>&#8594;</span> 201912302385          |  Individual  |     review     |     true    |
+| 3 |   staging  |          Org. nr. <span>&#8594;</span> 5599887766          |  Business  |      block     |     true    |
+| 4 |   staging  |          Org. nr. <span>&#8594;</span> 5566778899          |  Business  |     review     |     true    |
+| 5 |   staging  |          Reg. nr. <span>&#8594;</span> AAA111          |  Car  |      block     |     true    |
+| 6 |   staging  |          Reg. nr. <span>&#8594;</span> ABC123          |  Car  |     review     |     true    |
