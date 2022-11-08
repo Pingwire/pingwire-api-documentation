@@ -21,24 +21,24 @@ allOf:
           transactionChannel:
             type: string
             enum:
-            - BANKG (BankGiro transaction)
-            - MOTF (Money transfer)
-            - CASH (Cash transfer)
-            - ACCT (Account transfer)
-            - CARD (Card transaction)
-            - CRIR (Courier)
-            - UKN (Unknown)
-            - GAMB (Gambling transaction)
-            - SWISH (Swish transaction)
-            - OTH (Other)
-            - TRANS (Transfer)
-            - SECT (Securities transactions)
+            - bank-giro
+            - money-transfer
+            - cash
+            - account-transfer
+            - card
+            - courier
+            - unknown
+            - gambling-transaction
+            - swish
+            - other
+            - transfer
+            - securities-transactions
           transactionChannelProvider:
             type: string
             description: |
               Provider of transaction channel for specific cases if the information is known.
-              For `Money transfer` state the namne of the organization that provided the money transfer.
-              For `Gambling transactions` state the namne of the organization that provided the game.
+              For `Money transfer` state the name of the organization that provided the money transfer.
+              For `Gambling transactions` state the name of the organization that provided the game.
               For `Securities transactions` state the name of the organization that provided the transaction.
           date:
             type: string
