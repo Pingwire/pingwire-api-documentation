@@ -20,3 +20,22 @@ properties:
       - Manager
   active:
       type: boolean
+  birthDate:
+    type: string
+  occupation:
+    type: string
+    example: Developer
+  swedishSocialSecurityNumber:
+    type: string
+    format: yyyymmddxxxx
+  residence:
+    type: string
+    format: ISO 3166 ALPHA-3
+  foreignId: 
+    type: string
+    description: Foreign personal identity number
+  foreignIdCountry:
+    type: string
+    format: ISO 3166 ALPHA-3
+    description: Foreign personal identity country
+  
