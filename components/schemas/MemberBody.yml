@@ -6,7 +6,25 @@ properties:
     type: string
   email:
     type: string
-    format: e-mail    
+    format: e-mail
+  birthDate:
+    type: string
+  occupation:
+    type: string
+    example: Developer
+  swedishSocialSecurityNumber:
+    type: string
+    format: yyyymmddxxxx
+  residence:
+    type: string
+    format: ISO 3166 ALPHA-3
+  foreignId: 
+    type: string
+    description: Foreign personal identity number
+  foreignIdCountry:
+    type: string
+    format: ISO 3166 ALPHA-3
+    description: Foreign personal identity country    
   permissionRoles:
     type: array
     items: 

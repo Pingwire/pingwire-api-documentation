@@ -19,18 +19,18 @@ properties:
     type: string
     description: Channel used to execute the transaction. When no carrier has been used, “Not relevant” should be selected
     enum:
-    - CHP (Casino Chips)
-    - BMO (Bank money order)
-    - CHQ (Cheque)
-    - CARD
-    - SWISH
-    - BANKG (BankGiro)
-    - CTERM (Card terminal)
-    - SBOX (Service box)
-    - AGNT (Agent)
-    - UNK (Unknown)
-    - OTH (Other)
-    - NR (Not relevant)
+    - casino-chip
+    - bank-money-order
+    - cheque
+    - card
+    - swish
+    - bank-giro
+    - card-terminal
+    - service-box
+    - agent
+    - other
+    - unknown
+    - not-relevant
   transactionCarrierReference:
     type: string
     description: Reference for Carrier of transactions. For example, telephone number for swish, card number for car terminal, bankgiro for BankGiro transaction.
