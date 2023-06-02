@@ -131,6 +131,8 @@ components:
       $ref: "./components/schemas/Car.yml"
     KycForm:
       $ref: "./components/schemas/KycForm.yml"
+    KycFormBody:
+      $ref: "./components/schemas/KycFormBody.yml"
     Ping:
       $ref: "./components/schemas/Ping.yml"
     Case:

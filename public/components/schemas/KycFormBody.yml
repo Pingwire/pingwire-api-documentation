@@ -5,15 +5,6 @@ properties:
     type: string
     format: ObjectId
     example: 62b9437318fe4517089b2833
-  createdAt:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
-  id:
-    description: The unique identifier for this document.
-    type: string
-    format: ObjectId
-    example: 62b9437318fe4517089b2833
   entity:
     description: Information about the entity associated with the document.
     type: object
@@ -445,6 +436,5 @@ properties:
         format: ISO 3166 ALPHA-3
 
 required:
-  - id
   - entity
 additionalProperties: false
