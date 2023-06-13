@@ -78,44 +78,7 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - entity
-          properties:
-              entity:
-                type: object
-                properties:
-                  id:
-                    type: string
-                  type: 
-                    type: string
-                    enum: 
-                    - Individual
-                    - Business
-              transactions:
-                type: object
-                properties:
-                  incoming:
-                    type: object
-                    properties:
-                      monthlyVolume:
-                        type: number
-                      monthlyFrequency:
-                        type: number
-                  outgoing:
-                    type: object
-                    properties:
-                      monthlyVolume:
-                        type: number
-                      monthlyFrequency:
-                        type: number
-                  processed:
-                    type: object
-                    properties:
-                      monthlyVolume:
-                        type: number
-                      monthlyFrequency:
-                        type: number
+          $ref: '#/components/schemas/KycFormBody'
   responses:
     200:
       description: Successful operation
