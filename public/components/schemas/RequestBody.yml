@@ -16,6 +16,9 @@ properties:
     description: Type of request
     example: carKyc
     type: string
+  customId:
+    description: A custom identification for the request
+    type: string
   segment:
     type: string
     description: The `name` of an existing segment in our database.
