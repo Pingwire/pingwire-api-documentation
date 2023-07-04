@@ -2,49 +2,125 @@ type: object
 properties:
   fetchedDate:
     type: date
-    description: Date, iso 8601 format.
-    example: 2022-08-09T17:43:26.650+00:00
+    description: Date, ISO 8601 format.
+    example: 2023-06-15T00:00:00.000+00:00
   accounts:
     type: array
     description: In addition to the required fields, one of [`iban`, `bban`, `accountNumber`] must be included.
     items:
       type: object
-      properties: 
-        iban:
-          description: International Bank Account Number
+      properties:
+        provider:
           type: string
-        bban:
-          description: Basic Bank Account Number
+        swift:
           type: string
-        bic:
-          description: Bank Identification Code
+        role:
           type: string
+          description: The role of the person in relation to the account.
+          enum: 
+            - right-of-disposal
+            - power-of-attorney
+            - beneficiary
+            - internet-user-agreement
+            - contact-person
+            - account-holder
+            - joint-account-holder
+            - individual-account-holder
+            - cardholder
+            - user
+            - unknown
+            - other
+        status:
+          type: string
+          description: The status of the account.
+          enum: 
+            - active
+            - closed-by-client
+            - closed-by-operator
+            - closed
+            - blocked
+        nonBankingInstitution:
+          type: boolean
+        clearingNumber:
+          type: string
+        closed:
+          type: date
+          description: The date when the account was closed, ISO 8601 format.
+          example: 2023-06-01T00:00:00.000+00:00
+        opened:
+          type: date
+          description: The date when the account was opened, ISO 8601 format.
+          example: 2021-06-01T00:00:00.000+00:00
+        source:
+          type: string
+        isPrimaryHolder:
+          type: boolean
+        balanceDate:
+          type: date
+          description: The date when the balance was calculated, ISO 8601 format.
+          example: 2023-06-15T00:00:00.000+00:00
         accountNumber:
+          type: string
+        iban:
+          type: string
+          description: International Bank Account Number
+        bban:
+          type: string
+          description: Basic Bank Account Number
+        bic:
+          type: string
+          description: Bank Identification Code
+        accountName:
           type: string
         currency:
           type: string
           format: ISO 4217 code
         ownershipRatio:
           type: number
-          description: Indicates how much of the  account that is owned by the customer. 
-        accountName:
-          type: string
+          description: Indicates how much of the account is owned by the customer.
         product: 
           type: string
         type:
           type: string
           description: Account type
           enum:
-          - business
-          - checking
-          - credit-line
-          - external
-          - investment
-          - mortgage
-          - loan
-          - other
-          - pension
-          - savings
+            - business
+            - checking
+            - credit-line
+            - external
+            - investment
+            - mortgage
+            - loan
+            - other
+            - pension
+            - savings
+            - bank-giro
+            - bank-account
+            - securities-account
+            - prepaid-card
+            - company-account
+            - investment-savings-account
+            - capital-insurance
+            - client-account
+            - credit-card-account
+            - life-insurance
+            - loan-account
+            - unknown
+            - plus-giro-account
+            - gaming-account
+            - swish-number
+            - occupational-pensions-insurance
+            - foreign-currency-account
+            - share-or-equity-funds-account
+            - check
+            - money-order
+            - e-wallet
+            - card
+            - transaction-reference
+            - generated-transaction-reference
+            - iban-number
+            - psp-account
+            - safe-deposit-box
         balances:
           type: object
           properties:
@@ -79,51 +155,47 @@ properties:
                   type: string
                   format: ISO 4217 code
                 value:
-                    type: number
+                  type: number
               required:
-              - currency
-              - value
-          required:
-          - current
+                - currency
+                - value
         transactions:
           type: array
           items:
             type: object
-            properties: 
-              amount: 
+            properties:
+              date:
+                type: date
+                description: Date, ISO 8601 format.
+                example: 2023-06-15T00:00:00.000+00:00
+              amount:
                 type: number
-                description: Transaction amount.  
-              description: 
+                description: Transaction amount.
+              description:
                 type: string
               currency:
                 type: string
                 format: ISO 4217 code
-              date:
-                type: date
-                description: Date, iso 8601 format.
-                example: 2022-08-09T17:43:26.650+00:00
               status:
                 type: string
                 description: Transaction status.
                 enum:
-                - booked
-                - pending
+                  - booked
+                  - pending
               type:
                 type: string
                 description: Transaction type.
                 enum:
-                - card
-                - payment
-                - transfer
-                - withdrawal
-                - other
+                  - card
+                  - payment
+                  - transfer
+                  - withdrawal
+                  - other
             required:
-            - amount
-            - currency
-            - date
-            - description
-      required:
-      - bic
-      - currency
+              - date
+              - amount
+              - currency
+              - description
 required:
-- fetchedDate
+  - fetchedDate
+  - accounts

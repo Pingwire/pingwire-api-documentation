@@ -50,7 +50,9 @@ properties:
   segment:
     type: string
     format: ObjectId
-
+  customId:
+    description: A custom identification for the request
+    type: string
   requestType:
     description: Type of request
     example: carKyc
