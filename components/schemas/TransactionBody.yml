@@ -45,19 +45,63 @@ allOf:
             description: Date, iso 8601 format.
           initiator:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
-            - $ref: '#/components/schemas/Business'
-            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
+              - allOf:
+                - $ref: '#/components/schemas/Individual'
+                - type: object
+                - title: Individual
+                  properties:
+                    conductors:
+                      type: array
+                      items:
+                        allOf:
+                          - oneOf:
+                            - allOf:
+                              - $ref: '#/components/schemas/Individual'
+                              - type: object
+                                title: Individual
+                            - allOf:
+                              - $ref: '#/components/schemas/Business'
+                              - type: object
+                                title: Business
+                          - type: object
+                            properties:
+                              conductorType:
+                                type: string
+                                enum:
+                                  - signatory
+              - allOf:
+                - $ref: '#/components/schemas/Business'
+                - type: object
+                - title: Business
+                  properties:
+                    conductors:
+                      type: array
+                      items:
+                        allOf:
+                          - oneOf:
+                            - allOf:
+                              - $ref: '#/components/schemas/Individual'
+                              - type: object
+                                title: Individual Conductor
+                            - allOf:
+                              - $ref: '#/components/schemas/Business'
+                              - type: object
+                                title: Business Conductor
+                          - type: object
+                            properties:
+                              conductorType:
+                                type: string
+                                enum:
+                                  - signatory
+
           recipient:
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
-            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
           processor:
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
-            description: At least one of [`swedishOrganizationNumber`, `swedishSocialSecurityNumber`, `customId`, `id`] (availability of these fields depends on entity type) must be included together with `type`. The `id` field are reserved for already saved entities in the system. However, the use of the any other fields will create a new entity (if not found in the system) automatically or update the found entity with any additional fields sent in.
           bankData:
             type: object
             properties:

@@ -44,7 +44,21 @@ allOf:
             type: string
             description: Date, iso 8601 format.
           initiator:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - $ref: '#/components/schemas/PartyResponse'
+            - type: object
+              properties:
+                conductors:
+                  type: array
+                  items:
+                    allOf:
+                    - $ref: '#/components/schemas/PartyResponse'
+                    - type: object
+                      properties:
+                        conductorType:
+                          type: string
+                          enum:
+                            - signatory
           recipient:
             $ref: '#/components/schemas/PartyResponse'
           processor:
