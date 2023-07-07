@@ -123,6 +123,60 @@ paths:
 
 components:
   schemas:
+    BusinessForm:
+      allOf:
+        - $ref: '#/components/schemas/KycFormBody'
+        - type: object
+          properties:
+            contactInfo: 
+              $ref: '#/components/schemas/ContactInfo'
+            beneficialOwners:
+              $ref: '#/components/schemas/BeneficialOwners'
+            boardMembers:
+              $ref: '#/components/schemas/BoardMembers'
+            signatories:
+              $ref: '#/components/schemas/Signatories'
+            financialInfo:
+              $ref: '#/components/schemas/BusinessFinancialInfo'
+            identification:
+              $ref: '#/components/schemas/BusinessIdentification'
+            riskAssessment:
+              $ref: '#/components/schemas/BusinessRiskAssessment'
+    IndividualForm:
+      allOf:
+        - $ref: '#/components/schemas/KycFormBody'
+        - type: object
+          properties:
+            contactInfo: 
+              $ref: '#/components/schemas/ContactInfo'
+            financialInfo:
+              $ref: '#/components/schemas/IndividualFinancialInfo'
+            identification:
+              $ref: '#/components/schemas/IndividualIdentification'
+            riskAssessment:
+              $ref: '#/components/schemas/IndividualRiskAssessment'
+    ContactInfo:
+      $ref: "./components/schemas/ContactInfo.yml"
+    BeneficialOwners:
+      $ref: "./components/schemas/BeneficialOwners.yml"
+    BoardMembers:
+      $ref: "./components/schemas/BoardMembers.yml"
+    Signatories:
+      $ref: "./components/schemas/Signatories.yml"
+    TransactionBehavior:
+      $ref: "./components/schemas/TransactionBehavior.yml"
+    BusinessFinancialInfo:
+      $ref: "./components/schemas/BusinessFinancialInfo.yml"
+    IndividualFinancialInfo:
+      $ref: "./components/schemas/IndividualFinancialInfo.yml"
+    BusinessIdentification:
+      $ref: "./components/schemas/BusinessIdentification.yml"
+    IndividualIdentification:
+      $ref: "./components/schemas/IndividualIdentification.yml"
+    BusinessRiskAssessment:
+      $ref: "./components/schemas/BusinessRiskAssessment.yml"
+    IndividualRiskAssessment:
+      $ref: "./components/schemas/IndividualRiskAssessment.yml"
     IndividualResponse:
       $ref: "./components/schemas/Individual.yml"
     BusinessResponse:

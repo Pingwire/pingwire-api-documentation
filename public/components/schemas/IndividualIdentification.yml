@@ -1,0 +1,47 @@
+type: object
+properties:
+  firstName:
+    type: string
+  lastName:
+    type: string
+  middleName:
+    type: string
+  fullName:
+    type: string
+  dateOfBirth:
+    type: string
+    format: date
+  placeOfBirth:
+    type: string
+  nationality:
+    type: string
+  gender:
+    type: string
+    enum:
+      - 'male'
+      - 'female'
+      - 'other'
+  occupation:
+    type: string
+  maritalStatus:
+    type: string
+    enum:
+      - 'single'
+      - 'married'
+      - 'divorced'
+      - 'widowed'
+  passportNumber:
+    type: string
+  nationalIdNumber:
+    type: string
+  taxIdNumber:
+    type: string
+  driversLicenseNumber:
+    type: string
+  issuingCountry:
+    type: string
+  expirationDate:
+    type: string
+    format: date
+  issuingAuthority:
+    type: string

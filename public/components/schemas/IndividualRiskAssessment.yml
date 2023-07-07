@@ -1,0 +1,16 @@
+type: object
+properties:
+  pepStatus:
+    type: string
+    enum:
+      - 'yes'
+      - 'no'
+  sanctionStatus:
+    type: string
+    enum:
+      - 'yes'
+      - 'no'
+  countryOfResidence:
+    type: string
+  employmentIndustry:
+    type: string
