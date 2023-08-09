@@ -18,4 +18,4 @@ properties:
     type: string
   segment:
     type: string
-    description: The `name` of an existing segment in our database.
+    description: "Use segment id (recommended); segment name still supported but deprecated."
