@@ -1,0 +1,39 @@
+description: Array of beneficial owners of the entity.
+type: array
+items:
+  type: object
+  properties:
+    name:
+      description: The name of the beneficial owner.
+      type: string
+    ownershipRatio:
+      description: The ratio of ownership by the beneficial owner.
+      type: number
+    nationality:
+      description: The nationality of the beneficial owner.
+      type: string
+      format: ISO 3166 ALPHA-3
+    dateOfBirth:
+      description: The date of birth of the beneficial owner.
+      type: string
+    address:
+      description: The address of the beneficial owner.
+      type: string
+    email:
+      description: The email address of the beneficial owner.
+      type: string
+    phoneNumber:
+      description: The phone number of the beneficial owner.
+      type: string
+    passportNumber:
+      description: The passport number of the beneficial owner.
+      type: string
+    nationalIdNumber:
+      description: The national identification number of the beneficial owner.
+      type: string
+    driversLicenseNumber:
+      description: The driver's license number of the beneficial owner.
+      type: string
+    otherIdentification:
+      description: Any other identification details of the beneficial owner.
+      type: string

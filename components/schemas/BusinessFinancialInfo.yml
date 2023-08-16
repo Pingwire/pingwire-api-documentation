@@ -1,0 +1,71 @@
+type: object
+properties:
+  incoming:
+    $ref: '#/components/schemas/TransactionBehavior'
+  outgoing:
+    $ref: '#/components/schemas/TransactionBehavior'
+  processed:
+    $ref: '#/components/schemas/TransactionBehavior'
+  auditedFinancialStatements:
+    type: string
+    enum: ['yes', 'no']
+  sourceOfFunds:
+    type: string
+  numberOfEmployees:
+    type: integer
+  annualRevenue:
+    type: number
+    format: float
+    minimum: 0
+  netWorth:
+    type: number
+    format: float
+    minimum: 0
+  totalAssets:
+    type: number
+    format: float
+    minimum: 0
+  totalLiabilities:
+    type: number
+    format: float
+    minimum: 0
+  equity:
+    type: number
+    format: float
+    minimum: 0
+  debtToEquityRatio:
+    type: number
+    format: float
+    minimum: 0
+  ebitda:
+    type: number
+    format: float
+    minimum: 0
+  grossProfitMargin:
+    type: number
+    format: float
+    minimum: 0
+  outstandingLoans:
+    type: number
+    format: float
+    minimum: 0
+  netProfitMargin:
+    type: number
+    format: float
+    minimum: 0
+  operatingProfitMargin:
+    type: number
+    format: float
+    minimum: 0
+  creditScore:
+    type: integer
+  collateralPledged:
+    type: number
+    format: float
+    minimum: 0
+  accountsPayable:
+    type: string
+    enum: ['yes', 'no']
+  accountsReceivable:
+    type: string
+    enum: ['yes', 'no']
