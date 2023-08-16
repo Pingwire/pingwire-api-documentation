@@ -1,0 +1,26 @@
+type: object
+properties:
+  incoming:
+    $ref: '#/components/schemas/TransactionBehavior'
+  outgoing:
+    $ref: '#/components/schemas/TransactionBehavior'
+  processed:
+    $ref: '#/components/schemas/TransactionBehavior'
+  employmentStatus:
+    type: string
+  employerName:
+    type: string
+  occupation:
+    type: string
+  annualIncome:
+    type: number
+    format: float
+    minimum: 0
+  netWorth:
+    type: number
+    format: float
+    minimum: 0
+  sourceOfFunds:
+    type: string
+  purposeOfAccount:
+    type: string

@@ -1,0 +1,22 @@
+type: object
+properties:
+  companyName:
+    type: string
+  taxIdNumber:
+    type: string
+  companyRegistrationNumber:
+    type: string
+  lei:
+    type: string
+  countryOfIncorporation:
+    type: string
+  dateOfIncorporation:
+    type: string
+    format: date
+  parentCompanyName:
+    type: string
+  thirdPartyVerification:
+    type: string
+    enum:
+      - 'yes'
+      - 'no'

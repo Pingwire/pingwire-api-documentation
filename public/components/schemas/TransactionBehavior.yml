@@ -1,0 +1,19 @@
+type: object
+properties:
+  monthlyVolume:
+    type: number
+    format: float
+    minimum: 0
+  monthlyFrequency:
+    type: number
+    format: float
+    minimum: 0
+  currency:
+    type: string
+    description: ISO 4217 code.
+  averageAmount:
+    type: number
+    format: float
+    minimum: 0
+  source:
+    type: string

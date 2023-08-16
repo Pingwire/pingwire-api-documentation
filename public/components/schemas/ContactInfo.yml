@@ -1,0 +1,29 @@
+type: object
+properties:
+  residentialAddress:
+    description: The residential address of the contact person.
+    type: string
+  city:
+    description: The city of the contact person.
+    type: string
+  state:
+    description: The state of the contact person.
+    type: string
+  zipCode:
+    description: The zip code of the contact person.
+    type: string
+  country:
+    description: The country of the contact person.
+    type: string
+  mailingAddress:
+    description: The mailing address of the contact person.
+    type: string
+  email:
+    description: The email address of the contact person.
+    type: string
+  phoneNumber:
+    description: The phone number of the contact person.
+    type: string
+  website:
+    description: The website URL of the entity.
+    type: string
