@@ -223,6 +223,8 @@ components:
       $ref: "./components/schemas/BankData.yml"
     Individual:
       $ref: "./components/schemas/requestParties/Individual.yml"
+    Account:
+      $ref: "./components/schemas/requestParties/Account.yml"
     Business:
       $ref: "./components/schemas/requestParties/Business.yml"
     Car:
