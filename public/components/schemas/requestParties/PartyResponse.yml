@@ -9,6 +9,7 @@ properties:
     enum:
     - Individual
     - Business
+    - Account
   electronicId: 
     type: string
     description: For transactions authorized trough BankId, the serial number of the certificate could be used.
