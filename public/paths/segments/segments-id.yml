@@ -1,4 +1,5 @@
-get: 
+get:
+  deprecated: true 
   tags:
     - Segments
   summary: Segment
@@ -34,6 +35,7 @@ get:
   security:
   - bearerAuth: []
 put:
+  deprecated: true
   tags:
   - Segments
   summary: Update segment
