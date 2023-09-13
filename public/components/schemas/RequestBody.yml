@@ -19,6 +19,10 @@ properties:
   customId:
     description: A custom identification for the request
     type: string
+  process:
+    type: string
+    format: ObjectId 
   segment:
     type: string
+    deprecated: true
     description: "Use segment id (recommended); segment name still supported but deprecated."
