@@ -1,0 +1,16 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name is unique
+  requestType:
+    type: string
+    enum:
+    - transaction
+    - carKyc
+    - carPurchase
+    - individualKyc
+    - businessKy
+required:
+  - name
+  - requestType
