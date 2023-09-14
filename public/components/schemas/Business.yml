@@ -4,6 +4,9 @@ properties:
     type: string
     format: ObjectId
     example: 62b9437318fe4517089b2833
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   customId:
     type: string
   name:
@@ -12,6 +15,9 @@ properties:
     type: string
     format: xxxxxxxxxx
     example: xxxxxxxxxx
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   incorporationLegalForm:
     type: string
     description: Type of business.
@@ -66,25 +72,12 @@ properties:
           type: string
         id:
           type: string
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+          externalDocs:
+            description: Unique identifier
+            url: '/#section/Introduction/Unique-Identifier'
         relation:
           type: array
           items: 
             type: string
-  transactionOverrideThresholds:
-    type: object
-    properties:
-      incoming: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number
-      outgoing: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number
-      processed: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number

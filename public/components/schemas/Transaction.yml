@@ -50,6 +50,7 @@ allOf:
               properties:
                 conductors:
                   type: array
+                  description: Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
                   items:
                     allOf:
                     - $ref: '#/components/schemas/PartyResponse'
