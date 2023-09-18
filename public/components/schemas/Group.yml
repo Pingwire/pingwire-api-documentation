@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+  createdAt:
+    description: Date, iso 8601 format
+    type: string
+  updatedAt:
+    description: Date, iso 8601 format
+    type: string  
+  name:
+    type: string
+  active:
+    type: boolean 
+  score:
+    type: integer
+    description: Between 0 and 100

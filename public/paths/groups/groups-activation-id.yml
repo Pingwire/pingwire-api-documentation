@@ -1,18 +1,17 @@
 put:
-  deprecated: true
   tags:
-  - Segments
-  summary: Update segment active status
+  - Groups
+  summary: Update group active status
   parameters:
   - in: path
     name: id
-    description: Segment object id
+    description: Group object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update a segment activation status.
+  description: Update a group activation status.
   requestBody:
     content:
       application/json:
@@ -29,7 +28,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Segment"
+            $ref: "#/components/schemas/Group"
     400:
       description: Invalid parameters
       content:
