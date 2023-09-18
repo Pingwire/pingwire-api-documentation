@@ -11,9 +11,6 @@ properties:
     properties:
       id:
         type: string
-        externalDocs:
-          description: Unique identifier
-          url: '/#section/Introduction/Unique-Identifier'
       type:
         type: string
         enum: 

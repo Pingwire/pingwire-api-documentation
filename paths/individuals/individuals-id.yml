@@ -57,9 +57,7 @@ put:
           properties:
               customId:
                 type: string
-                externalDocs:
-                  description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'  
+                description: The custom id can be any id that the creator would like to identify the individual with.
               firstName:
                 type: string
               lastName:
@@ -67,9 +65,6 @@ put:
               swedishSocialSecurityNumber:
                 type: string
                 format: yyyymmddxxxx
-                externalDocs:
-                  description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'  
               birthDate:
                 type: string
                 format: 'yyyy-mm-dd'
@@ -78,6 +73,25 @@ put:
                 enum:
                 - Available
                 - Blocked
+              transactionOverrideThresholds:
+                type: object
+                description: Override KYC form thresholds
+                properties:
+                  incoming: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
+                  outgoing: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
+                  processed: 
+                    type: object
+                    properties: 
+                      monthlyVolume:
+                        type: number
     responses:
       200:
         description: Successful operation

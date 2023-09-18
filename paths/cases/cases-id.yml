@@ -48,15 +48,12 @@ post:
           - selectedIds
           properties:
             selectedIds:
-              externalDocs:
-                description: Unique identifiers
-                url: '/#section/Introduction/Unique-Identifier'  
               type: array
               items: 
                 type: string
                 description: list of case object ids to merge.
                 format: ObjectId
-                example: 62b9437318fe4517089b2833          
+                example: 62b9437318fe4517089b2833            
   responses:
       200:
         description: Successful operation

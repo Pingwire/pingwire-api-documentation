@@ -4,9 +4,6 @@ properties:
   id: 
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   type:
     type: string
     enum:

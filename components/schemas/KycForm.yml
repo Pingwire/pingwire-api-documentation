@@ -14,9 +14,7 @@ properties:
     type: date
     example: 2022-08-09T17:43:26.650+00:00
   id:
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
+    description: The unique identifier for this document.
     type: string
     format: ObjectId
     example: 62b9437318fe4517089b2833
@@ -25,10 +23,8 @@ properties:
     type: object
     properties:
       id:
+        description: The unique identifier of the entity.
         type: string
-        externalDocs:
-          description: Unique identifier
-          url: '/#section/Introduction/Unique-Identifier'
       type: 
         description: The type of the entity.
         type: string

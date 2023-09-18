@@ -3,18 +3,12 @@ properties:
   id: 
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   type:
     type: string
     enum:
     - Car
   registrationNumber:
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   registrationCountry:
     type: string
     format: ISO 3166 ALPHA-3

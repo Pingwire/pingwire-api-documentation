@@ -2,9 +2,6 @@ type: object
 properties:
   id:
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   entities:
     type: array
     items: 
@@ -14,9 +11,7 @@ properties:
           type: string
           description: object id
           format: ObjectId
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
+          
         type: 
           type: string
           enum:
@@ -30,9 +25,6 @@ properties:
       description: list of request object ids.
       format: ObjectId
       example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   pings:
     type: array
     items: 
@@ -40,9 +32,6 @@ properties:
       description: list of pings object ids.
       format: ObjectId
       example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   fipoReports:
     type: array
     items: 
@@ -50,9 +39,6 @@ properties:
       description: list of report object ids.
       format: ObjectId
       example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   comments:
     type: array
     items: 
@@ -63,9 +49,6 @@ properties:
           description: Object id of the member who created the comment.
           format: ObjectId
           example: 62b9437318fe4517089b2833
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
         message: 
           type: string
           description: The comment.
@@ -95,9 +78,6 @@ properties:
     description: Object id of case that this case have been merged into.
     format: ObjectId
     example: 62b9437318fe4517089b2833
-    externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   status: 
     type: string
     enum: 

@@ -3,9 +3,6 @@ properties:
   id:
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   entities:
     type: array
     items: 
@@ -14,9 +11,6 @@ properties:
         id: 
           type: string
           format: ObjectId
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
         type: 
           type: string
           enum:
@@ -34,9 +28,6 @@ properties:
           type: string
           format: ObjectId
           description: Object id of the member who created the comment.
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
         message: 
           type: string
           description: The comment.
@@ -48,9 +39,6 @@ properties:
     type: string
     format: ObjectId
     description: Object id of the rule that triggered the ping creation.
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   expiryDate:
     type: date
     example: 2022-08-09T17:43:26.650+00:00

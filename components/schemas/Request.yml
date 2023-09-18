@@ -19,9 +19,6 @@ properties:
   id:
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   createdAt: 
     type: date
     description: Date, iso 8601 format.
@@ -67,10 +64,8 @@ properties:
     type: string
     format: ObjectId   
   customId:
+    description: A custom identification for the request
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   requestType:
     description: Type of request
     example: carKyc

@@ -3,24 +3,15 @@ properties:
   id: 
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   type:
     type: string
     enum:
     - Individual
   customId:
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   swedishSocialSecurityNumber:
     type: string
     format: yyyymmddxxxx
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   firstName: 
     type: string
   lastName:

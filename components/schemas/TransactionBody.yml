@@ -44,7 +44,6 @@ allOf:
             type: string
             description: Date, iso 8601 format.
           initiator:
-            description: The transaction initiator is the entity who starts or triggers a transaction.
             oneOf:
               - allOf:
                 - $ref: '#/components/schemas/Account'
@@ -53,7 +52,6 @@ allOf:
                   properties:
                     conductors:
                       type: array
-                      description: Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
                       title: List of conductors
                       items:
                         allOf:
@@ -261,7 +259,6 @@ allOf:
                     conductors:
                       type: array
                       title: List of conductors
-                      description:  Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
                       items:
                         allOf:
                           - $ref: '#/components/schemas/Individual'
@@ -273,19 +270,16 @@ allOf:
                                   - signatory
 
           recipient:
-            description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions.
             oneOf:
             - $ref: '#/components/schemas/Account'
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
           processor:
-            description:  The transaction processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient.
             oneOf:
             - $ref: '#/components/schemas/Individual'
             - $ref: '#/components/schemas/Business'
           bankData:
             type: object
-            description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
             properties:
               initiator:
                 $ref: '#/components/schemas/BankData'

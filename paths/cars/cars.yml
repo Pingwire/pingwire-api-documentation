@@ -78,9 +78,6 @@ post:
           properties:
                 registrationNumber:
                   type: string
-                  externalDocs:
-                    description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'
                 registrationCountry:
                   type: string
                   format: ISO 3166 ALPHA-3

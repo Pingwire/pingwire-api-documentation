@@ -3,9 +3,6 @@ properties:
   name:
     type: string
     description: Name is unique
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   requestType:
     type: string
     enum:

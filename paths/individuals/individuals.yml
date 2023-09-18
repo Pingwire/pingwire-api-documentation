@@ -80,9 +80,6 @@ post:
                 customId:
                   type: string
                   description: The custom id can be any id that the created would like to identify the individual with.
-                  externalDocs:
-                    description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'  
                 firstName:
                   type: string
                 lastName:
@@ -90,9 +87,6 @@ post:
                 swedishSocialSecurityNumber:
                   type: string
                   format: yyyymmddxxxx
-                  externalDocs:
-                    description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'  
                 birthDate:
                   type: string
                   format: 'yyyy-mm-dd'

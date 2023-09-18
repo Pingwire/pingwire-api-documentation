@@ -3,31 +3,31 @@ properties:
   id: 
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   type:
     type: string
     enum:
     - Account
-  customId:
-    type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   provider:
       type: string
-      description: Identifier of bank holding the account.
+  swift:
+    type: string
   nonBankingInstitution:
+    type: boolean
+  clearingNumber:
+    type: string
+  source:
+    type: string
+  isPrimaryHolder:
     type: boolean
   opened:
     type: string
     format: 'yyyy-mm-dd'
-    description: The date the Account was opened
   closed:
     type: string
     format: 'yyyy-mm-dd'
-    description: The date the Account was closed
+  balanceDate:
+    type: string
+    format: 'yyyy-mm-dd'
   status:
     type: string
     enum:
@@ -36,27 +36,23 @@ properties:
       - closed-by-operator
       - closed
       - blocked
+  accountNumber:
+    type: string
   iban:
     type: string
-    description: An IBAN, or international bank account number, is a standard international numbering system.
   bban:
     type: string
-    description: An BBAN, or Basic Bank Account Number, is a standard national numbering system.
   bic:
     type: string
-    description: An BIC, or B Bank Identification Code, is a standard international bank identifier numbering system.
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   currency:
     type: string
     description: ISO 4217 code.
+  ownershipRatio:
+    type: number
   accountName:
     type: string
-    description: The name of the account.
   product:
     type: string
-    description: The banks product name for this account. For example, PERSONKONTO
   accountType:
     type: string
     enum:

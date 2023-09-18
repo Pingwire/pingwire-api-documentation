@@ -7,9 +7,6 @@ properties:
   email:
     type: string
     format: e-mail
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   birthDate:
     type: string
   occupation:
@@ -18,9 +15,6 @@ properties:
   swedishSocialSecurityNumber:
     type: string
     format: yyyymmddxxxx
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   residence:
     type: string
     format: ISO 3166 ALPHA-3

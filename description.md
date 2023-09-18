@@ -17,9 +17,6 @@ For making the integration to Pingwire as seamless as possible, we have included
 - `SEGMENT`: Custom grouping corresponding to a self-defined group structure, e.g. product usage. In addition, segments also correspond to a baseline probability of criminal activity.
 - `RISK CLASS`: Classes partitioned by the probability of an entity committing a crime using self-defined probability intervals.
 
-## Unique Identifier
-A unique identifier is a specific label or value used to clearly distinguish one item from all others. In databases or systems, this ensures that each piece of data can be accurately identified without any confusion, allowing for effective data retrieval, updating, or deletion.
-
 ## Sequence Diagram
 
 <img src="assets/seq-diagram.svg"  />
