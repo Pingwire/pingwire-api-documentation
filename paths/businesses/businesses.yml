@@ -78,12 +78,17 @@ post:
             customId:
               type: string
               description: The custom id can be any id that the creator would like to identify the business with.
+              externalDocs:
+                description: Unique identifier
+                url: '/#section/Introduction/Unique-Identifier'
             name:
               type: string
             swedishOrganizationNumber:
               type: string
               format: xxxxxxxxxx
-              example: xxxxxxxxxx
+              externalDocs:
+                description: Unique identifier
+                url: '/#section/Introduction/Unique-Identifier'
             incorporationLegalForm:
               type: string
               description: Type of business.

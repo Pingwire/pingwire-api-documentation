@@ -3,8 +3,14 @@ properties:
   id:
     type: string
     format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   clientId:
     type: string
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   permissionRoles:
     type: array
     items: 

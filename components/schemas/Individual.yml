@@ -4,6 +4,9 @@ properties:
     type: string
     format: ObjectId
     example: 62b9437318fe4517089b2833
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   customId:
     type: string
   firstName:
@@ -14,6 +17,9 @@ properties:
     type: string
     format: yyyymmddxxxx
     example: yyyymmddxxxx
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   birthDate:
     type: string
     format: 'yyyy-mm-dd'
@@ -76,21 +82,3 @@ properties:
           type: array
           items: 
             type: string
-  transactionOverrideThresholds:
-    type: object
-    properties:
-      incoming: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number
-      outgoing: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number
-      processed: 
-        type: object
-        properties: 
-          monthlyVolume:
-            type: number

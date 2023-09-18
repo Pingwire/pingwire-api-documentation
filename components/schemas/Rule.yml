@@ -3,6 +3,9 @@ properties:
   id:
     type: string
     format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'  
   name:
     type: string
   recommendation:
@@ -20,6 +23,9 @@ properties:
     type: string
     format: ObjectId
     description: Rule that trigger the the current rule
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier' 
   createPing:
     type: boolean
   score:
@@ -42,6 +48,9 @@ properties:
     description: Values depend on the selected rule
   segments:
     type: array
+    externalDocs:
+      description: Unique identifiers
+      url: '/#section/Introduction/Unique-Identifier' 
     items:
       type: string
       format: ObjectId
