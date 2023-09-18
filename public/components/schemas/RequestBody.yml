@@ -17,8 +17,10 @@ properties:
     example: carKyc
     type: string
   customId:
-    description: A custom identification for the request
     type: string
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   process:
     type: string
     format: ObjectId 

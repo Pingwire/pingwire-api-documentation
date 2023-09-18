@@ -3,11 +3,17 @@ properties:
   id:
     type: string
     format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   createdAt:
     description: Date, iso 8601 format
     type: string
   name:
     type: string
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   active:
     type: boolean 
   baselineScore:

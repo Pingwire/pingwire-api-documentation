@@ -3,13 +3,19 @@ properties:
   id:
     type: string
     format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   firstName:
     type: string
   lastName:
     type: string
   email:
     type: string
-    format: e-mail    
+    format: e-mail   
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier' 
   permissionRoles:
     type: array
     items: 
@@ -28,6 +34,9 @@ properties:
   swedishSocialSecurityNumber:
     type: string
     format: yyyymmddxxxx
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   residence:
     type: string
     format: ISO 3166 ALPHA-3

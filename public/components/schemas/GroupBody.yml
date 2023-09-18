@@ -3,6 +3,9 @@ properties:
   name:
     type: string
     description: Name is unique
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   score:
     type: integer
     description: Between 0 and 100
