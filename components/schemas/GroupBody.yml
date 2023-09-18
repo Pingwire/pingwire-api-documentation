@@ -6,9 +6,9 @@ properties:
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
-  baselineScore:
+  score:
     type: integer
     description: Between 0 and 100
 required:
   - name
-  - baselineScore
+  - score

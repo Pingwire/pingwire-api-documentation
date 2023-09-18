@@ -1,8 +1,8 @@
 get: 
   tags:
-    - Pings
-  summary: List pings
-  description: Receive list of pings saved in the database.
+    - Processes
+  summary: List processes
+  description: Receive list of processes saved in the database.
   parameters:
   - in: query
     name: _sort
@@ -13,8 +13,6 @@ get:
       enum:
       - id
       - createdAt
-      - description
-      - entities
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -26,27 +24,22 @@ get:
       - DESC
       - ASC
   - in: query
-    name: status
-    description: Filter list of pings by status.
+    name: active
+    description: Filter list of processes by active status.
     required: false
-    example: 
+    example: true
     schema:
-      type: string
-      enum: 
-      - pending
-      - resolved 
-      - confirmed 
-      - ignored 
+      type: boolean
   - in: query
     name: _start
-    description: The start number of the pings list.
+    description: The start number of the processes list.
     required: false
     example: '0'
     schema:
       type: number
   - in: query
     name: _end
-    description: The end number of the pings list.
+    description: The end number of the processes list.
     required: false
     example: '10'
     schema:
@@ -58,8 +51,8 @@ get:
         application/json:
           schema:
             type: array
-            items:
-              $ref: "#/components/schemas/Ping"
+            items: 
+              $ref: '#/components/schemas/Process'
     400:
       description: Invalid parameters
       content:
@@ -76,51 +69,21 @@ get:
   - bearerAuth: []
 post:
   tags:
-  - Pings
-  summary: Create pings
-  description: Create a new pings.
+  - Processes
+  summary: Create process
+  description: Create a new process.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - entities
-          - description
-          - score
-          properties:
-                entities:
-                  type: array
-                  description: List of entities.
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: ObjectId
-                        example: 62b9437318fe4517089b2833
-                        externalDocs:
-                          description: Unique identifier
-                          url: '/#section/Introduction/Unique-Identifier'
-                      type:
-                        type: string
-                        enum:
-                        - Individual
-                        - Business
-                        - Car
-                description:
-                  type: string
-                score:
-                  type: number
-                  min: 0
-                  max: 100
+          $ref: "#/components/schemas/ProcessBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Ping"
+            $ref: "#/components/schemas/Process"
     400:
       description: Invalid parameters
       content:

@@ -1,13 +1,12 @@
-get:
-  deprecated: true 
+get: 
   tags:
-    - Segments
-  summary: Segment
-  description: Receive segment by id saved in the database.
+    - Processes
+  summary: Process
+  description: Receive process by id saved in the database.
   parameters:
   - in: path
     name: id
-    description: Segment object id
+    description: Process object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -19,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Segment"
+            $ref: "#/components/schemas/Process"
     400:
       description: Invalid parameters
       content:
@@ -35,36 +34,31 @@ get:
   security:
   - bearerAuth: []
 put:
-  deprecated: true
   tags:
-  - Segments
-  summary: Update segment
+  - Processes
+  summary: Update process
   parameters:
   - in: path
     name: id
-    description: Segment object id
+    description: Process object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update a segment.
+  description: Update a process.
   requestBody:
     content:
       application/json:
         schema:
-          type: object
-          properties:
-            baselineScore:
-              type: integer
-              description: Between 0 and 100
+          $ref: "#/components/schemas/ProcessBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BusinessResponse"
+            $ref: "#/components/schemas/Process"
     400:
       description: Invalid parameters
       content:

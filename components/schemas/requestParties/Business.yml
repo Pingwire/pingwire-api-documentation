@@ -3,15 +3,24 @@ properties:
   id: 
     type: string
     format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   type:
     type: string
     enum:
     - Business
   customId:
     type: string
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   swedishOrganizationNumber:
     type: string
     format: xxxxxxxxxx
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   name:
     type: string
   electronicId: 

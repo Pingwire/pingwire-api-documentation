@@ -1,6 +1,12 @@
 type: object
 required:
+  - id
+  - createdAt
+  - processStopped
+  - step
+  - recommendation
   - requestType
+  - extraInformation
 discriminator:
   propertyName: requestType
   mapping:
@@ -10,6 +16,12 @@ discriminator:
     individualKyc: '#/components/schemas/IndividualKyc'
     businessKyc: '#/components/schemas/BusinessKyc'
 properties:
+  id:
+    type: string
+    format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   createdAt: 
     type: date
     description: Date, iso 8601 format.
@@ -49,10 +61,16 @@ properties:
           example: 2022-08-09T17:43:26.650+00:00
   segment:
     type: string
+    deprecated: true
     format: ObjectId
-  customId:
-    description: A custom identification for the request
+  process:
     type: string
+    format: ObjectId   
+  customId:
+    type: string
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   requestType:
     description: Type of request
     example: carKyc

@@ -17,6 +17,9 @@ properties:
     type: string
     format: ObjectId
     description: Rule that trigger the the current rule
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier' 
   createPing:
     type: boolean
   score:
@@ -38,6 +41,9 @@ properties:
     format: Mixed
     description: Values depend on the selected rule
   segments:
+    externalDocs:
+      description: Unique identifiers
+      url: '/#section/Introduction/Unique-Identifier' 
     type: array
     items:
       type: string

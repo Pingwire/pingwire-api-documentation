@@ -1,49 +1,34 @@
 put:
   tags:
-  - Pings
-  summary: Update ping status
+  - Groups
+  summary: Update group active status
   parameters:
   - in: path
     name: id
-    description: Ping object id
+    description: Group object id
     example: 620a2958bfc1d7a803398a6d
     required: true
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
     schema:
       type: string
       format: ObjectId
+  description: Update a group activation status.
   requestBody:
     content:
       application/json:
         schema:
           type: object
           required:
-          - status
-          - comment
-          - numberOfDaysIgnoreRule
+          - active
           properties:
-            numberOfDaysIgnoreRule:
-              type: number
-              description: Number of days in the future that a similar ping should not be created.
-              minimum: 0
-            comment:
-              type: string
-            status:
-              type: string
-              enum: 
-              - pending
-              - resolved 
-              - confirmed 
-              - ignored 
+            active:
+              type: boolean
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Ping"
+            $ref: "#/components/schemas/Group"
     400:
       description: Invalid parameters
       content:

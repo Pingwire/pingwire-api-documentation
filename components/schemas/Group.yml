@@ -9,6 +9,9 @@ properties:
   createdAt:
     description: Date, iso 8601 format
     type: string
+  updatedAt:
+    description: Date, iso 8601 format
+    type: string  
   name:
     type: string
     externalDocs:
@@ -16,6 +19,6 @@ properties:
       url: '/#section/Introduction/Unique-Identifier'
   active:
     type: boolean 
-  baselineScore:
+  score:
     type: integer
     description: Between 0 and 100

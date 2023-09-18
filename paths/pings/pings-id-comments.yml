@@ -7,6 +7,9 @@ put:
     name: id
     description: Ping object id
     example: 620a2958bfc1d7a803398a6d
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
     required: true
     schema:
       type: string

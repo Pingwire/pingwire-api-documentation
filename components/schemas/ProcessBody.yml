@@ -6,9 +6,14 @@ properties:
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
-  baselineScore:
-    type: integer
-    description: Between 0 and 100
+  requestType:
+    type: string
+    enum:
+    - transaction
+    - carKyc
+    - carPurchase
+    - individualKyc
+    - businessKy
 required:
   - name
-  - baselineScore
+  - requestType
