@@ -52,17 +52,10 @@ allOf:
                   properties:
                     conductors:
                       type: array
+                      title: List of conductors
                       items:
                         allOf:
-                          - oneOf:
-                            - allOf:
-                              - $ref: '#/components/schemas/Individual'
-                              - type: object
-                                title: Individual
-                            - allOf:
-                              - $ref: '#/components/schemas/Business'
-                              - type: object
-                                title: Business
+                          - $ref: '#/components/schemas/Individual'
                           - type: object
                             properties:
                               conductorType:
@@ -166,26 +159,6 @@ allOf:
                             - iban-number
                             - psp-account
                             - safe-deposit-box
-
-                    conductors:
-                      type: array
-                      items:
-                        allOf:
-                          - oneOf:
-                            - allOf:
-                              - $ref: '#/components/schemas/Individual'
-                              - type: object
-                                title: Individual
-                            - allOf:
-                              - $ref: '#/components/schemas/Business'
-                              - type: object
-                                title: Business
-                          - type: object
-                            properties:
-                              conductorType:
-                                type: string
-                                enum:
-                                  - signatory
               - allOf:
                 - $ref: '#/components/schemas/Business'
                 - type: object
@@ -285,17 +258,10 @@ allOf:
                             - safe-deposit-box
                     conductors:
                       type: array
+                      title: List of conductors
                       items:
                         allOf:
-                          - oneOf:
-                            - allOf:
-                              - $ref: '#/components/schemas/Individual'
-                              - type: object
-                                title: Individual Conductor
-                            - allOf:
-                              - $ref: '#/components/schemas/Business'
-                              - type: object
-                                title: Business Conductor
+                          - $ref: '#/components/schemas/Individual'
                           - type: object
                             properties:
                               conductorType:
