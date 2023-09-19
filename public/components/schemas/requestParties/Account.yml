@@ -1,20 +1,38 @@
 type: object
 properties:
+  type:
+    type: string
+    enum:
+    - Account
   id: 
     type: string
     format: ObjectId
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
-  type:
-    type: string
-    enum:
-    - Account
   customId:
     type: string
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
+  iban:
+    type: string
+    description: An IBAN, or international bank account number, is a standard international numbering system.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'    
+  bankgiroNumber:
+    type: string
+    description: A Bankgiro number is a unique identifier used for domestic banking operations.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  plusgiroNumber:
+    type: string
+    description: A Plusgiro number is a unique identifier used for domestic banking operations.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'      
   provider:
       type: string
       description: Identifier of bank holding the account.
@@ -36,18 +54,12 @@ properties:
       - closed-by-operator
       - closed
       - blocked
-  iban:
-    type: string
-    description: An IBAN, or international bank account number, is a standard international numbering system.
   bban:
     type: string
     description: An BBAN, or Basic Bank Account Number, is a standard national numbering system.
   bic:
     type: string
     description: An BIC, or B Bank Identification Code, is a standard international bank identifier numbering system.
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   currency:
     type: string
     description: ISO 4217 code.
@@ -129,3 +141,11 @@ properties:
   hardwareId:
     type: string
     description: Hardware id used to authorize the transaction.
+  groups: 
+    description: List of groups for classifying entities into set divisions.
+    type: array
+    items:
+      type: string
+      format: ObjectId
+required:
+ - type
