@@ -18,7 +18,7 @@ For making the integration to Pingwire as seamless as possible, we have included
 - `RISK CLASS`: Classes partitioned by the probability of an entity committing a crime using self-defined probability intervals.
 
 ## Unique Identifier
-A unique identifier is a specific label or value used to clearly distinguish one item from all others. In databases or systems, this ensures that each piece of data can be accurately identified without any confusion, allowing for effective data retrieval, updating, or deletion.
+A unique identifier is a distinct label or value that precisely distinguishes one item from all others. When submitting objects via API that have one or more of these unique identifiers, ensure that at least one identifier is included.
 
 ## Sequence Diagram
 
