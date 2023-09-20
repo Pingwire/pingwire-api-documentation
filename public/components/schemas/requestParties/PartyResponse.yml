@@ -45,6 +45,12 @@ properties:
   hardwareId:
     type: string
     description: Hardware id used to authorize the transaction.
+  groups: 
+    description: List of groups for classifying entities into set divisions.
+    type: array
+    items:
+      type: string
+      format: ObjectId
 required:
 - id
 - type
