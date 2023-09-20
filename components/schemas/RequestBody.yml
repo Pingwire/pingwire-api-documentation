@@ -18,9 +18,6 @@ properties:
     type: string
   customId:
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   process:
     type: string
     format: ObjectId 
