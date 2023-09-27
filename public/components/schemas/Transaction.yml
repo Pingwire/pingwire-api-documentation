@@ -45,6 +45,14 @@ allOf:
             description: Date, iso 8601 format.
           initiator:
             allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+                  - Account
             - $ref: '#/components/schemas/PartyResponse'
             - type: object
               properties:
@@ -53,17 +61,40 @@ allOf:
                   description: Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
                   items:
                     allOf:
+                    - type: object
+                      properties:
+                        type:
+                          type: string
+                          enum:
+                          - Individual
                     - $ref: '#/components/schemas/PartyResponse'
                     - type: object
                       properties:
                         conductorType:
                           type: string
                           enum:
-                            - signatory
+                            - signatory       
           recipient:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+                  - Account
+            - $ref: '#/components/schemas/PartyResponse'
           processor:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+            - $ref: '#/components/schemas/PartyResponse'
         required:
           - initiator
           - recipient
