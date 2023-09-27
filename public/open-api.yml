@@ -93,12 +93,6 @@ paths:
       $ref: './paths/members/members-activation-id.yml'
   /members/{id}/initiate-reset-password:
       $ref: './paths/members/members-id-initiate-reset-password.yml'
-  /segments:
-      $ref: './paths/segments/segments.yml'
-  /segments/{id}:
-      $ref: './paths/segments/segments-id.yml'
-  /segments/activation/{id}:
-      $ref: './paths/segments/segments-activation-id.yml'
   /processes:
       $ref: './paths/processes/processes.yml'
   /processes/{id}:
@@ -243,10 +237,6 @@ components:
       $ref: "./components/schemas/requestParties/Business.yml"
     Car:
       $ref: "./components/schemas/requestParties/Car.yml"
-    Segment:
-      $ref: "./components/schemas/Segment.yml"
-    SegmentBody:
-      $ref: "./components/schemas/SegmentBody.yml"
     Process:
       $ref: "./components/schemas/Process.yml"
     ProcessBody:
