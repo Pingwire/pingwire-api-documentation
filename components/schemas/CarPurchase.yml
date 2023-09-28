@@ -48,11 +48,35 @@ allOf:
             description: Date, iso 8601 format.
             example: 2022-08-09T17:43:26.650+00:00
           buyer:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+            - $ref: '#/components/schemas/PartyResponse'
           seller:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+            - $ref: '#/components/schemas/PartyResponse'
           guarantor:
-            $ref: '#/components/schemas/PartyResponse'
+            allOf:
+            - type: object
+              properties:
+                type:
+                  type: string
+                  enum:
+                  - Individual
+                  - Business
+            - $ref: '#/components/schemas/PartyResponse'
           car:
             type: object
             properties:
