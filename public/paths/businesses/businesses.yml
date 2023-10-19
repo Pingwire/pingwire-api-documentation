@@ -89,6 +89,10 @@ post:
               externalDocs:
                 description: Unique identifier
                 url: '/#section/Introduction/Unique-Identifier'
+            email:
+              type: string
+            phoneNumber:
+              type: string
             incorporationLegalForm:
               type: string
               description: Type of business.
