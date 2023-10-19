@@ -1,0 +1,10 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name is unique
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+required:
+  - name
