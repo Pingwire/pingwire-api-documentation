@@ -85,6 +85,10 @@ put:
               - foreign-company
               - other
               - unknown
+            email:
+              type: string
+            phoneNumber:
+              type: string
             status:
               type: string
               enum:

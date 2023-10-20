@@ -66,6 +66,11 @@ properties:
     enum: 
     - Available
     - Blocked 
+  email:
+    type: string
+    format: email
+  phoneNumber:
+    type: string
   relatedCompanies: 
     type: array
     items: 
