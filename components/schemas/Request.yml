@@ -75,3 +75,8 @@ properties:
     description: Type of request
     example: carKyc
     type: string
+  signals:
+    type: array
+    items: 
+      type: string
+      format: ObjectId
