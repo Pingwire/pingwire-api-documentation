@@ -43,6 +43,7 @@ x-tagGroups:
       - Members
       - API keys
       - Processes
+      - Signals
       - Groups
 paths:
   /auth/login/:
@@ -127,6 +128,12 @@ paths:
       $ref: './paths/rules/rules.yml'
   /rules/{id}:
       $ref: './paths/rules/rules-id.yml'
+  /signals:
+      $ref: './paths/signals/signals.yml'
+  /signals/{id}:
+      $ref: './paths/signals/signals-id.yml'
+  /signals/activation/{id}:
+      $ref: './paths/signals/signals-activation-id.yml'   
 
 
 components:
@@ -263,7 +270,10 @@ components:
       $ref: "./components/schemas/Rule.yml"
     RuleBody:
       $ref: "./components/schemas/RuleBody.yml"
-
+    Signal:
+      $ref: "./components/schemas/Signal.yml"
+    SignalBody:
+      $ref: "./components/schemas/SignalBody.yml"
 
 
 
