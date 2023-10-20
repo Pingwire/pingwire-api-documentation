@@ -76,5 +76,10 @@ properties:
     items:
       type: string
       format: ObjectId
+  email:
+    type: string
+    format: email
+  phoneNumber:
+    type: string
 required:
  - type

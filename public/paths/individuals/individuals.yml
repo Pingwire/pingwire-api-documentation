@@ -96,6 +96,10 @@ post:
                 birthDate:
                   type: string
                   format: 'yyyy-mm-dd'
+                email:
+                  type: string
+                phoneNumber:
+                  type: string
             
   responses:
     200:
