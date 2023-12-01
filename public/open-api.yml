@@ -114,7 +114,7 @@ paths:
       $ref: './paths/riskClasses/risk-classes-from-score.yml'
   /risk-classes/interval-coverage:
       $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'
-  /forms/{entityId}/{formId}/link:
+  /forms/{formId}/{entityId}/link:
       $ref: './paths/forms/form-entityId-formId.yml'
   # /api-keys:
   #     $ref: './paths/apiKeys/api-keys.yml'
