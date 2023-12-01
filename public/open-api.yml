@@ -37,7 +37,7 @@ x-tagGroups:
   - name: Other resources
     tags:
       - Segments
-      - KYC Forms
+      - Forms
       - Risk Classes
       - Rules
       - Members
@@ -114,10 +114,8 @@ paths:
       $ref: './paths/riskClasses/risk-classes-from-score.yml'
   /risk-classes/interval-coverage:
       $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'
-  /kyc-form/:
-    $ref: './paths/kyc-form/kyc-form.yml'
-  /kyc-form/{id}:
-    $ref: './paths/kyc-form/kyc-form-id.yml'
+  /forms/{entityId}/{formId}/link:
+      $ref: './paths/forms/form-entityId-formId.yml'
   # /api-keys:
   #     $ref: './paths/apiKeys/api-keys.yml'
   # /api-keys/{id}:

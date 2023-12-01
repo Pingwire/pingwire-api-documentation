@@ -1,12 +1,20 @@
 get: 
   tags:
-    - KYC Forms
-  summary: KYC form
-  description: Receive KYC forms by id saved in the database.
+    -  Forms
+  summary: Get form link
+  description: Generated a form link by using entity id and form id.
   parameters:
   - in: path
-    name: id
-    description: KYC form object id
+    name: entityId
+    description:  entity object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  - in: path
+    name: formId
+    description:  form object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -18,7 +26,14 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/KycForm"
+            type: object
+            properties:
+              link:
+                type: string
+              id:
+                type: string
+                format: ObjectId
+                description: form object id
     400:
       description: Invalid parameters
       content:
