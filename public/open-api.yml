@@ -20,6 +20,10 @@ servers:
     brokerName:
       default: generic
       description: Same as the basic auth username
+tags:
+  - name: Forms
+    description:
+      $ref: './paths/forms/form.md'
 x-tagGroups:
   - name: Get started
     tags:
@@ -34,10 +38,12 @@ x-tagGroups:
       - Individuals
       - Businesses
       - Cars
+  - name: KYC Forms
+    tags:
+      - Forms
   - name: Other resources
     tags:
       - Segments
-      - Forms
       - Risk Classes
       - Rules
       - Members
@@ -99,13 +105,13 @@ paths:
   /processes/{id}:
       $ref: './paths/processes/processes-id.yml'
   /processes/activation/{id}:
-      $ref: './paths/processes/processes-activation-id.yml'   
+      $ref: './paths/processes/processes-activation-id.yml'
   /groups:
       $ref: './paths/groups/groups.yml'
   /groups/{id}:
       $ref: './paths/groups/groups-id.yml'
   /groups/activation/{id}:
-      $ref: './paths/groups/groups-activation-id.yml'    
+      $ref: './paths/groups/groups-activation-id.yml'
   /risk-classes:
       $ref: './paths/riskClasses/risk-classes.yml'
   /risk-classes/{id}:
@@ -116,6 +122,8 @@ paths:
       $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'
   /forms/{formId}/{entityId}/link:
       $ref: './paths/forms/form-entityId-formId.yml'
+  /form-answers/{formAnswerId}:
+      $ref: './paths/forms/form-answers-formAnswerId.yml'
   # /api-keys:
   #     $ref: './paths/apiKeys/api-keys.yml'
   # /api-keys/{id}:
@@ -131,7 +139,7 @@ paths:
   /signals/{id}:
       $ref: './paths/signals/signals-id.yml'
   /signals/activation/{id}:
-      $ref: './paths/signals/signals-activation-id.yml'   
+      $ref: './paths/signals/signals-activation-id.yml'
 
 
 components:
@@ -141,7 +149,7 @@ components:
         - $ref: '#/components/schemas/KycFormBody'
         - type: object
           properties:
-            contactInfo: 
+            contactInfo:
               $ref: '#/components/schemas/ContactInfo'
             beneficialOwners:
               $ref: '#/components/schemas/BeneficialOwners'
@@ -160,7 +168,7 @@ components:
         - $ref: '#/components/schemas/KycFormBody'
         - type: object
           properties:
-            contactInfo: 
+            contactInfo:
               $ref: '#/components/schemas/ContactInfo'
             financialInfo:
               $ref: '#/components/schemas/IndividualFinancialInfo'
