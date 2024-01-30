@@ -16,11 +16,26 @@ properties:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   swedishSocialSecurityNumber:
+    deprecated: true
     type: string
     format: yyyymmddxxxx
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
+  nationalIdentifier:
+    externalDocs:
+      description: Unique identifier (country + identifier)
+      url: '/#section/Introduction/Unique-Identifier'
+    type: array
+    items: 
+      type: object
+      properties:
+        country: 
+          type: string
+          example: SWE
+          format: ISO 3166 ALPHA-3
+        identifier:
+          type: string
   firstName: 
     type: string
   lastName:
