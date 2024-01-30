@@ -16,11 +16,20 @@ properties:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   swedishOrganizationNumber:
+    deprecated: true
     type: string
     format: xxxxxxxxxx
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
+  registrationNumber:
+    type: string
+    externalDocs:
+      description: Unique identifier (in combination with residence)
+      url: '/#section/Introduction/Unique-Identifier'
+  residence:
+    type: string
+    format: ISO 3166 ALPHA-3
   name:
     type: string
   electronicId: 
