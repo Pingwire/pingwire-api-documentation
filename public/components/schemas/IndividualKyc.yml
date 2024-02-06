@@ -6,6 +6,8 @@ allOf:
       extraInformation:
         type: object
         properties:
+          bankIdIssueDate:
+            type: string
           entity:
             type: object
             properties:
