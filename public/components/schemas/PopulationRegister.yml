@@ -1,0 +1,397 @@
+type: object
+properties:
+  entityId:
+    type: string
+    format: ObjectId
+    description: Unique identifier for the entity.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  entityType:
+    type: string
+    enum: 
+      - Individual
+  record:
+    type: object
+    properties:
+      aggregatedIncome:
+        type: string
+        description: Aggregated income of the person.
+      contactAddress:
+        type: array
+        items:
+          type: object
+          properties:
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the address validity.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the address validity.
+            internationalAddress:
+              type: object
+              properties:
+                country:
+                  type: string
+                  description: Country of the international address.
+                deliveryAddress1:
+                  type: string
+                  description: First line of the delivery address.
+                deliveryAddress2:
+                  type: string
+                  description: Second line of the delivery address.
+                deliveryAddress3:
+                  type: string
+                  description: Third line of the delivery address.
+            domesticAddress:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: City of the domestic address.
+                coAddress:
+                  type: string
+                  description: Care of address, if applicable.
+                deliveryAddress1:
+                  type: string
+                  description: First line of the delivery address.
+                deliveryAddress2:
+                  type: string
+                  description: Second line of the delivery address.
+                zipCode:
+                  type: string
+                  description: ZIP code of the domestic address.
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            birth:
+              type: object
+              properties:
+                birthCongregation:
+                  type: string
+                  description: Congregation where the person was born.
+                birthCountyCode:
+                  type: string
+                  description: County code of the birthplace.
+                birthDate:
+                  type: string
+                  format: date
+                  description: Birth date of the person.
+            coordinationNumberInformation:
+              type: object
+              properties:
+                attributionDate:
+                  type: string
+                  format: date
+                  description: Date when the coordination number was attributed.
+                deathDate:
+                  type: string
+                  format: date
+                  description: Date of death, if applicable.
+                expectedInactivationDate:
+                  type: string
+                  format: date
+                  description: Expected date for inactivation of the coordination number.
+                inactivationDate:
+                  type: string
+                  format: date
+                  description: Actual inactivation date of the coordination number.
+                inactivationReason:
+                  type: string
+                  description: Reason for inactivation.
+                renewalDate:
+                  type: string
+                  format: date
+                  description: Date for next renewal of the coordination number.
+                status:
+                  type: string
+                  description: Current status of the coordination number.
+            gender:
+              type: string
+              description: Gender of the person.
+            personIdChangeInformation:
+              type: array
+              items:
+                type: object
+                properties:
+                  referencePersonId:
+                    type: string
+                    description: Reference to the previous or new person ID.
+                  referenceType:
+                    type: string
+                    description: Type of reference for the person ID change.
+            protectedRegistration:
+              type: boolean
+              description: Indicates if the registration is protected.
+            secrecy:
+              type: object
+              properties:
+                secrecy:
+                  type: boolean
+                  description: Indicates if secrecy is applied.
+                secrecySetBySpar:
+                  type: boolean
+                  description: Indicates if secrecy was set by SPAR.
+            swedishCitizen:
+              type: boolean
+              description: Indicates if the person is a Swedish citizen.
+      foreignAddress:
+        type: array
+        items:
+          type: object
+          properties:
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the address validity.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the address validity.
+            internationalAddress:
+              type: object
+              properties:
+                country:
+                  type: string
+                  description: Country of the international address.
+                deliveryAddress1:
+                  type: string
+                  description: First line of the delivery address.
+                deliveryAddress2:
+                  type: string
+                  description: Second line of the delivery address.
+                deliveryAddress3:
+                  type: string
+                  description: Third line of the delivery address.
+      incomeYear:
+        type: string
+        description: The year of the reported income.
+      name:
+        type: array
+        items:
+          type: object
+          properties:
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the name validity.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the name validity.
+            firstName:
+              type: string
+              description: First name of the person.
+            givenNameCode:
+              type: number
+              description: Code representing the given name.
+            middleName:
+              type: string
+              description: Middle name of the person.
+            shortenedName:
+              type: string
+              description: Shortened or commonly used name.
+            surName:
+              type: string
+              description: Surname of the person.
+      nationalRegistryChangeDate:
+        type: string
+        format: date
+        description: Date of the last change in the national registry.
+      personId:
+        type: string
+        required: true
+      personIdCountry:
+        type: string
+        required: true
+        format: ISO 3166 ALPHA-3
+        description: Unique identifier of the person.
+      personIdType:
+        type: string
+        description: Type of the person ID.
+      populationRegistration:
+        type: array
+        items:
+          type: object
+          properties:
+            countyCode:
+              type: string
+              description: County code of the registration.
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the population registration.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the population registration.
+            districtCode:
+              type: string
+              description: District code of the population registration.
+            municipalityCode:
+              type: string
+              description: Municipality code of the population registration.
+            populationRegistrationDate:
+              type: string
+              format: date
+              description: Date of the population registration.
+            residenceStatusCode:
+              type: string
+              description: Status code of the residence.
+      protectedRegistration:
+        type: boolean
+        description: Indicates if the registration is protected.
+      protectedRegistrationDate:
+        type: string
+        format: date
+        description: Date when the registration was protected.
+      realEstate:
+        type: array
+        items:
+          type: object
+          properties:
+            countyCode:
+              type: string
+              description: County code of the real estate.
+            municipalityCode:
+              type: string
+              description: Municipality code of the real estate.
+            realEstatePart:
+              type: array
+              items:
+                type: object
+                properties:
+                  identification:
+                    type: string
+                    description: Identification number of the real estate part.
+                  name:
+                    type: string
+                    description: Name of the real estate part.
+                  shareDenominator:
+                    type: number
+                    description: Denominator for the share of the real estate part.
+                  shareNumerator:
+                    type: number
+                    description: Numerator for the share of the real estate part.
+            realEstateTypeCode:
+              type: string
+              description: Type code of the real estate.
+            taxationUnitIdentificationNumber:
+              type: string
+              description: Taxation unit identification number of the real estate.
+            taxationValue:
+              type: string
+              description: Taxation value of the real estate.
+            taxationYear:
+              type: string
+              description: Taxation year of the real estate.
+      relation:
+        type: array
+        items:
+          type: object
+          properties:
+            birthDate:
+              type: string
+              format: date
+              description: Birth date of the related person.
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the relation.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the relation.
+            deRegistrationDate:
+              type: string
+              format: date
+              description: Date of deregistration, if applicable.
+            deRegistrationReasonCode:
+              type: string
+              description: Reason code for deregistration.
+            deathDate:
+              type: string
+              format: date
+              description: Death date of the related person, if applicable.
+            firstName:
+              type: string
+              description: First name of the related person.
+            middleName:
+              type: string
+              description: Middle name of the related person.
+            personId:
+              type: string
+              description: Unique identifier of the related person.
+            relationType:
+              type: string
+              description: Type of relation.
+            surName:
+              type: string
+              description: Surname of the related person.
+      secrecy:
+        type: object
+        properties:
+          secrecy:
+            type: boolean
+            description: Indicates if secrecy is applied.
+          secrecySetBySpar:
+            type: boolean
+            description: Indicates if secrecy was set by SPAR.
+      secrecyDate:
+        type: string
+        format: date
+        description: Date when secrecy was applied.
+      specialPostalAddress:
+        type: array
+        items:
+          type: object
+          properties:
+            dateFrom:
+              type: string
+              format: date
+              description: Start date of the address validity.
+            dateTo:
+              type: string
+              format: date
+              description: End date of the address validity.
+            internationalAddress:
+              type: object
+              properties:
+                country:
+                  type: string
+                  description: Country of the international address.
+                deliveryAddress1:
+                  type: string
+                  description: First line of the delivery address.
+                deliveryAddress2:
+                  type: string
+                  description: Second line of the delivery address.
+                deliveryAddress3:
+                  type: string
+                  description: Third line of the delivery address.
+            domesticAddress:
+              type: object
+              properties:
+                city:
+                  type: string
+                  description: City of the domestic addresse
+                coAddress:
+                  type: string
+                  description: Care of address, if applicable.
+                deliveryAddress1:
+                  type: string
+                  description: First line of the delivery address.
+                deliveryAddress2:
+                  type: string
+                  description: Second line of the delivery address.
+                zipCode:
+                  type: string
+                  description: ZIP code of the domestic address.
+required:
+  - entityId
+  - entityType
+  - record

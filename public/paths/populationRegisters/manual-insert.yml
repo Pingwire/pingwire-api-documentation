@@ -1,0 +1,31 @@
+post:
+  tags:
+  - Population Register
+  summary: Create manual population register
+  description: Create a new manual population register.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/PopulationRegister" 
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PopulationRegister"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
