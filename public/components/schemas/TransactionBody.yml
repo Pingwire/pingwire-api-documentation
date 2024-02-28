@@ -12,7 +12,7 @@ allOf:
           currency:
             type: string
             description: ISO 4217 code.
-          reference: 
+          reference:
             type: string
             description: Refers to the regulation (EU) 2015/847 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 20 May 2015 on information accompanying transfers of funds and repealing Regulation (EC) No 1781/2006. If the transaction is not included in the regulation then state another reference which purpose is to trace the transaction, for example a reference for swish or an OCR message.
           textMessage:
@@ -73,7 +73,7 @@ allOf:
                       title: Account
                       allOf:
                         - $ref: '#/components/schemas/Account'
-                
+
               - allOf:
                 - $ref: '#/components/schemas/Business'
                 - type: object
@@ -101,7 +101,7 @@ allOf:
             description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions.
             oneOf:
             - $ref: '#/components/schemas/Account'
-            - allOf:                 
+            - allOf:
               - $ref: '#/components/schemas/Business'
               - type: object
               - title: Business
@@ -110,7 +110,7 @@ allOf:
                     title: Account
                     allOf:
                       - $ref: '#/components/schemas/Account'
-            - allOf:                 
+            - allOf:
               - $ref: '#/components/schemas/Individual'
               - type: object
               - title: Individual
@@ -122,7 +122,7 @@ allOf:
           processor:
             description:  The transaction processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient.
             oneOf:
-            - allOf:                 
+            - allOf:
               - $ref: '#/components/schemas/Business'
               - type: object
               - title: Business
@@ -131,7 +131,7 @@ allOf:
                     title: Account
                     allOf:
                       - $ref: '#/components/schemas/Account'
-            - allOf:                 
+            - allOf:
               - $ref: '#/components/schemas/Individual'
               - type: object
               - title: Individual
@@ -140,16 +140,16 @@ allOf:
                     title: Account
                     allOf:
                       - $ref: '#/components/schemas/Account'
-          bankData:
-            type: object
-            description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
-            properties:
-              initiator:
-                $ref: '#/components/schemas/BankData'
-              recipient:
-                $ref: '#/components/schemas/BankData'
-              processor:
-                $ref: '#/components/schemas/BankData'
+          # bankData:
+          #   type: object
+          #   description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
+          #   properties:
+          #     initiator:
+          #       $ref: '#/components/schemas/BankData'
+          #     recipient:
+          #       $ref: '#/components/schemas/BankData'
+          #     processor:
+          #       $ref: '#/components/schemas/BankData'
         required:
           - initiator
           - recipient
