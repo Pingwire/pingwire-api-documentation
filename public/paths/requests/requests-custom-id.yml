@@ -1,17 +1,16 @@
 get:
   tags:
     - Requests
-  summary: Get request by id
-  description: Receive request by id saved in the database.
+  summary: Get request by customId
+  description: Retrieve request information by customId
   parameters:
   - in: path
-    name: id
-    description: Request object id
-    example: 620a2958bfc1d7a803398a6d
+    name: customId
+    description: Request customId
+    example: abc123
     required: true
     schema:
       type: string
-      format: ObjectId
   responses:
     200:
       description: Successful operation
