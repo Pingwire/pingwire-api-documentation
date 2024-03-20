@@ -18,9 +18,10 @@ properties:
     type: string
   customId:
     type: string
+    description: Custom id for the request. The customId is considered unique and using the same customId will return the previously created request. This can be used to achieve idempotency.
   process:
     type: string
-    format: ObjectId 
+    format: ObjectId
   segment:
     type: string
     deprecated: true
