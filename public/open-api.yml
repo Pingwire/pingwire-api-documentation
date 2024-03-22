@@ -87,7 +87,7 @@ paths:
     $ref: './paths/requests/requests.yml'
   /requests/{id}:
     $ref: './paths/requests/requests-id.yml'
-  /requests/{customId}:
+  /requests/customId/{customId}:
     $ref: './paths/requests/requests-custom-id.yml'
   /requests/{id}/recommendation:
     $ref: './paths/requests/requests-id-recommendation.yml'
