@@ -1,0 +1,128 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    description: Id of the new board members information object
+  fetchedAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was collected from the data provider.
+  createdAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was inserted in the system.
+  entityId:
+    type: string
+    format: ObjectId
+    description: Id of the entity linked to the board members information object
+  entityType:
+    type: string
+    enum:
+      - Individual
+    description: Type of the entity linked to the board members information object
+  providerName:
+    type: string
+    description: Name of the provider used to fetch the board members information object
+  data:
+    type: object
+    description: Board members data
+    properties:
+      boardMembers:
+        type: array
+        description: List of board members of the business
+        items:
+          type: object
+          properties:
+            person:
+              type: object
+              description: Information about the person who is board member. At least one of the unique identifier field is required
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: Id of the entity that is the board member. Use this to link it to a previously created entity.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                entityType:
+                  type: string
+                  enum:
+                  - Individual
+                  description: Type of the entity. This is only used when entityId is provided.
+                customId:
+                  type: string
+                  description: Custom Id of the entity who is the board member. This can be used to link it to a previously created entity.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                nationalIdentifier:
+                  type: array
+                  description: List of the national identifier of the board member. This field can be used to link it to a previously created entity
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                  items:
+                    type: object
+                    properties:
+                      country:
+                        type: string
+                        example: SWE
+                        format: ISO 3166 ALPHA-3
+                        description: Country of the national identifier
+                      identifier:
+                        type: string
+                        description: national identification number
+                firstName:
+                  type: string
+                  description: First name of the board member
+                lastName:
+                  type: string
+                  description: Last name of the board member
+                birthDate:
+                  type: string
+                  format: date
+                  description: Birth date of the board member
+                citizenship:
+                  type: array
+                  description: List of the citizenship of the board member
+                  items:
+                    type: string
+                    example: SWE
+                    format: ISO 3166 ALPHA-3
+                countryResidence:
+                  type: string
+                  example: SWE
+                  format: ISO 3166 ALPHA-3
+                  description: Country of residence of the board member
+            roles:
+              type: array
+              description: List of the roles of this board member
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type of role
+                    enum:
+                    - ceo
+                    - member
+                    - chairman
+                    - auditor
+                    - other
+                  description:
+                    type: string
+                    description: Can be used as a complement to "type" to describe the role in more details. This is particularly useful if the available values are not able to describe perfectly the situation.
+                required:
+                - type
+          required:
+          - person
+    required:
+      - boardMembers
+required:
+  - fetchedAt
+  - createdAt
+  - entityId
+  - entityType
+  - providerName
+  - data

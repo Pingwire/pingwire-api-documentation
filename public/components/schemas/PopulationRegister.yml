@@ -2,10 +2,11 @@ type: object
 properties:
   fetchedAt:
     type: string
-    format: date
-    description: Date when the information was collected from the data provider. If unknown use the current date.
+    format: date-time
+    description: Date when the information was collected from the data provider. If unknown use the current timestamp.
   data:
     type: object
+    description: Population register data
     properties:
       aggregatedIncome:
         type: string

@@ -6,12 +6,12 @@ properties:
     description: Id of the new company information object
   fetchedAt:
     type: string
-    format: date
-    description: Date when the information was collected from the data provider.
+    format: date-time
+    description: Date and time when the information was collected from the data provider.
   createdAt:
     type: string
-    format: date
-    description: Date when the information was inserted in the system.
+    format: date-time
+    description: Date and time when the information was inserted in the system.
   entityId:
     type: string
     format: ObjectId
@@ -26,6 +26,7 @@ properties:
     description: Name of the provider used to fetch the company information object
   data:
     type: object
+    description: Company information data
     properties:
       registration:
         type: object

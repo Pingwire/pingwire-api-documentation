@@ -2,10 +2,11 @@ type: object
 properties:
   fetchedAt:
     type: string
-    format: date
-    description: Date when the information was collected from the data provider. If unknown use the current date.
+    format: date-time
+    description: Date and time when the information was collected from the data provider. If unknown use the current timestamp.
   data:
     type: object
+    description: Company information data
     properties:
       registration:
         type: object

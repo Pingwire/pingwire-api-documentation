@@ -41,6 +41,13 @@ x-tagGroups:
   - name: KYC Forms
     tags:
       - Forms
+  - name: KYC Data
+    tags:
+      - Population Register
+      - Company Information
+      - Beneficial Owners
+      - Board Members
+
   - name: Other resources
     tags:
       - Segments
@@ -50,8 +57,6 @@ x-tagGroups:
       - API keys
       - Processes
       - Signals
-      - Population Register
-      - Company Information
       - Groups
 paths:
   /auth/login/:
@@ -66,6 +71,10 @@ paths:
     $ref: './paths/businesses/businesses-id.yml'
   /businesses/company-information/manual-insert/{id}:
     $ref: './paths/businesses/company-information/manual-insert.yml'
+  /businesses/beneficial-owners/manual-insert/{id}:
+    $ref: './paths/businesses/beneficial-owners/manual-insert.yml'
+  /businesses/board-members/manual-insert/{id}:
+    $ref: './paths/businesses/board-members/manual-insert.yml'
   /cars/:
     $ref: './paths/cars/cars.yml'
   /cars/{id}:
@@ -300,8 +309,14 @@ components:
       $ref: "./components/schemas/businesses/CompanyInformationRequest.yml"
     CompanyInformationResponse:
       $ref: "./components/schemas/businesses/CompanyInformationResponse.yml"
-
-
+    BeneficialOwnersRequest:
+      $ref: "./components/schemas/businesses/BeneficialOwnersRequest.yml"
+    BeneficialOwnersResponse:
+      $ref: "./components/schemas/businesses/BeneficialOwnersResponse.yml"
+    BoardMembersRequest:
+      $ref: "./components/schemas/businesses/BoardMembersRequest.yml"
+    BoardMembersResponse:
+      $ref: "./components/schemas/businesses/BoardMembersResponse.yml"
 
   securitySchemes:
     bearerAuth:
