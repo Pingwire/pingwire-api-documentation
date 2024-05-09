@@ -1,29 +1,21 @@
 post:
+  deprecated: true
   tags:
   - Population Register
-  summary: Create manual population register
-  description: Create a new manual population register.
-  parameters:
-  - in: path
-    name: id
-    description: Individual object id
-    example: 620a2958bfc1d7a803398a6d
-    required: true
-    schema:
-      type: string
-      format: ObjectId
+  summary: Create manual population register - Old
+  description: Create a new manual population register. This version of the endpoint has been deprecated. Use the new version instead. The schema of the new endpoint is very similar which should make it straight forward to migrate.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/PopulationRegister"
+          $ref: "#/components/schemas/PopulationRegisterOld"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PopulationRegisterResponse"
+            $ref: "#/components/schemas/PopulationRegisterOld"
     400:
       description: Invalid parameters
       content:

@@ -144,7 +144,9 @@ paths:
   /signals/activation/{id}:
       $ref: './paths/signals/signals-activation-id.yml'
   /individual/population-register/manual-insert:
-      $ref: '../paths/populationRegisters/manual-insert.yml'
+      $ref: './paths/populationRegisters/manual-insert-old.yml'
+  /individuals/population-register/{id}/manual-insert:
+      $ref: './paths/populationRegisters/manual-insert.yml'
 
 
 components:
@@ -285,8 +287,12 @@ components:
       $ref: "./components/schemas/Signal.yml"
     SignalBody:
       $ref: "./components/schemas/SignalBody.yml"
-    populationRegister:
+    PopulationRegisterOld:
+      $ref: "./components/schemas/PopulationRegisterOld.yml"
+    PopulationRegister:
       $ref: "./components/schemas/PopulationRegister.yml"
+    PopulationRegisterResponse:
+      $ref: "./components/schemas/PopulationRegisterResponse.yml"
 
 
 
