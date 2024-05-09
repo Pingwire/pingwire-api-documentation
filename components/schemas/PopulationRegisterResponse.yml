@@ -1,9 +1,29 @@
 type: object
 properties:
+  id:
+    type: string
+    format: ObjectId
+    description: Id of the new population register object
   fetchedAt:
     type: string
     format: date-time
-    description: Date when the information was collected from the data provider. If unknown use the current timestamp.
+    description: Date and time when the information was collected from the data provider.
+  createdAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was inserted in the system.
+  entityId:
+    type: string
+    format: ObjectId
+    description: Id of the entity linked to the population register object
+  entityType:
+    type: string
+    enum:
+      - Individual
+    description: Type of the entity linked to the population register object
+  providerName:
+    type: string
+    description: Name of the provider used to fetch the population register object
   data:
     type: object
     description: Population register data
@@ -387,4 +407,8 @@ properties:
                   description: ZIP code of the domestic address.
 required:
   - fetchedAt
+  - createdAt
+  - entityId
+  - entityType
+  - providerName
   - data

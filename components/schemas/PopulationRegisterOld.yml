@@ -1,12 +1,18 @@
 type: object
 properties:
-  fetchedAt:
+  entityId:
     type: string
-    format: date-time
-    description: Date when the information was collected from the data provider. If unknown use the current timestamp.
-  data:
+    format: ObjectId
+    description: Unique identifier for the entity.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  entityType:
+    type: string
+    enum:
+      - Individual
+  record:
     type: object
-    description: Population register data
     properties:
       aggregatedIncome:
         type: string
@@ -386,5 +392,6 @@ properties:
                   type: string
                   description: ZIP code of the domestic address.
 required:
-  - fetchedAt
-  - data
+  - entityId
+  - entityType
+  - record
