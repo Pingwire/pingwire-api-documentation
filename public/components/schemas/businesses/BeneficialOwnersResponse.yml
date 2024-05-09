@@ -1,0 +1,157 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    description: Id of the new beneficial owners information object
+  fetchedAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was collected from the data provider.
+  createdAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was inserted in the system.
+  entityId:
+    type: string
+    format: ObjectId
+    description: Id of the entity linked to the beneficial owners information object
+  entityType:
+    type: string
+    enum:
+      - Individual
+    description: Type of the entity linked to the beneficial owners information object
+  providerName:
+    type: string
+    description: Name of the provider used to fetch the beneficial owners information object
+  data:
+    type: object
+    description: Beneficial owners data
+    properties:
+      beneficialOwners:
+        type: array
+        description: List of beneficial owners of the business
+        items:
+          type: object
+          properties:
+            person:
+              type: object
+              description: Information about the person who is beneficial owner. At least one of the unique identifier field is required
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: Id of the entity that is the beneficial owner. Use this to link it to a previously created entity.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                entityType:
+                  type: string
+                  enum:
+                  - Individual
+                  description: Type of the entity. This is only used when entityId is provided.
+                customId:
+                  type: string
+                  description: Custom Id of the entity who is the beneficial owner. This can be used to link it to a previously created entity.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                nationalIdentifier:
+                  type: array
+                  description: List of the national identifier of the beneficial owner. This field can be used to link it to a previously created entity
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                  items:
+                    type: object
+                    properties:
+                      country:
+                        type: string
+                        example: SWE
+                        format: ISO 3166 ALPHA-3
+                        description: Country of the national identifier
+                      identifier:
+                        type: string
+                        description: national identification number
+                firstName:
+                  type: string
+                  description: First name of the beneficial owner
+                lastName:
+                  type: string
+                  description: Last name of the beneficial owner
+                birthDate:
+                  type: string
+                  format: date
+                  description: Birth date of the beneficial owner
+                citizenship:
+                  type: array
+                  description: List of the citizenship of the beneficial owner
+                  items:
+                    type: string
+                    example: SWE
+                    format: ISO 3166 ALPHA-3
+                countryResidence:
+                  type: string
+                  example: SWE
+                  format: ISO 3166 ALPHA-3
+                  description: Country of residence of the beneficial owner
+            extentOfOwnership:
+              type: object
+              description: Describe how big share of the business this beneficial owner owns
+              properties:
+                lowerBound:
+                  type: number
+                  description: Lower bound of the known interval for the share percentage. If the share percentage is perfectly known this can be equal to upperBound
+                upperBound:
+                  type: number
+                  description: Upper bound of the known interval for the share percentage. If the share percentage is perfectly known this can be equal to lowerBound
+              required:
+              - lowerBound
+              - upperBound
+            extentOfVoteRights:
+              type: object
+              description: Describe how big share of the voting rights of the business this beneficial owner has
+              properties:
+                lowerBound:
+                  type: number
+                  description: Lower bound of the known interval for the share percentage. If the share percentage is perfectly known this can be equal to upperBound
+                upperBound:
+                  type: number
+                  description: Upper bound of the known interval for the share percentage. If the share percentage is perfectly known this can be equal to lowerBound
+              required:
+              - lowerBound
+              - upperBound
+            typesOfControl:
+              type: array
+              description: List of the different ways the beneficial owner has control over the business
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type of control over the business.
+                    enum:
+                    - direct-control
+                    - board-member
+                    - indirect-control
+                    - control-with-close-relatives
+                    - other
+                  description:
+                    type: string
+                    description: Can be used as a complement to "type" to describe the type of control in more details. This is particularly useful if the available values are not able to describe perfectly the situation.
+                required:
+                - type
+          required:
+          - person
+      hasBeneficialOwners:
+        type: boolean
+        description: True if the company has officials beneficial owners. False if there are no known beneficial owners.
+    required:
+      - beneficialOwners
+required:
+  - fetchedAt
+  - createdAt
+  - entityId
+  - entityType
+  - providerName
+  - data

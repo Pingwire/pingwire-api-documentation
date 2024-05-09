@@ -1,12 +1,12 @@
 post:
   tags:
-  - Population Register
-  summary: Create manual population register
-  description: Create a new manual population register.
+  - Board Members
+  summary: Create manual board members information
+  description: Create a new board members information object
   parameters:
   - in: path
     name: id
-    description: Individual object id
+    description: Business object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -16,14 +16,14 @@ post:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/PopulationRegister"
+          $ref: "#/components/schemas/BoardMembersRequest"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/PopulationRegisterResponse"
+            $ref: "#/components/schemas/BoardMembersResponse"
     400:
       description: Invalid parameters
       content:
