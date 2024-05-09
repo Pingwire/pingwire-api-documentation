@@ -51,6 +51,7 @@ x-tagGroups:
       - Processes
       - Signals
       - Population Register
+      - Company Information
       - Groups
 paths:
   /auth/login/:
@@ -63,6 +64,8 @@ paths:
     $ref: './paths/businesses/businesses.yml'
   /businesses/{id}:
     $ref: './paths/businesses/businesses-id.yml'
+  /businesses/company-information/manual-insert/{id}:
+    $ref: './paths/businesses/company-information/manual-insert.yml'
   /cars/:
     $ref: './paths/cars/cars.yml'
   /cars/{id}:
@@ -145,7 +148,7 @@ paths:
       $ref: './paths/signals/signals-activation-id.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
-  /individuals/population-register/{id}/manual-insert:
+  /individuals/population-register/manual-insert/{id}:
       $ref: './paths/populationRegisters/manual-insert.yml'
 
 
@@ -293,6 +296,10 @@ components:
       $ref: "./components/schemas/PopulationRegister.yml"
     PopulationRegisterResponse:
       $ref: "./components/schemas/PopulationRegisterResponse.yml"
+    CompanyInformationRequest:
+      $ref: "./components/schemas/businesses/CompanyInformationRequest.yml"
+    CompanyInformationResponse:
+      $ref: "./components/schemas/businesses/CompanyInformationResponse.yml"
 
 
 

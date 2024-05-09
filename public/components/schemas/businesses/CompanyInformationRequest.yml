@@ -1,0 +1,214 @@
+type: object
+properties:
+  fetchedAt:
+    type: string
+    format: date
+    description: Date when the information was collected from the data provider. If unknown use the current date.
+  data:
+    type: object
+    properties:
+      registration:
+        type: object
+        description: Company registration data
+        properties:
+          registrationCountry:
+            type: string
+            example: SWE
+            format: ISO 3166 ALPHA-3
+            description: Country of registration
+          registrationNumber:
+            type: string
+            description: Registration number in the format of the country of registration
+          name:
+            type: string
+            description: Registered name of the company
+          registrationDate:
+            type: string
+            format: date
+            description: Date the company was registered
+          deregistrationDate:
+            type: string
+            format: date
+            description: Date the company was de-registered. This is only relevant for companies that are not active anymore.
+          registrationCommuneCode:
+            type: string
+            description: Code of the commune of registration of the company
+          registrationCommune:
+            type: string
+            description: Commune of registration of the company
+          registrationCountyCode:
+            type: string
+            description: Code of the county of registration of the company
+          registrationCounty:
+            type: string
+            description: County of registration of the company
+          legalForm:
+            type: string
+            enum:
+            - limited-liability-company
+            - economic-association
+            - sole-trader
+            - limited-partnership
+            - trading-partnership
+            - other
+            description: Legal form of the company. This field is required if legalFormDescription is provided.
+          legalFormDescription:
+            type: string
+            description: Can be used to describe in more details the legal form of the company. This is a complement to legalForm in case the available values are not able to describe precisely the legal form.
+          status:
+            type: string
+            enum:
+            - active
+            - shelf-company
+            - liquidation
+            - fusion
+            - restructuring
+            - bankruptcy
+            - other
+            description: Status of the company. This field is required if statusDescription is provided.
+          statusDescription:
+            type: string
+            description: Can be used to describe in more details the status of the company. This is a complement to status in case the available values are not able to describe precisely the status of the company.
+          statusDate:
+            type: string
+            format: date
+            description: Date when the status of the company changed
+          activityDescription:
+            type: string
+            description: Description of the business activity of the company
+          naceCode:
+            type: string
+            description: NACE code of the company industry. The NACE code can either be a section (e.g. A), a division (e.g. A1), a group (e.g. A1.1) or a class (e.g. A1.1.1)
+            example: A1.1.1
+          naceDescription:
+            type: string
+            description: Description of the company industry according to its NACE code.
+          isRegisteredVat:
+            type: boolean
+            description: True if the company is registered for VAT
+          vatNumber:
+            type: string
+            description: VAT number of the company
+          vatRegistrationDate:
+            type: string
+            format: date
+            description: Date of registration for VAT
+          isRegisteredPreliminaryTax:
+            type: boolean
+            description: True if the company is registered for preliminary tax (F-skatt in Sweden)
+          preliminaryTaxRegistrationDate:
+            type: string
+            description: Date of registration for preliminary tax
+      contact:
+        type: object
+        properties:
+          email:
+            type: string
+            description: Contact email of the company
+          phone:
+            type: string
+            description: Contact phone number of the company
+          fax:
+            type: string
+            description: Contact fax number of the company
+          website:
+            type: string
+            description: Public website of the company
+      addresses:
+        type: object
+        properties:
+          registrationAddress:
+            type: object
+            description: Official address of the company as it stands in the national register
+            properties:
+              streetAddress:
+                type: string
+                description: Street part of the address. Typically street name and house number
+              co:
+                type: string
+                description: Care of address
+              postalCode:
+                type: string
+                description: Postal code
+              city:
+                type: string
+                description: City
+              state:
+                type: string
+                description: State
+              country:
+                type: string
+                example: SWE
+                format: ISO 3166 ALPHA-3
+                description: country
+            required:
+              - streetAddress
+              - city
+              - country
+          visitingAddresses:
+            type: array
+            items:
+              type: object
+              description: Visiting address of the company
+              properties:
+                streetAddress:
+                  type: string
+                  description: Street part of the address. Typically street name and house number
+                co:
+                  type: string
+                  description: Care of address
+                postalCode:
+                  type: string
+                  description: Postal code
+                city:
+                  type: string
+                  description: City
+                state:
+                  type: string
+                  description: State
+                country:
+                  type: string
+                  example: SWE
+                  format: ISO 3166 ALPHA-3
+                  description: country
+              required:
+                - streetAddress
+                - city
+                - country
+          mailingAddresses:
+            type: array
+            description: Post address of the company
+            items:
+              type: object
+              properties:
+                streetAddress:
+                  type: string
+                  description: Street part of the address. Typically street name and house number
+                co:
+                  type: string
+                  description: Care of address
+                postalCode:
+                  type: string
+                  description: Postal code
+                city:
+                  type: string
+                  description: City
+                state:
+                  type: string
+                  description: State
+                country:
+                  type: string
+                  example: SWE
+                  format: ISO 3166 ALPHA-3
+                  description: country
+              required:
+                - streetAddress
+                - city
+                - country
+    required:
+      - registration
+      - contact
+      - addresses
+required:
+  - fetchedAt
+  - data
