@@ -1,7 +1,7 @@
 type: object
 required:
   - requestType
-  - segment
+  - process
   - extraInformation
 discriminator:
   propertyName: requestType
@@ -12,17 +12,22 @@ discriminator:
     individualKyc: '#/components/schemas/IndividualKycBody'
     businessKyc: '#/components/schemas/BusinessKycBody'
 properties:
-  requestType:
-    description: Type of request
-    example: carKyc
-    type: string
   customId:
     type: string
     description: Custom id for the request. The customId is considered unique and using the same customId will return the previously created request. This can be used to achieve idempotency.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
   process:
     type: string
     format: ObjectId
+    description: ID of the process linked to that request. Processes can be created from the interface or through the API.
   segment:
     type: string
     deprecated: true
-    description: "Use segment id (recommended); segment name still supported but deprecated."
+    description: Segment has been renamed to process. Use the field process instead.
+    format: ObjectId
+  requestType:
+    description: Type of the request. Each type is associated to a custom extraInformation schema.
+    example: transaction
+    type: string

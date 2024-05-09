@@ -5,12 +5,13 @@ allOf:
     properties:
       extraInformation:
         type: object
+        description: Payload of the request. Its schema depends of the requestType
         properties:
           bankIdIssueDate:
             type: string
           entity:
             oneOf:
-            - allOf:                 
+            - allOf:
               - $ref: '#/components/schemas/Individual'
               - type: object
               - title: Individual

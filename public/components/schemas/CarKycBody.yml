@@ -5,6 +5,7 @@ allOf:
     properties:
       extraInformation:
         type: object
+        description: Payload of the request. Its schema depends of the requestType
         properties:
           entity:
             oneOf:
