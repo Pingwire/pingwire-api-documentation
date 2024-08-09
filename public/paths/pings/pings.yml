@@ -1,4 +1,4 @@
-get: 
+get:
   tags:
     - Pings
   summary: List pings
@@ -19,7 +19,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -29,14 +29,14 @@ get:
     name: status
     description: Filter list of pings by status.
     required: false
-    example: 
+    example:
     schema:
       type: string
-      enum: 
+      enum:
       - pending
-      - resolved 
-      - confirmed 
-      - ignored 
+      - resolved
+      - confirmed
+      - ignored
   - in: query
     name: _start
     description: The start number of the pings list.
@@ -89,31 +89,27 @@ post:
           - description
           - score
           properties:
-                entities:
-                  type: array
-                  description: List of entities.
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: ObjectId
-                        example: 62b9437318fe4517089b2833
-                        externalDocs:
-                          description: Unique identifier
-                          url: '/#section/Introduction/Unique-Identifier'
-                      type:
-                        type: string
-                        enum:
-                        - Individual
-                        - Business
-                        - Car
-                description:
-                  type: string
-                score:
-                  type: number
-                  min: 0
-                  max: 100
+            entities:
+              type: array
+              description: List of entities.
+              items:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: ObjectId
+                    example: 62b9437318fe4517089b2833
+                    externalDocs:
+                      description: Unique identifier
+                      url: '/#section/Introduction/Unique-Identifier'
+                  type:
+                    $ref: '#/components/schemas/EntityTypes'
+            description:
+              type: string
+            score:
+              type: number
+              min: 0
+              max: 100
   responses:
     200:
       description: Successful operation

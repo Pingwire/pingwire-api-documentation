@@ -1,0 +1,7 @@
+type: string
+description: Type of the entity
+enum:
+  - Individual
+  - Business
+  - Car
+  - Account

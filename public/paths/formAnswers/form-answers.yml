@@ -1,0 +1,57 @@
+post:
+  tags:
+    -  Form answers
+  summary: Submit form answer
+  description: Submit a new form answer for a specific form and a specific entity.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - entity
+          - formId
+          properties:
+            entity:
+              type: object
+              description: Entity that submitted the form answers
+              required:
+              - id
+              - type
+              properties:
+                id:
+                  type: string
+                  format: ObjectId
+                  description: Id of the entity
+                type:
+                  $ref: '#/components/schemas/EntityTypes'
+            formId:
+              type: string
+              format: ObjectId
+              description: Form that was used to submit the answers
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                format: ObjectId
+                description: form answer object id
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

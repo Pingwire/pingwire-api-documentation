@@ -1,4 +1,4 @@
-## Introduction
+## Introduction to forms
 
 Forms can be used to collect information from the end user either manually or fully automated.
 
@@ -38,7 +38,7 @@ When the end user is redirected to the callback URL, it will be done with severa
 |`CANCELLED`|The form has been interrupted by the end user who decided to not submit any answers.|
 |`ERROR`|There has been a technical error of some sort and the end user was not able to submit any answers.|
 - `state`: Will be present if a state was provided to the form URL as a query parameter. It will be exactly identical to that provided value.
-- `formAnswerId`: Will only be present if the `status` is `SUCCESS`. This id can be used to retrieve the answers submitted by the end user using the [Get form answer](#tag/Forms/paths/~1form-answers~1%7BformAnswerId%7D/get) endpoint.
+- `formAnswerId`: Will only be present if the `status` is `SUCCESS`. This id can be used to retrieve the answers submitted by the end user using the [Get form answer](#tag/Form-answers/paths/~1form-answers~1%7BformAnswerId%7D/get) endpoint.
 - `errorCode`: Will only be present if the `status` is `ERROR`. New code can be introduced at any time so the logic reading these codes should be able to handle an unexpected value. Unexpected values can be handled the same way as the code `unknown`. The possible values as of today are:
 |Error code|Description|
 |----------|-----------|

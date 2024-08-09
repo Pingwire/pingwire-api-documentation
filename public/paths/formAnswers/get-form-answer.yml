@@ -1,6 +1,6 @@
 get:
   tags:
-    -  Forms
+    -  Form answers
   summary: Get form answer
   description: Retrieve the answers submitted from a form for a specific entity. The exact specification of the response schema will be refined at a later stage.
   parameters:
