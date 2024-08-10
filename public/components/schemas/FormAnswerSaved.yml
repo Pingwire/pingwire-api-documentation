@@ -1,0 +1,21 @@
+allOf:
+  - type: object
+    required:
+    - id
+    - createdAt
+    - updatedAt
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        example: 620a2958bfc1d7a803398a6d
+        description: Form answer object id
+      createdAt:
+        type: string
+        format: date-time
+        description: Time when the form answer was inserted in the Pingwire system
+      updatedAt:
+        type: string
+        format: date-time
+        description: Time when the form answer was updated the latest
+  - $ref: '#/components/schemas/FormAnswer'

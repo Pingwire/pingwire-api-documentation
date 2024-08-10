@@ -1,0 +1,616 @@
+type: object
+required:
+- entity
+- formId
+properties:
+  entity:
+    type: object
+    description: Entity that submitted the form answers
+    required:
+    - id
+    - type
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        example: 620a2958bfc1d7a803398a6d
+        description: Id of the entity
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  formId:
+    type: string
+    format: ObjectId
+    example: 620a2958bfc1d7a803398a6d
+    description: Form that was used to submit the answers
+  activities:
+    type: string
+    description: Description of the business activities
+  address:
+    type: string
+    description: Street address of the entity
+  alternativeBeneficialOwners:
+    type: array
+    description: Alternative beneficial owners of the business. This should be used when there is no beneficial owner for this business.
+    items:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - citizenship
+      - role
+      - nationalIdentifier
+      - address
+      - city
+      - postalCode
+      - residence
+      - isPep
+      properties:
+        firstName:
+          type: string
+          description: First name of the alternative beneficial owner
+        lastName:
+          type: string
+          description: Last name of the alternative beneficial owner
+        citizenship:
+          type: array
+          description: Citizenship countries of the alternative beneficial owner
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                description: Country of citizenship in alpha-3 iso format
+                example: SWE
+              connections:
+                type: array
+                items:
+                  type: string
+                  description: Type of connection to the country of citizenship
+                  enum:
+                  - noConnection
+                  - stayingMoreThan180Days
+                  - haveInvestmentsOrBusiness
+                  - nationallyRegistered
+                  - moneyTransfers
+        taxResidency:
+          type: array
+          description: Countries of tax residency in alpha-3 iso format
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        role:
+          type: object
+          description: Role of the alternative beneficial owner in the business
+          required:
+          - options
+          properties:
+            options:
+              type: string
+              description: Type of the alternative beneficial owner role
+              enum:
+              - ceo
+              - boardMember
+              - other
+            other:
+              type: string
+              description: Description of the alternative beneficial owner role. This can only be used if the chosen option is "other".
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: Date of birth of the alternative beneficial owner
+        nationalIdentifier:
+          type: array
+          items:
+            type: object
+            required:
+            - country
+            - identifier
+            - type
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                example: SWE
+                description: Country of the national identifier
+              identifier:
+                type: string
+                description: Identification number. The format depends of the type and the country chosen.
+              type:
+                type: string
+                enum:
+                - socialSecurityNumber
+                - nationalInsuranceNumber
+                - nationalID
+                - passportNumber
+                - driversLicenseNumber
+                - other
+                description: Type of the national identifier.
+        address:
+          type: string
+          description: Street address of the alternative beneficial owner
+        city:
+          type: string
+          description: City of the alternative beneficial owner
+        postalCode:
+          type: string
+          description: Postal code of the alternative beneficial owner
+        residence:
+          type: array
+          description: Countries of residence of the alternative beneficial owner
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        isPep:
+          type: string
+          enum:
+          - yes
+          - no
+          description: If the alternative beneficial owner is a PEP or not (including related to a PEP individual)
+        pep:
+          type: object
+          description: Information about the PEP status of the alternative beneficial owner. This field is required if "isPep" is "yes".
+          required:
+          - country
+          - role
+          - relation
+          properties:
+            country:
+              type: string
+              format: ISO 3166 ALPHA-3
+              example: SWE
+              description: Country of the PEP role
+            role:
+              type: string
+              description: Type of PEP role
+              enum:
+              - headOfStateOrGovernmentMinister
+              - legislativeMember
+              - politicalPartyBoardMember
+              - highCourtJudge
+              - seniorAuditOrCentralBankOfficial
+              - ambassadorMilitaryOfficer
+              - stateOwnedEnterpriseOfficial
+            relation:
+              type: string
+              description: Relation of the alternative beneficial owner to the person with an official role
+              enum:
+              - iAmPEP
+              - spouse
+              - registeredPartner
+              - cohabitant
+              - child
+              - childSpouseOrPartner
+              - parent
+              - knownAssociate
+            startDate:
+              type: string
+              format: date-time
+              description: Start date of the PEP role
+            endDate:
+              type: string
+              format: date-time
+              description: End date of the PEP role
+  beneficialOwner:
+    type: string
+    description: Whether the business has beneficial owners. If yes should use the "beneficialOwners" field otherwise the "alternativeBeneficialOwners" field.
+    enum:
+    - yes
+    - no
+  beneficialOwners:
+    type: array
+    description: Beneficial owners of the business. This should be used when there are official beneficial owners for this business.
+    items:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - citizenship
+      - controlType
+      - familyControl
+      - nationalIdentifier
+      - address
+      - city
+      - postalCode
+      - residence
+      - isPep
+      properties:
+        firstName:
+          type: string
+          description: First name of the beneficial owner
+        lastName:
+          type: string
+          description: Last name of the beneficial owner
+        citizenship:
+          type: array
+          description: Citizenship countries of the beneficial owner
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                description: Country of citizenship in alpha-3 iso format
+                example: SWE
+              connections:
+                type: array
+                items:
+                  type: string
+                  description: Type of connection to the country of citizenship
+                  enum:
+                  - noConnection
+                  - stayingMoreThan180Days
+                  - haveInvestmentsOrBusiness
+                  - nationallyRegistered
+                  - moneyTransfers
+        controlType:
+          description: Information about the control exercised on the business by the beneficial owner
+          oneOf:
+            - $ref: '#/components/schemas/DirectControlTypes'
+            - $ref: '#/components/schemas/IndirectControlTypes'
+        familyControl:
+          type: string
+          description: Whether the beneficial owner exercise control together with close family members
+          enum:
+          - yes
+          - no
+        taxResidency:
+          type: array
+          description: Countries of tax residency in alpha-3 iso format
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: Date of birth of the beneficial owner
+        nationalIdentifier:
+          type: array
+          items:
+            type: object
+            required:
+            - country
+            - identifier
+            - type
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                example: SWE
+                description: Country of the national identifier
+              identifier:
+                type: string
+                description: Identification number. The format depends of the type and the country chosen.
+              type:
+                type: string
+                enum:
+                - socialSecurityNumber
+                - nationalInsuranceNumber
+                - nationalID
+                - passportNumber
+                - driversLicenseNumber
+                - other
+                description: Type of the national identifier.
+        address:
+          type: string
+          description: Street address of the beneficial owner
+        city:
+          type: string
+          description: City of the beneficial owner
+        postalCode:
+          type: string
+          description: Postal code of the beneficial owner
+        residence:
+          type: array
+          description: Countries of residence of the beneficial owner
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        isPep:
+          type: string
+          enum:
+          - yes
+          - no
+          description: If the beneficial owner is a PEP or not (including related to a PEP individual)
+        pep:
+          type: object
+          description: Information about the PEP status of the beneficial owner. This field is required if "isPep" is "yes".
+          required:
+          - country
+          - role
+          - relation
+          properties:
+            country:
+              type: string
+              format: ISO 3166 ALPHA-3
+              example: SWE
+              description: Country of the PEP role
+            role:
+              type: string
+              description: Type of PEP role
+              enum:
+              - headOfStateOrGovernmentMinister
+              - legislativeMember
+              - politicalPartyBoardMember
+              - highCourtJudge
+              - seniorAuditOrCentralBankOfficial
+              - ambassadorMilitaryOfficer
+              - stateOwnedEnterpriseOfficial
+            relation:
+              type: string
+              description: Relation of the beneficial owner to the person with an official role
+              enum:
+              - iAmPEP
+              - spouse
+              - registeredPartner
+              - cohabitant
+              - child
+              - childSpouseOrPartner
+              - parent
+              - knownAssociate
+            startDate:
+              type: string
+              format: date-time
+              description: Start date of the PEP role
+            endDate:
+              type: string
+              format: date-time
+              description: End date of the PEP role
+  citizenship:
+    type: array
+    description: Citizenship countries of the individual
+    items:
+      type: object
+      properties:
+        country:
+          type: string
+          format: ISO 3166 ALPHA-3
+          description: Country of citizenship in alpha-3 iso format
+          example: SWE
+        connections:
+          type: array
+          items:
+            type: string
+            description: Type of connection to the country of citizenship
+            enum:
+            - noConnection
+            - stayingMoreThan180Days
+            - haveInvestmentsOrBusiness
+            - nationallyRegistered
+            - moneyTransfers
+  city:
+    type: string
+    description: City of the individual
+  companyName:
+    type: string
+    description: Name of the business
+  custom:
+    type: string # Refine
+  dateOfBirth:
+    type: string
+    format: date-time
+    description: Date of birth of the individual
+  email:
+    type: string
+    format: email
+    description: Contact email of the business or individual
+  employmentStatus:
+    type: string
+    description: Employment status of the individual
+    enum:
+    - fullTime
+    - partTime
+    - student
+    - unemployed
+    - retired
+  firstName:
+    type: string
+    description: First name of the individual
+  forecastedTurnover:
+    type: object
+    description: Forecasted turnover for the current year
+    required:
+    - value
+    - currency
+    properties:
+      value:
+        type: number
+        description: Amount
+      currency:
+        type: currency
+        description: Currency in the 3 letters format from ISO 4217
+        example: USD
+  industry:
+    type: string
+    description: Industry of the business
+    enum:
+    - agricultureForestryFishing
+    - miningQuarrying
+    - manufacturing
+    - electricityGasSteamAirConditioningSupply
+    - waterSupplySewerageWasteManagementRemediationActivities
+    - construction
+    - wholesaleRetailTradeRepairMotorVehiclesMotorcycles
+    - transportationStorage
+    - accommodationFoodServiceActivities
+    - informationCommunication
+    - financialInsuranceActivities
+    - realEstateActivities
+    - professionalScientificTechnicalActivities
+    - administrativeSupportServiceActivities
+    - publicAdministrationDefenceCompulsorySocialSecurity
+    - education
+    - humanHealthSocialWorkActivities
+    - artsEntertainmentRecreation
+    - otherServiceActivities
+    - activitiesHouseholdsEmployersUndifferentiatedGoodsServicesProducingActivitiesHouseholdsOwnUse
+    - activitiesExtraterritorialOrganisationsBodies
+  isFinancialInstitution:
+    type: string
+    description: Whether the business is a financial institution
+    enum:
+    - yes
+    - no
+  lastName:
+    type: string
+    description: Last name of the individual
+  legalForm:
+    type: object
+    description: Information about the legal form of the business
+    required:
+    - options
+    properties:
+      options:
+        type: string
+        description: Type of the legal form of the business
+        enum:
+        - limited
+        - economic
+        - sole
+        - branch
+        - general
+        - non
+        - limited
+        - foundation
+        - foreign
+        - other
+        - unknown
+      other:
+        type: string
+        description: Description of the legal form of the business. Only used if "options" is "other"
+  listedFinancialMarket:
+    type: object
+    description: Information about the financial market where the business is listed
+    required:
+    - option
+    properties:
+      option:
+        type: string
+        description: Whether the business is listed on a financial market
+        enum:
+        - yes
+        - no
+      market:
+        type: string
+        description: The financial market where the business is listed. Only used if "option" is "yes".
+  operationStartDate:
+    type: string
+    format: date-time
+    description: The date the operations of the business started.
+  organizationNumber:
+    type: object
+    description: Information about the registration number and country of the business.
+    required:
+    - country
+    - registrationNumber
+    properties:
+      country:
+        type: string
+        format: ISO 3166 ALPHA-3
+        description: Country of registration in alpha-3 iso format
+        example: SWE
+      registrationNumber:
+        type: string
+        description: The registration number. The format depends of the country chosen.
+  ownerStructure:
+    type: string
+    description: Free text description of the ownership structure of the business
+  pep:
+    type: object
+    description: Information about the PEP status of the individual
+    required:
+    - isPep
+    properties:
+      isPep:
+        type: string
+        enum:
+        - yes
+        - no
+        description: If the individual is a PEP or not (including related to a PEP individual)
+      pep:
+        type: object
+        description: Information about the PEP status of the individual. This field is required if "isPep" is "yes".
+        required:
+        - country
+        - role
+        - relation
+        properties:
+          country:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+            description: Country of the PEP role
+          role:
+            type: string
+            description: Type of PEP role
+            enum:
+            - headOfStateOrGovernmentMinister
+            - legislativeMember
+            - politicalPartyBoardMember
+            - highCourtJudge
+            - seniorAuditOrCentralBankOfficial
+            - ambassadorMilitaryOfficer
+            - stateOwnedEnterpriseOfficial
+          relation:
+            type: string
+            description: Relation of the individual to the person with an official role
+            enum:
+            - iAmPEP
+            - spouse
+            - registeredPartner
+            - cohabitant
+            - child
+            - childSpouseOrPartner
+            - parent
+            - knownAssociate
+          startDate:
+            type: string
+            format: date-time
+            description: Start date of the PEP role
+          endDate:
+            type: string
+            format: date-time
+            description: End date of the PEP role
+  personalNumber:
+    type: string
+  phoneNumber:
+    type: string
+  postalCode:
+    type: string
+  previousTurnover:
+    type: string
+  products:
+    type: string
+  purpose:
+    type: string
+  residence:
+    type: string
+  role:
+    type: string
+  salary:
+    type: string
+  signatories:
+    type: string
+  signer:
+    type: string
+  sourceOfFunds:
+    type: string
+  sourceOfWealth:
+    type: string
+  sourceOfWealthAmount:
+    type: string
+  stateOwned:
+    type: string
+  taxResidency:
+    type: string
+  tin:
+    type: string
+  txMonitoringThresholds:
+    type: string
+  website:
+    type: string
+    description: Website of the business

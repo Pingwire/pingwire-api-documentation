@@ -7,40 +7,14 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - entity
-          - formId
-          properties:
-            entity:
-              type: object
-              description: Entity that submitted the form answers
-              required:
-              - id
-              - type
-              properties:
-                id:
-                  type: string
-                  format: ObjectId
-                  description: Id of the entity
-                type:
-                  $ref: '#/components/schemas/EntityTypes'
-            formId:
-              type: string
-              format: ObjectId
-              description: Form that was used to submit the answers
+          $ref: '#/components/schemas/FormAnswer'
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId
-                description: form answer object id
+            $ref: '#/components/schemas/FormAnswerSaved'
     400:
       description: Invalid parameters
       content:

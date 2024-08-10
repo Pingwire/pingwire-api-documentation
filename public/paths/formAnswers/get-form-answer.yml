@@ -18,12 +18,7 @@ get:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId
-                description: form answer object id
+            $ref: '#/components/schemas/FormAnswerSaved'
     400:
       description: Invalid parameters
       content:

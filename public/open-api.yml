@@ -320,9 +320,17 @@ components:
       $ref: "./components/schemas/businesses/BoardMembersRequest.yml"
     BoardMembersResponse:
       $ref: "./components/schemas/businesses/BoardMembersResponse.yml"
+    FormAnswer:
+      $ref: "./components/schemas/FormAnswer.yml"
+    FormAnswerSaved:
+      $ref: "./components/schemas/FormAnswerSaved.yml"
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
+    DirectControlTypes:
+      $ref: "./components/schemas/controlTypes/directControlTypes.yml"
+    IndirectControlTypes:
+      $ref: "./components/schemas/controlTypes/indirectControlTypes.yml"
 
   securitySchemes:
     bearerAuth:
