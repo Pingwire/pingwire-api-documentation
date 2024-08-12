@@ -1,0 +1,20 @@
+type: object
+required:
+- role
+properties:
+  role:
+    type: object
+    description: Role of the related individual in the business
+    required:
+    - options
+    properties:
+      options:
+        type: string
+        description: Type of the role
+        enum:
+        - ceo
+        - boardMember
+        - other
+      other:
+        type: string
+        description: Description of the role. Only used if the chosen option is "other".

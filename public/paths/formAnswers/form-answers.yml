@@ -1,0 +1,31 @@
+post:
+  tags:
+    -  Form answers
+  summary: Submit form answer
+  description: Submit a new form answer for a specific form and a specific entity.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/FormAnswer'
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FormAnswerSaved'
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

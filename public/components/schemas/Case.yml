@@ -7,25 +7,21 @@ properties:
       url: '/#section/Introduction/Unique-Identifier'
   entities:
     type: array
-    items: 
+    items:
       type: object
       properties:
-        id: 
+        id:
           type: string
           description: object id
           format: ObjectId
           externalDocs:
             description: Unique identifier
             url: '/#section/Introduction/Unique-Identifier'
-        type: 
-          type: string
-          enum:
-          - Individual
-          - Business
-          - Car
+        type:
+          $ref: '#/components/schemas/EntityTypes'
   requests:
     type: array
-    items: 
+    items:
       type: string
       description: list of request object ids.
       format: ObjectId
@@ -35,7 +31,7 @@ properties:
         url: '/#section/Introduction/Unique-Identifier'
   pings:
     type: array
-    items: 
+    items:
       type: string
       description: list of pings object ids.
       format: ObjectId
@@ -45,7 +41,7 @@ properties:
         url: '/#section/Introduction/Unique-Identifier'
   fipoReports:
     type: array
-    items: 
+    items:
       type: string
       description: list of report object ids.
       format: ObjectId
@@ -55,10 +51,10 @@ properties:
         url: '/#section/Introduction/Unique-Identifier'
   comments:
     type: array
-    items: 
+    items:
       type: object
       properties:
-        member: 
+        member:
           type: string
           description: Object id of the member who created the comment.
           format: ObjectId
@@ -66,7 +62,7 @@ properties:
           externalDocs:
             description: Unique identifier
             url: '/#section/Introduction/Unique-Identifier'
-        message: 
+        message:
           type: string
           description: The comment.
         date:
@@ -79,12 +75,12 @@ properties:
     type: date
   files:
     type: array
-    items: 
+    items:
       type: object
       properties:
-        key: 
+        key:
           type: string
-        name: 
+        name:
           type: string
         createdAt:
           description: Date, iso 8601 format
@@ -98,8 +94,8 @@ properties:
     externalDocs:
         description: Unique identifier
         url: '/#section/Introduction/Unique-Identifier'
-  status: 
+  status:
     type: string
-    enum: 
+    enum:
     - Open
-    - Closed 
+    - Closed
