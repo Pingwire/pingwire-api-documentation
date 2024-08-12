@@ -1,0 +1,24 @@
+type: string
+enum:
+- salaryPension
+- investmentReturns
+- inheritanceGift
+- onlineGambling
+- cryptoTrading
+- holding
+- operation
+- loanProceeds
+- equityFinancing
+- grantsOrSubsidies
+- saleOfAssets
+- internalCashReserves
+- savings
+- securities
+- dividends
+- socialBenefits
+- realEstateSold
+- selfEmployment
+- scholarship
+- incomeFromFamilyMembers
+- winningsLotteriesBets
+- other

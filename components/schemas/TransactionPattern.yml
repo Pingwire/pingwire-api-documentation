@@ -1,0 +1,26 @@
+type: object
+properties:
+  monthlyVolume:
+    type: number
+    description: Volume of transactions during a month. Amount is expressed in the parent currency
+  monthlyFrequency:
+    type: number
+    description: Number of transactions during a month.
+  max:
+    type: number
+    description: Highest expected amount for a single transaction.
+  median:
+    type: number
+    description: Typical expected amount (median) for a single transaction.
+  expectedTransactionTimeline:
+    type: object
+    description: For how long the behaviour is expected
+    properties:
+      amount:
+        type: integer
+      unit:
+        type: string
+        enum:
+        - day
+        - month
+        - year

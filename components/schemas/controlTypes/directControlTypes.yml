@@ -1,0 +1,31 @@
+type: object
+required:
+- direct
+- type
+properties:
+  direct:
+    type: string
+    description: Whether the control is exercised directly or indirectly
+    enum:
+    - yes
+  type:
+    type: string
+    description: Type of control
+    enum:
+    - shareholder
+    - votingRight
+    - agreementMembership
+    - appointmentRight
+    - trustee
+    - boardMember
+    - beneficiary
+    - settlor
+    - other
+  ownership:
+    type: number
+    minimum: 0
+    maximum: 100
+    description: Extent of the ownership in percent. Only used if "type" is "shareholder" or "votingRight"
+  other:
+    type: string
+    description: Description of the ownership type. Only used if "type" is "other".

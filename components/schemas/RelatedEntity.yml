@@ -1,0 +1,78 @@
+allOf:
+- type: object
+  required:
+  - firstName
+  - lastName
+  - citizenship
+  - nationalIdentifier
+  - address
+  - city
+  - postalCode
+  - residence
+  - isPep
+  properties:
+    firstName:
+      type: string
+      description: First name of the related individual
+    lastName:
+      type: string
+      description: Last name of the related individual
+    citizenship:
+      type: array
+      description: Citizenship countries of the related individual
+      items:
+        type: object
+        properties:
+          country:
+            type: string
+            format: ISO 3166 ALPHA-3
+            description: Country of citizenship in alpha-3 iso format
+            example: SWE
+          connections:
+            type: array
+            items:
+              type: string
+              description: Type of connection to the country of citizenship
+              enum:
+              - noConnection
+              - stayingMoreThan180Days
+              - haveInvestmentsOrBusiness
+              - nationallyRegistered
+              - moneyTransfers
+    taxResidency:
+      type: array
+      description: Countries of tax residency in alpha-3 iso format
+      items:
+        type: string
+        format: ISO 3166 ALPHA-3
+        example: SWE
+    dateOfBirth:
+      type: string
+      format: date-time
+      description: Date of birth of the related individual
+    nationalIdentifier:
+      type: array
+      description: National identifier of the related individual
+      items:
+        $ref: '#/components/schemas/NationalIdentifier'
+    address:
+      type: string
+      description: Street address of the related individual
+    city:
+      type: string
+      description: City of the related individual
+    postalCode:
+      type: string
+      description: Postal code of the related individual
+    residence:
+      type: array
+      description: Countries of residence of the related individual
+      items:
+        type: string
+        format: ISO 3166 ALPHA-3
+        example: SWE
+    isPep:
+      description: If the related individual is a PEP or not (including related to a PEP individual)
+    pep:
+      description: Information about the PEP status of the related individual. This field is required if "isPep" is "yes".
+- $ref: '#/components/schemas/Pep'
