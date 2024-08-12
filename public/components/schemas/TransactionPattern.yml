@@ -21,6 +21,6 @@ properties:
       unit:
         type: string
         enum:
-        - days
-        - months
-        - years
+        - day
+        - month
+        - year
