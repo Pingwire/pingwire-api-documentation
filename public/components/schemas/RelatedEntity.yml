@@ -54,8 +54,7 @@ allOf:
       type: array
       description: National identifier of the related individual
       items:
-        items:
-          $ref: '#/components/schemas/NationalIdentifier'
+        $ref: '#/components/schemas/NationalIdentifier'
     address:
       type: string
       description: Street address of the related individual

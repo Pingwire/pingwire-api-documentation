@@ -176,15 +176,15 @@ properties:
         type: string
         description: Type of the legal form of the business
         enum:
-        - limited
-        - economic
-        - sole
+        - limited-liability-company
+        - economic-association
+        - sole-proprietorship
         - branch
-        - general
-        - non
-        - limited
+        - general-partnership
+        - non-profit-making-association
+        - limited-partnership
         - foundation
-        - foreign
+        - foreign-company
         - other
         - unknown
       other:

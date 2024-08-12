@@ -16,9 +16,4 @@ properties:
     type: string
     enum:
     - socialSecurityNumber
-    - nationalInsuranceNumber
-    - nationalID
-    - passportNumber
-    - driversLicenseNumber
-    - other
     description: Type of the national identifier.
