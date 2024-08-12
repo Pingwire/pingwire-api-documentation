@@ -102,6 +102,7 @@ properties:
           description: Date of birth of the alternative beneficial owner
         nationalIdentifier:
           type: array
+          description: National identifier of the alternative beneficial owner
           items:
             type: object
             required:
@@ -269,6 +270,7 @@ properties:
           description: Date of birth of the beneficial owner
         nationalIdentifier:
           type: array
+          description: National identifier of the beneficial owner
           items:
             type: object
             required:
@@ -389,7 +391,12 @@ properties:
     type: string
     description: Name of the business
   custom:
-    type: string # Refine
+    type: object
+    description: Answers to custom questions that are not officially supported. This is a hashmap with question identifiers as keys and free text answers as values.
+    additionalProperties:
+      x-additionalPropertiesName: questionIdentifier
+      type: string
+      description: Free text answer to the custom question.
   dateOfBirth:
     type: string
     format: date-time
@@ -575,42 +582,523 @@ properties:
             type: string
             format: date-time
             description: End date of the PEP role
-  personalNumber:
-    type: string
   phoneNumber:
     type: string
+    description: The phone number of the individual in the 164 phone number format
   postalCode:
     type: string
+    description: The postal code of the individual
   previousTurnover:
-    type: string
+    type: object
+    description: Turnover of the business for the previous year
+    required:
+    - value
+    - currency
+    properties:
+      value:
+        type: number
+        description: Amount
+      currency:
+        type: currency
+        description: Currency in the 3 letters format from ISO 4217
+        example: USD
   products:
-    type: string
+    type: object
+    description: Products used by the individual or the business.
+    required:
+    - options
+    properties:
+      options:
+        type: array
+        description: List of the products. There is no format validation but it is recommended to use product codes or similar so that it can easily be used programmatically.
+        items:
+          type: string
+      other:
+        type: string
+        description: Free text description of the product. Only used when one of the "options" is "other".
   purpose:
-    type: string
+    type: object
+    description: Purposes for using the products or services offered.
+    required:
+    - options
+    properties:
+      options:
+        type: array
+        description: List of the purposes. There is no format validation but it is recommended to use purpose codes or similar so that it can easily be used programmatically.
+        items:
+          type: string
+      other:
+        type: string
+        description: Free text description of the purpose. Only used when one of the "options" is "other".
   residence:
-    type: string
-  role:
-    type: string
+    type: array
+    description: Countries of residence of the individual or business
+    items:
+      type: string
+      format: ISO 3166 ALPHA-3
+      example: SWE
   salary:
-    type: string
+    type: object
+    description: Monthly gross salary of the individual
+    required:
+    - value
+    - currency
+    properties:
+      value:
+        type: number
+        description: Amount
+      currency:
+        type: currency
+        description: Currency in the 3 letters format from ISO 4217
+        example: USD
   signatories:
-    type: string
+    type: array
+    description: Signatories of the business
+    items:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - citizenship
+      - role
+      - nationalIdentifier
+      - address
+      - city
+      - postalCode
+      - residence
+      - isPep
+      properties:
+        firstName:
+          type: string
+          description: First name of the signatory
+        lastName:
+          type: string
+          description: Last name of the signatory
+        citizenship:
+          type: array
+          description: Citizenship countries of the signatory
+          items:
+            type: object
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                description: Country of citizenship in alpha-3 iso format
+                example: SWE
+              connections:
+                type: array
+                items:
+                  type: string
+                  description: Type of connection to the country of citizenship
+                  enum:
+                  - noConnection
+                  - stayingMoreThan180Days
+                  - haveInvestmentsOrBusiness
+                  - nationallyRegistered
+                  - moneyTransfers
+        taxResidency:
+          type: array
+          description: Countries of tax residency in alpha-3 iso format
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        role:
+          type: object
+          description: Role of the signatory in the business
+          required:
+          - options
+          properties:
+            options:
+              type: string
+              description: Type of the signatory role
+              enum:
+              - ceo
+              - boardMember
+              - other
+            other:
+              type: string
+              description: Description of the signatory role. This can only be used if the chosen option is "other".
+        dateOfBirth:
+          type: string
+          format: date-time
+          description: Date of birth of the signatory
+        nationalIdentifier:
+          type: array
+          description: National identifier of the signatory
+          items:
+            type: object
+            required:
+            - country
+            - identifier
+            - type
+            properties:
+              country:
+                type: string
+                format: ISO 3166 ALPHA-3
+                example: SWE
+                description: Country of the national identifier
+              identifier:
+                type: string
+                description: Identification number. The format depends of the type and the country chosen.
+              type:
+                type: string
+                enum:
+                - socialSecurityNumber
+                - nationalInsuranceNumber
+                - nationalID
+                - passportNumber
+                - driversLicenseNumber
+                - other
+                description: Type of the national identifier.
+        address:
+          type: string
+          description: Street address of the signatory
+        city:
+          type: string
+          description: City of the signatory
+        postalCode:
+          type: string
+          description: Postal code of the signatory
+        residence:
+          type: array
+          description: Countries of residence of the signatory
+          items:
+            type: string
+            format: ISO 3166 ALPHA-3
+            example: SWE
+        isPep:
+          type: string
+          enum:
+          - yes
+          - no
+          description: If the signatory is a PEP or not (including related to a PEP individual)
+        pep:
+          type: object
+          description: Information about the PEP status of the signatory. This field is required if "isPep" is "yes".
+          required:
+          - country
+          - role
+          - relation
+          properties:
+            country:
+              type: string
+              format: ISO 3166 ALPHA-3
+              example: SWE
+              description: Country of the PEP role
+            role:
+              type: string
+              description: Type of PEP role
+              enum:
+              - headOfStateOrGovernmentMinister
+              - legislativeMember
+              - politicalPartyBoardMember
+              - highCourtJudge
+              - seniorAuditOrCentralBankOfficial
+              - ambassadorMilitaryOfficer
+              - stateOwnedEnterpriseOfficial
+            relation:
+              type: string
+              description: Relation of the signatory to the person with an official role
+              enum:
+              - iAmPEP
+              - spouse
+              - registeredPartner
+              - cohabitant
+              - child
+              - childSpouseOrPartner
+              - parent
+              - knownAssociate
+            startDate:
+              type: string
+              format: date-time
+              description: Start date of the PEP role
+            endDate:
+              type: string
+              format: date-time
+              description: End date of the PEP role
   signer:
-    type: string
+    type: object
+    description: Information about the person who signed and submitted the form answers
+    properties:
+      nationalIdentifier:
+        type: array
+        description: National identifier of the signer
+        items:
+          type: object
+          required:
+          - country
+          - identifier
+          - type
+          properties:
+            country:
+              type: string
+              format: ISO 3166 ALPHA-3
+              example: SWE
+              description: Country of the national identifier
+            identifier:
+              type: string
+              description: Identification number. The format depends of the type and the country chosen.
+            type:
+              type: string
+              enum:
+              - socialSecurityNumber
+              - nationalInsuranceNumber
+              - nationalID
+              - passportNumber
+              - driversLicenseNumber
+              - other
+              description: Type of the national identifier.
+      firstName:
+        type: string
+        description: First name of the signer
+      lastName:
+        type: string
+        description: Last name of the signer
+      role:
+        type: string
+        description: Role of the signer in the business
+      email:
+        type: string
+        format: email
+        description: Email address of the signer
+      phoneNumber:
+        type: string
+        description: The phone number of the signer in the 164 phone number format
+      confirm:
+        type: string
+        description: Whether the signer has confirmed the answers submitted were correct to the best of their knowledge.
+        enum:
+        - yes
+        - no
   sourceOfFunds:
-    type: string
+    type: object
+    description: Information about the source of funds
+    required:
+    - options
+    properties:
+      options:
+        type: array
+        description: Type of the source of funds
+        items:
+          type: string
+          enum:
+          - salaryPension
+          - investmentReturns
+          - inheritanceGift
+          - onlineGambling
+          - cryptoTrading
+          - holding
+          - operation
+          - loanProceeds
+          - equityFinancing
+          - grantsOrSubsidies
+          - saleOfAssets
+          - internalCashReserves
+          - savings
+          - securities
+          - dividends
+          - socialBenefits
+          - realEstateSold
+          - selfEmployment
+          - scholarship
+          - incomeFromFamilyMembers
+          - winningsLotteriesBets
+          - other
+      other:
+        type: string
+        description: Description of the source of funds. Only used if one of the "options" is "other"
   sourceOfWealth:
-    type: string
+    type: object
+    description: Information about the source of wealth
+    required:
+    - options
+    properties:
+      options:
+        type: array
+        description: Type of the source of wealth
+        items:
+          type: string
+          enum:
+          - salaryPension
+          - investmentReturns
+          - inheritanceGift
+          - onlineGambling
+          - cryptoTrading
+          - holding
+          - operation
+          - loanProceeds
+          - equityFinancing
+          - grantsOrSubsidies
+          - saleOfAssets
+          - internalCashReserves
+          - savings
+          - securities
+          - dividends
+          - socialBenefits
+          - realEstateSold
+          - selfEmployment
+          - scholarship
+          - incomeFromFamilyMembers
+          - winningsLotteriesBets
+          - other
+      other:
+        type: string
+        description: Description of the source of wealth. Only used if one of the "options" is "other"
   sourceOfWealthAmount:
-    type: string
+    type: object
+    description: Monthly income from the selected source of wealth
+    required:
+    - value
+    - currency
+    properties:
+      value:
+        type: number
+        description: Amount
+      currency:
+        type: currency
+        description: Currency in the 3 letters format from ISO 4217
+        example: USD
   stateOwned:
     type: string
+    description: Whether the business is state owned
+    enum:
+    - yes
+    - no
   taxResidency:
-    type: string
+    type: array
+    description: Countries of tax residency of the individual or business
+    items:
+      type: string
+      format: ISO 3166 ALPHA-3
+      example: SWE
   tin:
     type: string
+    description: Tax identification number
   txMonitoringThresholds:
-    type: string
+    type: object
+    description: Expected transactional behaviour according to the business or individual. This is a two dimensional hashmap indexed on currency and country. The currency is in the 3 letters format from ISO 4217 and the country in the ISO 3166 ALPHA-3 format.
+    additionalProperties:
+      x-additionalPropertiesName: currency
+      description: Expected transactional behaviour in that specific currency according to the business or individual. Currency is in the 3 letters format from ISO 4217.
+      type: object
+      additionalProperties:
+        x-additionalPropertiesName: country
+        description: Expected transaction behaviour in that specific country (and in the parent currency) according to the business or individual. Country is in the ISO 3166 ALPHA-3 format.
+        type: object
+        properties:
+          incoming:
+            type: object
+            description: Expected transaction behaviour for incoming transactions in that country and currency.
+            properties:
+              monthlyVolume:
+                type: number
+                description: Volume of transactions during a month. Amount is expressed in the parent currency
+              monthlyFrequency:
+                type: number
+                description: Number of transactions during a month.
+              max:
+                type: number
+                description: Highest expected amount for a single transaction.
+              median:
+                type: number
+                description: Typical expected amount (median) for a single transaction.
+              expectedTransactionTimeline:
+                type: object
+                description: For how long the behaviour is expected
+                properties:
+                  amount:
+                    type: integer
+                  unit:
+                    type: string
+                    enum:
+                    - days
+                    - months
+                    - years
+          outgoing:
+            type: object
+            description: Expected transaction behaviour for outgoing transactions in that country and currency.
+            properties:
+              monthlyVolume:
+                type: number
+                description: Volume of transactions during a month. Amount is expressed in the parent currency
+              monthlyFrequency:
+                type: number
+                description: Number of transactions during a month.
+              max:
+                type: number
+                description: Highest expected amount for a single transaction.
+              median:
+                type: number
+                description: Typical expected amount (median) for a single transaction.
+              expectedTransactionTimeline:
+                type: object
+                description: For how long the behaviour is expected
+                properties:
+                  amount:
+                    type: integer
+                  unit:
+                    type: string
+                    enum:
+                    - days
+                    - months
+                    - years
+          process:
+            type: object
+            description: Expected transaction behaviour for processed transactions in that country and currency.
+            properties:
+              monthlyVolume:
+                type: number
+                description: Volume of transactions during a month. Amount is expressed in the parent currency
+              monthlyFrequency:
+                type: number
+                description: Number of transactions during a month.
+              max:
+                type: number
+                description: Highest expected amount for a single transaction.
+              median:
+                type: number
+                description: Typical expected amount (median) for a single transaction.
+              expectedTransactionTimeline:
+                type: object
+                description: For how long the behaviour is expected
+                properties:
+                  amount:
+                    type: integer
+                  unit:
+                    type: string
+                    enum:
+                    - days
+                    - months
+                    - years
+          total:
+            type: object
+            description: Expected transaction behaviour for transactions in all directions (incoming, outgoing and processed) in that country and currency.
+            properties:
+              monthlyVolume:
+                type: number
+                description: Volume of transactions during a month. Amount is expressed in the parent currency
+              monthlyFrequency:
+                type: number
+                description: Number of transactions during a month.
+              max:
+                type: number
+                description: Highest expected amount for a single transaction.
+              median:
+                type: number
+                description: Typical expected amount (median) for a single transaction.
+              expectedTransactionTimeline:
+                type: object
+                description: For how long the behaviour is expected
+                properties:
+                  amount:
+                    type: integer
+                  unit:
+                    type: string
+                    enum:
+                    - days
+                    - months
+                    - years
   website:
     type: string
     description: Website of the business
