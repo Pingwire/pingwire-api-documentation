@@ -32,168 +32,9 @@ properties:
     type: array
     description: Alternative beneficial owners of the business. This should be used when there is no beneficial owner for this business.
     items:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - citizenship
-      - role
-      - nationalIdentifier
-      - address
-      - city
-      - postalCode
-      - residence
-      - isPep
-      properties:
-        firstName:
-          type: string
-          description: First name of the alternative beneficial owner
-        lastName:
-          type: string
-          description: Last name of the alternative beneficial owner
-        citizenship:
-          type: array
-          description: Citizenship countries of the alternative beneficial owner
-          items:
-            type: object
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                description: Country of citizenship in alpha-3 iso format
-                example: SWE
-              connections:
-                type: array
-                items:
-                  type: string
-                  description: Type of connection to the country of citizenship
-                  enum:
-                  - noConnection
-                  - stayingMoreThan180Days
-                  - haveInvestmentsOrBusiness
-                  - nationallyRegistered
-                  - moneyTransfers
-        taxResidency:
-          type: array
-          description: Countries of tax residency in alpha-3 iso format
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        role:
-          type: object
-          description: Role of the alternative beneficial owner in the business
-          required:
-          - options
-          properties:
-            options:
-              type: string
-              description: Type of the alternative beneficial owner role
-              enum:
-              - ceo
-              - boardMember
-              - other
-            other:
-              type: string
-              description: Description of the alternative beneficial owner role. This can only be used if the chosen option is "other".
-        dateOfBirth:
-          type: string
-          format: date-time
-          description: Date of birth of the alternative beneficial owner
-        nationalIdentifier:
-          type: array
-          description: National identifier of the alternative beneficial owner
-          items:
-            type: object
-            required:
-            - country
-            - identifier
-            - type
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                example: SWE
-                description: Country of the national identifier
-              identifier:
-                type: string
-                description: Identification number. The format depends of the type and the country chosen.
-              type:
-                type: string
-                enum:
-                - socialSecurityNumber
-                - nationalInsuranceNumber
-                - nationalID
-                - passportNumber
-                - driversLicenseNumber
-                - other
-                description: Type of the national identifier.
-        address:
-          type: string
-          description: Street address of the alternative beneficial owner
-        city:
-          type: string
-          description: City of the alternative beneficial owner
-        postalCode:
-          type: string
-          description: Postal code of the alternative beneficial owner
-        residence:
-          type: array
-          description: Countries of residence of the alternative beneficial owner
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        isPep:
-          type: string
-          enum:
-          - yes
-          - no
-          description: If the alternative beneficial owner is a PEP or not (including related to a PEP individual)
-        pep:
-          type: object
-          description: Information about the PEP status of the alternative beneficial owner. This field is required if "isPep" is "yes".
-          required:
-          - country
-          - role
-          - relation
-          properties:
-            country:
-              type: string
-              format: ISO 3166 ALPHA-3
-              example: SWE
-              description: Country of the PEP role
-            role:
-              type: string
-              description: Type of PEP role
-              enum:
-              - headOfStateOrGovernmentMinister
-              - legislativeMember
-              - politicalPartyBoardMember
-              - highCourtJudge
-              - seniorAuditOrCentralBankOfficial
-              - ambassadorMilitaryOfficer
-              - stateOwnedEnterpriseOfficial
-            relation:
-              type: string
-              description: Relation of the alternative beneficial owner to the person with an official role
-              enum:
-              - iAmPEP
-              - spouse
-              - registeredPartner
-              - cohabitant
-              - child
-              - childSpouseOrPartner
-              - parent
-              - knownAssociate
-            startDate:
-              type: string
-              format: date-time
-              description: Start date of the PEP role
-            endDate:
-              type: string
-              format: date-time
-              description: End date of the PEP role
+      allOf:
+        - $ref: '#/components/schemas/RelatedEntity'
+        - $ref: '#/components/schemas/RelatedEntityRole'
   beneficialOwner:
     type: string
     description: Whether the business has beneficial owners. If yes should use the "beneficialOwners" field otherwise the "alternativeBeneficialOwners" field.
@@ -204,164 +45,24 @@ properties:
     type: array
     description: Beneficial owners of the business. This should be used when there are official beneficial owners for this business.
     items:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - citizenship
-      - controlType
-      - familyControl
-      - nationalIdentifier
-      - address
-      - city
-      - postalCode
-      - residence
-      - isPep
-      properties:
-        firstName:
-          type: string
-          description: First name of the beneficial owner
-        lastName:
-          type: string
-          description: Last name of the beneficial owner
-        citizenship:
-          type: array
-          description: Citizenship countries of the beneficial owner
-          items:
-            type: object
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                description: Country of citizenship in alpha-3 iso format
-                example: SWE
-              connections:
-                type: array
-                items:
-                  type: string
-                  description: Type of connection to the country of citizenship
-                  enum:
-                  - noConnection
-                  - stayingMoreThan180Days
-                  - haveInvestmentsOrBusiness
-                  - nationallyRegistered
-                  - moneyTransfers
-        controlType:
-          description: Information about the control exercised on the business by the beneficial owner
-          oneOf:
-            - $ref: '#/components/schemas/DirectControlTypes'
-            - $ref: '#/components/schemas/IndirectControlTypes'
-        familyControl:
-          type: string
-          description: Whether the beneficial owner exercise control together with close family members
-          enum:
-          - yes
-          - no
-        taxResidency:
-          type: array
-          description: Countries of tax residency in alpha-3 iso format
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        dateOfBirth:
-          type: string
-          format: date-time
-          description: Date of birth of the beneficial owner
-        nationalIdentifier:
-          type: array
-          description: National identifier of the beneficial owner
-          items:
-            type: object
-            required:
-            - country
-            - identifier
-            - type
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                example: SWE
-                description: Country of the national identifier
-              identifier:
-                type: string
-                description: Identification number. The format depends of the type and the country chosen.
-              type:
-                type: string
-                enum:
-                - socialSecurityNumber
-                - nationalInsuranceNumber
-                - nationalID
-                - passportNumber
-                - driversLicenseNumber
-                - other
-                description: Type of the national identifier.
-        address:
-          type: string
-          description: Street address of the beneficial owner
-        city:
-          type: string
-          description: City of the beneficial owner
-        postalCode:
-          type: string
-          description: Postal code of the beneficial owner
-        residence:
-          type: array
-          description: Countries of residence of the beneficial owner
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        isPep:
-          type: string
-          enum:
-          - yes
-          - no
-          description: If the beneficial owner is a PEP or not (including related to a PEP individual)
-        pep:
-          type: object
-          description: Information about the PEP status of the beneficial owner. This field is required if "isPep" is "yes".
+      allOf:
+        - $ref: '#/components/schemas/RelatedEntity'
+        - type: object
           required:
-          - country
-          - role
-          - relation
+          - controlType
+          - familyControl
           properties:
-            country:
+            controlType:
+              description: Information about the control exercised on the business by the related individual
+              oneOf:
+                - $ref: '#/components/schemas/DirectControlTypes'
+                - $ref: '#/components/schemas/IndirectControlTypes'
+            familyControl:
               type: string
-              format: ISO 3166 ALPHA-3
-              example: SWE
-              description: Country of the PEP role
-            role:
-              type: string
-              description: Type of PEP role
+              description: Whether the related individual exercise control together with close family members
               enum:
-              - headOfStateOrGovernmentMinister
-              - legislativeMember
-              - politicalPartyBoardMember
-              - highCourtJudge
-              - seniorAuditOrCentralBankOfficial
-              - ambassadorMilitaryOfficer
-              - stateOwnedEnterpriseOfficial
-            relation:
-              type: string
-              description: Relation of the beneficial owner to the person with an official role
-              enum:
-              - iAmPEP
-              - spouse
-              - registeredPartner
-              - cohabitant
-              - child
-              - childSpouseOrPartner
-              - parent
-              - knownAssociate
-            startDate:
-              type: string
-              format: date-time
-              description: Start date of the PEP role
-            endDate:
-              type: string
-              format: date-time
-              description: End date of the PEP role
+              - yes
+              - no
   citizenship:
     type: array
     description: Citizenship countries of the individual
@@ -527,61 +228,7 @@ properties:
     type: string
     description: Free text description of the ownership structure of the business
   pep:
-    type: object
-    description: Information about the PEP status of the individual
-    required:
-    - isPep
-    properties:
-      isPep:
-        type: string
-        enum:
-        - yes
-        - no
-        description: If the individual is a PEP or not (including related to a PEP individual)
-      pep:
-        type: object
-        description: Information about the PEP status of the individual. This field is required if "isPep" is "yes".
-        required:
-        - country
-        - role
-        - relation
-        properties:
-          country:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-            description: Country of the PEP role
-          role:
-            type: string
-            description: Type of PEP role
-            enum:
-            - headOfStateOrGovernmentMinister
-            - legislativeMember
-            - politicalPartyBoardMember
-            - highCourtJudge
-            - seniorAuditOrCentralBankOfficial
-            - ambassadorMilitaryOfficer
-            - stateOwnedEnterpriseOfficial
-          relation:
-            type: string
-            description: Relation of the individual to the person with an official role
-            enum:
-            - iAmPEP
-            - spouse
-            - registeredPartner
-            - cohabitant
-            - child
-            - childSpouseOrPartner
-            - parent
-            - knownAssociate
-          startDate:
-            type: string
-            format: date-time
-            description: Start date of the PEP role
-          endDate:
-            type: string
-            format: date-time
-            description: End date of the PEP role
+    $ref: '#/components/schemas/Pep'
   phoneNumber:
     type: string
     description: The phone number of the individual in the 164 phone number format
@@ -655,168 +302,9 @@ properties:
     type: array
     description: Signatories of the business
     items:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - citizenship
-      - role
-      - nationalIdentifier
-      - address
-      - city
-      - postalCode
-      - residence
-      - isPep
-      properties:
-        firstName:
-          type: string
-          description: First name of the signatory
-        lastName:
-          type: string
-          description: Last name of the signatory
-        citizenship:
-          type: array
-          description: Citizenship countries of the signatory
-          items:
-            type: object
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                description: Country of citizenship in alpha-3 iso format
-                example: SWE
-              connections:
-                type: array
-                items:
-                  type: string
-                  description: Type of connection to the country of citizenship
-                  enum:
-                  - noConnection
-                  - stayingMoreThan180Days
-                  - haveInvestmentsOrBusiness
-                  - nationallyRegistered
-                  - moneyTransfers
-        taxResidency:
-          type: array
-          description: Countries of tax residency in alpha-3 iso format
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        role:
-          type: object
-          description: Role of the signatory in the business
-          required:
-          - options
-          properties:
-            options:
-              type: string
-              description: Type of the signatory role
-              enum:
-              - ceo
-              - boardMember
-              - other
-            other:
-              type: string
-              description: Description of the signatory role. This can only be used if the chosen option is "other".
-        dateOfBirth:
-          type: string
-          format: date-time
-          description: Date of birth of the signatory
-        nationalIdentifier:
-          type: array
-          description: National identifier of the signatory
-          items:
-            type: object
-            required:
-            - country
-            - identifier
-            - type
-            properties:
-              country:
-                type: string
-                format: ISO 3166 ALPHA-3
-                example: SWE
-                description: Country of the national identifier
-              identifier:
-                type: string
-                description: Identification number. The format depends of the type and the country chosen.
-              type:
-                type: string
-                enum:
-                - socialSecurityNumber
-                - nationalInsuranceNumber
-                - nationalID
-                - passportNumber
-                - driversLicenseNumber
-                - other
-                description: Type of the national identifier.
-        address:
-          type: string
-          description: Street address of the signatory
-        city:
-          type: string
-          description: City of the signatory
-        postalCode:
-          type: string
-          description: Postal code of the signatory
-        residence:
-          type: array
-          description: Countries of residence of the signatory
-          items:
-            type: string
-            format: ISO 3166 ALPHA-3
-            example: SWE
-        isPep:
-          type: string
-          enum:
-          - yes
-          - no
-          description: If the signatory is a PEP or not (including related to a PEP individual)
-        pep:
-          type: object
-          description: Information about the PEP status of the signatory. This field is required if "isPep" is "yes".
-          required:
-          - country
-          - role
-          - relation
-          properties:
-            country:
-              type: string
-              format: ISO 3166 ALPHA-3
-              example: SWE
-              description: Country of the PEP role
-            role:
-              type: string
-              description: Type of PEP role
-              enum:
-              - headOfStateOrGovernmentMinister
-              - legislativeMember
-              - politicalPartyBoardMember
-              - highCourtJudge
-              - seniorAuditOrCentralBankOfficial
-              - ambassadorMilitaryOfficer
-              - stateOwnedEnterpriseOfficial
-            relation:
-              type: string
-              description: Relation of the signatory to the person with an official role
-              enum:
-              - iAmPEP
-              - spouse
-              - registeredPartner
-              - cohabitant
-              - child
-              - childSpouseOrPartner
-              - parent
-              - knownAssociate
-            startDate:
-              type: string
-              format: date-time
-              description: Start date of the PEP role
-            endDate:
-              type: string
-              format: date-time
-              description: End date of the PEP role
+      allOf:
+        - $ref: '#/components/schemas/RelatedEntity'
+        - $ref: '#/components/schemas/RelatedEntityRole'
   signer:
     type: object
     description: Information about the person who signed and submitted the form answers
@@ -825,30 +313,7 @@ properties:
         type: array
         description: National identifier of the signer
         items:
-          type: object
-          required:
-          - country
-          - identifier
-          - type
-          properties:
-            country:
-              type: string
-              format: ISO 3166 ALPHA-3
-              example: SWE
-              description: Country of the national identifier
-            identifier:
-              type: string
-              description: Identification number. The format depends of the type and the country chosen.
-            type:
-              type: string
-              enum:
-              - socialSecurityNumber
-              - nationalInsuranceNumber
-              - nationalID
-              - passportNumber
-              - driversLicenseNumber
-              - other
-              description: Type of the national identifier.
+          $ref: '#/components/schemas/NationalIdentifier'
       firstName:
         type: string
         description: First name of the signer
@@ -881,30 +346,7 @@ properties:
         type: array
         description: Type of the source of funds
         items:
-          type: string
-          enum:
-          - salaryPension
-          - investmentReturns
-          - inheritanceGift
-          - onlineGambling
-          - cryptoTrading
-          - holding
-          - operation
-          - loanProceeds
-          - equityFinancing
-          - grantsOrSubsidies
-          - saleOfAssets
-          - internalCashReserves
-          - savings
-          - securities
-          - dividends
-          - socialBenefits
-          - realEstateSold
-          - selfEmployment
-          - scholarship
-          - incomeFromFamilyMembers
-          - winningsLotteriesBets
-          - other
+          $ref: '#/components/schemas/SourceOfFunds'
       other:
         type: string
         description: Description of the source of funds. Only used if one of the "options" is "other"
@@ -918,30 +360,7 @@ properties:
         type: array
         description: Type of the source of wealth
         items:
-          type: string
-          enum:
-          - salaryPension
-          - investmentReturns
-          - inheritanceGift
-          - onlineGambling
-          - cryptoTrading
-          - holding
-          - operation
-          - loanProceeds
-          - equityFinancing
-          - grantsOrSubsidies
-          - saleOfAssets
-          - internalCashReserves
-          - savings
-          - securities
-          - dividends
-          - socialBenefits
-          - realEstateSold
-          - selfEmployment
-          - scholarship
-          - incomeFromFamilyMembers
-          - winningsLotteriesBets
-          - other
+          $ref: '#/components/schemas/SourceOfFunds'
       other:
         type: string
         description: Description of the source of wealth. Only used if one of the "options" is "other"
@@ -988,117 +407,25 @@ properties:
         type: object
         properties:
           incoming:
-            type: object
-            description: Expected transaction behaviour for incoming transactions in that country and currency.
-            properties:
-              monthlyVolume:
-                type: number
-                description: Volume of transactions during a month. Amount is expressed in the parent currency
-              monthlyFrequency:
-                type: number
-                description: Number of transactions during a month.
-              max:
-                type: number
-                description: Highest expected amount for a single transaction.
-              median:
-                type: number
-                description: Typical expected amount (median) for a single transaction.
-              expectedTransactionTimeline:
-                type: object
-                description: For how long the behaviour is expected
-                properties:
-                  amount:
-                    type: integer
-                  unit:
-                    type: string
-                    enum:
-                    - days
-                    - months
-                    - years
+            allOf:
+              - $ref: '#/components/schemas/TransactionPattern'
+              - type: object
+                description: Expected transaction behaviour for incoming transactions in that country and currency.
           outgoing:
-            type: object
-            description: Expected transaction behaviour for outgoing transactions in that country and currency.
-            properties:
-              monthlyVolume:
-                type: number
-                description: Volume of transactions during a month. Amount is expressed in the parent currency
-              monthlyFrequency:
-                type: number
-                description: Number of transactions during a month.
-              max:
-                type: number
-                description: Highest expected amount for a single transaction.
-              median:
-                type: number
-                description: Typical expected amount (median) for a single transaction.
-              expectedTransactionTimeline:
-                type: object
-                description: For how long the behaviour is expected
-                properties:
-                  amount:
-                    type: integer
-                  unit:
-                    type: string
-                    enum:
-                    - days
-                    - months
-                    - years
+            allOf:
+              - $ref: '#/components/schemas/TransactionPattern'
+              - type: object
+                description: Expected transaction behaviour for outgoing transactions in that country and currency.
           process:
-            type: object
-            description: Expected transaction behaviour for processed transactions in that country and currency.
-            properties:
-              monthlyVolume:
-                type: number
-                description: Volume of transactions during a month. Amount is expressed in the parent currency
-              monthlyFrequency:
-                type: number
-                description: Number of transactions during a month.
-              max:
-                type: number
-                description: Highest expected amount for a single transaction.
-              median:
-                type: number
-                description: Typical expected amount (median) for a single transaction.
-              expectedTransactionTimeline:
-                type: object
-                description: For how long the behaviour is expected
-                properties:
-                  amount:
-                    type: integer
-                  unit:
-                    type: string
-                    enum:
-                    - days
-                    - months
-                    - years
+            allOf:
+              - $ref: '#/components/schemas/TransactionPattern'
+              - type: object
+                description: Expected transaction behaviour for processed transactions in that country and currency.
           total:
-            type: object
-            description: Expected transaction behaviour for transactions in all directions (incoming, outgoing and processed) in that country and currency.
-            properties:
-              monthlyVolume:
-                type: number
-                description: Volume of transactions during a month. Amount is expressed in the parent currency
-              monthlyFrequency:
-                type: number
-                description: Number of transactions during a month.
-              max:
-                type: number
-                description: Highest expected amount for a single transaction.
-              median:
-                type: number
-                description: Typical expected amount (median) for a single transaction.
-              expectedTransactionTimeline:
-                type: object
-                description: For how long the behaviour is expected
-                properties:
-                  amount:
-                    type: integer
-                  unit:
-                    type: string
-                    enum:
-                    - days
-                    - months
-                    - years
+            allOf:
+              - $ref: '#/components/schemas/TransactionPattern'
+              - type: object
+                description: Expected transaction behaviour for transactions in all directions (incoming, outgoing and processed) in that country and currency.
   website:
     type: string
     description: Website of the business

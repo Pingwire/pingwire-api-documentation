@@ -1,0 +1,55 @@
+type: object
+description: Information about the PEP status of the individual
+required:
+- isPep
+properties:
+  isPep:
+    type: string
+    enum:
+    - yes
+    - no
+    description: If the individual is a PEP or not (including related to a PEP individual)
+  pep:
+    type: object
+    description: Information about the PEP status of the individual. This field is required if "isPep" is "yes".
+    required:
+    - country
+    - role
+    - relation
+    properties:
+      country:
+        type: string
+        format: ISO 3166 ALPHA-3
+        example: SWE
+        description: Country of the PEP role
+      role:
+        type: string
+        description: Type of PEP role
+        enum:
+        - headOfStateOrGovernmentMinister
+        - legislativeMember
+        - politicalPartyBoardMember
+        - highCourtJudge
+        - seniorAuditOrCentralBankOfficial
+        - ambassadorMilitaryOfficer
+        - stateOwnedEnterpriseOfficial
+      relation:
+        type: string
+        description: Relation of the individual to the person with an official role
+        enum:
+        - iAmPEP
+        - spouse
+        - registeredPartner
+        - cohabitant
+        - child
+        - childSpouseOrPartner
+        - parent
+        - knownAssociate
+      startDate:
+        type: string
+        format: date-time
+        description: Start date of the PEP role
+      endDate:
+        type: string
+        format: date-time
+        description: End date of the PEP role

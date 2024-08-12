@@ -324,9 +324,21 @@ components:
       $ref: "./components/schemas/FormAnswer.yml"
     FormAnswerSaved:
       $ref: "./components/schemas/FormAnswerSaved.yml"
+    RelatedEntity:
+      $ref: "./components/schemas/RelatedEntity.yml"
+    RelatedEntityRole:
+      $ref: "./components/schemas/RelatedEntityRole.yml"
+    TransactionPattern:
+      $ref: "./components/schemas/TransactionPattern.yml"
+    Pep:
+      $ref: "./components/schemas/Pep.yml"
+    NationalIdentifier:
+      $ref: "./components/schemas/NationalIdentifier.yml"
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
+    SourceOfFunds:
+      $ref: "./components/schemas/enums/sourceOfFunds.yml"
     DirectControlTypes:
       $ref: "./components/schemas/controlTypes/directControlTypes.yml"
     IndirectControlTypes:
