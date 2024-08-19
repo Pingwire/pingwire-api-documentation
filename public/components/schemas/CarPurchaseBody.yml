@@ -51,17 +51,17 @@ allOf:
           buyer:
             oneOf:
             - $ref: '#/components/schemas/Individual'
-            - $ref: '#/components/schemas/Business'
+            - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           seller:
             oneOf:
             - $ref: '#/components/schemas/Individual'
-            - $ref: '#/components/schemas/Business'
+            - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           guarantor:
             oneOf:
             - $ref: '#/components/schemas/Individual'
-            - $ref: '#/components/schemas/Business'
+            - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           car:
             oneOf:

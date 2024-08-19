@@ -222,8 +222,10 @@ components:
       $ref: "./components/schemas/IndividualRiskAssessment.yml"
     IndividualResponse:
       $ref: "./components/schemas/Individual.yml"
-    BusinessResponse:
+    Business:
       $ref: "./components/schemas/Business.yml"
+    BusinessSaved:
+      $ref: "./components/schemas/BusinessSaved.yml"
     CarResponse:
       $ref: "./components/schemas/Car.yml"
     KycForm:
@@ -268,7 +270,7 @@ components:
       $ref: "./components/schemas/requestParties/Individual.yml"
     Account:
       $ref: "./components/schemas/requestParties/Account.yml"
-    Business:
+    BusinessRequestParty:
       $ref: "./components/schemas/requestParties/Business.yml"
     Car:
       $ref: "./components/schemas/requestParties/Car.yml"

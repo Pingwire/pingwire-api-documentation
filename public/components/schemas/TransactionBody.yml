@@ -77,7 +77,7 @@ allOf:
                         - $ref: '#/components/schemas/Account'
 
               - allOf:
-                - $ref: '#/components/schemas/Business'
+                - $ref: '#/components/schemas/BusinessRequestParty'
                 - type: object
                 - title: Business
                   properties:
@@ -104,7 +104,7 @@ allOf:
             oneOf:
             - $ref: '#/components/schemas/Account'
             - allOf:
-              - $ref: '#/components/schemas/Business'
+              - $ref: '#/components/schemas/BusinessRequestParty'
               - type: object
               - title: Business
                 properties:
@@ -125,7 +125,7 @@ allOf:
             description:  The transaction processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient.
             oneOf:
             - allOf:
-              - $ref: '#/components/schemas/Business'
+              - $ref: '#/components/schemas/BusinessRequestParty'
               - type: object
               - title: Business
                 properties:
