@@ -1,4 +1,4 @@
-get: 
+get:
   tags:
     - Businesses
   summary: List businesses
@@ -19,7 +19,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -47,7 +47,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/BusinessResponse"
+              $ref: "#/components/schemas/BusinessSaved"
     400:
       description: Invalid parameters
       content:
@@ -71,52 +71,7 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - customId
-          properties:
-            customId:
-              type: string
-              description: The custom id can be any id that the creator would like to identify the business with.
-              externalDocs:
-                description: Unique identifier
-                url: '/#section/Introduction/Unique-Identifier'
-            name:
-              type: string
-            swedishOrganizationNumber:
-              deprecated: true
-              type: string
-              format: xxxxxxxxxx
-              externalDocs:
-                description: Unique identifier
-                url: '/#section/Introduction/Unique-Identifier'
-            registrationNumber:
-                type: string
-                externalDocs:
-                  description: Unique identifier (in combination with residence)
-                  url: '/#section/Introduction/Unique-Identifier'
-            residence:
-                type: string
-                format: ISO 3166 ALPHA-3
-            email:
-              type: string
-            phoneNumber:
-              type: string
-            incorporationLegalForm:
-              type: string
-              description: Type of business.
-              enum:
-              - limited-liability-company
-              - economic-association
-              - sole-proprietorship
-              - branch
-              - general-partnership
-              - non-profit-making-association
-              - limited-partnership
-              - foundation
-              - foreign-company
-              - other
-              - unknown
+          $ref: "#/components/schemas/Business"
 
   responses:
     200:
@@ -124,7 +79,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BusinessResponse"
+            $ref: "#/components/schemas/BusinessSaved"
     400:
       description: Invalid parameters
       content:
