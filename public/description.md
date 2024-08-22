@@ -1,6 +1,6 @@
-The Pingwire API can be used by companies in active collaboration with Pingwire AB.
+The Pingwire API can be used by all our customers. Reach out to get your credentials.
 
- <a href="mailto:sales@pingwire.io">Become a partner</a>
+ <a href="mailto:sales@pingwire.io">Become a customer</a>
 
 
 # Introduction

@@ -5,7 +5,7 @@ info:
   description:
     $ref: description.md
   x-logo:
-    url: './assets/pingwire-green.png'
+    url: './assets/pingwire-logo.svg'
     altText: Pingwire
 servers:
 - url: https://api.pingwire.io/
