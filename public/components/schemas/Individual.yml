@@ -37,7 +37,7 @@ properties:
           type: string
   birthDate:
     type: string
-    format: 'yyyy-mm-dd'
+    format: date-time
   riskScore:
     type: number
     minimum: 0

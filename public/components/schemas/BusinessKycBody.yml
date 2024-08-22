@@ -8,18 +8,19 @@ allOf:
         description: Payload of the request. Its schema depends of the requestType
         properties:
           entity:
+            description: Entity that is subject of the KYC
             oneOf:
             - allOf:
               - $ref: '#/components/schemas/BusinessRequestParty'
               - type: object
-              - title: Business
+                title: Business
                 properties:
                   ownedAccounts:
                     title: Account
                     type: array
+                    description: Accounts owned by the business
                     items:
                       allOf:
                         - $ref: '#/components/schemas/Account'
-            description: 'At least one field must be included independent of type.'
         required:
           - entity

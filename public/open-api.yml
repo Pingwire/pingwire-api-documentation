@@ -294,8 +294,6 @@ components:
       $ref: "./components/schemas/Member.yml"
     MemberBody:
       $ref: "./components/schemas/MemberBody.yml"
-    PartyResponse:
-      $ref: "./components/schemas/requestParties/PartyResponse.yml"
     # ApiKey:
     #   $ref: "./components/schemas/ApiKey.yml"
     # ApiKeyBody:
@@ -336,10 +334,14 @@ components:
       $ref: "./components/schemas/RelatedEntityRole.yml"
     TransactionPattern:
       $ref: "./components/schemas/TransactionPattern.yml"
+    TransactionParty:
+      $ref: "./components/schemas/requestParties/TransactionParty.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
       $ref: "./components/schemas/NationalIdentifier.yml"
+    NationalIdentifierRestricted:
+      $ref: "./components/schemas/NationalIdentifierRestricted.yml"
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"

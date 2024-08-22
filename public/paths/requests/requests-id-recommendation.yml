@@ -23,11 +23,12 @@ put:
           properties:
             recommendation:
               type: string
-              enum: 
+              description: New recommendation for the request
+              enum:
               - block
               - proceed
             comment:
-              type: string
+              description: Explanation why the recommendation is updated
   responses:
     200:
       description: Successful operation

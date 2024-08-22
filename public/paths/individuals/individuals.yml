@@ -1,4 +1,4 @@
-get: 
+get:
   tags:
     - Individuals
   summary: List individuals
@@ -20,7 +20,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -82,7 +82,7 @@ post:
                   description: The custom id can be any id that the created would like to identify the individual with.
                   externalDocs:
                     description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'  
+                    url: '/#section/Introduction/Unique-Identifier'
                 firstName:
                   type: string
                 lastName:
@@ -93,30 +93,30 @@ post:
                     description: Unique identifier (country + identifier)
                     url: '/#section/Introduction/Unique-Identifier'
                   type: array
-                  items: 
+                  items:
                     type: object
                     properties:
-                      country: 
+                      country:
                         type: string
                         example: SWE
                         format: ISO 3166 ALPHA-3
                       identifier:
-                        type: string  
+                        type: string
                 swedishSocialSecurityNumber:
                   deprecated: true
                   type: string
                   format: yyyymmddxxxx
                   externalDocs:
                     description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'  
+                    url: '/#section/Introduction/Unique-Identifier'
                 birthDate:
                   type: string
-                  format: 'yyyy-mm-dd'
+                  format: date-time
                 email:
                   type: string
                 phoneNumber:
                   type: string
-            
+
   responses:
     200:
       description: Successful operation

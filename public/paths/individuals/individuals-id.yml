@@ -1,4 +1,4 @@
-get: 
+get:
   tags:
     - Individuals
   summary: Individual
@@ -59,7 +59,7 @@ put:
                 type: string
                 externalDocs:
                   description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'  
+                  url: '/#section/Introduction/Unique-Identifier'
               firstName:
                 type: string
               lastName:
@@ -76,18 +76,18 @@ put:
                   description: Unique identifier (country + identifier)
                   url: '/#section/Introduction/Unique-Identifier'
                 type: array
-                items: 
+                items:
                   type: object
                   properties:
-                    country: 
+                    country:
                       type: string
                       example: SWE
                       format: ISO 3166 ALPHA-3
                     identifier:
-                      type: string  
+                      type: string
               birthDate:
                 type: string
-                format: 'yyyy-mm-dd'
+                format: date-time
               email:
                 type: string
               phoneNumber:

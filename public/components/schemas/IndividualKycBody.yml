@@ -9,19 +9,21 @@ allOf:
         properties:
           bankIdIssueDate:
             type: string
+            description: Issue date of the BankID certificate use to authenticate the individual during this KYC
           entity:
+            description: Entity that is subject of the KYC
             oneOf:
             - allOf:
               - $ref: '#/components/schemas/Individual'
               - type: object
-              - title: Individual
+                title: Individual
                 properties:
                   ownedAccounts:
                     title: Account
+                    description: Accounts owned by the individual
                     type: array
                     items:
                       allOf:
                         - $ref: '#/components/schemas/Account'
-            description: 'At least one field must be included independent of type.'
         required:
           - entity

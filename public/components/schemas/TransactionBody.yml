@@ -50,13 +50,13 @@ allOf:
             oneOf:
               - allOf:
                 - $ref: '#/components/schemas/Account'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Account
+                  title: Account
                   properties:
                     conductors:
                       type: array
                       description: Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
-                      title: List of conductors
                       items:
                         allOf:
                           - $ref: '#/components/schemas/Individual'
@@ -68,26 +68,29 @@ allOf:
                                   - signatory
               - allOf:
                 - $ref: '#/components/schemas/Individual'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Individual
+                  title: Individual
                   properties:
                     account:
                       title: Account
+                      description: Account used to initiate the transaction
                       allOf:
                         - $ref: '#/components/schemas/Account'
 
               - allOf:
                 - $ref: '#/components/schemas/BusinessRequestParty'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Business
+                  title: Business
                   properties:
                     account:
                       title: Account
+                      description: Account used to initiate the transaction
                       allOf:
                         - $ref: '#/components/schemas/Account'
                     conductors:
                       type: array
-                      title: List of conductors
                       description:  Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
                       items:
                         allOf:
@@ -102,46 +105,44 @@ allOf:
           recipient:
             description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions.
             oneOf:
-            - $ref: '#/components/schemas/Account'
             - allOf:
-              - $ref: '#/components/schemas/BusinessRequestParty'
+              - $ref: '#/components/schemas/Account'
+              - $ref: '#/components/schemas/TransactionParty'
               - type: object
-              - title: Business
+                title: Account
+            - allOf:
+              - $ref: '#/components/schemas/Individual'
+              - $ref: '#/components/schemas/TransactionParty'
+              - type: object
+                title: Individual
                 properties:
                   account:
                     title: Account
+                    description: Account used to receive the transaction
                     allOf:
                       - $ref: '#/components/schemas/Account'
             - allOf:
-              - $ref: '#/components/schemas/Individual'
+              - $ref: '#/components/schemas/BusinessRequestParty'
+              - $ref: '#/components/schemas/TransactionParty'
               - type: object
-              - title: Individual
+                title: Business
                 properties:
                   account:
                     title: Account
+                    description: Account used to receive the transaction
                     allOf:
                       - $ref: '#/components/schemas/Account'
           processor:
             description:  The transaction processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient.
             oneOf:
             - allOf:
-              - $ref: '#/components/schemas/BusinessRequestParty'
-              - type: object
-              - title: Business
-                properties:
-                  account:
-                    title: Account
-                    allOf:
-                      - $ref: '#/components/schemas/Account'
-            - allOf:
               - $ref: '#/components/schemas/Individual'
               - type: object
-              - title: Individual
-                properties:
-                  account:
-                    title: Account
-                    allOf:
-                      - $ref: '#/components/schemas/Account'
+                title: Individual
+            - allOf:
+              - $ref: '#/components/schemas/BusinessRequestParty'
+              - type: object
+                title: Business
           # bankData:
           #   type: object
           #   description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
