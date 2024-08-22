@@ -4,8 +4,6 @@ The Pingwire API can be used by all our customers. Reach out to get your credent
 
 
 # Introduction
-For making the integration to Pingwire as seamless as possible, we have included a section `Introduction` that explains keywords and illustrates the processes.
-
 ## Dictionary
 
 - `ENTITY`: An entity is a subject for investigation e.g an individual, a company, or an asset.

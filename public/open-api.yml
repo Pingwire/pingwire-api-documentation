@@ -7,6 +7,7 @@ info:
   x-logo:
     url: './assets/pingwire-logo.svg'
     altText: Pingwire
+    href: https://www.pingwire.io
 servers:
 - url: https://api.pingwire.io/
   description: Production server
