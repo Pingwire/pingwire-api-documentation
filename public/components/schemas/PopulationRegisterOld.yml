@@ -24,11 +24,11 @@ properties:
           properties:
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the address validity.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the address validity.
             internationalAddress:
               type: object
@@ -79,33 +79,33 @@ properties:
                   description: County code of the birthplace.
                 birthDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Birth date of the person.
             coordinationNumberInformation:
               type: object
               properties:
                 attributionDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Date when the coordination number was attributed.
                 deathDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Date of death, if applicable.
                 expectedInactivationDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Expected date for inactivation of the coordination number.
                 inactivationDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Actual inactivation date of the coordination number.
                 inactivationReason:
                   type: string
                   description: Reason for inactivation.
                 renewalDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Date for next renewal of the coordination number.
                 status:
                   type: string
@@ -146,11 +146,11 @@ properties:
           properties:
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the address validity.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the address validity.
             internationalAddress:
               type: object
@@ -177,11 +177,11 @@ properties:
           properties:
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the name validity.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the name validity.
             firstName:
               type: string
@@ -200,7 +200,7 @@ properties:
               description: Surname of the person.
       nationalRegistryChangeDate:
         type: string
-        format: date
+        format: date-time
         description: Date of the last change in the national registry.
       personId:
         type: string
@@ -223,11 +223,11 @@ properties:
               description: County code of the registration.
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the population registration.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the population registration.
             districtCode:
               type: string
@@ -237,7 +237,7 @@ properties:
               description: Municipality code of the population registration.
             populationRegistrationDate:
               type: string
-              format: date
+              format: date-time
               description: Date of the population registration.
             residenceStatusCode:
               type: string
@@ -247,7 +247,7 @@ properties:
         description: Indicates if the registration is protected.
       protectedRegistrationDate:
         type: string
-        format: date
+        format: date-time
         description: Date when the registration was protected.
       realEstate:
         type: array
@@ -296,26 +296,26 @@ properties:
           properties:
             birthDate:
               type: string
-              format: date
+              format: date-time
               description: Birth date of the related person.
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the relation.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the relation.
             deRegistrationDate:
               type: string
-              format: date
+              format: date-time
               description: Date of deregistration, if applicable.
             deRegistrationReasonCode:
               type: string
               description: Reason code for deregistration.
             deathDate:
               type: string
-              format: date
+              format: date-time
               description: Death date of the related person, if applicable.
             firstName:
               type: string
@@ -343,7 +343,7 @@ properties:
             description: Indicates if secrecy was set by SPAR.
       secrecyDate:
         type: string
-        format: date
+        format: date-time
         description: Date when secrecy was applied.
       specialPostalAddress:
         type: array
@@ -352,11 +352,11 @@ properties:
           properties:
             dateFrom:
               type: string
-              format: date
+              format: date-time
               description: Start date of the address validity.
             dateTo:
               type: string
-              format: date
+              format: date-time
               description: End date of the address validity.
             internationalAddress:
               type: object

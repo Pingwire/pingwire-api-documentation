@@ -24,6 +24,11 @@ put:
           properties:
             comment:
               type: string
+              description: Comment to add on the ping
+            origin:
+              type: string
+              format: ObjectId
+              description: ID of the comment to edit with this new comment
   responses:
     200:
       description: Successful operation

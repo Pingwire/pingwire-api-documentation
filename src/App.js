@@ -14,9 +14,11 @@ function App() {
       <RedocStandalone
         specUrl="open-api.yml"
         options={{
-          nativeScrollbars: true,
           theme: {
-            colors: { primary: { main: '#388e3c' } },
+            colors: { primary: { main: '#238061' } },
+            sidebar: {
+              backgroundColor: '#d3dcda',
+            },
             logo: { gutter: '15%' },
           },
         }}

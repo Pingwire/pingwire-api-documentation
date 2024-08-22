@@ -45,27 +45,27 @@ allOf:
               For `Gambling transactions` state the name of the organization that provided the game.
               For `Securities transactions` state the name of the organization that provided the transaction.
           date:
-            type: date
-            description: Date, iso 8601 format.
-            example: 2022-08-09T17:43:26.650+00:00
+            type: string
+            format: date-time
+            description: Date of the car purchase
           buyer:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           seller:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           guarantor:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           car:
             oneOf:
-            - $ref: '#/components/schemas/Car'
+            - $ref: '#/components/schemas/CarRequestParty'
             description: 'At least one field must be included of type.'
         required:
           - buyer

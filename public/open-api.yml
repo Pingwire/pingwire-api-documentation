@@ -5,8 +5,9 @@ info:
   description:
     $ref: description.md
   x-logo:
-    url: './assets/pingwire-green.png'
+    url: './assets/pingwire-logo.svg'
     altText: Pingwire
+    href: https://www.pingwire.io
 servers:
 - url: https://api.pingwire.io/
   description: Production server
@@ -38,6 +39,7 @@ x-tagGroups:
       - Individuals
       - Businesses
       - Cars
+      - Accounts
   - name: KYC Forms
     tags:
       - Forms
@@ -51,15 +53,17 @@ x-tagGroups:
 
   - name: Other resources
     tags:
-      - Segments
       - Risk Classes
       - Rules
       - Members
-      - API keys
       - Processes
       - Signals
       - Groups
 paths:
+  /account-entities/:
+    $ref: './paths/accountEntities/account-entities.yml'
+  /account-entities/{id}:
+    $ref: './paths/accountEntities/account-entities-id.yml'
   /auth/login/:
     $ref: './paths/auth/auth.yml'
   /individuals/:
@@ -90,6 +94,8 @@ paths:
     $ref: './paths/pings/pings-id-comments.yml'
   /cases/:
     $ref: './paths/cases/cases.yml'
+  /cases/merge/:
+    $ref: './paths/cases/cases-merge.yml'
   /cases/{id}:
     $ref: './paths/cases/cases-id.yml'
   /cases/{id}/status:
@@ -198,12 +204,18 @@ components:
               $ref: '#/components/schemas/IndividualIdentification'
             riskAssessment:
               $ref: '#/components/schemas/IndividualRiskAssessment'
+    AccountEntityBody:
+      $ref: "./components/schemas/AccountEntityBody.yml"
+    AccountEntity:
+      $ref: "./components/schemas/AccountEntity.yml"
     ContactInfo:
       $ref: "./components/schemas/ContactInfo.yml"
     BeneficialOwners:
       $ref: "./components/schemas/BeneficialOwners.yml"
     BoardMembers:
       $ref: "./components/schemas/BoardMembers.yml"
+    EntitySavedFields:
+      $ref: "./components/schemas/EntitySavedFields.yml"
     Signatories:
       $ref: "./components/schemas/Signatories.yml"
     TransactionBehavior:
@@ -220,14 +232,18 @@ components:
       $ref: "./components/schemas/BusinessRiskAssessment.yml"
     IndividualRiskAssessment:
       $ref: "./components/schemas/IndividualRiskAssessment.yml"
-    IndividualResponse:
+    Individual:
       $ref: "./components/schemas/Individual.yml"
+    BusinessBody:
+      $ref: "./components/schemas/BusinessBody.yml"
+    BusinessBodyUpdate:
+      $ref: "./components/schemas/BusinessBodyUpdate.yml"
     Business:
       $ref: "./components/schemas/Business.yml"
-    BusinessSaved:
-      $ref: "./components/schemas/BusinessSaved.yml"
-    CarResponse:
+    Car:
       $ref: "./components/schemas/Car.yml"
+    Comment:
+      $ref: "./components/schemas/Comment.yml"
     KycForm:
       $ref: "./components/schemas/KycForm.yml"
     KycFormBody:
@@ -266,14 +282,22 @@ components:
       $ref: "./components/schemas/Request.yml"
     # BankData:
     #   $ref: "./components/schemas/BankData.yml"
-    Individual:
+    IndividualRequestParty:
       $ref: "./components/schemas/requestParties/Individual.yml"
-    Account:
+    IndividualBody:
+      $ref: "./components/schemas/IndividualBody.yml"
+    IndividualBodyUpdate:
+      $ref: "./components/schemas/IndividualBodyUpdate.yml"
+    AccountRequestParty:
       $ref: "./components/schemas/requestParties/Account.yml"
     BusinessRequestParty:
       $ref: "./components/schemas/requestParties/Business.yml"
-    Car:
+    CarRequestParty:
       $ref: "./components/schemas/requestParties/Car.yml"
+    CarBody:
+      $ref: "./components/schemas/CarBody.yml"
+    CarBodyUpdate:
+      $ref: "./components/schemas/CarBodyUpdate.yml"
     Process:
       $ref: "./components/schemas/Process.yml"
     ProcessBody:
@@ -290,8 +314,6 @@ components:
       $ref: "./components/schemas/Member.yml"
     MemberBody:
       $ref: "./components/schemas/MemberBody.yml"
-    PartyResponse:
-      $ref: "./components/schemas/requestParties/PartyResponse.yml"
     # ApiKey:
     #   $ref: "./components/schemas/ApiKey.yml"
     # ApiKeyBody:
@@ -332,10 +354,14 @@ components:
       $ref: "./components/schemas/RelatedEntityRole.yml"
     TransactionPattern:
       $ref: "./components/schemas/TransactionPattern.yml"
+    TransactionParty:
+      $ref: "./components/schemas/requestParties/TransactionParty.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
       $ref: "./components/schemas/NationalIdentifier.yml"
+    NationalIdentifierRestricted:
+      $ref: "./components/schemas/NationalIdentifierRestricted.yml"
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"

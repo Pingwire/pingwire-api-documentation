@@ -8,8 +8,8 @@ allOf:
         description: Payload of the request. Its schema depends of the requestType
         properties:
           entity:
+            description: Entity that is subject of the KYC
             oneOf:
-            - $ref: '#/components/schemas/Car'
-            description: 'At least one field must be included of type.'
+            - $ref: '#/components/schemas/CarRequestParty'
         required:
-          - entity
+        - entity

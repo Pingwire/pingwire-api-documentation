@@ -22,21 +22,34 @@ put:
           required:
           - status
           - comment
-          - numberOfDaysIgnoreRule
           properties:
+            status:
+              type: string
+              description: New status of the ping
+              enum:
+              - pending
+              - resolved
+              - confirmed
+              - ignored
+            comment:
+              type: string
+              description: Explanation for why the status is updated
+            score:
+              type: number
+              description: Score contribution to use for this ping. This is only used when status is "confirmed". It is required when status is "confirmed"
+              minimum: 0
+              maximum: 100
             numberOfDaysIgnoreRule:
               type: number
               description: Number of days in the future that a similar ping should not be created.
               minimum: 0
-            comment:
+            overrideRecommendation:
               type: string
-            status:
-              type: string
-              enum: 
-              - pending
-              - resolved 
-              - confirmed 
-              - ignored 
+              description: Recommendation to apply for future requests while the rule is ignored. This will only be used for the amount of days specified in "numberOfDaysIgnoreRule"
+              enum:
+              - proceed
+              - review
+              - block
   responses:
     200:
       description: Successful operation

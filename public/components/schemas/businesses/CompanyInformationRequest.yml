@@ -25,11 +25,11 @@ properties:
             description: Registered name of the company
           registrationDate:
             type: string
-            format: date
+            format: date-time
             description: Date the company was registered
           deregistrationDate:
             type: string
-            format: date
+            format: date-time
             description: Date the company was de-registered. This is only relevant for companies that are not active anymore.
           registrationCommuneCode:
             type: string
@@ -72,7 +72,7 @@ properties:
             description: Can be used to describe in more details the status of the company. This is a complement to status in case the available values are not able to describe precisely the status of the company.
           statusDate:
             type: string
-            format: date
+            format: date-time
             description: Date when the status of the company changed
           activityDescription:
             type: string
@@ -92,7 +92,7 @@ properties:
             description: VAT number of the company
           vatRegistrationDate:
             type: string
-            format: date
+            format: date-time
             description: Date of registration for VAT
           isRegisteredPreliminaryTax:
             type: boolean

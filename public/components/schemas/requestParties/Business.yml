@@ -1,69 +1,44 @@
 type: object
+title: Business
 properties:
   type:
     type: string
     enum:
     - Business
-  id: 
+  id:
     type: string
     format: ObjectId
+    description: ID of an already created business
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   customId:
     type: string
+    description: Unique external identifier
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   swedishOrganizationNumber:
     deprecated: true
     type: string
+    description: Swedish organisation number. Deprecated, use registrationNumber and residence instead
     format: xxxxxxxxxx
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   registrationNumber:
     type: string
+    description: Registration number of the business
     externalDocs:
       description: Unique identifier (in combination with residence)
       url: '/#section/Introduction/Unique-Identifier'
   residence:
     type: string
     format: ISO 3166 ALPHA-3
+    description: Country of registration
   name:
     type: string
-  electronicId: 
-    type: string
-    description: For transactions authorized trough BankId, the serial number of the certificate could be used.
-  ip: 
-    type: string
-    description: IP address.
-  transactionCarrierType: 
-    type: string
-    description: Channel used to execute the transaction. When no carrier has been used, “Not relevant” should be selected
-    enum:
-    - casino-chip
-    - bank-money-order
-    - cheque
-    - card
-    - swish
-    - bank-giro
-    - card-terminal
-    - service-box
-    - agent
-    - other
-    - unknown
-    - not-relevant
-  transactionCarrierReference:
-    type: string
-    description: Reference for carrier of transactions. For example, telephone number for swish, card number for car terminal, bankgiro for BankGiro transaction.
-  country: 
-    type: string
-    description: Country from/to where the transaction was sent.
-    format: ISO 3166 ALPHA-3
-  hardwareId:
-    type: string
-    description: Hardware id used to authorize the transaction.
+    description: Name of the business
   incorporationLegalForm:
     type: string
     description: Type of business.
@@ -79,16 +54,18 @@ properties:
      - foreign-company
      - other
      - unknown
-  groups: 
-    description: List of groups for classifying entities into set divisions.
+  groups:
+    description: List of groups the entity should be associated to
     type: array
     items:
       type: string
       format: ObjectId
   email:
     type: string
+    description: Contact email of the business
     format: email
   phoneNumber:
+    description: Contact phone number of the business
     type: string
 required:
  - type

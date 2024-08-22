@@ -1,0 +1,46 @@
+type: object
+required:
+- _id
+- message
+- date
+- editions
+properties:
+  _id:
+    type: string
+    format: ObjectId
+    example: 62b9437318fe4517089b2833
+    description: ID of the comment
+  member:
+    type: string
+    format: ObjectId
+    example: 62b9437318fe4517089b2833
+    description: ID of the member who created the comment
+  message:
+    type: string
+    description: Content of the comment when created the first time
+  date:
+    type: string
+    format: date-time
+    description: Date when the comment was created
+  editions:
+    type: array
+    description: Editions of the comment after it was first published
+    items:
+      type: object
+      required:
+      - message
+      - date
+      properties:
+        member:
+          type: string
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+          description: ID of the member who edited the comment
+        message:
+          type: string
+          description: Content of the comment after the edition
+        date:
+          type: string
+          format: date-time
+          description: Date when the comment was edited
+

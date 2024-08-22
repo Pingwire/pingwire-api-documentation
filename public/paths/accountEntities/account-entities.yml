@@ -1,19 +1,17 @@
 get:
   tags:
-    - Cases
-  summary: List cases
-  description: Receive list of cases saved in the database.
+    - Accounts
+  summary: List accounts
+  description: Receive list of accounts saved in the database.
   parameters:
   - in: query
     name: _sort
     required: false
-    example: 'id'
     schema:
       type: string
       enum:
-      - id
       - createdAt
-      - entities
+      - riskScore
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -25,25 +23,15 @@ get:
       - DESC
       - ASC
   - in: query
-    name: status
-    description: Filter list of cases by status.
-    required: false
-    example:
-    schema:
-      type: string
-      enum:
-      - Open
-      - Closed
-  - in: query
     name: _start
-    description: The start number of the cases list.
+    description: The start number of the accounts list.
     required: false
     example: '0'
     schema:
       type: number
   - in: query
     name: _end
-    description: The end number of the cases list.
+    description: The end number of the accounts list.
     required: false
     example: '10'
     schema:
@@ -56,7 +44,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/Case"
+              $ref: "#/components/schemas/AccountEntity"
     400:
       description: Invalid parameters
       content:

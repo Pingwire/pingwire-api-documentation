@@ -1,9 +1,9 @@
 type: object
 properties:
   fetchedDate:
-    type: date
-    description: Date, ISO 8601 format.
-    example: 2023-06-15T00:00:00.000+00:00
+    format: date-time
+    type: string
+    description: Date when the bank data were fetched
   accounts:
     type: array
     description: In addition to the required fields, one of [`iban`, `bban`, `accountNumber`] must be included.
@@ -17,7 +17,7 @@ properties:
         role:
           type: string
           description: The role of the person in relation to the account.
-          enum: 
+          enum:
             - right-of-disposal
             - power-of-attorney
             - beneficiary
@@ -33,7 +33,7 @@ properties:
         status:
           type: string
           description: The status of the account.
-          enum: 
+          enum:
             - active
             - closed-by-client
             - closed-by-operator
@@ -44,21 +44,21 @@ properties:
         clearingNumber:
           type: string
         closed:
-          type: date
-          description: The date when the account was closed, ISO 8601 format.
-          example: 2023-06-01T00:00:00.000+00:00
+          format: date-time
+          type: string
+          description: The date when the account was closed.
         opened:
-          type: date
-          description: The date when the account was opened, ISO 8601 format.
-          example: 2021-06-01T00:00:00.000+00:00
+          format: date-time
+          type: string
+          description: The date when the account was opened.
         source:
           type: string
         isPrimaryHolder:
           type: boolean
         balanceDate:
-          type: date
-          description: The date when the balance was calculated, ISO 8601 format.
-          example: 2023-06-15T00:00:00.000+00:00
+          format: date-time
+          type: string
+          description: The date when the balance was calculated.
         accountNumber:
           type: string
         iban:
@@ -78,7 +78,7 @@ properties:
         ownershipRatio:
           type: number
           description: Indicates how much of the account is owned by the customer.
-        product: 
+        product:
           type: string
         type:
           type: string
@@ -165,9 +165,9 @@ properties:
             type: object
             properties:
               date:
-                type: date
-                description: Date, ISO 8601 format.
-                example: 2023-06-15T00:00:00.000+00:00
+                format: date-time
+                type: string
+                description: Date of the transaction
               amount:
                 type: number
                 description: Transaction amount.

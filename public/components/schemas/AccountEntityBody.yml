@@ -1,16 +1,5 @@
 type: object
 properties:
-  type:
-    type: string
-    enum:
-    - Account
-  id:
-    type: string
-    format: ObjectId
-    description: ID of an already created account
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
   customId:
     type: string
     description: Unique external identifier
@@ -73,11 +62,6 @@ properties:
     type: string
     description: Country where the account is registered
     format: ISO 3166 ALPHA-3
-  currency:
-    type: string
-    description: Currency of the account
-    format: ISO 4217 code
-    example: USD
   accountName:
     type: string
     description: The name of the account.

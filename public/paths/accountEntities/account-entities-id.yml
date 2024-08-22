@@ -1,12 +1,12 @@
 get:
   tags:
-    - Businesses
-  summary: Business
-  description: Receive business by id saved in the database.
+    - Accounts
+  summary: Get account
+  description: Receive account by id saved in the database.
   parameters:
   - in: path
     name: id
-    description: Business object id
+    description: Account object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Business"
+            $ref: "#/components/schemas/AccountEntity"
     400:
       description: Invalid parameters
       content:
@@ -35,31 +35,30 @@ get:
   - bearerAuth: []
 put:
   tags:
-  - Businesses
-  summary: Update businesses
+  - Accounts
+  summary: Update account
   parameters:
   - in: path
     name: id
-    description: Business object id
+    description: Account object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update a businesses.
+  description: Update account information
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/BusinessBodyUpdate"
-
+          $ref: "#/components/schemas/AccountEntityBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Business"
+            $ref: "#/components/schemas/AccountEntity"
     400:
       description: Invalid parameters
       content:

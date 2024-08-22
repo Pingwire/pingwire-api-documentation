@@ -1,0 +1,13 @@
+type: object
+required:
+- country
+- identifier
+properties:
+  country:
+    type: string
+    format: ISO 3166 ALPHA-3
+    example: SWE
+    description: Country of the national identifier
+  identifier:
+    type: string
+    description: Identification number. The format depends of the country chosen.
