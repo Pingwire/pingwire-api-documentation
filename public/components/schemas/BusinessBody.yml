@@ -1,0 +1,45 @@
+type: object
+properties:
+  customId:
+    type: string
+    description: Custom ID used to identify the business uniquely. Typically an external unique identifier.
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  name:
+    type: string
+    description: The name of the business
+  swedishOrganizationNumber:
+    deprecated: true
+    type: string
+    format: xxxxxxxxxx
+    example: xxxxxxxxxx
+    description: The Swedish company registration number. Deprecated, use "registrationNumber" and "residence" instead
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  registrationNumber:
+    type: string
+    description: Business registration number in the country of residence
+    externalDocs:
+      description: Unique identifier (in combination with residence)
+      url: '/#section/Introduction/Unique-Identifier'
+  residence:
+    type: string
+    format: ISO 3166 ALPHA-3
+    example: SWE
+    description: The country of registration of the business. Required if "registrationNumber" is used
+  email:
+    type: string
+    format: email
+    description: Contact email of the business
+  phoneNumber:
+    type: string
+    description: Contact phone number of the business
+  groups:
+    type: array
+    description: List of groups the business belongs to.
+    items:
+      type: string
+      format: ObjectId
+      example: 620a2958bfc1d7a803398a6d

@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/IndividualResponse"
+            $ref: "#/components/schemas/Individual"
     400:
       description: Invalid parameters
       content:
@@ -51,59 +51,14 @@ put:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - customId
-          properties:
-              customId:
-                type: string
-                externalDocs:
-                  description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'
-              firstName:
-                type: string
-              lastName:
-                type: string
-              swedishSocialSecurityNumber:
-                type: string
-                deprecated: true
-                format: yyyymmddxxxx
-                externalDocs:
-                  description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'
-              nationalIdentifier:
-                externalDocs:
-                  description: Unique identifier (country + identifier)
-                  url: '/#section/Introduction/Unique-Identifier'
-                type: array
-                items:
-                  type: object
-                  properties:
-                    country:
-                      type: string
-                      example: SWE
-                      format: ISO 3166 ALPHA-3
-                    identifier:
-                      type: string
-              birthDate:
-                type: string
-                format: date-time
-              email:
-                type: string
-              phoneNumber:
-                type: string
-              status:
-                type: string
-                enum:
-                - Available
-                - Blocked
+          $ref: "#/components/schemas/IndividualBodyUpdate"
     responses:
       200:
         description: Successful operation
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/IndividualResponse"
+              $ref: "#/components/schemas/Individual"
       400:
         description: Invalid parameters
         content:

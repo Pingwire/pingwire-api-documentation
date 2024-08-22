@@ -50,22 +50,22 @@ allOf:
             description: Date of the car purchase
           buyer:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           seller:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           guarantor:
             oneOf:
-            - $ref: '#/components/schemas/Individual'
+            - $ref: '#/components/schemas/IndividualRequestParty'
             - $ref: '#/components/schemas/BusinessRequestParty'
             description: 'At least one field must be included independent of type.'
           car:
             oneOf:
-            - $ref: '#/components/schemas/Car'
+            - $ref: '#/components/schemas/CarRequestParty'
             description: 'At least one field must be included of type.'
         required:
           - buyer

@@ -48,7 +48,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/IndividualResponse"
+              $ref: "#/components/schemas/Individual"
     400:
       description: Invalid parameters
       content:
@@ -73,49 +73,7 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - customId
-          properties:
-                customId:
-                  type: string
-                  description: The custom id can be any id that the created would like to identify the individual with.
-                  externalDocs:
-                    description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'
-                firstName:
-                  type: string
-                lastName:
-                  type: string
-
-                nationalIdentifier:
-                  externalDocs:
-                    description: Unique identifier (country + identifier)
-                    url: '/#section/Introduction/Unique-Identifier'
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      country:
-                        type: string
-                        example: SWE
-                        format: ISO 3166 ALPHA-3
-                      identifier:
-                        type: string
-                swedishSocialSecurityNumber:
-                  deprecated: true
-                  type: string
-                  format: yyyymmddxxxx
-                  externalDocs:
-                    description: Unique identifier
-                    url: '/#section/Introduction/Unique-Identifier'
-                birthDate:
-                  type: string
-                  format: date-time
-                email:
-                  type: string
-                phoneNumber:
-                  type: string
+          $ref: "#/components/schemas/IndividualBody"
 
   responses:
     200:
@@ -123,7 +81,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/IndividualResponse"
+            $ref: "#/components/schemas/Individual"
     400:
       description: Invalid parameters
       content:

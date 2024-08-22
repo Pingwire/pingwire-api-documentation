@@ -47,7 +47,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/CarResponse"
+              $ref: "#/components/schemas/Car"
     400:
       description: Invalid parameters
       content:
@@ -71,30 +71,14 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          required:
-          - registrationNumber
-          - registrationCountry
-          properties:
-            registrationNumber:
-              type: string
-              externalDocs:
-                description: Unique identifier
-                url: '/#section/Introduction/Unique-Identifier'
-            registrationCountry:
-              type: string
-              format: ISO 3166 ALPHA-3
-            vinCode:
-              type: string
-            carModel:
-              type: string
+          $ref: "#/components/schemas/CarBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/CarResponse"
+            $ref: "#/components/schemas/Car"
     400:
       description: Invalid parameters
       content:

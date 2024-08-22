@@ -1,0 +1,10 @@
+allOf:
+- $ref: "#/components/schemas/BusinessBody"
+- type: object
+  properties:
+    status:
+      type: string
+      description: Status of the business in the Pingwire system. Blocked entities will always receive recommendation "Block" on all their requests.
+      enum:
+      - Available
+      - Blocked

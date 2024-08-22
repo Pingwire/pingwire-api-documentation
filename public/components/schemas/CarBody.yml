@@ -1,0 +1,21 @@
+type: object
+required:
+- registrationNumber
+- registrationCountry
+properties:
+  registrationNumber:
+    type: string
+    description: Registration number of the car
+    externalDocs:
+      description: Unique identifier (together with registrationCountry)
+      url: '/#section/Introduction/Unique-Identifier'
+  registrationCountry:
+    type: string
+    description: Registration country of the car
+    format: ISO 3166 ALPHA-3
+  vinCode:
+    type: string
+    description: VIN (Vehicle Identification Number) of the car
+  carModel:
+    type: string
+    description: Model of the car

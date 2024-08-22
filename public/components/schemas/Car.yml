@@ -1,67 +1,35 @@
-type: object
-properties:
-  id:
-    type: string
-    format: ObjectId
-    example: 62b9437318fe4517089b2833
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
-  registrationNumber:
-    type: string
-    example: ABC123
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
-  registrationCountry:
-    type: string
-    format: ISO 3166 ALPHA-3
-  vinCode:
-    type: string
-  carModel:
-    type: string
-  createdAt:
-    description: Date when the car was created
-    type: string
-    format: date-time
-  riskScore:
-    type: number
-    minimum: 0
-    maximum: 100
-  status:
-    type: string
-    enum:
-    - Available
-    - Blocked
-  scoreLatestCalculationDate:
-    description: Date when the score was calculated latest
-    type: string
-    format: date-time
-  scoreHistory:
-    type: array
-    items:
+allOf:
+- type: object
+  required:
+  - id
+  properties:
+    id:
+      type: string
+      format: ObjectId
+      description: ID of the car
+      example: 62b9437318fe4517089b2833
+      externalDocs:
+        description: Unique identifier
+        url: '/#section/Introduction/Unique-Identifier'
+- $ref: '#/components/schemas/CarBodyUpdate'
+- $ref: '#/components/schemas/EntitySavedFields'
+- type: object
+  properties:
+    owner:
       type: object
+      description: Entity owning the car
       properties:
-        score:
-          type: number
-          minimum: 0
-          maximum: 100
-        date:
-          description: Date when the score was updated
+        id:
           type: string
-          format: date-time
-  owner:
-    type: object
-    properties:
-      id:
-        type: string
-        format: ObjectId
-        example: 62b9437318fe4517089b2833
-        externalDocs:
-          description: Unique identifier
-          url: '/#section/Introduction/Unique-Identifier'
-      type:
-        type: string
-        enum:
-        - Individual
-        - Business
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+          description: ID of the owner
+          externalDocs:
+            description: Unique identifier
+            url: '/#section/Introduction/Unique-Identifier'
+        type:
+          type: string
+          description: Entity type of the owner
+          enum:
+          - Individual
+          - Business

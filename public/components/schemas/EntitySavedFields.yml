@@ -1,0 +1,32 @@
+type: object
+required:
+- createdAt
+- scoreHistory
+properties:
+  createdAt:
+    description: Date when the entity was created
+    type: string
+    format: date-time
+  riskScore:
+    type: number
+    description: The risk score of the entity. It represents a probability of financial crime in percent.
+    minimum: 0
+    maximum: 100
+  scoreLatestCalculationDate:
+    description: Date when the score was updated last
+    type: string
+    format: date-time
+  scoreHistory:
+    type: array
+    description: History of scores
+    items:
+      type: object
+      properties:
+        score:
+          type: number
+          minimum: 0
+          maximum: 100
+        date:
+          description: Date when the score was updated
+          format: date-time
+          type: string

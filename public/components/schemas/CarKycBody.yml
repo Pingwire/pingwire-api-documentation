@@ -10,6 +10,6 @@ allOf:
           entity:
             description: Entity that is subject of the KYC
             oneOf:
-            - $ref: '#/components/schemas/Car'
+            - $ref: '#/components/schemas/CarRequestParty'
         required:
         - entity

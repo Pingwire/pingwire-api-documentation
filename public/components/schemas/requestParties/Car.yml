@@ -1,4 +1,5 @@
 type: object
+title: Car
 properties:
   type:
     type: string

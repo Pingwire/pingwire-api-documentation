@@ -206,6 +206,8 @@ components:
       $ref: "./components/schemas/BeneficialOwners.yml"
     BoardMembers:
       $ref: "./components/schemas/BoardMembers.yml"
+    EntitySavedFields:
+      $ref: "./components/schemas/EntitySavedFields.yml"
     Signatories:
       $ref: "./components/schemas/Signatories.yml"
     TransactionBehavior:
@@ -222,13 +224,15 @@ components:
       $ref: "./components/schemas/BusinessRiskAssessment.yml"
     IndividualRiskAssessment:
       $ref: "./components/schemas/IndividualRiskAssessment.yml"
-    IndividualResponse:
+    Individual:
       $ref: "./components/schemas/Individual.yml"
+    BusinessBody:
+      $ref: "./components/schemas/BusinessBody.yml"
+    BusinessBodyUpdate:
+      $ref: "./components/schemas/BusinessBodyUpdate.yml"
     Business:
       $ref: "./components/schemas/Business.yml"
-    BusinessSaved:
-      $ref: "./components/schemas/BusinessSaved.yml"
-    CarResponse:
+    Car:
       $ref: "./components/schemas/Car.yml"
     Comment:
       $ref: "./components/schemas/Comment.yml"
@@ -270,14 +274,22 @@ components:
       $ref: "./components/schemas/Request.yml"
     # BankData:
     #   $ref: "./components/schemas/BankData.yml"
-    Individual:
+    IndividualRequestParty:
       $ref: "./components/schemas/requestParties/Individual.yml"
-    Account:
+    IndividualBody:
+      $ref: "./components/schemas/IndividualBody.yml"
+    IndividualBodyUpdate:
+      $ref: "./components/schemas/IndividualBodyUpdate.yml"
+    AccountRequestParty:
       $ref: "./components/schemas/requestParties/Account.yml"
     BusinessRequestParty:
       $ref: "./components/schemas/requestParties/Business.yml"
-    Car:
+    CarRequestParty:
       $ref: "./components/schemas/requestParties/Car.yml"
+    CarBody:
+      $ref: "./components/schemas/CarBody.yml"
+    CarBodyUpdate:
+      $ref: "./components/schemas/CarBodyUpdate.yml"
     Process:
       $ref: "./components/schemas/Process.yml"
     ProcessBody:

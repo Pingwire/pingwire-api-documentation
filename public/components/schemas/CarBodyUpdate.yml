@@ -1,0 +1,16 @@
+allOf:
+- $ref: '#/components/schemas/CarBody'
+- type: object
+  properties:
+    status:
+      type: string
+      description: Status of the car in the Pingwire system. Blocked entities will always receive recommendation "Block" on all their requests.
+      enum:
+      - Available
+      - Blocked
+    groups:
+      description: List of groups the entity should be associated to
+      type: array
+      items:
+        type: string
+        format: ObjectId

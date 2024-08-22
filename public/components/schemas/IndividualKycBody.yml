@@ -14,16 +14,17 @@ allOf:
             description: Entity that is subject of the KYC
             oneOf:
             - allOf:
-              - $ref: '#/components/schemas/Individual'
+              - $ref: '#/components/schemas/IndividualRequestParty'
               - type: object
                 title: Individual
                 properties:
                   ownedAccounts:
-                    title: Account
                     description: Accounts owned by the individual
                     type: array
                     items:
                       allOf:
-                        - $ref: '#/components/schemas/Account'
+                        - $ref: '#/components/schemas/AccountRequestParty'
+                        - type: object
+                          title: Account
         required:
           - entity

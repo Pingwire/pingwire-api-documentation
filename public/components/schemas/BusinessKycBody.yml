@@ -16,11 +16,12 @@ allOf:
                 title: Business
                 properties:
                   ownedAccounts:
-                    title: Account
                     type: array
                     description: Accounts owned by the business
                     items:
                       allOf:
-                        - $ref: '#/components/schemas/Account'
+                        - $ref: '#/components/schemas/AccountRequestParty'
+                        - type: object
+                          title: Account
         required:
           - entity

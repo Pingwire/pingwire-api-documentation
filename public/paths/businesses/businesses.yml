@@ -47,7 +47,7 @@ get:
           schema:
             type: array
             items:
-              $ref: "#/components/schemas/BusinessSaved"
+              $ref: "#/components/schemas/Business"
     400:
       description: Invalid parameters
       content:
@@ -71,7 +71,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/Business"
+          $ref: "#/components/schemas/BusinessBody"
 
   responses:
     200:
@@ -79,7 +79,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BusinessSaved"
+            $ref: "#/components/schemas/Business"
     400:
       description: Invalid parameters
       content:
