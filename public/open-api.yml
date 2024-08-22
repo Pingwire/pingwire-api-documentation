@@ -38,6 +38,7 @@ x-tagGroups:
       - Individuals
       - Businesses
       - Cars
+      - Accounts
   - name: KYC Forms
     tags:
       - Forms
@@ -51,15 +52,17 @@ x-tagGroups:
 
   - name: Other resources
     tags:
-      - Segments
       - Risk Classes
       - Rules
       - Members
-      - API keys
       - Processes
       - Signals
       - Groups
 paths:
+  /account-entities/:
+    $ref: './paths/accountEntities/account-entities.yml'
+  /account-entities/{id}:
+    $ref: './paths/accountEntities/account-entities-id.yml'
   /auth/login/:
     $ref: './paths/auth/auth.yml'
   /individuals/:
@@ -200,6 +203,10 @@ components:
               $ref: '#/components/schemas/IndividualIdentification'
             riskAssessment:
               $ref: '#/components/schemas/IndividualRiskAssessment'
+    AccountEntityBody:
+      $ref: "./components/schemas/AccountEntityBody.yml"
+    AccountEntity:
+      $ref: "./components/schemas/AccountEntity.yml"
     ContactInfo:
       $ref: "./components/schemas/ContactInfo.yml"
     BeneficialOwners:

@@ -1,0 +1,119 @@
+type: object
+properties:
+  customId:
+    type: string
+    description: Unique external identifier
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  iban:
+    type: string
+    description: IBAN (International Bank Account Number) of the account
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  bankgiroNumber:
+    type: string
+    description: Bankgiro number associated to the account
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  plusgiroNumber:
+    type: string
+    description: Plusgiro number associated to the account
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  bban:
+    type: string
+    description: BBAN (Basic Bank Account Number) of the account
+    externalDocs:
+      description: Unique identifier (together with country)
+      url: '/#section/Introduction/Unique-Identifier'
+  provider:
+    type: string
+    description: Identifier of the institution issuing the account.
+  nonBankingInstitution:
+    type: boolean
+    description: Whether the institution issuing the account is a non banking institution
+  source:
+    type: string
+  opened:
+    type: string
+    format: date-time
+    description: The date the account was opened
+  closed:
+    type: string
+    format: date-time
+    description: The date the account was closed
+  status:
+    type: string
+    description: Status of the account at the bank
+    enum:
+      - active
+      - closed-by-client
+      - closed-by-operator
+      - closed
+      - blocked
+  bic:
+    type: string
+    description: The BIC (Bank identification code) associated to the account
+  country:
+    type: string
+    description: Country where the account is registered
+    format: ISO 3166 ALPHA-3
+  accountName:
+    type: string
+    description: The name of the account.
+  product:
+    type: string
+    description: The banks product name for this account
+  accountType:
+    type: string
+    description: Type of bank account
+    enum:
+      - business
+      - checking
+      - credit-line
+      - external
+      - investment
+      - mortgage
+      - loan
+      - other
+      - pension
+      - savings
+      - bank-giro
+      - bank-account
+      - securities-account
+      - prepaid-card
+      - company-account
+      - investment-savings-account
+      - capital-insurance
+      - client-account
+      - credit-card-account
+      - life-insurance
+      - loan-account
+      - unknown
+      - plus-giro-account
+      - gaming-account
+      - swish-number
+      - occupational-pensions-insurance
+      - foreign-currency-account
+      - share-or-equity-funds-account
+      - check
+      - money-order
+      - e-wallet
+      - card
+      - transaction-reference
+      - generated-transaction-reference
+      - iban-number
+      - psp-account
+      - safe-deposit-box
+  groups:
+    description: List of groups the entity should be associated to
+    type: array
+    items:
+      type: string
+      format: ObjectId
+required:
+ - type
