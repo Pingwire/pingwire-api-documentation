@@ -10,7 +10,7 @@ properties:
     type: string
   dateOfBirth:
     type: string
-    format: date
+    format: date-time
   placeOfBirth:
     type: string
   nationality:
@@ -42,6 +42,6 @@ properties:
     type: string
   expirationDate:
     type: string
-    format: date
+    format: date-time
   issuingAuthority:
     type: string

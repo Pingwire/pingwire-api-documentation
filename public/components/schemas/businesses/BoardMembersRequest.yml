@@ -61,7 +61,7 @@ properties:
                   description: Last name of the board member
                 birthDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Birth date of the board member
                 citizenship:
                   type: array

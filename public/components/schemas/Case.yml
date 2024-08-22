@@ -1,101 +1,118 @@
 type: object
+required:
+- id
+- entities
+- requests
+- pings
+- fipoReports
+- comments
+- createdAd
+- files
+- status
+- teams
 properties:
   id:
     type: string
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
+    format: ObjectId
+    description: ID of the case
+    example: 62b9437318fe4517089b2833
   entities:
     type: array
+    description: Entities included in the case
     items:
       type: object
+      required:
+      - id
+      - type
       properties:
         id:
           type: string
-          description: object id
+          description: ID of the entity
           format: ObjectId
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
+          example: 62b9437318fe4517089b2833
         type:
           $ref: '#/components/schemas/EntityTypes'
   requests:
     type: array
+    description: Requests included in the case
     items:
       type: string
-      description: list of request object ids.
       format: ObjectId
       example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   pings:
     type: array
-    items:
-      type: string
-      description: list of pings object ids.
-      format: ObjectId
-      example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
-  fipoReports:
-    type: array
-    items:
-      type: string
-      description: list of report object ids.
-      format: ObjectId
-      example: 62b9437318fe4517089b2833
-      externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
-  comments:
-    type: array
+    description: Pings included in the case
     items:
       type: object
+      required:
+        - id
       properties:
-        member:
+        id:
           type: string
-          description: Object id of the member who created the comment.
+          description: ID of the ping
           format: ObjectId
           example: 62b9437318fe4517089b2833
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
-        message:
+        rule:
           type: string
-          description: The comment.
-        date:
-          type: date
-          example: 2022-08-09T17:43:26.650+00:00
-          description: Date, iso 8601 format, for when the comment was created.
+          description: ID of the rule that generated the ping
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+  fipoReports:
+    type: array
+    description: Financial police reports included in the case
+    items:
+      type: string
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
+  comments:
+    type: array
+    description: Comments in the case
+    items:
+      $ref: '#/components/schemas/Comment'
   createdAt:
-    description: Date, iso 8601 format
-    example: 2022-08-09T17:43:26.650+00:00
-    type: date
+    description: Date when the case was created
+    type: string
+    format: date-time
   files:
     type: array
+    description: File attachments included in the case
     items:
       type: object
+      required:
+      - key
+      - name
+      - createdAt
       properties:
         key:
           type: string
+          description: Identifier of the file in the file storage system
         name:
           type: string
+          description: Name of the file
         createdAt:
-          description: Date, iso 8601 format
-          type: date
-          example: 2022-08-09T17:43:26.650+00:00
+          type: string
+          description: Date when the file was uploaded to the case
+          format: date-time
   mergedInto:
     type: string
-    description: Object id of case that this case have been merged into.
+    description: ID of the case that this case have been merged into.
     format: ObjectId
     example: 62b9437318fe4517089b2833
-    externalDocs:
-        description: Unique identifier
-        url: '/#section/Introduction/Unique-Identifier'
   status:
     type: string
+    description: Status of the case
     enum:
     - Open
     - Closed
+  teams:
+    type: array
+    description: Teams assigned to the case
+    items:
+      type: string
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
+  closedAt:
+    type: string
+    format: date-time
+    description: Date when the case was closed
+

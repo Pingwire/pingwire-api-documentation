@@ -81,7 +81,7 @@ properties:
                   description: Last name of the beneficial owner
                 birthDate:
                   type: string
-                  format: date
+                  format: date-time
                   description: Birth date of the beneficial owner
                 citizenship:
                   type: array

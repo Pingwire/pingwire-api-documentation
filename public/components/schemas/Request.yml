@@ -29,9 +29,9 @@ properties:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   createdAt:
-    type: date
-    description: Date, iso 8601 format.
-    example: 2022-08-09T17:43:26.650+00:00
+    type: string
+    format: date-time
+    description: Date when the request was created
   processStopped:
     type: boolean
     example: false
@@ -70,19 +70,7 @@ properties:
     type: array
     description: Comments left on the request using the graphical user interface.
     items:
-      type: object
-      properties:
-        member:
-          type: string
-          format: ObjectId
-          description: Object id of the member who created the comment.
-        message:
-          type: string
-          description: The comment.
-        date:
-          type: date
-          description: Date, iso 8601 format.
-          example: 2022-08-09T17:43:26.650+00:00
+      $ref: '#/components/schemas/Comment'
   requestType:
     description: Type of the request. Each type is associated to a custom extraInformation schema.
     example: transaction

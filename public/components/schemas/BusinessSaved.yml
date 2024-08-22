@@ -19,9 +19,9 @@ allOf:
         description: The risk score of the business. It represents a probability of financial crime in percent.
       kycOnboarding:
         deprecated: true
-        description: Date, iso 8601 format. Deprecated.
-        type: date
-        example: 2022-08-09T17:43:26.650+00:00
+        description: Date when the business was onboarded
+        format: date-time
+        type: string
       status:
         type: string
         description: Status of the business in the Pingwire system. Blocked entities will always receive recommendation "Block" on all their requests.
@@ -29,9 +29,9 @@ allOf:
         - Available
         - Blocked
       scoreLatestCalculationDate:
-        description: Date when the score was updated last. Date, iso 8601 format
-        type: date
-        example: 2022-08-09T17:43:26.650+00:00
+        description: Date when the score was updated last
+        format: date-time
+        type: string
       scoreHistory:
         type: array
         description: History of scores
@@ -43,9 +43,9 @@ allOf:
               minimum: 0
               maximum: 100
             date:
-              description: Date, iso 8601 format
-              type: date
-              example: 2022-08-09T17:43:26.650+00:00
+              description: Date when the score was updated
+              format: date-time
+              type: string
       conductors:
         type: array
         items:

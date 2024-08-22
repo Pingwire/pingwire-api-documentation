@@ -90,6 +90,8 @@ paths:
     $ref: './paths/pings/pings-id-comments.yml'
   /cases/:
     $ref: './paths/cases/cases.yml'
+  /cases/merge/:
+    $ref: './paths/cases/cases-merge.yml'
   /cases/{id}:
     $ref: './paths/cases/cases-id.yml'
   /cases/{id}/status:
@@ -228,6 +230,8 @@ components:
       $ref: "./components/schemas/BusinessSaved.yml"
     CarResponse:
       $ref: "./components/schemas/Car.yml"
+    Comment:
+      $ref: "./components/schemas/Comment.yml"
     KycForm:
       $ref: "./components/schemas/KycForm.yml"
     KycFormBody:

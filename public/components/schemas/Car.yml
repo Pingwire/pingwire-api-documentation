@@ -21,35 +21,35 @@ properties:
   carModel:
     type: string
   createdAt:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
+    description: Date when the car was created
+    type: string
+    format: date-time
   riskScore:
     type: number
     minimum: 0
     maximum: 100
-  status: 
+  status:
     type: string
-    enum: 
+    enum:
     - Available
     - Blocked
   scoreLatestCalculationDate:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
+    description: Date when the score was calculated latest
+    type: string
+    format: date-time
   scoreHistory:
     type: array
-    items: 
+    items:
       type: object
-      properties: 
+      properties:
         score:
           type: number
           minimum: 0
           maximum: 100
         date:
-          description: Date, iso 8601 format
-          type: date
-          example: 2022-08-09T17:43:26.650+00:00
+          description: Date when the score was updated
+          type: string
+          format: date-time
   owner:
     type: object
     properties:
