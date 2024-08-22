@@ -88,10 +88,12 @@ post:
           - entities
           - description
           - score
+          - riskTimeline
+          - caseId
           properties:
             entities:
               type: array
-              description: List of entities.
+              description: List of entities included in the ping
               items:
                 type: object
                 properties:
@@ -106,10 +108,35 @@ post:
                     $ref: '#/components/schemas/EntityTypes'
             description:
               type: string
+              description: Description of the suspicious information or behaviour detected by the ping
             score:
               type: number
+              description: Score contribution of the ping
               min: 0
               max: 100
+            riskTimeline:
+              type: object
+              description: Timeline describing how the risk score contribution of the ping should evolve over time. The risk contribution will linearly decrease over the timeline.
+              required:
+              - period
+              - amount
+              properties:
+                period:
+                  type: string
+                  enum:
+                  - seconds
+                  - minutes
+                  - hours
+                  - days
+                  - months
+                  - years
+                amount:
+                  type: number
+                  min: 1
+            caseId:
+              type: string
+              format: ObjectId
+              description: ID of the case the ping should be included into
   responses:
     200:
       description: Successful operation

@@ -1,25 +1,35 @@
 type: object
+title: Car
 properties:
   type:
     type: string
     enum:
     - Car
-  id: 
+  id:
     type: string
     format: ObjectId
+    description: ID of an already created car
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  customId:
+    type: string
+    description: Unique external identifier
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
   registrationNumber:
     type: string
+    description: Registration number of the car
     externalDocs:
-      description: Unique identifier
+      description: Unique identifier (together with registrationCountry)
       url: '/#section/Introduction/Unique-Identifier'
   registrationCountry:
     type: string
+    description: Registration country of the car
     format: ISO 3166 ALPHA-3
-  groups: 
-    description: List of groups for classifying entities into set divisions.
+  groups:
+    description: List of groups the entity should be associated to
     type: array
     items:
       type: string

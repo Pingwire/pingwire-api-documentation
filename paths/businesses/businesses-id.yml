@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BusinessSaved"
+            $ref: "#/components/schemas/Business"
     400:
       description: Invalid parameters
       content:
@@ -51,16 +51,7 @@ put:
     content:
       application/json:
         schema:
-          allOf:
-            - $ref: "#/components/schemas/Business"
-            - type: object
-              properties:
-                status:
-                  type: string
-                  description: Status of the business in the Pingwire system. Blocked entities will always receive recommendation "Block" on all their requests.
-                  enum:
-                  - Available
-                  - Blocked
+          $ref: "#/components/schemas/BusinessBodyUpdate"
 
   responses:
     200:
@@ -68,7 +59,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BusinessSaved"
+            $ref: "#/components/schemas/Business"
     400:
       description: Invalid parameters
       content:

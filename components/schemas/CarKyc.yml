@@ -1,28 +1,4 @@
 description: A representation of a carKyc
 allOf:
+  - $ref: '#/components/schemas/CarKycBody'
   - $ref: '#/components/schemas/Request'
-  - type: object
-    properties:
-      extraInformation:
-        type: object
-        description: Payload of the request. Its schema depends of the requestType
-        properties:
-          entity:
-            type: object
-            properties:
-              id:
-                type: string
-                format: ObjectId
-                example: 62b9437318fe4517089b2833
-                externalDocs:
-                  description: Unique identifier
-                  url: '/#section/Introduction/Unique-Identifier'
-              type:
-                type: string
-                enum:
-                - Car
-            required:
-            - id
-            - type
-        required:
-          - entity

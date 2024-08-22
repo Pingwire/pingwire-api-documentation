@@ -49,17 +49,17 @@ allOf:
             description: The transaction initiator is the entity who starts or triggers a transaction.
             oneOf:
               - allOf:
-                - $ref: '#/components/schemas/Account'
+                - $ref: '#/components/schemas/AccountRequestParty'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Account
+                  title: Account
                   properties:
                     conductors:
                       type: array
-                      description: Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
-                      title: List of conductors
+                      description: List of representatives that authenticated and facilitated the transaction on behalf of the owner of the account.
                       items:
                         allOf:
-                          - $ref: '#/components/schemas/Individual'
+                          - $ref: '#/components/schemas/IndividualRequestParty'
                           - type: object
                             properties:
                               conductorType:
@@ -67,31 +67,34 @@ allOf:
                                 enum:
                                   - signatory
               - allOf:
-                - $ref: '#/components/schemas/Individual'
+                - $ref: '#/components/schemas/IndividualRequestParty'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Individual
+                  title: Individual
                   properties:
                     account:
                       title: Account
+                      description: Account used to initiate the transaction
                       allOf:
-                        - $ref: '#/components/schemas/Account'
+                        - $ref: '#/components/schemas/AccountRequestParty'
 
               - allOf:
                 - $ref: '#/components/schemas/BusinessRequestParty'
+                - $ref: '#/components/schemas/TransactionParty'
                 - type: object
-                - title: Business
+                  title: Business
                   properties:
                     account:
                       title: Account
+                      description: Account used to initiate the transaction
                       allOf:
-                        - $ref: '#/components/schemas/Account'
+                        - $ref: '#/components/schemas/AccountRequestParty'
                     conductors:
                       type: array
-                      title: List of conductors
-                      description:  Representatives designated to oversee and facilitate a transaction on behalf of a business initiator.
+                      description: List of representatives that authenticated and facilitated the transaction on behalf of the business.
                       items:
                         allOf:
-                          - $ref: '#/components/schemas/Individual'
+                          - $ref: '#/components/schemas/IndividualRequestParty'
                           - type: object
                             properties:
                               conductorType:
@@ -102,46 +105,44 @@ allOf:
           recipient:
             description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions.
             oneOf:
-            - $ref: '#/components/schemas/Account'
+            - allOf:
+              - $ref: '#/components/schemas/AccountRequestParty'
+              - $ref: '#/components/schemas/TransactionParty'
+              - type: object
+                title: Account
+            - allOf:
+              - $ref: '#/components/schemas/IndividualRequestParty'
+              - $ref: '#/components/schemas/TransactionParty'
+              - type: object
+                title: Individual
+                properties:
+                  account:
+                    title: Account
+                    description: Account used to receive the transaction
+                    allOf:
+                      - $ref: '#/components/schemas/AccountRequestParty'
             - allOf:
               - $ref: '#/components/schemas/BusinessRequestParty'
+              - $ref: '#/components/schemas/TransactionParty'
               - type: object
-              - title: Business
+                title: Business
                 properties:
                   account:
                     title: Account
+                    description: Account used to receive the transaction
                     allOf:
-                      - $ref: '#/components/schemas/Account'
-            - allOf:
-              - $ref: '#/components/schemas/Individual'
-              - type: object
-              - title: Individual
-                properties:
-                  account:
-                    title: Account
-                    allOf:
-                      - $ref: '#/components/schemas/Account'
+                      - $ref: '#/components/schemas/AccountRequestParty'
           processor:
             description:  The transaction processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient.
             oneOf:
             - allOf:
+              - $ref: '#/components/schemas/IndividualRequestParty'
+              - type: object
+                title: Individual
+            - allOf:
               - $ref: '#/components/schemas/BusinessRequestParty'
               - type: object
-              - title: Business
-                properties:
-                  account:
-                    title: Account
-                    allOf:
-                      - $ref: '#/components/schemas/Account'
-            - allOf:
-              - $ref: '#/components/schemas/Individual'
-              - type: object
-              - title: Individual
-                properties:
-                  account:
-                    title: Account
-                    allOf:
-                      - $ref: '#/components/schemas/Account'
+                title: Business
           # bankData:
           #   type: object
           #   description: Contains PSD2 details for a transaction's initiator, recipient, and processor.

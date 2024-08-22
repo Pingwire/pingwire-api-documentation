@@ -1,0 +1,38 @@
+type: object
+properties:
+  customId:
+    type: string
+    description: Unique external identifier
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  firstName:
+    type: string
+    description: First name of the individual
+  lastName:
+    type: string
+    description: Last name of the individual
+  nationalIdentifier:
+    externalDocs:
+      description: Unique identifier (country + identifier)
+      url: '/#section/Introduction/Unique-Identifier'
+    type: array
+    description: National identifiers of the individual
+    items:
+      $ref: '#/components/schemas/NationalIdentifierRestricted'
+  birthDate:
+    type: string
+    format: date-time
+    description: Birth date of the individual
+  residence:
+    type: string
+    format: ISO 3166 ALPHA-3
+    description: Country of residence
+    example: SWE
+  email:
+    type: string
+    format: email
+    description: Contact email of the individual
+  phoneNumber:
+    type: string
+    description: Contact phone number of the individual

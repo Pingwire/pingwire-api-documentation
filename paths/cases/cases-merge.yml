@@ -1,0 +1,41 @@
+post:
+  tags:
+  - Cases
+  summary: Merge
+  description:  Merge cases together. Responds with a new case consisting of the merged cases.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - selectedIds
+          properties:
+            selectedIds:
+              type: array
+              items:
+                type: string
+                description: list of case object ids to merge.
+                format: ObjectId
+                example: 62b9437318fe4517089b2833
+  responses:
+      200:
+        description: Successful operation
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Case"
+      400:
+        description: Invalid parameters
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InvalidBody"
+      500:
+        description: Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

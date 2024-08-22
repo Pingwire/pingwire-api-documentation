@@ -1,4 +1,4 @@
-get: 
+get:
   tags:
     - Cases
   summary: List cases
@@ -18,7 +18,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -28,12 +28,12 @@ get:
     name: status
     description: Filter list of cases by status.
     required: false
-    example: 
+    example:
     schema:
       type: string
-      enum: 
+      enum:
       - Open
-      - Closed 
+      - Closed
   - in: query
     name: _start
     description: The start number of the cases list.

@@ -3,64 +3,47 @@ properties:
   id:
     type: string
     format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
+    description: ID of the ping
   entities:
     type: array
+    description: Entities included in the ping
     items:
       type: object
       properties:
         id:
           type: string
           format: ObjectId
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
+          description: ID of the entity
         type:
           $ref: '#/components/schemas/EntityTypes'
   description:
     type: string
+    description: Ping description to explain what has been discovered by the ping.
   comments:
     type: array
+    description: Comments left by members on the ping
     items:
-      type: object
-      properties:
-        member:
-          type: string
-          format: ObjectId
-          description: Object id of the member who created the comment.
-          externalDocs:
-            description: Unique identifier
-            url: '/#section/Introduction/Unique-Identifier'
-        message:
-          type: string
-          description: The comment.
-        date:
-          type: string
-          example: 2022-08-09T17:43:26.650+00:00
-          description: Date, iso 8601 format, for when the comment was created.
+      $ref: '#/components/schemas/Comment'
   rule:
     type: string
     format: ObjectId
-    description: Object id of the rule that triggered the ping creation.
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
+    description: ID of the rule that triggered the ping creation.
   expiryDate:
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
-    description: Date, iso 8601 format, for when the rule should create similar ping.
+    type: string
+    format: date-time
+    description: Until the expiryDate the rule will not create any new ping and use the overrideRecommendation
   createdAt:
-    description: Date, iso 8601 format
-    type: date
-    example: 2022-08-09T17:43:26.650+00:00
+    description: Date when the ping was created
+    type: string
+    format: date-time
   score:
     type: number
+    description: Score contribution of the ping
     minimum: 0
     maximum: 100
   status:
     type: string
+    description: Status of the ping
     enum:
     - pending
     - resolved

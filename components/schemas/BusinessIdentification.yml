@@ -12,7 +12,7 @@ properties:
     type: string
   dateOfIncorporation:
     type: string
-    format: date
+    format: date-time
   parentCompanyName:
     type: string
   thirdPartyVerification:

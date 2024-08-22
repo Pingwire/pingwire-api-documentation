@@ -1,89 +1,62 @@
-type: object
-required:
+allOf:
+- type: object
+  required:
   - id
-  - createdAt
-  - processStopped
-  - step
-  - process
-  - requestType
-  - extraInformation
-discriminator:
-  propertyName: requestType
-  mapping:
-    transaction: '#/components/schemas/Transaction'
-    carKyc: '#/components/schemas/CarKyc'
-    carPurchase: '#/components/schemas/CarPurchase'
-    individualKyc: '#/components/schemas/IndividualKyc'
-    businessKyc: '#/components/schemas/BusinessKyc'
-properties:
-  id:
-    type: string
-    format: ObjectId
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
-  customId:
-    type: string
-    description: Custom id for the request.
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
-  createdAt:
-    type: date
-    description: Date, iso 8601 format.
-    example: 2022-08-09T17:43:26.650+00:00
-  processStopped:
-    type: boolean
-    example: false
-    deprecated: true
-    description: For internal use only
-  step:
-    type: string
-    enum:
-    - created
-    - processed
-    example: processed
-    description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request as reached the processed step. This guarantees that recommendation and signals are always available in the response object.
-  recommendation:
-    type: string
-    enum:
-    - proceed
-    - review
-    - block
-    description: Recommendation for the request. This can be used to react to triggered rules and block or put on hold the end user if applicable. The recommendation will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The recommendation is therefore always available from the create request endpoint response object.
-  signals:
-    type: array
-    items:
+  properties:
+    id:
       type: string
       format: ObjectId
-    description: IDs of the signals that have been triggered by the rule tree for this request. Signals can be created through the graphical user interface or through the API. Signals can be used to react to specific rules being triggered in the rule tree. The signals array will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The signals array is therefore always available from the create request endpoint response object.
-  process:
-    type: string
-    format: ObjectId
-    description: ID of the process linked to that request. Processes can be created from the interface or through the API.
-  segment:
-    type: string
-    deprecated: true
-    description: Segment has been renamed to process. Use the field process instead.
-    format: ObjectId
-  comments:
-    type: array
-    description: Comments left on the request using the graphical user interface.
-    items:
-      type: object
-      properties:
-        member:
-          type: string
-          format: ObjectId
-          description: Object id of the member who created the comment.
-        message:
-          type: string
-          description: The comment.
-        date:
-          type: date
-          description: Date, iso 8601 format.
-          example: 2022-08-09T17:43:26.650+00:00
-  requestType:
-    description: Type of the request. Each type is associated to a custom extraInformation schema.
-    example: transaction
-    type: string
+      externalDocs:
+        description: Unique identifier
+        url: '/#section/Introduction/Unique-Identifier'
+- type: object
+  required:
+    - createdAt
+    - processStopped
+    - step
+    - process
+    - requestType
+    - extraInformation
+  discriminator:
+    propertyName: requestType
+    mapping:
+      transaction: '#/components/schemas/Transaction'
+      carKyc: '#/components/schemas/CarKyc'
+      carPurchase: '#/components/schemas/CarPurchase'
+      individualKyc: '#/components/schemas/IndividualKyc'
+      businessKyc: '#/components/schemas/BusinessKyc'
+  properties:
+    createdAt:
+      type: string
+      format: date-time
+      description: Date when the request was created
+    processStopped:
+      type: boolean
+      example: false
+      deprecated: true
+      description: For internal use only
+    step:
+      type: string
+      enum:
+      - created
+      - processed
+      example: processed
+      description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request as reached the processed step. This guarantees that recommendation and signals are always available in the response object.
+    recommendation:
+      type: string
+      enum:
+      - proceed
+      - review
+      - block
+      description: Recommendation for the request. This can be used to react to triggered rules and block or put on hold the end user if applicable. The recommendation will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The recommendation is therefore always available from the create request endpoint response object.
+    signals:
+      type: array
+      items:
+        type: string
+        format: ObjectId
+      description: IDs of the signals that have been triggered by the rule tree for this request. Signals can be created through the graphical user interface or through the API. Signals can be used to react to specific rules being triggered in the rule tree. The signals array will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The signals array is therefore always available from the create request endpoint response object.
+    comments:
+      type: array
+      description: Comments left on the request using the graphical user interface.
+      items:
+        $ref: '#/components/schemas/Comment'
