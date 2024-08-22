@@ -18,7 +18,11 @@ For making the integration to Pingwire as seamless as possible, we have included
 - `RISK CLASS`: Classes partitioned by the probability of an entity committing a crime using self-defined probability intervals.
 
 ## Unique Identifier
-A unique identifier is a distinct label or value that precisely distinguishes one item from all others. When submitting objects via API that have one or more of these unique identifiers, ensure that at least one identifier is included.
+The Pingwire system strives to ensure the unicity of entities that are inserted in the system in order to help our customers detect complex financial patterns. To do so it is using some fields labeled as "Unique identifiers".
+
+The system prevents the insertion of duplicated unique identifiers by reusing existing entities as much as possible. Creating a new entity can result on updating an existing one if the payload for the create endpoint contains a unique identifier already present in an existing entity.
+
+Similarly when inserting a new entity in the system at least one of the unique identifier must be present in the payload so that it can be matched to existing or future entities. An entity without unique identifier would be useless in the system as it would never be able to be matched to past or future activity/behaviour/information.
 
 ## Sequence Diagram
 
