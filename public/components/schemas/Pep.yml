@@ -1,7 +1,5 @@
 type: object
 description: Information about the PEP status of the individual
-required:
-- isPep
 properties:
   isPep:
     type: string
