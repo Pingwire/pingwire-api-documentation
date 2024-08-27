@@ -3,13 +3,6 @@ allOf:
   required:
   - firstName
   - lastName
-  - citizenship
-  - nationalIdentifier
-  - address
-  - city
-  - postalCode
-  - residence
-  - isPep
   properties:
     firstName:
       type: string

@@ -1,6 +1,4 @@
 type: object
-required:
-- role
 properties:
   role:
     type: object
