@@ -228,7 +228,11 @@ properties:
     type: string
     description: Free text description of the ownership structure of the business
   pep:
-    $ref: '#/components/schemas/Pep'
+    allOf:
+    - $ref: '#/components/schemas/Pep'
+    - type: object
+      required:
+      - isPep
   phoneNumber:
     type: string
     description: The phone number of the individual in the 164 phone number format
