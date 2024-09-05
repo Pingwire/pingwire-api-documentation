@@ -1,7 +1,7 @@
 get:
   tags:
     - Individuals
-  summary: Individual
+  summary: Get individual
   description: Receive individual by id saved in the database.
   parameters:
   - in: path

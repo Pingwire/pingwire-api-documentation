@@ -1,7 +1,7 @@
 get:
   tags:
     - Cars
-  summary: Car
+  summary: Get car
   description: Receive car by id saved in the database.
   parameters:
   - in: path

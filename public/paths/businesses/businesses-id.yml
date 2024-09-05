@@ -1,7 +1,7 @@
 get:
   tags:
     - Businesses
-  summary: Business
+  summary: Get business
   description: Receive business by id saved in the database.
   parameters:
   - in: path
