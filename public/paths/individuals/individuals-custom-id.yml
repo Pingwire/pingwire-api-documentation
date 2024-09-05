@@ -1,0 +1,33 @@
+get:
+  tags:
+    - Individuals
+  summary: Get individual by customId
+  description: Receive individual by customId saved in the database.
+  parameters:
+  - in: path
+    name: customId
+    description: customId of the individual
+    required: true
+    schema:
+      type: string
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Individual"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

@@ -64,16 +64,22 @@ paths:
     $ref: './paths/accountEntities/account-entities.yml'
   /account-entities/{id}:
     $ref: './paths/accountEntities/account-entities-id.yml'
+  /account-entities/customId/{customId}:
+    $ref: './paths/accountEntities/account-entities-custom-id.yml'
   /auth/login/:
     $ref: './paths/auth/auth.yml'
   /individuals/:
     $ref: './paths/individuals/individuals.yml'
   /individuals/{id}:
     $ref: './paths/individuals/individuals-id.yml'
+  /individuals/customId/{customId}:
+    $ref: './paths/individuals/individuals-custom-id.yml'
   /businesses/:
     $ref: './paths/businesses/businesses.yml'
   /businesses/{id}:
     $ref: './paths/businesses/businesses-id.yml'
+  /businesses/customId/{customId}:
+    $ref: './paths/businesses/businesses-custom-id.yml'
   /businesses/company-information/manual-insert/{id}:
     $ref: './paths/businesses/company-information/manual-insert.yml'
   /businesses/beneficial-owners/manual-insert/{id}:
@@ -84,6 +90,8 @@ paths:
     $ref: './paths/cars/cars.yml'
   /cars/{id}:
     $ref: './paths/cars/cars-id.yml'
+  /cars/customId/{customId}:
+    $ref: './paths/cars/cars-custom-id.yml'
   /pings/:
     $ref: './paths/pings/pings.yml'
   /pings/{id}:
