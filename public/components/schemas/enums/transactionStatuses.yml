@@ -1,0 +1,7 @@
+type: string
+description: Status of the transaction. Defaults to `completed`.
+enum:
+  - pending
+  - completed
+  - failed
+  - cancelled

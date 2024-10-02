@@ -375,6 +375,8 @@ components:
       $ref: "./components/schemas/enums/entityTypes.yml"
     SourceOfFunds:
       $ref: "./components/schemas/enums/sourceOfFunds.yml"
+    transactionStatuses:
+      $ref: "./components/schemas/enums/transactionStatuses.yml"
     DirectControlTypes:
       $ref: "./components/schemas/controlTypes/directControlTypes.yml"
     IndirectControlTypes:
