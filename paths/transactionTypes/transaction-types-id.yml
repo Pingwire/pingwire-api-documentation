@@ -1,12 +1,12 @@
 get:
   tags:
-    - Groups
-  summary: Group
-  description: Receive group by id saved in the database.
+    - Transaction Types
+  summary: Transaction Type
+  description: Receive transaction type by id saved in the database.
   parameters:
   - in: path
     name: id
-    description: Group object id
+    description: Transaction Type object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -18,7 +18,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Group"
+            $ref: "#/components/schemas/TransactionType"
     400:
       description: Invalid parameters
       content:
@@ -35,30 +35,30 @@ get:
   - bearerAuth: []
 put:
   tags:
-  - Groups
-  summary: Update group
+  - Transaction Types
+  summary: Update transaction type
   parameters:
   - in: path
     name: id
-    description: Group object id
+    description: Transaction type object id
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update a group.
+  description: Update a transaction type.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/GroupBody"
+          $ref: "#/components/schemas/TransactionTypeBody"
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Group"
+            $ref: "#/components/schemas/TransactionType"
     400:
       description: Invalid parameters
       content:

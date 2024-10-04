@@ -20,6 +20,16 @@ allOf:
           textMessage:
             type: string
             description: The text that the sender may have written regarding the transaction.
+          status:
+            $ref: '#/components/schemas/transactionStatuses'
+          transactionTypes:
+            type: array
+            description: List of transaction types that should be assigned to this transaction. Transaction types can be created through the interface or the API.
+            items:
+              type: string
+              format: ObjectId
+              description: ID of the transaction type
+              example: 62b9437318fe4517089b2833
           transactionChannel:
             type: string
             enum:
