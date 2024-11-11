@@ -1,8 +1,8 @@
 put:
   tags:
     - Transaction
-  summary: Update transaction status
-  description: Update a transaction status
+  summary: Update pending transaction status
+  description: Update a transaction status, transaction must be in a pending status.
   parameters:
   - in: path
     name: id
