@@ -6,7 +6,7 @@ required:
 discriminator:
   propertyName: requestType
   mapping:
-    transaction: '#/components/schemas/TransactionBody'
+    transaction: '#/components/schemas/RequestTransactionBody'
     carKyc: '#/components/schemas/CarKycBody'
     carPurchase: '#/components/schemas/CarPurchaseBody'
     individualKyc: '#/components/schemas/IndividualKycBody'

@@ -271,8 +271,8 @@ components:
       $ref: "./components/schemas/InvalidBody.yml"
     ErrorBody:
       $ref: "./components/schemas/ErrorBody.yml"
-    Transaction:
-      $ref: "./components/schemas/Transaction.yml"
+    RequestTransaction:
+      $ref: "./components/schemas/RequestTransaction.yml"
     CarKyc:
       $ref: "./components/schemas/CarKyc.yml"
     IndividualKyc:
@@ -285,8 +285,8 @@ components:
       $ref: "./components/schemas/BusinessKycBody.yml"
     CarPurchase:
       $ref: "./components/schemas/CarPurchase.yml"
-    TransactionBody:
-      $ref: "./components/schemas/TransactionBody.yml"
+    RequestTransactionBody:
+      $ref: "./components/schemas/RequestTransactionBody.yml"
     CarKycBody:
       $ref: "./components/schemas/CarKycBody.yml"
     CarPurchaseBody:

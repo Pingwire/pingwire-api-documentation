@@ -20,7 +20,7 @@ allOf:
   discriminator:
     propertyName: requestType
     mapping:
-      transaction: '#/components/schemas/Transaction'
+      transaction: '#/components/schemas/RequestTransaction'
       carKyc: '#/components/schemas/CarKyc'
       carPurchase: '#/components/schemas/CarPurchase'
       individualKyc: '#/components/schemas/IndividualKyc'

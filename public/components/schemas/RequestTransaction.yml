@@ -1,6 +1,6 @@
 description: A representation of a transaction
 allOf:
-  - $ref: '#/components/schemas/TransactionBody'
+  - $ref: '#/components/schemas/RequestTransactionBody'
   - $ref: '#/components/schemas/Request'
   - type: object
     properties:
