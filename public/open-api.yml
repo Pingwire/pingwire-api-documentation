@@ -348,6 +348,8 @@ components:
       $ref: "./components/schemas/TransactionType.yml"
     TransactionBody:
       $ref: "./components/schemas/TransactionBody.yml"
+    Transaction:
+      $ref: "./components/schemas/Transaction.yml"
     TransactionTypeBody:
       $ref: "./components/schemas/TransactionTypeBody.yml"
     PopulationRegisterOld:

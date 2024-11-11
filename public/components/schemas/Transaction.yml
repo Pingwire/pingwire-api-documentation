@@ -1,0 +1,13 @@
+description: A representation of a transaction
+allOf:
+  - type: object
+    properties:
+      transactionId:
+        type: string
+        format: ObjectId
+        externalDocs:
+          description: Unique identifier
+          url: '/#section/Introduction/Unique-Identifier'
+        description: ID of the transaction
+        example: 62b9437318fe4517089b2833
+  - $ref: '#/components/schemas/TransactionBody'
