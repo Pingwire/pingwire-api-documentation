@@ -276,24 +276,24 @@ components:
       $ref: "./components/schemas/ErrorBody.yml"
     RequestTransaction:
       $ref: "./components/schemas/RequestTransaction.yml"
-    CarKyc:
-      $ref: "./components/schemas/CarKyc.yml"
-    IndividualKyc:
-      $ref: "./components/schemas/IndividualKyc.yml"
-    IndividualKycBody:
-      $ref: "./components/schemas/IndividualKycBody.yml"
-    BusinessKyc:
-      $ref: "./components/schemas/BusinessKyc.yml"
-    BusinessKycBody:
-      $ref: "./components/schemas/BusinessKycBody.yml"
-    CarPurchase:
-      $ref: "./components/schemas/CarPurchase.yml"
+    RequestCarKyc:
+      $ref: "./components/schemas/RequestCarKyc.yml"
+    RequestIndividualKyc:
+      $ref: "./components/schemas/RequestIndividualKyc.yml"
+    RequestIndividualKycBody:
+      $ref: "./components/schemas/RequestIndividualKycBody.yml"
+    RequestBusinessKyc:
+      $ref: "./components/schemas/RequestBusinessKyc.yml"
+    RequestBusinessKycBody:
+      $ref: "./components/schemas/RequestBusinessKycBody.yml"
+    RequestCarPurchase:
+      $ref: "./components/schemas/RequestCarPurchase.yml"
     RequestTransactionBody:
       $ref: "./components/schemas/RequestTransactionBody.yml"
-    CarKycBody:
-      $ref: "./components/schemas/CarKycBody.yml"
-    CarPurchaseBody:
-      $ref: "./components/schemas/CarPurchaseBody.yml"
+    RequestCarKycBody:
+      $ref: "./components/schemas/RequestCarKycBody.yml"
+    RequestCarPurchaseBody:
+      $ref: "./components/schemas/RequestCarPurchaseBody.yml"
     RequestBody:
       $ref: "./components/schemas/RequestBody.yml"
     Request:

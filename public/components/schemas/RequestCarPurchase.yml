@@ -1,6 +1,6 @@
 description: A representation of a car purchase
 allOf:
-  - $ref: '#/components/schemas/CarPurchaseBody'
+  - $ref: '#/components/schemas/RequestCarPurchaseBody'
   - $ref: '#/components/schemas/Request'
   - type: object
     properties:

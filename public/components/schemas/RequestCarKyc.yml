@@ -1,4 +1,4 @@
 description: A representation of a carKyc
 allOf:
-  - $ref: '#/components/schemas/CarKycBody'
+  - $ref: '#/components/schemas/RequestCarKycBody'
   - $ref: '#/components/schemas/Request'
