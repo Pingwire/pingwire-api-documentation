@@ -60,6 +60,7 @@ x-tagGroups:
       - Signals
       - Groups
       - Transaction Types
+      - Transaction
 paths:
   /account-entities/:
     $ref: './paths/accountEntities/account-entities.yml'
@@ -173,6 +174,8 @@ paths:
       $ref: './paths/signals/signals-id.yml'
   /signals/activation/{id}:
       $ref: './paths/signals/signals-activation-id.yml'
+  /transaction/{id}:
+      $ref: './paths/transaction/transaction.yml'
   /transaction-types:
       $ref: './paths/transactionTypes/transaction-types.yml'
   /transaction-types/{id}:
@@ -343,6 +346,8 @@ components:
       $ref: "./components/schemas/SignalBody.yml"
     TransactionType:
       $ref: "./components/schemas/TransactionType.yml"
+    TransactionBody:
+      $ref: "./components/schemas/TransactionBody.yml"
     TransactionTypeBody:
       $ref: "./components/schemas/TransactionTypeBody.yml"
     PopulationRegisterOld:
