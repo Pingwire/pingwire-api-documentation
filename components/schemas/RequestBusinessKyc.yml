@@ -1,4 +1,4 @@
 description: A representation of a businessKyc
 allOf:
-  - $ref: '#/components/schemas/BusinessKycBody'
+  - $ref: '#/components/schemas/RequestBusinessKycBody'
   - $ref: '#/components/schemas/Request'

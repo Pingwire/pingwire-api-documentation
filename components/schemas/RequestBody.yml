@@ -6,11 +6,11 @@ required:
 discriminator:
   propertyName: requestType
   mapping:
-    transaction: '#/components/schemas/TransactionBody'
-    carKyc: '#/components/schemas/CarKycBody'
-    carPurchase: '#/components/schemas/CarPurchaseBody'
-    individualKyc: '#/components/schemas/IndividualKycBody'
-    businessKyc: '#/components/schemas/BusinessKycBody'
+    transaction: '#/components/schemas/RequestTransactionBody'
+    carKyc: '#/components/schemas/RequestCarKycBody'
+    carPurchase: '#/components/schemas/RequestCarPurchaseBody'
+    individualKyc: '#/components/schemas/RequestIndividualKycBody'
+    businessKyc: '#/components/schemas/RequestBusinessKycBody'
 properties:
   customId:
     type: string

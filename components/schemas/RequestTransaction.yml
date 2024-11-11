@@ -1,0 +1,18 @@
+description: A representation of a transaction
+allOf:
+  - $ref: '#/components/schemas/RequestTransactionBody'
+  - $ref: '#/components/schemas/Request'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        description: Payload of the request. Its schema depends of the requestType
+        properties:
+          transactionId:
+            type: string
+            format: ObjectId
+            externalDocs:
+              description: Unique identifier
+              url: '/#section/Introduction/Unique-Identifier'
+            description: ID of the transaction
+            example: 62b9437318fe4517089b2833
