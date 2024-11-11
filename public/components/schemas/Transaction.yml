@@ -2,7 +2,7 @@ description: A representation of a transaction
 allOf:
   - type: object
     properties:
-      transactionId:
+      id:
         type: string
         format: ObjectId
         externalDocs:

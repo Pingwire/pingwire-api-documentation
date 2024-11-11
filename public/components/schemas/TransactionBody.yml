@@ -156,9 +156,9 @@ properties:
   #       $ref: '#/components/schemas/BankData'
   #     processor:
   #       $ref: '#/components/schemas/BankData'
-  required:
-    - initiator
-    - recipient
-    - amount
-    - date
-    - currency
+required:
+  - initiator
+  - recipient
+  - amount
+  - date
+  - currency
