@@ -20,11 +20,11 @@ allOf:
   discriminator:
     propertyName: requestType
     mapping:
-      transaction: '#/components/schemas/Transaction'
-      carKyc: '#/components/schemas/CarKyc'
-      carPurchase: '#/components/schemas/CarPurchase'
-      individualKyc: '#/components/schemas/IndividualKyc'
-      businessKyc: '#/components/schemas/BusinessKyc'
+      transaction: '#/components/schemas/RequestTransaction'
+      carKyc: '#/components/schemas/RequestCarKyc'
+      carPurchase: '#/components/schemas/RequestCarPurchase'
+      individualKyc: '#/components/schemas/RequestIndividualKyc'
+      businessKyc: '#/components/schemas/RequestBusinessKyc'
   properties:
     createdAt:
       type: string

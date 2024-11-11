@@ -1,0 +1,10 @@
+description: A representation of a transaction
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        description: Payload of the request. Its schema depends of the requestType
+        allOf:
+          - $ref: '#/components/schemas/TransactionBody'
