@@ -146,6 +146,25 @@ properties:
       - $ref: '#/components/schemas/BusinessRequestParty'
       - type: object
         title: Business
+    - allOf:
+      - $ref: '#/components/schemas/AccountRequestParty'
+      - type: object
+        title: Account
+  subProcessor:
+    description:  The transaction sub-processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient. This is useful in case there are more than one intermediary and the processor is therefore not enough.
+    oneOf:
+    - allOf:
+      - $ref: '#/components/schemas/IndividualRequestParty'
+      - type: object
+        title: Individual
+    - allOf:
+      - $ref: '#/components/schemas/BusinessRequestParty'
+      - type: object
+        title: Business
+    - allOf:
+      - $ref: '#/components/schemas/AccountRequestParty'
+      - type: object
+        title: Account
   # bankData:
   #   type: object
   #   description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
@@ -155,6 +174,8 @@ properties:
   #     recipient:
   #       $ref: '#/components/schemas/BankData'
   #     processor:
+  #       $ref: '#/components/schemas/BankData'
+  #     subProcessor:
   #       $ref: '#/components/schemas/BankData'
 required:
   - initiator
