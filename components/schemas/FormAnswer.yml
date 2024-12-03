@@ -115,6 +115,72 @@ properties:
     - student
     - unemployed
     - retired
+  expectedTransactionBehaviour:
+    type: array
+    description: |
+      Expected transaction behaviour according to the business or individual. This is an array with one item per combination of currency and transaction type configuration.
+    items:
+      type: object
+      required:
+      - currency
+      properties:
+        currency:
+          type: string
+          description: Currency for the expected behaviour in the 3 letters format from ISO 4217
+        transactionTypeConfiguration:
+          type: object
+          description: Transaction types to be included in the expected behaviour. If that field is omitted then all types are included in the behaviour.
+          required:
+          - or
+          properties:
+            or:
+              type: array
+              description: List of the "OR" conditions.
+              items:
+                type: object
+                required:
+                - and
+                properties:
+                  and:
+                    type: array
+                    description: List of the "AND" conditions for that "OR" block.
+                    items:
+                      type: object
+                      required:
+                      - inclusion
+                      - transactionTypeId
+                      properties:
+                        inclusion:
+                          description: describe if the transaction type should be included or excluded. "excluded" will use the transaction type with a "NOT" condition.
+                          type: string
+                          enum:
+                          - included
+                          - excluded
+                        transactionTypeId:
+                          type: string
+                          description: ID of the transaction type to consider
+                          format: ObjectId
+                          example: 620a2958bfc1d7a803398a6d
+        incoming:
+          allOf:
+          - type: object
+            description: Expected transaction behaviour for incoming transactions in that currency and transaction type configuration.
+          - $ref: '#/components/schemas/ExpectedTransactionBehaviour'
+        outgoing:
+          allOf:
+          - type: object
+            description: Expected transaction behaviour for outgoing transactions in that currency and transaction type configuration.
+          - $ref: '#/components/schemas/ExpectedTransactionBehaviour'
+        process:
+          allOf:
+          - type: object
+            description: Expected transaction behaviour for processed transactions in that currency and transaction type configuration.
+          - $ref: '#/components/schemas/ExpectedTransactionBehaviour'
+        total:
+          allOf:
+          - type: object
+            description: Expected transaction behaviour for all transactions in that currency and transaction type configuration.
+          - $ref: '#/components/schemas/ExpectedTransactionBehaviour'
   firstName:
     type: string
     description: First name of the individual
@@ -400,7 +466,11 @@ properties:
     description: Tax identification number
   txMonitoringThresholds:
     type: object
-    description: Expected transactional behaviour according to the business or individual. This is a two dimensional hashmap indexed on currency and country. The currency is in the 3 letters format from ISO 4217 and the country in the ISO 3166 ALPHA-3 format.
+    deprecated: true
+    description: |
+      Deprecated. Use expectedTransactionBehaviour instead.
+
+      Expected transactional behaviour according to the business or individual. This is a two dimensional hashmap indexed on currency and country. The currency is in the 3 letters format from ISO 4217 and the country in the ISO 3166 ALPHA-3 format.
     additionalProperties:
       x-additionalPropertiesName: currency
       description: Expected transactional behaviour in that specific currency according to the business or individual. Currency is in the 3 letters format from ISO 4217.
