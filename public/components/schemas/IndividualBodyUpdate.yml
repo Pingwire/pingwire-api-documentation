@@ -14,3 +14,11 @@ allOf:
       items:
         type: string
         format: ObjectId
+    customIds:
+      description: List of all unique customId from different sources. Used to update the whole list.
+      externalDocs:
+        description: Unique identifier
+        url: '/#section/Introduction/Unique-Identifier'
+      type: array
+      items:
+        type: string

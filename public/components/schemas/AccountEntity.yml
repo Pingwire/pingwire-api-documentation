@@ -11,6 +11,11 @@ allOf:
       externalDocs:
         description: Unique identifier
         url: '/#section/Introduction/Unique-Identifier'
-- $ref: '#/components/schemas/AccountEntityBody'
+    customId:
+      deprecated: true
+      description: Unique external identifier. Deprecated, use customIds instead.
+    customIds:
+      description: List of all unique customId from different sources.
+- $ref: '#/components/schemas/AccountEntityBodyUpdate'
 - $ref: '#/components/schemas/EntitySavedFields'
 

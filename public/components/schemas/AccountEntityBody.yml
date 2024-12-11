@@ -2,7 +2,7 @@ type: object
 properties:
   customId:
     type: string
-    description: Unique external identifier
+    description: Unique external identifier. Used to append to customIds list.
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'

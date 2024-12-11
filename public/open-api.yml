@@ -224,6 +224,8 @@ components:
               $ref: '#/components/schemas/IndividualRiskAssessment'
     AccountEntityBody:
       $ref: "./components/schemas/AccountEntityBody.yml"
+    AccountEntityBodyUpdate:
+      $ref: "./components/schemas/AccountEntityBodyUpdate.yml"
     AccountEntity:
       $ref: "./components/schemas/AccountEntity.yml"
     ContactInfo:
