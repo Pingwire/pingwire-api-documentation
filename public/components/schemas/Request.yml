@@ -41,20 +41,20 @@ allOf:
       - created
       - processed
       example: processed
-      description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request as reached the processed step. This guarantees that recommendation and signals are always available in the response object.
+      description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request has reached the processed step. This guarantees that recommendation and signals are always available in the response object.
     recommendation:
       type: string
       enum:
       - proceed
       - review
       - block
-      description: Recommendation for the request. This can be used to react to triggered rules and block or put on hold the end user if applicable. The recommendation will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The recommendation is therefore always available from the create request endpoint response object.
+      description: Recommendation for the request. This can be used to react to triggered rules and block or put on hold the end user if applicable. The recommendation will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request has reached the processed step. The recommendation is therefore always available from the create request endpoint response object.
     signals:
       type: array
       items:
         type: string
         format: ObjectId
-      description: IDs of the signals that have been triggered by the rule tree for this request. Signals can be created through the graphical user interface or through the API. Signals can be used to react to specific rules being triggered in the rule tree. The signals array will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request as reached the processed step. The signals array is therefore always available from the create request endpoint response object.
+      description: IDs of the signals that have been triggered by the rule tree for this request. Signals can be created through the graphical user interface or through the API. Signals can be used to react to specific rules being triggered in the rule tree. The signals array will always be available for requests at step processed. From the create request endpoint, the response is not returned before the request has reached the processed step. The signals array is therefore always available from the create request endpoint response object.
     comments:
       type: array
       description: Comments left on the request using the graphical user interface.

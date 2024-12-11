@@ -49,7 +49,7 @@ properties:
     type: string
     description: Date, iso 8601 format.
   initiator:
-    description: The transaction initiator is the entity who starts or triggers a transaction.
+    description: The transaction initiator is the entity who starts or triggers a transaction. It can be omitted but one of initiator and recipient is required.
     oneOf:
       - allOf:
         - $ref: '#/components/schemas/AccountRequestParty'
@@ -106,7 +106,7 @@ properties:
                           - signatory
 
   recipient:
-    description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions.
+    description: The transaction recipient refers to the entity who is the intended final receiver  of a transactions. It can be omitted but one of initiator and recipient is required.
     oneOf:
     - allOf:
       - $ref: '#/components/schemas/AccountRequestParty'
@@ -178,8 +178,6 @@ properties:
   #     subProcessor:
   #       $ref: '#/components/schemas/BankData'
 required:
-  - initiator
-  - recipient
   - amount
   - date
   - currency
