@@ -51,7 +51,7 @@ put:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/AccountEntityBody"
+          $ref: "#/components/schemas/AccountEntityBodyUpdate"
   responses:
     200:
       description: Successful operation
