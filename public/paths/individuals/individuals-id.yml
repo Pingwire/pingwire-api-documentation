@@ -52,24 +52,24 @@ put:
       application/json:
         schema:
           $ref: "#/components/schemas/IndividualBodyUpdate"
-    responses:
-      200:
-        description: Successful operation
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Individual"
-      400:
-        description: Invalid parameters
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/InvalidBody"
-      500:
-        description: Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ErrorBody"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Individual"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
     security:
     - bearerAuth: []
