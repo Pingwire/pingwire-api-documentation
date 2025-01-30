@@ -36,3 +36,9 @@ properties:
   phoneNumber:
     type: string
     description: Contact phone number of the individual
+  groups:
+      description: List of groups the entity should be associated to
+      type: array
+      items:
+        type: string
+        format: ObjectId
