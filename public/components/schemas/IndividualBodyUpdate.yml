@@ -8,12 +8,6 @@ allOf:
       enum:
       - Available
       - Blocked
-    groups:
-      description: List of groups the entity should be associated to
-      type: array
-      items:
-        type: string
-        format: ObjectId
     customIds:
       description: List of all unique customId from different sources. Used to update the whole list.
       externalDocs:
