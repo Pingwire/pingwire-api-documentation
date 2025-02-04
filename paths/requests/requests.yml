@@ -37,6 +37,27 @@ get:
       - review
       - proceed
   - in: query
+    name: id
+    description: Filter list of requests by id of request. Either this query parameter or requestType query parameter must be defined.
+    required: false
+    example: 679b5a44b82f37f3cf378ea5
+    schema:
+      type: string
+      format: ObjectId
+  - in: query
+    name: requestType
+    description: Filter list of requests by requestType. Either this query parameter or the id query paramter must be defined.
+    required: false
+    example: transaction
+    schema:
+      type: string
+      enum:
+        - transaction
+        - carKyc
+        - carPurchase
+        - individualKyc
+        - businessKyc
+  - in: query
     name: _start
     description: The start number of the requests list.
     required: false
