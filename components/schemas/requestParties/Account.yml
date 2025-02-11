@@ -57,7 +57,7 @@ properties:
     type: string
     format: date-time
     description: The date the account was closed
-  status:
+  bankAccountStatus:
     type: string
     description: Status of the account at the bank
     enum:
