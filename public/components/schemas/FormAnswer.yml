@@ -16,7 +16,12 @@ properties:
         example: 620a2958bfc1d7a803398a6d
         description: Id of the entity
       type:
-        $ref: '#/components/schemas/EntityTypes'
+        type: string
+        description: Type of the entity
+        enum:
+          - Individual
+          - Business
+          - Account
   formId:
     type: string
     format: ObjectId
