@@ -11,11 +11,8 @@ get:
     schema:
       type: string
       enum:
-      - id
-      - firstName
-      - lastName
-      - swedishSocialSecurityNumber
       - riskScore
+      - createdAt
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.

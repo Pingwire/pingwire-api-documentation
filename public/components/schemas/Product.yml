@@ -11,10 +11,7 @@ allOf:
         externalDocs:
           description: Unique identifier
           url: '/#section/Introduction/Unique-Identifier'
-      customId:
-        deprecated: true
-        description: Unique external identifier. Deprecated, use customIds instead.
       customIds:
-        description: List of all unique customId from different sources.
+        description: List of all unique customIds from different sources.
   - $ref: '#/components/schemas/ProductBodyUpdate'
   - $ref: '#/components/schemas/EntitySavedFields'

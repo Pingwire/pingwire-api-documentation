@@ -1,5 +1,5 @@
 type: string
-description: Role of a party
+description: Role of a product party
 enum:
   - product-holder
   - connected-account

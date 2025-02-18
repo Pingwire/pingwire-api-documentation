@@ -3,6 +3,7 @@ properties:
   customId:
     type: string
     description: Unique external identifier
+    writeOnly: true
     externalDocs:
       description: Unique identifier
       url: '/#section/Introduction/Unique-Identifier'
