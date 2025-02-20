@@ -1,0 +1,42 @@
+type: object
+properties:
+  customId:
+    type: string
+    description: Unique external identifier
+    writeOnly: true
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  productNumber:
+    type: string
+    description: Number of the product
+  productType:
+    $ref: '#/components/schemas/ProductTypes'
+  productInformation:
+    type: unknown
+    description: Information about the product
+  parties:
+    type: array
+    items:
+      type: object
+      properties:
+        type: 
+          $ref: '#/components/schemas/ProductTypes'
+        id:
+          type: string
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+          description: ID of the party
+        role: 
+          $ref: '#/components/schemas/ProductPartyRoles'
+      required:
+      - type
+      - id
+      - role
+    description: List of party link to this product
+  groups:
+      description: List of groups the entity should be associated to
+      type: array
+      items:
+        type: string
+        format: ObjectId

@@ -1,0 +1,75 @@
+get:
+  tags:
+    - Products
+  summary: Get product
+  description: Receive product by id saved in the database.
+  parameters:
+  - in: path
+    name: id
+    description: Product object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Product"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Products
+  summary: Update product
+  parameters:
+  - in: path
+    name: id
+    description: Product object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  description: Update a product.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/ProductBodyUpdate"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Product"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+    security:
+    - bearerAuth: []
