@@ -40,6 +40,7 @@ x-tagGroups:
       - Businesses
       - Cars
       - Accounts
+      - Products
   - name: KYC Forms
     tags:
       - Forms
@@ -138,6 +139,10 @@ paths:
       $ref: './paths/processes/processes-id.yml'
   /processes/activation/{id}:
       $ref: './paths/processes/processes-activation-id.yml'
+  /products/:
+    $ref: './paths/products/products.yml'
+  /products/{id}:
+    $ref: './paths/products/products-id.yml'
   /groups:
       $ref: './paths/groups/groups.yml'
   /groups/{id}:
@@ -360,6 +365,12 @@ components:
       $ref: "./components/schemas/PopulationRegister.yml"
     PopulationRegisterResponse:
       $ref: "./components/schemas/PopulationRegisterResponse.yml"
+    Product:
+      $ref: "./components/schemas/Product.yml"
+    ProductBody:
+      $ref: "./components/schemas/ProductBody.yml"
+    ProductBodyUpdate:
+      $ref: "./components/schemas/ProductBodyUpdate.yml"
     CompanyInformationRequest:
       $ref: "./components/schemas/businesses/CompanyInformationRequest.yml"
     CompanyInformationResponse:
@@ -395,6 +406,10 @@ components:
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
+    ProductTypes:
+      $ref: "./components/schemas/enums/productTypes.yml"
+    ProductPartyRoles:
+      $ref: "./components/schemas/enums/productPartyRoles.yml"
     SourceOfFunds:
       $ref: "./components/schemas/enums/sourceOfFunds.yml"
     transactionStatuses:

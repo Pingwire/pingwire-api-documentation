@@ -1,0 +1,17 @@
+allOf:
+  - type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        description: ID of the individual
+        example: 62b9437318fe4517089b2833
+        externalDocs:
+          description: Unique identifier
+          url: '/#section/Introduction/Unique-Identifier'
+      customIds:
+        description: List of all unique customIds from different sources.
+  - $ref: '#/components/schemas/ProductBodyUpdate'
+  - $ref: '#/components/schemas/EntitySavedFields'

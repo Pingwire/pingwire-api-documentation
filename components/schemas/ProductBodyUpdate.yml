@@ -1,0 +1,12 @@
+allOf:
+- $ref: '#/components/schemas/ProductBody'
+- type: object
+  properties:
+    customIds:
+      description: List of all unique customIds from different sources. Used to update the whole list.
+      externalDocs:
+        description: Unique identifier
+        url: '/#section/Introduction/Unique-Identifier'
+      type: array
+      items:
+        type: string
