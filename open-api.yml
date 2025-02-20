@@ -367,10 +367,24 @@ components:
       $ref: "./components/schemas/PopulationRegisterResponse.yml"
     Product:
       $ref: "./components/schemas/Product.yml"
+    ProductBase:
+      $ref: "./components/schemas/ProductBase.yml"
     ProductBody:
       $ref: "./components/schemas/ProductBody.yml"
+    ProductBodyBase:
+      $ref: "./components/schemas/ProductBodyBase.yml"
     ProductBodyUpdate:
       $ref: "./components/schemas/ProductBodyUpdate.yml"
+    ProductBodyUpdateBase:
+      $ref: "./components/schemas/ProductBodyUpdateBase.yml"
+    ProductSwish:
+      $ref: "./components/schemas/ProductSwish.yml"
+    ProductSwishBody:
+      $ref: "./components/schemas/ProductSwishBody.yml"
+    ProductSwishBodyUpdate:
+      $ref: "./components/schemas/ProductSwishBodyUpdate.yml"
+    ProductSwishProductInformation:
+      $ref: "./components/schemas/ProductSwishProductInformation.yml"
     CompanyInformationRequest:
       $ref: "./components/schemas/businesses/CompanyInformationRequest.yml"
     CompanyInformationResponse:
