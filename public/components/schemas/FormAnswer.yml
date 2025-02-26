@@ -34,6 +34,11 @@ properties:
   address:
     type: string
     description: Street address of the entity
+  nationalIdentifier:
+    type: array
+    description: National identifier
+    items:
+      $ref: '#/components/schemas/NationalIdentifier'
   alternativeBeneficialOwners:
     type: array
     description: Alternative beneficial owners of the business. This should be used when there is no beneficial owner for this business.

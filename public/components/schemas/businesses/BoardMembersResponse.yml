@@ -58,21 +58,9 @@ properties:
                     url: '/#section/Introduction/Unique-Identifier'
                 nationalIdentifier:
                   type: array
-                  description: List of the national identifier of the board member. This field can be used to link it to a previously created entity
-                  externalDocs:
-                    description: Unique Identifier
-                    url: '/#section/Introduction/Unique-Identifier'
+                  description: National identifier of the signer
                   items:
-                    type: object
-                    properties:
-                      country:
-                        type: string
-                        example: SWE
-                        format: ISO 3166 ALPHA-3
-                        description: Country of the national identifier
-                      identifier:
-                        type: string
-                        description: national identification number
+                    $ref: '#/components/schemas/NationalIdentifierRestricted'
                 firstName:
                   type: string
                   description: First name of the board member

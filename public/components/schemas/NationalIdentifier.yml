@@ -8,6 +8,11 @@ properties:
     type: string
     enum:
     - socialSecurityNumber
-    description: Type of the national identifier.
+    - nationalInsuranceNumber
+    - nationalID
+    - passportNumber
+    - driversLicenseNumber
+    - other
+    description: Type of the national identifier. socialSecurityNumber is mandatory for following country:SWE, FIN, DKK, GBR, ZAF 
   identifier:
     description: Identification number. The format depends of the type and the country chosen.
