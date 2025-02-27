@@ -4,10 +4,31 @@ type: object
 required:
 - type
 properties:
-  type:
-    type: string
-    enum:
-    - socialSecurityNumber
-    description: Type of the national identifier.
   identifier:
     description: Identification number. The format depends of the type and the country chosen.
+oneOf:
+  - type: object
+    title: Specific countries national identifiers
+    properties:
+      country:
+        type: string
+        enum: [SWE, FIN, DKK, GBR, ZAF]
+      type:
+        type: string
+        enum: [socialSecurityNumber]
+        description: Type of the national identifier.
+  - type: object
+    title: Other countries national identifiers
+    properties:
+      country:
+        type: string
+      type:
+        type: string
+        enum: 
+        - socialSecurityNumber
+        - nationalInsuranceNumber
+        - nationalID
+        - passportNumber
+        - driversLicenseNumber
+        - other
+        description: Type of the national identifier.
