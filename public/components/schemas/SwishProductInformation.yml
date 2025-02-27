@@ -1,0 +1,6 @@
+type: object
+properties:
+  phoneNumber:
+    type: string
+    description: Phone number the swish product is linked to.
+    example: "070000000"
