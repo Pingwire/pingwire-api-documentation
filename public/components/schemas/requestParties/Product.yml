@@ -1,9 +1,5 @@
 type: object
 title: Product
-discriminator:
-  propertyName: productType
-  mapping:
-    swish: '#/components/schemas/SwishProductInformation'
 properties:
   type:
     type: string
@@ -22,7 +18,11 @@ properties:
   productType:
     type: string
     enum:
-    - swish
+      - swish
+  productInformation:
+    type: object
+    oneOf: 
+      - $ref: "#/components/schemas/SwishProductInformation"    
   groups:
     type: array
     description: List of groups the product belongs to.

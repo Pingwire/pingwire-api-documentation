@@ -57,6 +57,11 @@ properties:
         - type: object
           title: Account
           properties:
+            productEntity:
+              type: object
+              description: Product used to initiate the transaction
+              allOf:
+              - $ref: '#/components/schemas/ProductParty'
             conductors:
               type: array
               description: List of representatives that authenticated and facilitated the transaction on behalf of the owner of the account.
@@ -75,6 +80,11 @@ properties:
         - type: object
           title: Individual
           properties:
+            productEntity:
+                type: object
+                description: Product used to initiate the transaction
+                allOf:
+                  - $ref: '#/components/schemas/ProductParty'
             account:
               title: Account
               description: Account used to initiate the transaction
@@ -92,6 +102,10 @@ properties:
               description: Account used to initiate the transaction
               allOf:
                 - $ref: '#/components/schemas/AccountRequestParty'
+            productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
             conductors:
               type: array
               description: List of representatives that authenticated and facilitated the transaction on behalf of the business.
@@ -113,12 +127,21 @@ properties:
       - $ref: '#/components/schemas/TransactionParty'
       - type: object
         title: Account
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
     - allOf:
       - $ref: '#/components/schemas/IndividualRequestParty'
       - $ref: '#/components/schemas/TransactionParty'
       - type: object
         title: Individual
         properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
           account:
             title: Account
             description: Account used to receive the transaction
@@ -130,6 +153,10 @@ properties:
       - type: object
         title: Business
         properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
           account:
             title: Account
             description: Account used to receive the transaction
@@ -142,14 +169,29 @@ properties:
       - $ref: '#/components/schemas/IndividualRequestParty'
       - type: object
         title: Individual
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
     - allOf:
       - $ref: '#/components/schemas/BusinessRequestParty'
       - type: object
         title: Business
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
     - allOf:
       - $ref: '#/components/schemas/AccountRequestParty'
       - type: object
         title: Account
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
   subProcessor:
     description:  The transaction sub-processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient. This is useful in case there are more than one intermediary and the processor is therefore not enough.
     oneOf:
@@ -157,14 +199,29 @@ properties:
       - $ref: '#/components/schemas/IndividualRequestParty'
       - type: object
         title: Individual
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
     - allOf:
       - $ref: '#/components/schemas/BusinessRequestParty'
       - type: object
         title: Business
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
     - allOf:
       - $ref: '#/components/schemas/AccountRequestParty'
       - type: object
         title: Account
+        properties:
+          productEntity:
+              type: object
+              title: Product
+              $ref: '#/components/schemas/ProductParty'
   # bankData:
   #   type: object
   #   description: Contains PSD2 details for a transaction's initiator, recipient, and processor.
