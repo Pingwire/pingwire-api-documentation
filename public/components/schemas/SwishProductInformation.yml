@@ -1,9 +1,0 @@
-type: object
-title: Swish
-description: Information about the product
-properties:
-  phoneNumber:
-    type: string
-    description: Phone number associated to the swish product
-    example: "0701234567"
-  

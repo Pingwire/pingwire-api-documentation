@@ -1,0 +1,33 @@
+type: object
+required:
+- type
+properties:
+  type:
+    type: string
+    enum:
+    - Product
+  id:
+    type: string
+    format: ObjectId
+    description: ID of an already created product
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  customId:
+    type: string
+    description: Unique external identifier
+    writeOnly: true
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  productNumber:
+    type: string
+    description: Number of the product
+  productType:
+    $ref: '#/components/schemas/ProductTypes'
+  groups:
+      description: List of groups the entity should be associated to
+      type: array
+      items:
+        type: string
+        format: ObjectId

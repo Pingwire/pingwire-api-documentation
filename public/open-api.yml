@@ -379,8 +379,10 @@ components:
       $ref: "./components/schemas/ProductBodyUpdateBase.yml"
     ProductParty:
       $ref: "./components/schemas/requestParties/Product.yml"
-    SwishProductInformation:
-      $ref: "./components/schemas/SwishProductInformation.yml"
+    ProductPartySwish:
+      $ref: "./components/schemas/requestParties/ProductPartySwish.yml"
+    ProductPartyBase:
+      $ref: "./components/schemas/requestParties/ProductPartyBase.yml"
     ProductSwish:
       $ref: "./components/schemas/ProductSwish.yml"
     ProductSwishBody:

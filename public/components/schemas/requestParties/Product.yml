@@ -1,32 +1,7 @@
 type: object
-title: Product
-properties:
-  type:
-    type: string
-    enum:
-    - Product
-  id:
-    type: string
-    format: ObjectId
-    description: ID of an already created product
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
-  productNumber:
-    type: string
-    description: An identifier for the product to relate it to the entity. Eg. contract number.
-  productType:
-    type: string
-    enum:
-      - swish
-  productInformation:
-    type: object
-    oneOf: 
-      - $ref: "#/components/schemas/SwishProductInformation"    
-  groups:
-    type: array
-    description: List of groups the product belongs to.
-    items:
-      type: string
-      format: ObjectId
-      example: 620a2958bfc1d7a803398a6d
+oneOf:
+  - $ref: '#/components/schemas/ProductPartySwish'
+discriminator:
+  propertyName: productType
+  mapping:
+    swish: '#/components/schemas/ProductPartySwish'

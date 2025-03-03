@@ -1,9 +1,0 @@
-type: object
-oneOf: 
-  - $ref: "#/components/schemas/SwishProductInformation"    
-  - $ref: "#/components/schemas/Product"    
-discriminator:
-  propertyName: productType
-  mapping:
-    swish: '#/components/schemas/SwishProductInformation'
-    autogiro: '#/components/schemas/Product'
