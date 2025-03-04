@@ -29,3 +29,43 @@ post:
             $ref: "#/components/schemas/ErrorBody"
   security:
   - bearerAuth: []
+put:
+  tags:
+    -  Form answers
+  summary: Update form answer
+  description: Update status of files upload in a form answer.
+  parameters:
+  - in: path
+    name: formAnswerId
+    description: Form answer object id. It can be retrieved as part of the information provided as feedback when the form is submitted. For details on how it is provided, see the section [Setups for presenting forms](#section/Setups-for-presenting-forms)
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/FormAnswerUpdate'
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/FormAnswerSaved'
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
