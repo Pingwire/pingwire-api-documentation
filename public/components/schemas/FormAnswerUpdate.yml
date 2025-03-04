@@ -2,6 +2,12 @@ type: object
 properties:
   status:
     type: string
+    description: |
+      Status of the form answers.
+      * `pending` - Form answers are submitted by the customer but not reviewed yet by anyone.
+      * `completed` - Form answers have been reviewed by an AML officer and approved.
+      * `rejected` - Form answers have been reviewed by an AML officer and discarded.
+      * `withdrawn` - Form answers were submitted by the customer but they decided to remove their submission.
     enum:
       - pending
       - completed
