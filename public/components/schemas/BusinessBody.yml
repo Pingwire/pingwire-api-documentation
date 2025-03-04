@@ -43,3 +43,7 @@ properties:
       type: string
       format: ObjectId
       example: 620a2958bfc1d7a803398a6d
+  kycApprouvedAt:
+    type: string
+    format: date-time
+    description: Date when KYC has been approuved
