@@ -18,19 +18,19 @@ properties:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/ProductTypes'
+          $ref: '#/components/schemas/EntityTypes'
         id:
           type: string
           format: ObjectId
           example: 62b9437318fe4517089b2833
-          description: ID of the party
+          description: ID of the entity
         role:
           $ref: '#/components/schemas/ProductPartyRoles'
       required:
       - type
       - id
       - role
-    description: List of party link to this product
+    description: List of entities (parties) linked to this product
   groups:
       description: List of groups the entity should be associated to
       type: array
