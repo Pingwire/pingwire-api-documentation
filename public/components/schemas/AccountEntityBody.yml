@@ -30,6 +30,22 @@ properties:
     externalDocs:
       description: Unique identifier (together with country)
       url: '/#section/Introduction/Unique-Identifier'
+  connectedEntities:
+    type: array
+    description: List of entities linked to this account (account holders)
+    items:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/EntityTypes'
+        id:
+          type: string
+          format: ObjectId
+          example: 62b9437318fe4517089b2833
+          description: ID of the entity
+      required:
+      - type
+      - id
   provider:
     type: string
     description: Identifier of the institution issuing the account.
