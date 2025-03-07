@@ -2,14 +2,12 @@ put:
   tags:
   - Pings
   summary: Comment on ping
+  operationId: commentPing
   parameters:
   - in: path
     name: id
     description: Ping object id
     example: 620a2958bfc1d7a803398a6d
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
     required: true
     schema:
       type: string

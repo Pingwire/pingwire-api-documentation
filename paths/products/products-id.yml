@@ -2,6 +2,7 @@ get:
   tags:
     - Products
   summary: Get product
+  operationId: getProduct
   description: Receive product by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Products
   summary: Update product
+  operationId: updateProduct
   parameters:
   - in: path
     name: id
@@ -71,5 +73,5 @@ put:
         application/json:
           schema:
             $ref: "#/components/schemas/ErrorBody"
-    security:
-    - bearerAuth: []
+  security:
+  - bearerAuth: []

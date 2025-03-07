@@ -2,6 +2,7 @@ post:
   tags:
   - Population Register
   summary: Create manual population register
+  operationId: createManualPopulationRegister
   description: Create a new manual population register.
   parameters:
   - in: path

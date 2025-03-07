@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Members
   summary: List members
+  operationId: listMembers
   description: Receive list of members saved in the database.
   parameters:
   - in: query
@@ -18,7 +19,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -45,7 +46,7 @@ get:
         application/json:
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/components/schemas/Member'
     400:
       description: Invalid parameters
@@ -65,6 +66,7 @@ post:
   tags:
   - Members
   summary: Create member
+  operationId: createMember
   description: Create a new member.
   requestBody:
     content:

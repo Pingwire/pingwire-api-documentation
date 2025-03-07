@@ -207,7 +207,7 @@ allOf:
             type: number
             description: Amount
           currency:
-            type: currency
+            type: string
             description: Currency in the 3 letters format from ISO 4217
             example: USD
       industry:
@@ -328,7 +328,7 @@ allOf:
             type: number
             description: Amount
           currency:
-            type: currency
+            type: string
             description: Currency in the 3 letters format from ISO 4217
             example: USD
       products:
@@ -377,7 +377,7 @@ allOf:
             type: number
             description: Amount
           currency:
-            type: currency
+            type: string
             description: Currency in the 3 letters format from ISO 4217
             example: USD
       signatories:
@@ -457,7 +457,7 @@ allOf:
             type: number
             description: Amount
           currency:
-            type: currency
+            type: string
             description: Currency in the 3 letters format from ISO 4217
             example: USD
       stateOwned:

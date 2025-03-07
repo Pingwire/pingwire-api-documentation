@@ -2,6 +2,7 @@ get:
   tags:
     - Transaction Types
   summary: List transaction types
+  operationId: listTransactionTypes
   description: Receive list of transaction types saved in the database.
   parameters:
   - in: query
@@ -71,6 +72,7 @@ post:
   tags:
   - Transaction Types
   summary: Create transaction type
+  operationId: createTransactionType
   description: Create a new transaction type.
   requestBody:
     content:

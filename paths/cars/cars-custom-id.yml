@@ -2,6 +2,7 @@ get:
   tags:
     - Cars
   summary: Get car by customId
+  operationId: getCarByCustomId
   description: Receive car by customId saved in the database.
   parameters:
   - in: path

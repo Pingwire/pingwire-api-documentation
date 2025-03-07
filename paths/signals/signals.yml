@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Signals
   summary: List signals
+  operationId: listSignals
   description: Receive list of signals saved in the database.
   parameters:
   - in: query
@@ -17,7 +18,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -51,7 +52,7 @@ get:
         application/json:
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/components/schemas/Signal'
     400:
       description: Invalid parameters
@@ -71,6 +72,7 @@ post:
   tags:
   - Signals
   summary: Create signal
+  operationId: createSignal
   description: Create a new signal.
   requestBody:
     content:

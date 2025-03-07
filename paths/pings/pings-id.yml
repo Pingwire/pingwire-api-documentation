@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Pings
-  summary: Ping
+  summary: Get ping
+  operationId: getPing
   description: Receive ping by id saved in the database.
   parameters:
   - in: path

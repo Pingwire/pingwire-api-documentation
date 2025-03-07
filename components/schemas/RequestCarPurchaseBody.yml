@@ -8,10 +8,10 @@ allOf:
         description: Payload of the request. Its schema depends of the requestType
         properties:
           amount:
-            type: float
+            type: number
             example: 1000
           valuation:
-            type: float
+            type: number
             example: 1000
           currency:
             type: string

@@ -1,7 +1,8 @@
-put: 
+put:
   tags:
     - Requests
-  summary: Reprocess
+  summary: Reprocess request
+  operationId: reprocessRequest
   description: Reprocess a request that is under `review`.
   parameters:
   - in: path

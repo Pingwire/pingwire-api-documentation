@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Signals
-  summary: Signal
+  summary: Get signal
+  operationId: getSignal
   description: Receive signal by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Signals
   summary: Update signal
+  operationId: updateSignal
   parameters:
   - in: path
     name: id

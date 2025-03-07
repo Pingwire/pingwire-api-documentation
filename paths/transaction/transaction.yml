@@ -2,6 +2,7 @@ put:
   tags:
     - Transaction
   summary: Update pending transaction status
+  operationId: updateTransactionStatus
   description: Update a transaction status, transaction must be in a pending status.
   parameters:
   - in: path

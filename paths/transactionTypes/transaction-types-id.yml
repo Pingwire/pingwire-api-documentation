@@ -1,7 +1,8 @@
 get:
   tags:
     - Transaction Types
-  summary: Transaction Type
+  summary: Get transaction type
+  operationId: getTransactionType
   description: Receive transaction type by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Transaction Types
   summary: Update transaction type
+  operationId: updateTransactionType
   parameters:
   - in: path
     name: id

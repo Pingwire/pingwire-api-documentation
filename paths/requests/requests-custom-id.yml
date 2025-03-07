@@ -2,6 +2,7 @@ get:
   tags:
     - Requests
   summary: Get request by customId
+  operationId: getRequestByCustomId
   description: Retrieve request information by customId
   parameters:
   - in: path

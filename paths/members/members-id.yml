@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Members
-  summary: Member
+  summary: Get member
+  operationId: getMember
   description: Receive member by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Members
   summary: Update member
+  operationId: updateMember
   parameters:
   - in: path
     name: id

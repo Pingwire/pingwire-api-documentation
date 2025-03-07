@@ -2,6 +2,7 @@ put:
   tags:
     - Cases
   summary: Comment on case
+  operationId: commentCase
   parameters:
   - in: path
     name: id

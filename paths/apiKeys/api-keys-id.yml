@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - API keys
   summary: API key
+  operation: getApiKey
   description: Receive API key by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - API keys
   summary: Update API key
+  operationId: updateApiKey
   parameters:
   - in: path
     name: id

@@ -2,6 +2,7 @@ get:
   tags:
     - Requests
   summary: Get request by id
+  operationId: getRequest
   description: Receive request by id saved in the database.
   parameters:
   - in: path

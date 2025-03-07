@@ -2,6 +2,7 @@ get:
   tags:
     - Cars
   summary: Get car
+  operationId: getCar
   description: Receive car by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Cars
   summary: Update car
+  operationId: updateCar
   parameters:
   - in: path
     name: id
