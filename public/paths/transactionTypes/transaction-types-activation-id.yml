@@ -2,6 +2,7 @@ put:
   tags:
   - Transaction Types
   summary: Update transaction type active status
+  operationId: updateTransactionTypeActiveStatus
   parameters:
   - in: path
     name: id

@@ -1,7 +1,7 @@
 type: object
 properties:
   amount:
-    type: float
+    type: number
     example: 1000
     description: Amount of the transaction
   currency:

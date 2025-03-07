@@ -2,6 +2,7 @@ put:
   tags:
   - Signals
   summary: Update signal active status
+  operationId: updateSignalActiveStatus
   parameters:
   - in: path
     name: id

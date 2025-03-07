@@ -2,6 +2,7 @@ get:
   tags:
     - Cases
   summary: List cases
+  operationId: listCases
   description: Receive list of cases saved in the database.
   parameters:
   - in: query

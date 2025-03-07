@@ -2,6 +2,7 @@ put:
   tags:
   - Groups
   summary: Update group active status
+  operationId: updateGroupActiveStatus
   parameters:
   - in: path
     name: id

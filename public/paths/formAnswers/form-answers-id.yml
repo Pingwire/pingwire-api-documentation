@@ -1,13 +1,13 @@
 get:
   tags:
-    - Individuals
-  summary: Get individual
-  operationId: getIndividual
-  description: Receive individual by id saved in the database.
+    -  Form answers
+  summary: Get form answer
+  operationId: getFormAnswer
+  description: Retrieve the answers submitted from a form for a specific entity. The exact specification of the response schema will be refined at a later stage.
   parameters:
   - in: path
-    name: id
-    description: Individual object id
+    name: formAnswerId
+    description: Form answer object id. It can be retrieved as part of the information provided as feedback when the form is submitted. For details on how it is provided, see the section [Setups for presenting forms](#section/Setups-for-presenting-forms)
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
@@ -19,7 +19,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Individual"
+            $ref: '#/components/schemas/FormAnswerSaved'
     400:
       description: Invalid parameters
       content:
@@ -36,31 +36,31 @@ get:
   - bearerAuth: []
 put:
   tags:
-  - Individuals
-  summary: Update individual
-  operationId: updateIndividual
+    -  Form answers
+  summary: Update form answer
+  operationId: updateFormAnswer
+  description: Update status of files upload in a form answer.
   parameters:
   - in: path
-    name: id
-    description: Individual object id
+    name: formAnswerId
+    description: Form answer object id. It can be retrieved as part of the information provided as feedback when the form is submitted. For details on how it is provided, see the section [Setups for presenting forms](#section/Setups-for-presenting-forms)
     example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
       format: ObjectId
-  description: Update a individual.
   requestBody:
     content:
       application/json:
         schema:
-          $ref: "#/components/schemas/IndividualBodyUpdate"
+          $ref: '#/components/schemas/FormAnswerUpdate'
   responses:
     200:
       description: Successful operation
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Individual"
+            $ref: '#/components/schemas/FormAnswerSaved'
     400:
       description: Invalid parameters
       content:

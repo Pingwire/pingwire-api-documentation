@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Requests
   summary: List requests
+  operationId: listRequest
   description: Receive list of requests saved in the database.
   parameters:
   - in: query
@@ -19,7 +20,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -29,10 +30,10 @@ get:
     name: recommendation
     description: Filter list of requests by recommendation.
     required: false
-    example: 
+    example:
     schema:
       type: string
-      enum: 
+      enum:
       - block
       - review
       - proceed
@@ -78,7 +79,7 @@ get:
         application/json:
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/components/schemas/Request'
     400:
       description: Invalid parameters
@@ -98,6 +99,7 @@ post:
   tags:
   - Requests
   summary: Create request
+  operationId: createRequest
   description: Create a new request.
   requestBody:
     content:

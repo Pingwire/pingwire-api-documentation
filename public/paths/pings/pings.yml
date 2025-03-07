@@ -2,6 +2,7 @@ get:
   tags:
     - Pings
   summary: List pings
+  operationId: listPings
   description: Receive list of pings saved in the database.
   parameters:
   - in: query
@@ -77,8 +78,9 @@ get:
 post:
   tags:
   - Pings
-  summary: Create pings
-  description: Create a new pings.
+  summary: Create ping
+  operationId: createPing
+  description: Create a new ping
   requestBody:
     content:
       application/json:
@@ -112,8 +114,8 @@ post:
             score:
               type: number
               description: Score contribution of the ping
-              min: 0
-              max: 100
+              minimum: 0
+              maximum: 100
             riskTimeline:
               type: object
               description: Timeline describing how the risk score contribution of the ping should evolve over time. The risk contribution will linearly decrease over the timeline.
@@ -132,7 +134,7 @@ post:
                   - years
                 amount:
                   type: number
-                  min: 1
+                  minimum: 1
             caseId:
               type: string
               format: ObjectId

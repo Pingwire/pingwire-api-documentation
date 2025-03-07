@@ -2,6 +2,7 @@ get:
   tags:
     - Individuals
   summary: List individuals
+  operationId: listIndividuals
   description: Receive list of individuals saved in the database.
   parameters:
   - in: query
@@ -68,6 +69,7 @@ post:
   tags:
   - Individuals
   summary: Create individual
+  operationId: createIndividual
   description: Create a new individual.
   requestBody:
     content:

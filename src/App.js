@@ -12,7 +12,7 @@ function App() {
     <>
       <GlobalStyle />
       <RedocStandalone
-        specUrl="open-api.yml"
+        specUrl={process.env.REACT_APP_SPEC_URL}
         options={{
           theme: {
             colors: { primary: { main: '#238061' } },

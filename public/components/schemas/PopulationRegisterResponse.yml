@@ -218,10 +218,8 @@ properties:
         description: Date of the last change in the national registry.
       personId:
         type: string
-        required: true
       personIdCountry:
         type: string
-        required: true
         format: ISO 3166 ALPHA-3
         description: Unique identifier of the person.
       personIdType:

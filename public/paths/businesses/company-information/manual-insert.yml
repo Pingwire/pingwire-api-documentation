@@ -2,6 +2,7 @@ post:
   tags:
   - Company Information
   summary: Create manual company information
+  operationId: createManualCompanyInformation
   description: Create a new manual company information
   parameters:
   - in: path

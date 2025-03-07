@@ -2,6 +2,7 @@ get:
   tags:
     - Accounts
   summary: Get account
+  operationId: getAccount
   description: Receive account by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Accounts
   summary: Update account
+  operationId: updateAccount
   parameters:
   - in: path
     name: id
@@ -52,37 +54,6 @@ put:
       application/json:
         schema:
           $ref: "#/components/schemas/AccountEntityBodyUpdate"
-  responses:
-    200:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/AccountEntity"
-    400:
-      description: Invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/InvalidBody"
-    500:
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorBody"
-  security:
-  - bearerAuth: []
-post:
-  tags:
-  - Accounts
-  summary: Create account
-  description: Created account information
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: "#/components/schemas/AccountEntityBody"
   responses:
     200:
       description: Successful operation

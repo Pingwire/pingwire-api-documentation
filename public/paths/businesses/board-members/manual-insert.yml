@@ -2,6 +2,7 @@ post:
   tags:
   - Board Members
   summary: Create manual board members information
+  operationId: createManualBoardMembers
   description: Create a new board members information object
   parameters:
   - in: path

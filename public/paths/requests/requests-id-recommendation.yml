@@ -1,7 +1,8 @@
 put:
   tags:
     - Requests
-  summary: Update recommendation
+  summary: Update request recommendation
+  operationId: updateRequestRecommendation
   description: Update request recommendation from review.
   parameters:
   - in: path

@@ -3,6 +3,7 @@ post:
   tags:
   - Population Register
   summary: Create manual population register - Old
+  operationId: createManualPopulationRegisterDeprecated
   description: Create a new manual population register. This version of the endpoint has been deprecated. Use the new version instead. The schema of the new endpoint is very similar which should make it straight forward to migrate.
   requestBody:
     content:

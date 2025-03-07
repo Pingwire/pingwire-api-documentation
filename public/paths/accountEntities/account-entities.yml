@@ -2,6 +2,7 @@ get:
   tags:
     - Accounts
   summary: List accounts
+  operationId: listAccounts
   description: Receive list of accounts saved in the database.
   parameters:
   - in: query
@@ -45,6 +46,38 @@ get:
             type: array
             items:
               $ref: "#/components/schemas/AccountEntity"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Accounts
+  summary: Create account
+  operationId: createAccount
+  description: Created account information
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/AccountEntityBody"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/AccountEntity"
     400:
       description: Invalid parameters
       content:
