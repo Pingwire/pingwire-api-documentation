@@ -1,0 +1,10 @@
+apis:
+  pingwire:
+    root: public/open-api.yml
+    rules:
+      no-unresolved-refs:
+        severity: off
+  pingwire-bundled:
+    root: public/open-api-bundle.yml
+extends:
+  - recommended
