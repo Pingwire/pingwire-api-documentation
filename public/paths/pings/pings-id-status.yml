@@ -2,15 +2,13 @@ put:
   tags:
   - Pings
   summary: Update ping status
+  operationId: updatePingStatus
   parameters:
   - in: path
     name: id
     description: Ping object id
     example: 620a2958bfc1d7a803398a6d
     required: true
-    externalDocs:
-      description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier'
     schema:
       type: string
       format: ObjectId

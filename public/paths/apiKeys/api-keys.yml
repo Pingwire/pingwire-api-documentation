@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - API keys
   summary: List API keys
+  operationId: listApiKeys
   description: Receive list of API keys saved in the database.
   parameters:
   - in: query
@@ -17,7 +18,7 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example: 
+    example:
     schema:
       type: string
       enum:
@@ -44,7 +45,7 @@ get:
         application/json:
           schema:
             type: array
-            items: 
+            items:
               $ref: '#/components/schemas/ApiKey'
     400:
       description: Invalid parameters
@@ -64,6 +65,7 @@ post:
   tags:
   - API keys
   summary: Create API key
+  operationId: createApiKey
   description: Create a new API key.
   requestBody:
     content:

@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     -  Forms
   summary: Get form link
+  operationId: getFormLink
   description: Generated a form link by using entity id and form id.
   parameters:
   - in: path

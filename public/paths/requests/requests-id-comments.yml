@@ -2,6 +2,7 @@ put:
   tags:
     - Requests
   summary: Comment on request
+  operationId: commentRequest
   parameters:
   - in: path
     name: id

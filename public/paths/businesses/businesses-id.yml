@@ -2,6 +2,7 @@ get:
   tags:
     - Businesses
   summary: Get business
+  operationId: getBusiness
   description: Receive business by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Businesses
   summary: Update businesses
+  operationId: updateBusiness
   parameters:
   - in: path
     name: id

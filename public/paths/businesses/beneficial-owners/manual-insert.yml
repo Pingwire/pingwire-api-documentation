@@ -2,6 +2,7 @@ post:
   tags:
   - Beneficial Owners
   summary: Create manual beneficial owners information
+  operationId: createManualBeneficialOwners
   description: Create a new beneficial owners information object
   parameters:
   - in: path

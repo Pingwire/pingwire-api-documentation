@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Risk Classes
-  summary: Risk class
+  summary: Get risk class
+  operationId: getRiskClass
   description: Receive risk class by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Risk Classes
   summary: Update risk class
+  operationId: updateRiskClass
   parameters:
   - in: path
     name: id
@@ -86,6 +88,7 @@ delete:
   tags:
   - Risk Classes
   summary: Delete risk class
+  operationId: deleteRiskClass
   parameters:
   - in: path
     name: id
@@ -103,7 +106,7 @@ delete:
         application/json:
           schema:
             type: object
-            
+
     400:
       description: Invalid parameters
       content:

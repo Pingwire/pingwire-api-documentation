@@ -2,6 +2,7 @@ get:
   tags:
     - Businesses
   summary: Get business by customId
+  operationId: getBusinessByCustomId
   description: Receive business by customId saved in the database.
   parameters:
   - in: path

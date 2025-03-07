@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Rules
-  summary: Rule
+  summary: Get rule
+  operationId: getRule
   description: Receive rule by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Rules
   summary: Update rule
+  operationId: updateRule
   parameters:
   - in: path
     name: id
@@ -76,7 +78,8 @@ put:
 delete:
   tags:
   - Rules
-  summary: Delete rule
+  summary: Delete rule draft
+  operationId: deleteRuleDraft
   parameters:
   - in: path
     name: id

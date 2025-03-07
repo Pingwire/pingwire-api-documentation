@@ -2,6 +2,7 @@ get:
   tags:
     - Accounts
   summary: Get account by customId
+  operationId: getAccountByCustomId
   description: Receive account by customId saved in the database.
   parameters:
   - in: path

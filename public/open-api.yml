@@ -8,19 +8,14 @@ info:
     url: './assets/pingwire-logo.svg'
     altText: Pingwire
     href: https://www.pingwire.io
+  license:
+    name: Commercial - Subscription Required
+    url: "https://www.pingwire.io/contact-us"
 servers:
-- url: https://api.pingwire.io/
+- url: https://api.pingwire.io
   description: Production server
-  variables:
-    brokerName:
-      default: generic
-      description: Same as the basic auth username
 - url: https://api.staging.pingwire.io
   description: Staging server
-  variables:
-    brokerName:
-      default: generic
-      description: Same as the basic auth username
 tags:
   - name: Forms
     description:
@@ -62,22 +57,23 @@ x-tagGroups:
       - Groups
       - Transaction Types
       - Transaction
+
 paths:
-  /account-entities/:
+  /account-entities:
     $ref: './paths/accountEntities/account-entities.yml'
   /account-entities/{id}:
     $ref: './paths/accountEntities/account-entities-id.yml'
   /account-entities/customId/{customId}:
     $ref: './paths/accountEntities/account-entities-custom-id.yml'
-  /auth/login/:
+  /auth/login:
     $ref: './paths/auth/auth.yml'
-  /individuals/:
+  /individuals:
     $ref: './paths/individuals/individuals.yml'
   /individuals/{id}:
     $ref: './paths/individuals/individuals-id.yml'
   /individuals/customId/{customId}:
     $ref: './paths/individuals/individuals-custom-id.yml'
-  /businesses/:
+  /businesses:
     $ref: './paths/businesses/businesses.yml'
   /businesses/{id}:
     $ref: './paths/businesses/businesses-id.yml'
@@ -89,13 +85,13 @@ paths:
     $ref: './paths/businesses/beneficial-owners/manual-insert.yml'
   /businesses/board-members/manual-insert/{id}:
     $ref: './paths/businesses/board-members/manual-insert.yml'
-  /cars/:
+  /cars:
     $ref: './paths/cars/cars.yml'
   /cars/{id}:
     $ref: './paths/cars/cars-id.yml'
   /cars/customId/{customId}:
     $ref: './paths/cars/cars-custom-id.yml'
-  /pings/:
+  /pings:
     $ref: './paths/pings/pings.yml'
   /pings/{id}:
     $ref: './paths/pings/pings-id.yml'
@@ -103,9 +99,9 @@ paths:
     $ref: './paths/pings/pings-id-status.yml'
   /pings/{id}/comment:
     $ref: './paths/pings/pings-id-comments.yml'
-  /cases/:
+  /cases:
     $ref: './paths/cases/cases.yml'
-  /cases/merge/:
+  /cases/merge:
     $ref: './paths/cases/cases-merge.yml'
   /cases/{id}:
     $ref: './paths/cases/cases-id.yml'
@@ -113,7 +109,7 @@ paths:
     $ref: './paths/cases/cases-id-status.yml'
   /cases/{id}/comment:
     $ref: './paths/cases/cases-id-comments.yml'
-  /requests/:
+  /requests:
     $ref: './paths/requests/requests.yml'
   /requests/{id}:
     $ref: './paths/requests/requests-id.yml'
@@ -139,7 +135,7 @@ paths:
       $ref: './paths/processes/processes-id.yml'
   /processes/activation/{id}:
       $ref: './paths/processes/processes-activation-id.yml'
-  /products/:
+  /products:
     $ref: './paths/products/products.yml'
   /products/{id}:
     $ref: './paths/products/products-id.yml'
@@ -160,7 +156,7 @@ paths:
   /forms/{formId}/{entityId}/link:
       $ref: './paths/forms/form-entityId-formId.yml'
   /form-answers/{formAnswerId}:
-      $ref: './paths/formAnswers/get-form-answer.yml'
+      $ref: './paths/formAnswers/form-answers-id.yml'
   /form-answers:
       $ref: './paths/formAnswers/form-answers.yml'
   # /api-keys:
@@ -192,71 +188,16 @@ paths:
   /individuals/population-register/manual-insert/{id}:
       $ref: './paths/populationRegisters/manual-insert.yml'
 
-
 components:
   schemas:
-    BusinessForm:
-      allOf:
-        - $ref: '#/components/schemas/KycFormBody'
-        - type: object
-          properties:
-            contactInfo:
-              $ref: '#/components/schemas/ContactInfo'
-            beneficialOwners:
-              $ref: '#/components/schemas/BeneficialOwners'
-            boardMembers:
-              $ref: '#/components/schemas/BoardMembers'
-            signatories:
-              $ref: '#/components/schemas/Signatories'
-            financialInfo:
-              $ref: '#/components/schemas/BusinessFinancialInfo'
-            identification:
-              $ref: '#/components/schemas/BusinessIdentification'
-            riskAssessment:
-              $ref: '#/components/schemas/BusinessRiskAssessment'
-    IndividualForm:
-      allOf:
-        - $ref: '#/components/schemas/KycFormBody'
-        - type: object
-          properties:
-            contactInfo:
-              $ref: '#/components/schemas/ContactInfo'
-            financialInfo:
-              $ref: '#/components/schemas/IndividualFinancialInfo'
-            identification:
-              $ref: '#/components/schemas/IndividualIdentification'
-            riskAssessment:
-              $ref: '#/components/schemas/IndividualRiskAssessment'
     AccountEntityBody:
       $ref: "./components/schemas/AccountEntityBody.yml"
     AccountEntityBodyUpdate:
       $ref: "./components/schemas/AccountEntityBodyUpdate.yml"
     AccountEntity:
       $ref: "./components/schemas/AccountEntity.yml"
-    ContactInfo:
-      $ref: "./components/schemas/ContactInfo.yml"
-    BeneficialOwners:
-      $ref: "./components/schemas/BeneficialOwners.yml"
-    BoardMembers:
-      $ref: "./components/schemas/BoardMembers.yml"
     EntitySavedFields:
       $ref: "./components/schemas/EntitySavedFields.yml"
-    Signatories:
-      $ref: "./components/schemas/Signatories.yml"
-    TransactionBehavior:
-      $ref: "./components/schemas/TransactionBehavior.yml"
-    BusinessFinancialInfo:
-      $ref: "./components/schemas/BusinessFinancialInfo.yml"
-    IndividualFinancialInfo:
-      $ref: "./components/schemas/IndividualFinancialInfo.yml"
-    BusinessIdentification:
-      $ref: "./components/schemas/BusinessIdentification.yml"
-    IndividualIdentification:
-      $ref: "./components/schemas/IndividualIdentification.yml"
-    BusinessRiskAssessment:
-      $ref: "./components/schemas/BusinessRiskAssessment.yml"
-    IndividualRiskAssessment:
-      $ref: "./components/schemas/IndividualRiskAssessment.yml"
     Individual:
       $ref: "./components/schemas/Individual.yml"
     BusinessBody:
@@ -269,10 +210,6 @@ components:
       $ref: "./components/schemas/Car.yml"
     Comment:
       $ref: "./components/schemas/Comment.yml"
-    KycForm:
-      $ref: "./components/schemas/KycForm.yml"
-    KycFormBody:
-      $ref: "./components/schemas/KycFormBody.yml"
     Ping:
       $ref: "./components/schemas/Ping.yml"
     Case:

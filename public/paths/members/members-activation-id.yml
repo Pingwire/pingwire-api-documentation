@@ -2,6 +2,7 @@ put:
   tags:
   - Members
   summary: Update member active status
+  operationId: updateMemberActiveStatus
   parameters:
   - in: path
     name: id

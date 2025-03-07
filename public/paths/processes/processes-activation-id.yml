@@ -2,6 +2,7 @@ put:
   tags:
   - Processes
   summary: Update process active status
+  operationId: updateProcessActiveStatus
   parameters:
   - in: path
     name: id

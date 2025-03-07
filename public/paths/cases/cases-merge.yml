@@ -1,7 +1,8 @@
 post:
   tags:
   - Cases
-  summary: Merge
+  summary: Merge cases
+  operationId: mergeCases
   description:  Merge cases together. Responds with a new case consisting of the merged cases.
   requestBody:
     content:

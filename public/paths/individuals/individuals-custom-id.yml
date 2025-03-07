@@ -2,6 +2,7 @@ get:
   tags:
     - Individuals
   summary: Get individual by customId
+  operationId: getIndividualByCustomId
   description: Receive individual by customId saved in the database.
   parameters:
   - in: path

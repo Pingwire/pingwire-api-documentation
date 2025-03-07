@@ -1,7 +1,8 @@
 get:
   tags:
     - Cases
-  summary: Case
+  summary: Get case
+  operationId: getCase
   description: Receive case by id saved in the database.
   parameters:
   - in: path

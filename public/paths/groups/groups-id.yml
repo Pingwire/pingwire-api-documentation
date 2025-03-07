@@ -1,7 +1,8 @@
 get:
   tags:
     - Groups
-  summary: Group
+  summary: Get group
+  operationId: getGroup
   description: Receive group by id saved in the database.
   parameters:
   - in: path
@@ -37,6 +38,7 @@ put:
   tags:
   - Groups
   summary: Update group
+  operationId: updateGroup
   parameters:
   - in: path
     name: id

@@ -2,6 +2,7 @@ get:
   tags:
     - Cars
   summary: List cars
+  operationId: listCars
   description: Receive list of cars saved in the database.
   parameters:
   - in: query
@@ -66,6 +67,7 @@ post:
   tags:
   - Cars
   summary: Create cars
+  operationId: createCar
   description: Create a new cars.
   requestBody:
     content:

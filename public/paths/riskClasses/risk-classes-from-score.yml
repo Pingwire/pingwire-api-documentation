@@ -1,7 +1,8 @@
-get: 
+get:
   tags:
     - Risk Classes
-  summary: Risk class by score
+  summary: Get risk class by score
+  operationId: getRiskClassByScore
   description: Receive risk class by score.
   parameters:
   - in: path
