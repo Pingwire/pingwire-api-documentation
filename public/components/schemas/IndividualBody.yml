@@ -42,7 +42,7 @@ properties:
       items:
         type: string
         format: ObjectId
-  kycApprouvedAt:
+  kycApprovedAt:
     type: string
     format: date-time
-    description: Date when KYC has been approuved
+    description: Date when KYC has been approved
