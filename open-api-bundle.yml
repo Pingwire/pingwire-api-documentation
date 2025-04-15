@@ -4361,10 +4361,10 @@ components:
           items:
             type: string
             format: ObjectId
-        kycApprouvedAt:
+        kycApprovedAt:
           type: string
           format: date-time
-          description: Date when KYC has been approuved
+          description: Date when KYC has been approved
       required:
         - type
     AccountEntityBodyUpdate:
@@ -4507,10 +4507,10 @@ components:
             type: string
             format: ObjectId
             example: 620a2958bfc1d7a803398a6d
-        kycApprouvedAt:
+        kycApprovedAt:
           type: string
           format: date-time
-          description: Date when KYC has been approuved
+          description: Date when KYC has been approved
     BusinessBodyUpdate:
       allOf:
         - $ref: '#/components/schemas/BusinessBody'
@@ -5215,10 +5215,10 @@ components:
           items:
             type: string
             format: ObjectId
-        kycApprouvedAt:
+        kycApprovedAt:
           type: string
           format: date-time
-          description: Date when KYC has been approuved
+          description: Date when KYC has been approved
     IndividualBodyUpdate:
       allOf:
         - $ref: '#/components/schemas/IndividualBody'
@@ -5266,10 +5266,10 @@ components:
         carModel:
           type: string
           description: Model of the car
-        kycApprouvedAt:
+        kycApprovedAt:
           type: string
           format: date-time
-          description: Date when KYC has been approuved
+          description: Date when KYC has been approved
     CarBodyUpdate:
       allOf:
         - $ref: '#/components/schemas/CarBody'
@@ -7204,10 +7204,10 @@ components:
           items:
             type: string
             format: ObjectId
-        kycApprouvedAt:
+        kycApprovedAt:
           type: string
           format: date-time
-          description: Date when KYC has been approuved
+          description: Date when KYC has been approved
     ProductBodyUpdate:
       type: object
       oneOf:
