@@ -1,0 +1,95 @@
+get:
+  tags:
+    - Connections
+  summary: List connections
+  operationId: listConnection
+  description: Receive list of connections saved in the database.
+  parameters:
+  - in: query
+    name: from
+    description: Source entity, must be used with to and cannot be used with entity
+    required: false
+    schema:
+      type: string
+      format: ObjectId
+      description: ID of the 'from' entity
+      example: 62b9437318fe4517089b2833
+  - in: query
+    name: to
+    description: Target entity, must be used with from and cannot be used with entity
+    required: false
+    schema:
+      type: string
+      format: ObjectId
+      description: ID of the 'to' entity
+      example: 62b9437318fe4517089b2833
+  - in: query
+    name: entity
+    description: Entity id, must be used with type and cannot be used with from or to.
+    required: false
+    schema:
+      type: string
+      format: ObjectId
+      description: ID of entity
+      example: 62b9437318fe4517089b2833
+  - in: query
+    name: type
+    description: Type of connection.
+    required: false
+    schema:
+      $ref: '#/components/schemas/ConnectionTypes'
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Connection"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Connections
+  summary: Create connections
+  operationId: createConnection
+  description: Create a new connections.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/ConnectionUpdate"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Connection"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
