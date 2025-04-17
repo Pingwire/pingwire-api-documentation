@@ -1,0 +1,41 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    description: ID of the connection
+    example: 62b9437318fe4517089b2833
+  from:
+    description: Source entity
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of the 'from' entity
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  to:
+    description: Target entity
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of the 'to' entity
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  type:
+    $ref: '#/components/schemas/ConnectionTypes'
+  createdAt:
+    type: string
+    description: Date when the connection was created.
+    format: date-time
+  connectionInfo:
+    type: object
+    properties:
+      description: 
+        type: string
+        description: Description of the connection

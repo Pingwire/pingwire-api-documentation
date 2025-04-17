@@ -1,0 +1,49 @@
+type: object
+properties:
+  from:
+    description: Source entity of the connection. Must be used with to and cannot be used with entity1 or entity2 
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of the 'from' entity
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  to:
+    description: Target entity of he connection. Must be used with from and cannot be used with entity1 or entity2 
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of the 'to' entity
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  entity1:
+    description: First entity of the connection (used when source or target doesn't matter). Must be used with enitity2 and cannot be used with from or to 
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of entity1
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  entity2:
+    description: Second entity of the connection (used when source or target doesn't matter). Must be used with enitity1 and cannot be used with from or to 
+    type: object
+    properties:
+      id: 
+        type: string
+        format: ObjectId
+        description: ID of entity2
+        example: 62b9437318fe4517089b2833
+      type:
+        $ref: '#/components/schemas/EntityTypes'
+  description:
+    description: Description of the connection
+    type: string

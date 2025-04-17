@@ -1,0 +1,4 @@
+type: string
+description: Type of connection
+enum:
+  - Custom
