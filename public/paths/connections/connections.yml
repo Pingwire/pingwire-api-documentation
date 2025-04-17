@@ -7,7 +7,7 @@ get:
   parameters:
   - in: query
     name: from
-    description: Source entity, must be used with to and cannot be used with entity
+    description: Source entity, used to have all connections with this entity as a source. It cannot be used with entity.
     required: false
     schema:
       type: string
@@ -16,7 +16,7 @@ get:
       example: 62b9437318fe4517089b2833
   - in: query
     name: to
-    description: Target entity, must be used with from and cannot be used with entity
+    description: Target entity, used to have all connections with this entity as a target. It cannot be used with entity.
     required: false
     schema:
       type: string
@@ -25,7 +25,7 @@ get:
       example: 62b9437318fe4517089b2833
   - in: query
     name: entity
-    description: Entity id, must be used with type and cannot be used with from or to.
+    description: Entity id, used to have all connections for this entity (either source or target of the connection). Must be used with type and cannot be used with from or to.
     required: false
     schema:
       type: string
