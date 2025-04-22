@@ -1133,6 +1133,139 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
+  /connections:
+    get:
+      tags:
+        - Connections
+      summary: List connections
+      operationId: listConnection
+      description: Receive list of connections saved in the database.
+      parameters:
+        - in: query
+          name: from
+          description: Source entity, used to have all connections with this entity as a source. It cannot be used with entity.
+          required: false
+          schema:
+            type: string
+            format: ObjectId
+            description: ID of the 'from' entity
+            example: 62b9437318fe4517089b2833
+        - in: query
+          name: to
+          description: Target entity, used to have all connections with this entity as a target. It cannot be used with entity.
+          required: false
+          schema:
+            type: string
+            format: ObjectId
+            description: ID of the 'to' entity
+            example: 62b9437318fe4517089b2833
+        - in: query
+          name: entity
+          description: Entity id, used to have all connections for this entity (either source or target of the connection). Must be used with type and cannot be used with from or to.
+          required: false
+          schema:
+            type: string
+            format: ObjectId
+            description: ID of entity
+            example: 62b9437318fe4517089b2833
+        - in: query
+          name: type
+          description: Type of connection.
+          required: false
+          schema:
+            $ref: '#/components/schemas/ConnectionTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Connection'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Connections
+      summary: Create connections
+      operationId: createConnection
+      description: Create a new connections.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectionUpdate'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /connections/{id}:
+    delete:
+      tags:
+        - Connections
+      summary: Delete connection
+      operationId: deleteConnection
+      description: Delete connection by id saved in the database.
+      parameters:
+        - in: path
+          name: id
+          description: Connection object id
+          example: 620a2958bfc1d7a803398a6d
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
   /pings:
     get:
       tags:
@@ -4608,6 +4741,98 @@ components:
                   enum:
                     - Individual
                     - Business
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectId
+          description: ID of the connection
+          example: 62b9437318fe4517089b2833
+        from:
+          description: Source entity
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the 'from' entity
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        to:
+          description: Target entity
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the 'to' entity
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        type:
+          $ref: '#/components/schemas/ConnectionTypes'
+        createdAt:
+          type: string
+          description: Date when the connection was created.
+          format: date-time
+        connectionInfo:
+          type: object
+          properties:
+            description:
+              type: string
+              description: Description of the connection
+    ConnectionUpdate:
+      type: object
+      properties:
+        from:
+          description: Source entity of the connection. Must be used with to and cannot be used with entity1 or entity2
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the 'from' entity
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        to:
+          description: Target entity of he connection. Must be used with from and cannot be used with entity1 or entity2
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the 'to' entity
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        entity1:
+          description: First entity of the connection (used when source or target doesn't matter). Must be used with enitity2 and cannot be used with from or to
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of entity1
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        entity2:
+          description: Second entity of the connection (used when source or target doesn't matter). Must be used with enitity1 and cannot be used with from or to
+          type: object
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of entity2
+              example: 62b9437318fe4517089b2833
+            type:
+              $ref: '#/components/schemas/EntityTypes'
+        description:
+          description: Description of the connection
+          type: string
     Comment:
       type: object
       required:
@@ -9079,6 +9304,8 @@ components:
                 - year
     EntityTypes:
       $ref: '#/components/schemas/entityTypes'
+    ConnectionTypes:
+      $ref: '#/components/schemas/connectionTypes'
     ProductTypes:
       $ref: '#/components/schemas/productTypes'
     ProductPartyRoles:
@@ -9427,6 +9654,11 @@ components:
         - Car
         - Account
         - Product
+    connectionTypes:
+      type: string
+      description: Type of connection
+      enum:
+        - Custom
     productTypes:
       type: string
       description: Type of product
@@ -9565,6 +9797,7 @@ x-tagGroups:
       - Members
       - Processes
       - Signals
+      - Connections
       - Groups
       - Transaction Types
       - Transaction
