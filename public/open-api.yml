@@ -190,8 +190,10 @@ paths:
       $ref: './paths/transactionTypes/transaction-types-activation-id.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
-  /individuals/population-register/manual-insert/{id}:
+  /individuals/population-register/v2/manual-insert/{id}:
       $ref: './paths/populationRegisters/manual-insert.yml'
+  /individuals/population-register/v2/{id}:
+      $ref: './paths/populationRegisters/population-register.yml'
 
 components:
   schemas:
