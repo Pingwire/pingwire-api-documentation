@@ -54,6 +54,7 @@ x-tagGroups:
       - Members
       - Processes
       - Signals
+      - Connections
       - Groups
       - Transaction Types
       - Transaction
@@ -91,6 +92,10 @@ paths:
     $ref: './paths/cars/cars-id.yml'
   /cars/customId/{customId}:
     $ref: './paths/cars/cars-custom-id.yml'
+  /connections:
+    $ref: './paths/connections/connections.yml'
+  /connections/{id}:
+    $ref: './paths/connections/connections-id.yml'
   /pings:
     $ref: './paths/pings/pings.yml'
   /pings/{id}:
@@ -208,6 +213,10 @@ components:
       $ref: "./components/schemas/Business.yml"
     Car:
       $ref: "./components/schemas/Car.yml"
+    Connection:
+      $ref: "./components/schemas/Connection.yml"
+    ConnectionUpdate:
+      $ref: "./components/schemas/ConnectionUpdate.yml"
     Comment:
       $ref: "./components/schemas/Comment.yml"
     Ping:
@@ -365,6 +374,8 @@ components:
 
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
+    ConnectionTypes:
+      $ref: "./components/schemas/enums/connectionTypes.yml"
     ProductTypes:
       $ref: "./components/schemas/enums/productTypes.yml"
     ProductPartyRoles:
