@@ -4316,7 +4316,7 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
-  /individuals/population-register/manual-insert/{id}:
+  /individuals/population-register/v2/manual-insert/{id}:
     post:
       tags:
         - Population Register
@@ -4337,6 +4337,43 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/PopulationRegister'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PopulationRegisterResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /individuals/population-register/v2/{id}:
+    get:
+      tags:
+        - Population Register
+      summary: Get latest population register
+      operationId: getLatestPopulationRegister
+      description: Get latest population register.
+      parameters:
+        - in: path
+          name: id
+          description: Individual object id
+          example: 620a2958bfc1d7a803398a6d
+          required: true
+          schema:
+            type: string
+            format: ObjectId
       responses:
         '200':
           description: Successful operation
