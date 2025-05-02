@@ -7438,7 +7438,13 @@ components:
             url: /#section/Introduction/Unique-Identifier
         productNumber:
           type: string
-          description: Number of the product
+          description: Unique identification number of the product
+          externalDocs:
+            description: Unique identifier
+            url: /#section/Introduction/Unique-Identifier
+        productDescription:
+          type: string
+          description: Description of the product
         productType:
           $ref: '#/components/schemas/ProductTypes'
         parties:
