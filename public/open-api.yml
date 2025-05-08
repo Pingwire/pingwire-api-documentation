@@ -223,6 +223,8 @@ components:
       $ref: "./components/schemas/Comment.yml"
     Ping:
       $ref: "./components/schemas/Ping.yml"
+    PingBodyUpdate:
+      $ref: "./components/schemas/PingBodyUpdate.yml"
     Case:
       $ref: "./components/schemas/Case.yml"
     InvalidBody:
@@ -307,8 +309,6 @@ components:
       $ref: "./components/schemas/Transaction.yml"
     TransactionTypeBody:
       $ref: "./components/schemas/TransactionTypeBody.yml"
-    PingBodyUpdate:
-      $ref: "./components/schemas/PingBodyUpdate.yml"
     PopulationRegisterOld:
       $ref: "./components/schemas/PopulationRegisterOld.yml"
     PopulationRegister:

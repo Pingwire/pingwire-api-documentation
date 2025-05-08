@@ -1,3 +1,4 @@
+allOf:
 - type: object
   properties:
     tags:
