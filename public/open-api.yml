@@ -307,6 +307,8 @@ components:
       $ref: "./components/schemas/Transaction.yml"
     TransactionTypeBody:
       $ref: "./components/schemas/TransactionTypeBody.yml"
+    PingBodyUpdate:
+      $ref: "./components/schemas/PingBodyUpdate.yml"
     PopulationRegisterOld:
       $ref: "./components/schemas/PopulationRegisterOld.yml"
     PopulationRegister:
