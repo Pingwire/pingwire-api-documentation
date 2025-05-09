@@ -223,6 +223,8 @@ components:
       $ref: "./components/schemas/Comment.yml"
     Ping:
       $ref: "./components/schemas/Ping.yml"
+    PingBodyUpdate:
+      $ref: "./components/schemas/PingBodyUpdate.yml"
     Case:
       $ref: "./components/schemas/Case.yml"
     InvalidBody:
