@@ -1,0 +1,10 @@
+allOf:
+- type: object
+  properties:
+    tags:
+      type: array
+      description: List of tags attached to the ping.
+      items:
+        type: string
+        format: ObjectId
+        example: 62b9437318fe4517089b2833
