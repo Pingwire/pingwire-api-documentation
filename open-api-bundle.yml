@@ -8578,6 +8578,10 @@ components:
               format: ObjectId
               example: 620a2958bfc1d7a803398a6d
               description: Form that was used to submit the answers
+            submittedAt:
+              type: string
+              format: date-time
+              description: The time at which the form answer was submitted. Set by default to now.
             activities:
               type: string
               description: Description of the business activities
@@ -9082,6 +9086,10 @@ components:
               type: string
               format: date-time
               description: Time when the form answer was inserted in the Pingwire system
+            submittedAt:
+              type: string
+              format: date-time
+              description: The time at which the form answer was submitted. Set by default to now
             updatedAt:
               type: string
               format: date-time

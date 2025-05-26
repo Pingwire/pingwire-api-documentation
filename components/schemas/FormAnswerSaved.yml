@@ -14,6 +14,10 @@ allOf:
         type: string
         format: date-time
         description: Time when the form answer was inserted in the Pingwire system
+      submittedAt:
+        type: string
+        format: date-time
+        description: The time at which the form answer was submitted. Set by default to now
       updatedAt:
         type: string
         format: date-time
