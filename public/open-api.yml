@@ -392,6 +392,10 @@ components:
       $ref: "./components/schemas/controlTypes/directControlTypes.yml"
     IndirectControlTypes:
       $ref: "./components/schemas/controlTypes/indirectControlTypes.yml"
+    CaseStatuses:
+      $ref: "./components/schemas/enums/caseStatuses.yml"
+    CasePriorities:
+      $ref: "./components/schemas/enums/casePriorities.yml"
 
   securitySchemes:
     bearerAuth:

@@ -6,10 +6,11 @@ required:
 - pings
 - fipoReports
 - comments
-- createdAd
+- createdAt
 - files
 - status
-- teams
+- priority
+- tags
 properties:
   id:
     type: string
@@ -99,14 +100,12 @@ properties:
     format: ObjectId
     example: 62b9437318fe4517089b2833
   status:
-    type: string
-    description: Status of the case
-    enum:
-    - Open
-    - Closed
-  teams:
+    $ref: '#/components/schemas/CaseStatuses'
+  priority:
+    $ref: '#/components/schemas/CasePriorities'
+  tags:
     type: array
-    description: Teams assigned to the case
+    description: Tags of the case
     items:
       type: string
       format: ObjectId
@@ -115,4 +114,27 @@ properties:
     type: string
     format: date-time
     description: Date when the case was closed
+  assignment:
+    type: object
+    description: Assignment details of the case
+    properties:
+      memberId:
+        type: string
+        description: ID of the member the case is currently assigned to.
+        format: ObjectId
+        example: 62b9437318fe4517089b2833
+  escalation:
+    type: object
+    description: Escalation details of the case
+    properties:
+      escalatedTo:
+        type: string
+        description: ID of the member the case is currently escalated to.
+        format: ObjectId
+        example: 62b9437318fe4517089b2833
+      requestedBy:
+        type: string
+        description: ID of the member who requested the escalation.
+        format: ObjectId
+        example: 62b9437318fe4517089b2833
 

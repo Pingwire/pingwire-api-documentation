@@ -43,23 +43,13 @@ get:
     description: Filter list of cases by status. The query parameter can be repeated to filter by multiple statuses.
     required: false
     schema:
-      type: string
-      enum:
-      - Open
-      - Closed
-      - in-progress
-      - pending
+      $ref: '#/components/schemas/CaseStatuses'
   - in: query
     name: priority
     description: Filter list of cases by priority. The query parameter can be repeated to filter by multiple priorities.
     required: false
     schema:
-      type: string
-      enum:
-      - low
-      - normal
-      - high
-      - urgent
+      $ref: '#/components/schemas/CasePriorities'
   - in: query
     name: entities
     description: Filter list of cases by entity ID. The query parameter can be repeated to filter by multiple entities.
