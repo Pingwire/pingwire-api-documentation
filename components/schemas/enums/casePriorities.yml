@@ -1,0 +1,12 @@
+type: string
+description: |
+  Priority of the case.
+  - `low`: the case has low priority and can be addressed later.
+  - `normal`: the case has normal priority and should be addressed in a reasonable time frame.
+  - `high`: the case has high priority and should be addressed as soon as possible.
+  - `urgent`: the case has urgent priority and requires immediate attention.
+enum:
+- low
+- normal
+- high
+- urgent

@@ -1,0 +1,12 @@
+type: string
+description: |
+  Status of the case.
+  - `Open`: the case is open and can be worked on.
+  - `Closed`: the case is closed and cannot be worked on anymore.
+  - `in-progress`: the case is currently being worked on.
+  - `pending`: the case is pending and waiting for some action, for example customer feedback or peer review.
+enum:
+- Open
+- Closed
+- in-progress
+- pending

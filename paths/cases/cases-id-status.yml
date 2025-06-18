@@ -21,10 +21,7 @@ put:
           - status
           properties:
             status:
-              type: string
-              enum:
-              - Open
-              - Closed
+              $ref: '#/components/schemas/CaseStatuses'
   responses:
     200:
       description: Successful operation

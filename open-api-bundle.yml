@@ -1647,7 +1647,6 @@ paths:
             enum:
               - id
               - createdAt
-              - entities
         - in: query
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -1658,16 +1657,6 @@ paths:
             enum:
               - DESC
               - ASC
-        - in: query
-          name: status
-          description: Filter list of cases by status.
-          required: false
-          example: null
-          schema:
-            type: string
-            enum:
-              - Open
-              - Closed
         - in: query
           name: _start
           description: The start number of the cases list.
@@ -1682,6 +1671,46 @@ paths:
           example: '10'
           schema:
             type: number
+        - in: query
+          name: status
+          description: Filter list of cases by status. The query parameter can be repeated to filter by multiple statuses.
+          required: false
+          schema:
+            $ref: '#/components/schemas/CaseStatuses'
+        - in: query
+          name: priority
+          description: Filter list of cases by priority. The query parameter can be repeated to filter by multiple priorities.
+          required: false
+          schema:
+            $ref: '#/components/schemas/CasePriorities'
+        - in: query
+          name: entities
+          description: Filter list of cases by entity ID. The query parameter can be repeated to filter by multiple entities.
+          required: false
+          example: 62b9437318fe4517089b2833
+          schema:
+            type: string
+        - in: query
+          name: assignee
+          description: Filter list of cases by the member ID that cases are assigned to. Use the value `unassigned` to filter on cases that have not been assigned. The query parameter can be repeated to filter by multiple assignees.
+          required: false
+          example: 62b9437318fe4517089b2833
+          schema:
+            type: string
+        - in: query
+          name: escalatedTo
+          description: Filter list of cases by the member ID that cases are escalated to. Use the value `deescalated` to filter on cases that are currently not escalated. The query parameter can be repeated to filter by multiple escalated to members.
+          required: false
+          example: 62b9437318fe4517089b2833
+          schema:
+            type: string
+        - in: query
+          name: tags
+          description: Filter list of cases by tag ID. The query parameter can be repeated to filter by multiple tags.
+          required: false
+          example: 62b9437318fe4517089b2833
+          schema:
+            type: string
       responses:
         '200':
           description: Successful operation
@@ -1809,10 +1838,7 @@ paths:
                 - status
               properties:
                 status:
-                  type: string
-                  enum:
-                    - Open
-                    - Closed
+                  $ref: '#/components/schemas/CaseStatuses'
       responses:
         '200':
           description: Successful operation
@@ -5029,10 +5055,11 @@ components:
         - pings
         - fipoReports
         - comments
-        - createdAd
+        - createdAt
         - files
         - status
-        - teams
+        - priority
+        - tags
       properties:
         id:
           type: string
@@ -5122,14 +5149,12 @@ components:
           format: ObjectId
           example: 62b9437318fe4517089b2833
         status:
-          type: string
-          description: Status of the case
-          enum:
-            - Open
-            - Closed
-        teams:
+          $ref: '#/components/schemas/CaseStatuses'
+        priority:
+          $ref: '#/components/schemas/CasePriorities'
+        tags:
           type: array
-          description: Teams assigned to the case
+          description: Tags of the case
           items:
             type: string
             format: ObjectId
@@ -5138,6 +5163,29 @@ components:
           type: string
           format: date-time
           description: Date when the case was closed
+        assignment:
+          type: object
+          description: Assignment details of the case
+          properties:
+            memberId:
+              type: string
+              description: ID of the member the case is currently assigned to.
+              format: ObjectId
+              example: 62b9437318fe4517089b2833
+        escalation:
+          type: object
+          description: Escalation details of the case
+          properties:
+            escalatedTo:
+              type: string
+              description: ID of the member the case is currently escalated to.
+              format: ObjectId
+              example: 62b9437318fe4517089b2833
+            requestedBy:
+              type: string
+              description: ID of the member who requested the escalation.
+              format: ObjectId
+              example: 62b9437318fe4517089b2833
     InvalidBody:
       type: object
       required:
@@ -9427,6 +9475,10 @@ components:
       $ref: '#/components/schemas/directControlTypes'
     IndirectControlTypes:
       $ref: '#/components/schemas/indirectControlTypes'
+    CaseStatuses:
+      $ref: '#/components/schemas/caseStatuses'
+    CasePriorities:
+      $ref: '#/components/schemas/casePriorities'
     Individual-2:
       type: object
       properties:
@@ -9863,6 +9915,32 @@ components:
         other:
           type: string
           description: Description of the ownership type. Only used if "type" is "other".
+    caseStatuses:
+      type: string
+      description: |
+        Status of the case.
+        - `Open`: the case is open and can be worked on.
+        - `Closed`: the case is closed and cannot be worked on anymore.
+        - `in-progress`: the case is currently being worked on.
+        - `pending`: the case is pending and waiting for some action, for example customer feedback or peer review.
+      enum:
+        - Open
+        - Closed
+        - in-progress
+        - pending
+    casePriorities:
+      type: string
+      description: |
+        Priority of the case.
+        - `low`: the case has low priority and can be addressed later.
+        - `normal`: the case has normal priority and should be addressed in a reasonable time frame.
+        - `high`: the case has high priority and should be addressed as soon as possible.
+        - `urgent`: the case has urgent priority and requires immediate attention.
+      enum:
+        - low
+        - normal
+        - high
+        - urgent
   securitySchemes:
     bearerAuth:
       type: http
