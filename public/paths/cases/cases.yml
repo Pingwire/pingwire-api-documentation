@@ -14,7 +14,6 @@ get:
       enum:
       - id
       - createdAt
-      - entities
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -25,16 +24,6 @@ get:
       enum:
       - DESC
       - ASC
-  - in: query
-    name: status
-    description: Filter list of cases by status.
-    required: false
-    example:
-    schema:
-      type: string
-      enum:
-      - Open
-      - Closed
   - in: query
     name: _start
     description: The start number of the cases list.
@@ -49,6 +38,46 @@ get:
     example: '10'
     schema:
       type: number
+  - in: query
+    name: status
+    description: Filter list of cases by status. The query parameter can be repeated to filter by multiple statuses.
+    required: false
+    schema:
+      $ref: '#/components/schemas/CaseStatuses'
+  - in: query
+    name: priority
+    description: Filter list of cases by priority. The query parameter can be repeated to filter by multiple priorities.
+    required: false
+    schema:
+      $ref: '#/components/schemas/CasePriorities'
+  - in: query
+    name: entities
+    description: Filter list of cases by entity ID. The query parameter can be repeated to filter by multiple entities.
+    required: false
+    example: 62b9437318fe4517089b2833
+    schema:
+      type: string
+  - in: query
+    name: assignee
+    description: Filter list of cases by the member ID that cases are assigned to. Use the value `unassigned` to filter on cases that have not been assigned. The query parameter can be repeated to filter by multiple assignees.
+    required: false
+    example: 62b9437318fe4517089b2833
+    schema:
+      type: string
+  - in: query
+    name: escalatedTo
+    description: Filter list of cases by the member ID that cases are escalated to. Use the value `deescalated` to filter on cases that are currently not escalated. The query parameter can be repeated to filter by multiple escalated to members.
+    required: false
+    example: 62b9437318fe4517089b2833
+    schema:
+      type: string
+  - in: query
+    name: tags
+    description: Filter list of cases by tag ID. The query parameter can be repeated to filter by multiple tags.
+    required: false
+    example: 62b9437318fe4517089b2833
+    schema:
+      type: string
   responses:
     200:
       description: Successful operation
