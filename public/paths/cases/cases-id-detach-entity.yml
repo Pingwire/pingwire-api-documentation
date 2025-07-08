@@ -1,9 +1,9 @@
 put:
   tags:
     - Cases
-  summary: Attach entity
-  operationId: attachEntityToCase
-  description: Attach an entity to a case.
+  summary: Detach entity
+  operationId: detachEntityToCase
+  description: Detach an entity from a case.
   parameters:
   - in: path
     name: id
@@ -25,7 +25,7 @@ put:
             entityId:
               type: string
               format: ObjectId
-              description: EntityId of the entity to attach to the case
+              description: EntityId of the entity to detach from the case
               example: 62b9437318fe4517089b2833
             entityType:
               $ref: '#/components/schemas/EntityTypes'

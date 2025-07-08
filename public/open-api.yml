@@ -112,6 +112,8 @@ paths:
     $ref: './paths/cases/cases-id.yml'
   /cases/{id}/attach-entity:
     $ref: './paths/cases/cases-id-attach-entity.yml'
+  /cases/{id}/detach-entity:
+    $ref: './paths/cases/cases-id-detach-entity.yml'
   /cases/{id}/status:
     $ref: './paths/cases/cases-id-status.yml'
   /cases/{id}/comment:
