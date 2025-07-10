@@ -1,24 +1,19 @@
-post:
+put:
   tags:
     - Transaction Table Setup
-  summary: Add a row to a transaction table setup
-  operationId: addTransactionTableSetupRow
-  description: Add a new row to the transaction table setup. The row displays data for a specific transaction type filter.
+  summary: Remove a row from a transaction table setup
+  operationId: removeTransactionTableSetupRow
+  description: Remove a row from the transaction table setup.
   parameters:
   - in: path
     name: entityType
     required: true
-    description: Entity type for which to add a new transaction setup row.
-  requestBody:
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            transactionTypeConfiguration:
-              $ref: "#/components/schemas/TransactionTypeConfiguration"
-          required:
-            - transactionTypeConfiguration
+    description: Entity type for which to remove a transaction table setup row.
+  - in: path
+    name: id
+    required: true
+    description: Id of the row to remove from the transaction table setup
+
   responses:
     200:
       description: Successful operation
