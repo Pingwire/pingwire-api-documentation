@@ -187,6 +187,8 @@ paths:
       $ref: './paths/transactionTableSetup/transaction-table-setup.yml'
   /transaction-table-setup/{entityType}/row:
       $ref: './paths/transactionTableSetup/transaction-table-setup-row.yml'
+  /transaction-table-setup/{entityType}/rowToShow:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-row-to-show.yml'
   /transaction-table-setup/{entityType}/row/{id}:
       $ref: './paths/transactionTableSetup/transaction-table-setup-row-id.yml'
   /transaction-types:

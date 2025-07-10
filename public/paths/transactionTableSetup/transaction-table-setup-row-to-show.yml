@@ -1,0 +1,44 @@
+put:
+  tags:
+    - Transaction Table Setup
+  summary: Define row to show in graph
+  operationId: removeTransactionTableSetupRow
+  description: Define a row that should show in the transaction graph.
+  parameters:
+  - in: path
+    name: entityType
+    required: true
+    description: Entity type for which to remove a transaction table setup row.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            rowToShowInGraph:
+              type: string
+              format: objectId
+              example: 62b9437318fe4517089b2833
+              description: Id of the row to show in graph
+
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionTableSetup"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
