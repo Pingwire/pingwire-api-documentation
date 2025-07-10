@@ -1,0 +1,36 @@
+get:
+  tags:
+    - Transaction Table Setup
+  summary: Fetch transaction table setup for entity type
+  operationId: getTransactionTableSetup
+  description: Receive the transaction table interface setup for the specified entity type
+  parameters:
+  - in: path
+    name: entityType
+    required: true
+    description: Entity type for which to get the table setup
+    example: business
+    schema:
+      $ref: '#/components/schemas/EntityTypes'
+
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionTableSetup"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

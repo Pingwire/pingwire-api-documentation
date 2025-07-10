@@ -1,0 +1,25 @@
+type: array
+items:
+  type: object
+  properties:
+    or:
+      type: array
+      items:
+        type: object
+        properties:
+          and:
+            type: array
+            items:
+              type: object
+              properties:
+                inclusion:
+                  type: string
+                  description: Whether or not to include the transaction type
+                  enum:
+                    - included
+                    - excluded
+                transactionTypeId:
+                  type: string
+                  format: ObjectId
+                  example: 62b9437318fe4517089b2833
+                  description: ID of he transaction type to include/exclude

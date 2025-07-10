@@ -1,0 +1,57 @@
+type: object
+required:
+- id
+- entityType
+properties:
+  id:
+    type: string
+    format: objectId
+  entityType:
+    $ref: '#/components/schemas/EntityTypes'
+  rows:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: objectId
+          example: 62b9437318fe4517089b2833
+          description: Id of the row
+        transactionTypeConfiguration:
+          $ref: "#/components/schemas/TransactionTypeConfiguration"
+  columns:
+    type: array
+    items:
+      type: object
+      properties:
+        source:
+          type: string
+          description: The source of the column to display on the table
+          enum:
+            - typeConfiguration
+            - incoming.volume
+            - incoming.monthlyVolume
+            - outgoing.volume
+            - outgoing.monthlyVolume
+            - processing.volume
+            - processing.monthlyVolume
+            - total.volume
+            - total.monthlyVolume
+            - netVolume
+            - netMonthlyVolume
+            - incoming.frequency
+            - incoming.monthlyFrequency
+            - outgoing.frequency
+            - outgoing.monthlyFrequency
+            - processing.frequency
+            - processing.monthlyFrequency
+            - total.frequency
+            - total.monthlyFrequency
+        enabled:
+          type: boolean
+          description: Whether or not the column should be displayed
+  rowToShowInGraph:
+    type: string
+    format: objectId
+    description: The id of the row to show in graph
