@@ -2,13 +2,15 @@ post:
   tags:
     - Transaction Table Setup
   summary: Change columns of a transaction table
-  operationId: addTransactionTableSetupRow
+  operationId: updateTransactionTableSetupColumns
   description: Change the columns to show in a transaction table
   parameters:
   - in: path
     name: entityType
     required: true
     description: Entity type for which to add a new transaction setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
   requestBody:
     content:
       application/json:

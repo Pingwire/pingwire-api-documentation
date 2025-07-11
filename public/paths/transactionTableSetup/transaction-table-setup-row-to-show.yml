@@ -2,13 +2,15 @@ put:
   tags:
     - Transaction Table Setup
   summary: Define row to show in graph
-  operationId: removeTransactionTableSetupRow
+  operationId: selectTransactionTableSetupRowToShow
   description: Define a row that should show in the transaction graph.
   parameters:
   - in: path
     name: entityType
     required: true
     description: Entity type for which to remove a transaction table setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
   requestBody:
     content:
       application/json:

@@ -9,6 +9,8 @@ post:
     name: entityType
     required: true
     description: Entity type for which to add a new transaction setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
   requestBody:
     content:
       application/json:

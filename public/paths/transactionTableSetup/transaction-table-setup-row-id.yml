@@ -9,10 +9,16 @@ put:
     name: entityType
     required: true
     description: Entity type for which to remove a transaction table setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
   - in: path
     name: id
     required: true
     description: Id of the row to remove from the transaction table setup
+    schema:
+      type: string
+      format: objectId
+      example: 62b9437318fe4517089b2833
 
   responses:
     200:
