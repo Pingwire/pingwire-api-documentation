@@ -1,0 +1,42 @@
+post:
+  tags:
+    - Transaction Table Setup
+  summary: Change columns of a transaction table
+  operationId: addTransactionTableSetupRow
+  description: Change the columns to show in a transaction table
+  parameters:
+  - in: path
+    name: entityType
+    required: true
+    description: Entity type for which to add a new transaction setup row.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            columns:
+              $ref: "#/components/schemas/TransactionTableSetupColumns"
+          required:
+            - columns
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionTableSetup"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

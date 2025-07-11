@@ -185,6 +185,8 @@ paths:
       $ref: './paths/transaction/transaction.yml'
   /transaction-table-setup/{entityType}:
       $ref: './paths/transactionTableSetup/transaction-table-setup.yml'
+  /transaction-table-setup/{entityType}/columns:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-columns.yml'
   /transaction-table-setup/{entityType}/row:
       $ref: './paths/transactionTableSetup/transaction-table-setup-row.yml'
   /transaction-table-setup/{entityType}/rowToShow:
@@ -374,6 +376,8 @@ components:
       $ref: "./components/schemas/RelatedEntity.yml"
     RelatedEntityRole:
       $ref: "./components/schemas/RelatedEntityRole.yml"
+    TransactionTableSetupColumns:
+      $ref: "./components/schemas/TransactionTableSetupColumns.yml"
     TransactionPattern:
       $ref: "./components/schemas/TransactionPattern.yml"
     TransactionParty:
