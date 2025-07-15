@@ -1734,6 +1734,49 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
+    post:
+      tags:
+        - Cases
+      summary: Create case
+      operationId: createCase
+      description: Create a case.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entityId
+                - entityType
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: EntityId of the entity to create a case for
+                  example: 62b9437318fe4517089b2833
+                entityType:
+                  $ref: '#/components/schemas/EntityTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
   /cases/merge:
     post:
       tags:
@@ -1793,6 +1836,112 @@ paths:
           schema:
             type: string
             format: ObjectId
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /cases/{id}/attach-entity:
+    put:
+      tags:
+        - Cases
+      summary: Attach entity
+      operationId: attachEntityToCase
+      description: Attach an entity to a case.
+      parameters:
+        - in: path
+          name: id
+          description: Case object id
+          example: 620a2958bfc1d7a803398a6d
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entityId
+                - entityType
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: EntityId of the entity to attach to the case
+                  example: 62b9437318fe4517089b2833
+                entityType:
+                  $ref: '#/components/schemas/EntityTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Case'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /cases/{id}/detach-entity:
+    put:
+      tags:
+        - Cases
+      summary: Detach entity
+      operationId: detachEntityToCase
+      description: Detach an entity from a case.
+      parameters:
+        - in: path
+          name: id
+          description: Case object id
+          example: 620a2958bfc1d7a803398a6d
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - entityId
+                - entityType
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: EntityId of the entity to detach from the case
+                  example: 62b9437318fe4517089b2833
+                entityType:
+                  $ref: '#/components/schemas/EntityTypes'
       responses:
         '200':
           description: Successful operation
