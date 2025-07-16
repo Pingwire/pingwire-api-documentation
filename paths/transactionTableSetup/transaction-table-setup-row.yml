@@ -1,0 +1,44 @@
+post:
+  tags:
+    - Transaction Table Setup
+  summary: Add a row to a transaction table setup
+  operationId: addTransactionTableSetupRow
+  description: Add a new row to the transaction table setup. The row displays data for a specific transaction type filter.
+  parameters:
+  - in: path
+    name: entityType
+    required: true
+    description: Entity type for which to add a new transaction setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            transactionTypeConfiguration:
+              $ref: "#/components/schemas/TransactionTypeConfiguration"
+          required:
+            - transactionTypeConfiguration
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionTableSetup"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

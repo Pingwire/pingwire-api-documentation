@@ -1,0 +1,28 @@
+type: object
+required:
+- id
+- entityType
+properties:
+  id:
+    type: string
+    format: objectId
+  entityType:
+    $ref: '#/components/schemas/EntityTypes'
+  rows:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: objectId
+          example: 62b9437318fe4517089b2833
+          description: Id of the row
+        transactionTypeConfiguration:
+          $ref: "#/components/schemas/TransactionTypeConfiguration"
+  columns:
+    $ref: "#/components/schemas/TransactionTableSetupColumns"  
+  rowToShowInGraph:
+    type: string
+    format: objectId
+    description: The id of the row to show in graph

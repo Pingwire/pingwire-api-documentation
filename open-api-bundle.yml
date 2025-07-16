@@ -4270,6 +4270,221 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
+  /transaction-table-setup/{entityType}:
+    get:
+      tags:
+        - Transaction Table Setup
+      summary: Fetch transaction table setup for entity type
+      operationId: getTransactionTableSetup
+      description: Receive the transaction table interface setup for the specified entity type
+      parameters:
+        - in: path
+          name: entityType
+          required: true
+          description: Entity type for which to get the table setup
+          example: business
+          schema:
+            $ref: '#/components/schemas/EntityTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionTableSetup'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /transaction-table-setup/{entityType}/columns:
+    post:
+      tags:
+        - Transaction Table Setup
+      summary: Change columns of a transaction table
+      operationId: updateTransactionTableSetupColumns
+      description: Change the columns to show in a transaction table
+      parameters:
+        - in: path
+          name: entityType
+          required: true
+          description: Entity type for which to add a new transaction setup row.
+          schema:
+            $ref: '#/components/schemas/EntityTypes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columns:
+                  $ref: '#/components/schemas/TransactionTableSetupColumns'
+              required:
+                - columns
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionTableSetup'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /transaction-table-setup/{entityType}/row:
+    post:
+      tags:
+        - Transaction Table Setup
+      summary: Add a row to a transaction table setup
+      operationId: addTransactionTableSetupRow
+      description: Add a new row to the transaction table setup. The row displays data for a specific transaction type filter.
+      parameters:
+        - in: path
+          name: entityType
+          required: true
+          description: Entity type for which to add a new transaction setup row.
+          schema:
+            $ref: '#/components/schemas/EntityTypes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                transactionTypeConfiguration:
+                  $ref: '#/components/schemas/TransactionTypeConfiguration'
+              required:
+                - transactionTypeConfiguration
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionTableSetup'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /transaction-table-setup/{entityType}/rowToShow:
+    put:
+      tags:
+        - Transaction Table Setup
+      summary: Define row to show in graph
+      operationId: selectTransactionTableSetupRowToShow
+      description: Define a row that should show in the transaction graph.
+      parameters:
+        - in: path
+          name: entityType
+          required: true
+          description: Entity type for which to remove a transaction table setup row.
+          schema:
+            $ref: '#/components/schemas/EntityTypes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                rowToShowInGraph:
+                  type: string
+                  format: objectId
+                  example: 62b9437318fe4517089b2833
+                  description: Id of the row to show in graph
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionTableSetup'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /transaction-table-setup/{entityType}/row/{id}:
+    put:
+      tags:
+        - Transaction Table Setup
+      summary: Remove a row from a transaction table setup
+      operationId: removeTransactionTableSetupRow
+      description: Remove a row from the transaction table setup.
+      parameters:
+        - in: path
+          name: entityType
+          required: true
+          description: Entity type for which to remove a transaction table setup row.
+          schema:
+            $ref: '#/components/schemas/EntityTypes'
+        - in: path
+          name: id
+          required: true
+          description: Id of the row to remove from the transaction table setup
+          schema:
+            type: string
+            format: objectId
+            example: 62b9437318fe4517089b2833
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionTableSetup'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
   /transaction-types:
     get:
       tags:
@@ -6432,6 +6647,35 @@ components:
               description: ID of the transaction
               example: 62b9437318fe4517089b2833
         - $ref: '#/components/schemas/TransactionBody'
+    TransactionTableSetup:
+      type: object
+      required:
+        - id
+        - entityType
+      properties:
+        id:
+          type: string
+          format: objectId
+        entityType:
+          $ref: '#/components/schemas/EntityTypes'
+        rows:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: objectId
+                example: 62b9437318fe4517089b2833
+                description: Id of the row
+              transactionTypeConfiguration:
+                $ref: '#/components/schemas/TransactionTypeConfiguration'
+        columns:
+          $ref: '#/components/schemas/TransactionTableSetupColumns'
+        rowToShowInGraph:
+          type: string
+          format: objectId
+          description: The id of the row to show in graph
     TransactionTypeBody:
       type: object
       properties:
@@ -9399,6 +9643,37 @@ components:
             other:
               type: string
               description: Description of the role. Only used if the chosen option is "other".
+    TransactionTableSetupColumns:
+      type: array
+      items:
+        type: object
+        properties:
+          source:
+            type: string
+            description: The source of the column to display on the table
+            enum:
+              - typeConfiguration
+              - incoming.volume
+              - incoming.monthlyVolume
+              - outgoing.volume
+              - outgoing.monthlyVolume
+              - processing.volume
+              - processing.monthlyVolume
+              - total.volume
+              - total.monthlyVolume
+              - netVolume
+              - netMonthlyVolume
+              - incoming.frequency
+              - incoming.monthlyFrequency
+              - outgoing.frequency
+              - outgoing.monthlyFrequency
+              - processing.frequency
+              - processing.monthlyFrequency
+              - total.frequency
+              - total.monthlyFrequency
+          enabled:
+            type: boolean
+            description: Whether or not the column should be displayed
     TransactionPattern:
       type: object
       properties:
@@ -9461,6 +9736,32 @@ components:
         hardwareId:
           type: string
           description: Hardware id used to authorize the transaction.
+    TransactionTypeConfiguration:
+      type: array
+      items:
+        type: object
+        properties:
+          or:
+            type: array
+            items:
+              type: object
+              properties:
+                and:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      inclusion:
+                        type: string
+                        description: Whether or not to include the transaction type
+                        enum:
+                          - included
+                          - excluded
+                      transactionTypeId:
+                        type: string
+                        format: ObjectId
+                        example: 62b9437318fe4517089b2833
+                        description: ID of he transaction type to include/exclude
     Pep:
       type: object
       description: Information about the PEP status of the individual
@@ -10129,5 +10430,6 @@ x-tagGroups:
       - Signals
       - Connections
       - Groups
+      - Transaction Table Setup
       - Transaction Types
       - Transaction
