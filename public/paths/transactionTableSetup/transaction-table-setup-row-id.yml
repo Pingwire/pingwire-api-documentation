@@ -1,0 +1,43 @@
+put:
+  tags:
+    - Transaction Table Setup
+  summary: Remove a row from a transaction table setup
+  operationId: removeTransactionTableSetupRow
+  description: Remove a row from the transaction table setup.
+  parameters:
+  - in: path
+    name: entityType
+    required: true
+    description: Entity type for which to remove a transaction table setup row.
+    schema:
+      $ref: "#/components/schemas/EntityTypes"
+  - in: path
+    name: id
+    required: true
+    description: Id of the row to remove from the transaction table setup
+    schema:
+      type: string
+      format: objectId
+      example: 62b9437318fe4517089b2833
+
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionTableSetup"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

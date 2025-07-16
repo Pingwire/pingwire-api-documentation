@@ -56,6 +56,7 @@ x-tagGroups:
       - Signals
       - Connections
       - Groups
+      - Transaction Table Setup
       - Transaction Types
       - Transaction
 
@@ -186,6 +187,16 @@ paths:
       $ref: './paths/signals/signals-activation-id.yml'
   /transaction/{id}:
       $ref: './paths/transaction/transaction.yml'
+  /transaction-table-setup/{entityType}:
+      $ref: './paths/transactionTableSetup/transaction-table-setup.yml'
+  /transaction-table-setup/{entityType}/columns:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-columns.yml'
+  /transaction-table-setup/{entityType}/row:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-row.yml'
+  /transaction-table-setup/{entityType}/rowToShow:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-row-to-show.yml'
+  /transaction-table-setup/{entityType}/row/{id}:
+      $ref: './paths/transactionTableSetup/transaction-table-setup-row-id.yml'
   /transaction-types:
       $ref: './paths/transactionTypes/transaction-types.yml'
   /transaction-types/{id}:
@@ -311,6 +322,8 @@ components:
       $ref: "./components/schemas/TransactionBody.yml"
     Transaction:
       $ref: "./components/schemas/Transaction.yml"
+    TransactionTableSetup:
+      $ref: "./components/schemas/TransactionTableSetup.yml"
     TransactionTypeBody:
       $ref: "./components/schemas/TransactionTypeBody.yml"
     PopulationRegisterOld:
@@ -367,10 +380,14 @@ components:
       $ref: "./components/schemas/RelatedEntity.yml"
     RelatedEntityRole:
       $ref: "./components/schemas/RelatedEntityRole.yml"
+    TransactionTableSetupColumns:
+      $ref: "./components/schemas/TransactionTableSetupColumns.yml"
     TransactionPattern:
       $ref: "./components/schemas/TransactionPattern.yml"
     TransactionParty:
       $ref: "./components/schemas/requestParties/TransactionParty.yml"
+    TransactionTypeConfiguration:
+      $ref: "./components/schemas/TransactionTypeConfiguration.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
