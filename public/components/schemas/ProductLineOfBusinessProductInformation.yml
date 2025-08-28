@@ -18,7 +18,8 @@ properties:
             type: string
             description: City
           country:
-            type: ISO 3166 ALPHA-3
+            type: string
+            format: ISO 3166 ALPHA-3
             description: Country
             example: SWE
       email:

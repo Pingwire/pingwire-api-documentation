@@ -1,3 +1,0 @@
-allOf:
-  - $ref: '#/components/schemas/ProductBodyBase'
-  - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'

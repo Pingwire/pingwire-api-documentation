@@ -348,6 +348,8 @@ components:
       $ref: "./components/schemas/requestParties/Product.yml"
     ProductPartySwish:
       $ref: "./components/schemas/requestParties/ProductPartySwish.yml"
+    ProductPartyLineOfBusiness:
+      $ref: "./components/schemas/requestParties/ProductPartyLineOfBusiness.yml"
     ProductPartyBase:
       $ref: "./components/schemas/requestParties/ProductPartyBase.yml"
     ProductSwish:
@@ -358,6 +360,14 @@ components:
       $ref: "./components/schemas/ProductSwishBodyUpdate.yml"
     ProductSwishProductInformation:
       $ref: "./components/schemas/ProductSwishProductInformation.yml"
+    ProductLineOfBusiness:
+      $ref: "./components/schemas/ProductLineOfBusiness.yml"
+    ProductLineOfBusinessBody:
+      $ref: "./components/schemas/ProductLineOfBusinessBody.yml"
+    ProductLineOfBusinessBodyUpdate:
+      $ref: "./components/schemas/ProductLineOfBusinessBodyUpdate.yml"
+    ProductLineOfBusinessProductInformation:
+      $ref: "./components/schemas/ProductLineOfBusinessProductInformation.yml"
     CompanyInformationRequest:
       $ref: "./components/schemas/businesses/CompanyInformationRequest.yml"
     CompanyInformationResponse:
