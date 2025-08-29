@@ -1,7 +1,9 @@
 type: object
 oneOf:
   - $ref: '#/components/schemas/ProductSwishBodyUpdate'
+  - $ref: '#/components/schemas/ProductLineOfBusinessBodyUpdate'
 discriminator:
   propertyName: productType
   mapping:
     swish: '#/components/schemas/ProductSwishBodyUpdate'
+    lineOfBusiness: '#/components/schemas/ProductLineOfBusinessBodyUpdate'

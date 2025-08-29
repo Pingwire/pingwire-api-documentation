@@ -7889,10 +7889,12 @@ components:
       type: object
       oneOf:
         - $ref: '#/components/schemas/ProductSwish'
+        - $ref: '#/components/schemas/ProductLineOfBusiness'
       discriminator:
         propertyName: productType
         mapping:
           swish: '#/components/schemas/ProductSwish'
+          lineOfBusiness: '#/components/schemas/ProductLineOfBusiness'
     ProductBase:
       allOf:
         - type: object
@@ -7915,10 +7917,12 @@ components:
       type: object
       oneOf:
         - $ref: '#/components/schemas/ProductSwishBody'
+        - $ref: '#/components/schemas/ProductLineOfBusinessBody'
       discriminator:
         propertyName: productType
         mapping:
           swish: '#/components/schemas/ProductSwishBody'
+          lineOfBusiness: '#/components/schemas/ProductLineOfBusinessBody'
     ProductBodyBase:
       type: object
       properties:
@@ -7973,10 +7977,12 @@ components:
       type: object
       oneOf:
         - $ref: '#/components/schemas/ProductSwishBodyUpdate'
+        - $ref: '#/components/schemas/ProductLineOfBusinessBodyUpdate'
       discriminator:
         propertyName: productType
         mapping:
           swish: '#/components/schemas/ProductSwishBodyUpdate'
+          lineOfBusiness: '#/components/schemas/ProductLineOfBusinessBodyUpdate'
     ProductBodyUpdateBase:
       allOf:
         - $ref: '#/components/schemas/ProductBodyBase'
@@ -7996,6 +8002,10 @@ components:
       allOf:
         - $ref: '#/components/schemas/ProductPartyBase'
         - $ref: '#/components/schemas/ProductSwishProductInformation'
+    ProductPartyLineOfBusiness:
+      allOf:
+        - $ref: '#/components/schemas/ProductPartyBase'
+        - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
     ProductPartyBase:
       type: object
       required:
@@ -8052,6 +8062,52 @@ components:
             phoneNumber:
               type: string
               description: Phone number associated to the swish product
+              example: '0701234567'
+    ProductLineOfBusiness:
+      allOf:
+        - $ref: '#/components/schemas/ProductBase'
+        - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
+    ProductLineOfBusinessBody:
+      allOf:
+        - $ref: '#/components/schemas/ProductBodyBase'
+        - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
+    ProductLineOfBusinessBodyUpdate:
+      allOf:
+        - $ref: '#/components/schemas/ProductBodyUpdateBase'
+        - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
+    ProductLineOfBusinessProductInformation:
+      type: object
+      properties:
+        productInformation:
+          type: object
+          description: Information about the product
+          properties:
+            adress:
+              type: object
+              description: Address associated to the lineOfBusiness product
+              properties:
+                streetAdress:
+                  type: string
+                  description: Street part of the address. Typically street name and house number
+                postalCode:
+                  type: string
+                  description: Postal code
+                city:
+                  type: string
+                  description: City
+                country:
+                  type: string
+                  format: ISO 3166 ALPHA-3
+                  description: Country
+                  example: SWE
+            email:
+              type: string
+              format: email
+              description: Contact email associated to the lineOfBusiness product
+              example: test@test.com
+            phone:
+              type: string
+              description: Phone number associated to the lineOfBusiness product
               example: '0701234567'
     CompanyInformationRequest:
       type: object
@@ -10246,10 +10302,12 @@ components:
       type: object
       oneOf:
         - $ref: '#/components/schemas/ProductPartySwish'
+        - $ref: '#/components/schemas/ProductPartyLineOfBusiness'
       discriminator:
         propertyName: productType
         mapping:
           swish: '#/components/schemas/ProductPartySwish'
+          lineOfBusiness: '#/components/schemas/ProductPartyLineOfBusiness'
     entityTypes:
       type: string
       description: Type of the entity
@@ -10269,6 +10327,7 @@ components:
       description: Type of product
       enum:
         - swish
+        - lineOfBusiness
     productPartyRoles:
       type: string
       description: Role of a product party
