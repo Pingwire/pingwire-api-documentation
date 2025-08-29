@@ -2,4 +2,4 @@ type: string
 description: Type of product
 enum:
   - swish
-  
+  - lineOfBusiness

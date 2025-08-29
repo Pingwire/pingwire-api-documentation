@@ -18,9 +18,9 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "bundle": "npm run redocly -- bundle pingwire -o ./public/open-api-bundle.yml --force",
+    "bundle": "npm run redocly -- bundle --config=.redocly.yml pingwire -o ./public/open-api-bundle.yml --force",
     "build": "npm run bundle && react-scripts build",
-    "test": "npm run bundle && npm run redocly -- lint pingwire-bundled",
+    "test": "npm run bundle && npm run redocly -- lint --config=.redocly.yml pingwire-bundled",
     "test:dev": "react-scripts test",
     "eject": "react-scripts eject",
     "redocly": "npx @redocly/cli"
