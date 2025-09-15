@@ -1,0 +1,38 @@
+allOf:
+  - type: object
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        description: Id of the new board members information object
+        example: 620a2958bfc1d7a803398a6d
+      fetchedAt:
+        type: string
+        format: date-time
+        description: Date and time when the information was collected from the data provider.
+      createdAt:
+        type: string
+        format: date-time
+        description: Date and time when the information was inserted in the system.
+      entityId:
+        type: string
+        format: ObjectId
+        description: Id of the entity linked to the board members information object
+        example: 620a2958bfc1d7a803398a6d
+      entityType:
+        type: string
+        enum:
+          - Business
+        description: Type of the entity linked to the board members information object
+      providerName:
+        type: string
+        description: Name of the provider used to fetch the board members information object
+    required:
+    - id
+    - fetchedAt
+    - createdAt
+    - entityId
+    - entityType
+    - providerName
+    - data
+  - $ref: '#/components/schemas/SignatoriesRequest'

@@ -46,6 +46,7 @@ x-tagGroups:
       - Company Information
       - Beneficial Owners
       - Board Members
+      - Signatories
 
   - name: Other resources
     tags:
@@ -87,6 +88,8 @@ paths:
     $ref: './paths/businesses/beneficial-owners/manual-insert.yml'
   /businesses/board-members/manual-insert/{id}:
     $ref: './paths/businesses/board-members/manual-insert.yml'
+  /businesses/signatories/manual-insert/{id}:
+    $ref: './paths/businesses/signatories/manual-insert.yml'
   /cars:
     $ref: './paths/cars/cars.yml'
   /cars/{id}:
@@ -380,6 +383,10 @@ components:
       $ref: "./components/schemas/businesses/BoardMembersRequest.yml"
     BoardMembersResponse:
       $ref: "./components/schemas/businesses/BoardMembersResponse.yml"
+    SignatoriesRequest:
+      $ref: "./components/schemas/businesses/SignatoriesRequest.yml"
+    SignatoriesResponse:
+      $ref: "./components/schemas/businesses/SignatoriesResponse.yml"
     FormAnswer:
       $ref: "./components/schemas/FormAnswer.yml"
     FormAnswerSaved:

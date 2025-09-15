@@ -1,0 +1,117 @@
+type: object
+properties:
+  fetchedAt:
+    type: string
+    format: date-time
+    description: Date and time when the information was collected from the data provider. If unknown use the current timestamp.
+  data:
+    type: object
+    description: Signatories data
+    properties:
+      signatories:
+        type: array
+        description: List of signatories of the business
+        items:
+          type: object
+          properties:
+            person:
+              type: object
+              description: Information about the person who is the signatory. At least one of the unique identifier fields is required
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: Id of the entity that is the signatory. Use this to link it to a previously created entity.
+                  example: 620a2958bfc1d7a803398a6d
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                entityType:
+                  type: string
+                  enum:
+                  - Individual
+                  description: Type of the entity. This is only used when entityId is provided.
+                customId:
+                  type: string
+                  description: Custom Id of the entity who is the signatory. This can be used to link it to a previously created entity.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                nationalIdentifier:
+                  type: array
+                  description: National identifier of the signatory. This can be used to link it to a previously created entity.
+                  items:
+                    $ref: '#/components/schemas/NationalIdentifierRestricted'
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                firstName:
+                  type: string
+                  description: First name of the signatory. Can be used to link it to a previously created entity together with the last name and birth date.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                lastName:
+                  type: string
+                  description: Last name of the signatory. Can be used to link it to a previously created entity together with the first name and birth date.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                birthDate:
+                  type: string
+                  format: date-time
+                  description: Birth date of the signatory. Can be used to link it to a previously created entity together with the first name and last name.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
+                citizenship:
+                  type: array
+                  description: List of the countries of citizenship of the signatory
+                  items:
+                    type: string
+                    example: SWE
+                    format: ISO 3166 ALPHA-3
+                countryResidence:
+                  type: string
+                  example: SWE
+                  format: ISO 3166 ALPHA-3
+                  description: Country of residence of the signatory
+            roles:
+              type: array
+              description: List of the roles of this signatory
+              items:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type of role
+                    enum:
+                    - ceo
+                    - member
+                    - chairman
+                    - auditor
+                    - other
+                  description:
+                    type: string
+                    description: Can be used as a complement to "type" to describe the role in more details. This is particularly useful if the available values are not able to describe perfectly the situation.
+                  fromDate:
+                    type: string
+                    format: date-time
+                    description: Date from which the person has this role
+                  toDate:
+                    type: string
+                    format: date-time
+                    description: Date until which the person has this role. Can be set to a future date if there is a known end date.
+                required:
+                - type
+            isLimitedAdminSign:
+              type: boolean
+              description: Indicates if the signatory has limited signatory rights (e.g. can sign only up to a certain amount or only for administrative matters)
+          required:
+          - person
+      signingRules:
+        type: string
+        description: Extract of the legal statement describing the signing rules that apply to this business.
+required:
+  - fetchedAt
+  - data

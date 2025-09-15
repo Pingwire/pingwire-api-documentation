@@ -16,7 +16,7 @@ properties:
           properties:
             person:
               type: object
-              description: Information about the person who is board member. At least one of the unique identifier field is required
+              description: Information about the person who is the board member. At least one of the unique identifier fields is required
               properties:
                 entityId:
                   type: string
@@ -38,22 +38,34 @@ properties:
                     url: '/#section/Introduction/Unique-Identifier'
                 nationalIdentifier:
                   type: array
-                  description: National identifier of the signer
+                  description: National identifier of the board member. This can be used to link it to a previously created entity.
                   items:
                     $ref: '#/components/schemas/NationalIdentifierRestricted'
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
                 firstName:
                   type: string
-                  description: First name of the board member
+                  description: First name of the board member. Can be used to link it to a previously created entity together with the last name and birth date.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
                 lastName:
                   type: string
-                  description: Last name of the board member
+                  description: Last name of the board member. Can be used to link it to a previously created entity together with the first name and birth date.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
                 birthDate:
                   type: string
                   format: date-time
-                  description: Birth date of the board member
+                  description: Birth date of the board member. Can be used to link it to a previously created entity together with the first name and last name.
+                  externalDocs:
+                    description: Unique Identifier
+                    url: '/#section/Introduction/Unique-Identifier'
                 citizenship:
                   type: array
-                  description: List of the citizenship of the board member
+                  description: List of the countries of citizenship of the board member
                   items:
                     type: string
                     example: SWE
