@@ -16,7 +16,7 @@ properties:
           properties:
             person:
               type: object
-              description: Information about the person who is beneficial owner. At least one of the unique identifier field is required
+              description: Information about the person who is the beneficial owner. At least one of the unique identifier fields is required
               properties:
                 entityId:
                   type: string
@@ -65,7 +65,7 @@ properties:
                     url: '/#section/Introduction/Unique-Identifier'
                 citizenship:
                   type: array
-                  description: List of the citizenship of the beneficial owner
+                  description: List of the countries of citizenship of the beneficial owner
                   items:
                     type: string
                     example: SWE
