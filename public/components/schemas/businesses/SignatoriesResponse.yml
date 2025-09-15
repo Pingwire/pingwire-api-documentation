@@ -4,7 +4,8 @@ allOf:
       id:
         type: string
         format: ObjectId
-        description: Id of the new beneficial owners information object
+        description: Id of the new board members information object
+        example: 620a2958bfc1d7a803398a6d
       fetchedAt:
         type: string
         format: date-time
@@ -16,20 +17,22 @@ allOf:
       entityId:
         type: string
         format: ObjectId
-        description: Id of the entity linked to the beneficial owners information object
+        description: Id of the entity linked to the board members information object
+        example: 620a2958bfc1d7a803398a6d
       entityType:
         type: string
         enum:
           - Business
-        description: Type of the entity linked to the beneficial owners information object
+        description: Type of the entity linked to the board members information object
       providerName:
         type: string
-        description: Name of the provider used to fetch the beneficial owners information object
+        description: Name of the provider used to fetch the board members information object
     required:
+    - id
     - fetchedAt
     - createdAt
     - entityId
     - entityType
     - providerName
     - data
-  - $ref: '#/components/schemas/BeneficialOwnersRequest'
+  - $ref: '#/components/schemas/SignatoriesRequest'
