@@ -63,6 +63,13 @@ properties:
                   externalDocs:
                     description: Unique Identifier
                     url: '/#section/Introduction/Unique-Identifier'
+                groups:
+                  type: array
+                  description: List of groups the beneficial owner should be added to.
+                  items:
+                    type: string
+                    format: ObjectId
+                    example: 620a2958bfc1d7a803398a6d
                 citizenship:
                   type: array
                   description: List of the countries of citizenship of the beneficial owner
