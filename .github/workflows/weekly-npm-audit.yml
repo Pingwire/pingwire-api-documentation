@@ -1,0 +1,40 @@
+name: Weekly NPM audit
+
+on:
+  schedule:
+    - cron: "0 7 * * 3"
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      NPM_AUDIT_REPORT: npm-audit-report.json
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_TECH_TEAM_CHANNEL_ID: ${{ secrets.SLACK_TECH_TEAM_CHANNEL_ID }}
+      SLACK_API_URL: ${{ secrets.SLACK_API_URL }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      ACK_FILE: acknowledged-npm-vulnerabilities.json
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Install curl
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+      - name: Make script executable
+        run: chmod +x scripts/compare-audit.sh
+
+      - name: Run npm audit
+        run: ./scripts/compare-audit.sh documentation .
