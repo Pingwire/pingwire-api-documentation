@@ -18,12 +18,11 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "bundle": "npm run redocly -- bundle --config=.redocly.yml pingwire -o ./public/open-api-bundle.yml --force",
+    "bundle": "redocly bundle --config=.redocly.yml pingwire -o ./public/open-api-bundle.yml --force",
     "build": "npm run bundle && react-scripts build",
-    "test": "npm run bundle && npm run redocly -- lint --config=.redocly.yml pingwire-bundled",
+    "test": "npm run bundle && redocly lint --config=.redocly.yml pingwire-bundled",
     "test:dev": "react-scripts test",
-    "eject": "react-scripts eject",
-    "redocly": "npx @redocly/cli"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "parserOptions": {
@@ -59,6 +58,7 @@
     ]
   },
   "devDependencies": {
+    "@redocly/cli": "^2.5.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",

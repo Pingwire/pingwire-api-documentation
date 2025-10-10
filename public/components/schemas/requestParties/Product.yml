@@ -1,9 +1,11 @@
 type: object
 oneOf:
+  - $ref: '#/components/schemas/ProductPartyInvoice'
   - $ref: '#/components/schemas/ProductPartySwish'
   - $ref: '#/components/schemas/ProductPartyLineOfBusiness'
 discriminator:
   propertyName: productType
   mapping:
+    invoice: '#/components/schemas/ProductPartyInvoice'
     swish: '#/components/schemas/ProductPartySwish'
     lineOfBusiness: '#/components/schemas/ProductPartyLineOfBusiness'
