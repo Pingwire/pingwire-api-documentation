@@ -6508,6 +6508,9 @@ components:
                 - type: object
                   title: Account
                   properties:
+                    payerName:
+                      type: string
+                      description: Name of the payer as seen from the payment system. This is particularly useful when the initiator is not known (initiator type Account)
                     productEntity:
                       type: object
                       description: Product used to initiate the transaction
@@ -6531,6 +6534,9 @@ components:
                 - type: object
                   title: Individual
                   properties:
+                    payerName:
+                      type: string
+                      description: Name of the payer as seen from the payment system. This is particularly useful when the initiator is not known (initiator type Account)
                     productEntity:
                       type: object
                       description: Product used to initiate the transaction
@@ -6552,10 +6558,14 @@ components:
                       description: Account used to initiate the transaction
                       allOf:
                         - $ref: '#/components/schemas/AccountRequestParty'
+                    payerName:
+                      type: string
+                      description: Name of the payer as seen from the payment system. This is particularly useful when the initiator is not known (initiator type Account)
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to initiate the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
                     conductors:
                       type: array
                       description: List of representatives that authenticated and facilitated the transaction on behalf of the business.
@@ -6577,20 +6587,28 @@ components:
                 - type: object
                   title: Account
                   properties:
+                    beneficiaryName:
+                      type: string
+                      description: Name of the beneficiary as seen from the payment system. This is particularly useful when the recipient is not known (recipient type Account)
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to receive the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
             - allOf:
                 - $ref: '#/components/schemas/IndividualRequestParty'
                 - $ref: '#/components/schemas/TransactionParty'
                 - type: object
                   title: Individual
                   properties:
+                    beneficiaryName:
+                      type: string
+                      description: Name of the beneficiary as seen from the payment system. This is particularly useful when the recipient is not known (recipient type Account)
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to receive the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
                     account:
                       title: Account
                       description: Account used to receive the transaction
@@ -6602,10 +6620,14 @@ components:
                 - type: object
                   title: Business
                   properties:
+                    beneficiaryName:
+                      type: string
+                      description: Name of the beneficiary as seen from the payment system. This is particularly useful when the recipient is not known (recipient type Account)
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to receive the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
                     account:
                       title: Account
                       description: Account used to receive the transaction
@@ -6621,8 +6643,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
             - allOf:
                 - $ref: '#/components/schemas/BusinessRequestParty'
                 - type: object
@@ -6630,8 +6653,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
             - allOf:
                 - $ref: '#/components/schemas/AccountRequestParty'
                 - type: object
@@ -6639,8 +6663,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
         subProcessor:
           description: The transaction sub-processor is an intermediary entity or service responsible for handling the transaction between the initiator and the recipient. This is useful in case there are more than one intermediary and the processor is therefore not enough.
           oneOf:
@@ -6651,8 +6676,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to sub-process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
             - allOf:
                 - $ref: '#/components/schemas/BusinessRequestParty'
                 - type: object
@@ -6660,8 +6686,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to sub-process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
             - allOf:
                 - $ref: '#/components/schemas/AccountRequestParty'
                 - type: object
@@ -6669,8 +6696,9 @@ components:
                   properties:
                     productEntity:
                       type: object
-                      title: Product
-                      $ref: '#/components/schemas/ProductParty'
+                      description: Product used to sub-process the transaction
+                      allOf:
+                        - $ref: '#/components/schemas/ProductParty'
       required:
         - amount
         - date
