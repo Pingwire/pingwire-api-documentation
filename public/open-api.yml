@@ -349,12 +349,22 @@ components:
       $ref: "./components/schemas/ProductBodyUpdateBase.yml"
     ProductParty:
       $ref: "./components/schemas/requestParties/Product.yml"
+    ProductPartyInvoice:
+      $ref: "./components/schemas/requestParties/ProductPartyInvoice.yml"
     ProductPartySwish:
       $ref: "./components/schemas/requestParties/ProductPartySwish.yml"
     ProductPartyLineOfBusiness:
       $ref: "./components/schemas/requestParties/ProductPartyLineOfBusiness.yml"
     ProductPartyBase:
       $ref: "./components/schemas/requestParties/ProductPartyBase.yml"
+    ProductInvoice:
+      $ref: "./components/schemas/ProductInvoice.yml"
+    ProductInvoiceBody:
+      $ref: "./components/schemas/ProductInvoiceBody.yml"
+    ProductInvoiceBodyUpdate:
+      $ref: "./components/schemas/ProductInvoiceBodyUpdate.yml"
+    ProductInvoiceProductInformation:
+      $ref: "./components/schemas/ProductInvoiceProductInformation.yml"
     ProductSwish:
       $ref: "./components/schemas/ProductSwish.yml"
     ProductSwishBody:
