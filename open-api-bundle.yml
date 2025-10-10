@@ -7958,11 +7958,13 @@ components:
     Product:
       type: object
       oneOf:
+        - $ref: '#/components/schemas/ProductInvoice'
         - $ref: '#/components/schemas/ProductSwish'
         - $ref: '#/components/schemas/ProductLineOfBusiness'
       discriminator:
         propertyName: productType
         mapping:
+          invoice: '#/components/schemas/ProductInvoice'
           swish: '#/components/schemas/ProductSwish'
           lineOfBusiness: '#/components/schemas/ProductLineOfBusiness'
     ProductBase:
@@ -7986,11 +7988,13 @@ components:
     ProductBody:
       type: object
       oneOf:
+        - $ref: '#/components/schemas/ProductInvoiceBody'
         - $ref: '#/components/schemas/ProductSwishBody'
         - $ref: '#/components/schemas/ProductLineOfBusinessBody'
       discriminator:
         propertyName: productType
         mapping:
+          invoice: '#/components/schemas/ProductInvoiceBody'
           swish: '#/components/schemas/ProductSwishBody'
           lineOfBusiness: '#/components/schemas/ProductLineOfBusinessBody'
     ProductBodyBase:
@@ -8046,11 +8050,13 @@ components:
     ProductBodyUpdate:
       type: object
       oneOf:
+        - $ref: '#/components/schemas/ProductInvoiceBodyUpdate'
         - $ref: '#/components/schemas/ProductSwishBodyUpdate'
         - $ref: '#/components/schemas/ProductLineOfBusinessBodyUpdate'
       discriminator:
         propertyName: productType
         mapping:
+          invoice: '#/components/schemas/ProductInvoiceBodyUpdate'
           swish: '#/components/schemas/ProductSwishBodyUpdate'
           lineOfBusiness: '#/components/schemas/ProductLineOfBusinessBodyUpdate'
     ProductBodyUpdateBase:
@@ -8068,6 +8074,10 @@ components:
                 type: string
     ProductParty:
       $ref: '#/components/schemas/Product-2'
+    ProductPartyInvoice:
+      allOf:
+        - $ref: '#/components/schemas/ProductPartyBase'
+        - $ref: '#/components/schemas/ProductInvoiceProductInformation'
     ProductPartySwish:
       allOf:
         - $ref: '#/components/schemas/ProductPartyBase'
@@ -8110,6 +8120,101 @@ components:
           items:
             type: string
             format: ObjectId
+    ProductInvoice:
+      allOf:
+        - $ref: '#/components/schemas/ProductBase'
+        - $ref: '#/components/schemas/ProductInvoiceProductInformation'
+    ProductInvoiceBody:
+      allOf:
+        - $ref: '#/components/schemas/ProductBodyBase'
+        - $ref: '#/components/schemas/ProductInvoiceProductInformation'
+    ProductInvoiceBodyUpdate:
+      allOf:
+        - $ref: '#/components/schemas/ProductBodyUpdateBase'
+        - $ref: '#/components/schemas/ProductInvoiceProductInformation'
+    ProductInvoiceProductInformation:
+      type: object
+      properties:
+        productInformation:
+          type: object
+          description: Information about the product
+          properties:
+            invoiceDate:
+              type: string
+              format: date
+              description: Date when the invoice was issued
+              example: '2023-10-01'
+            dueDate:
+              type: string
+              format: date
+              description: Date when the invoice is due
+              example: '2023-10-30'
+            currency:
+              type: string
+              description: Currency code in ISO 4217 format
+              example: USD
+            invoiceAmount:
+              type: number
+              description: Total amount of the invoice including VAT
+              example: 1000
+            vatAmount:
+              type: number
+              description: Amount of VAT included in the invoice
+              example: 250
+            invoiceNumber:
+              type: string
+              description: Unique identifier for the invoice
+              example: INV-1001
+            customerNumber:
+              type: string
+              description: Unique identifier for the customer as stated on the invoice
+              example: CUST-2002
+            issuer:
+              type: object
+              description: Information about the issuer of the invoice
+              required:
+                - type
+                - id
+              properties:
+                type:
+                  type: string
+                  description: Entity type of the issuer
+                  enum:
+                    - Individual
+                    - Business
+                id:
+                  type: string
+                  format: ObjectId
+                  description: Unique identifier of the issuer in the system
+                  example: 62b9437318fe4517089b2833
+            paymentDetails:
+              type: object
+              description: Payment details for the invoice
+              properties:
+                accountNumber:
+                  type: string
+                  description: Account number to which the payment should be made. Format depends on the method of payment.
+                  example: '1234567890'
+                reference:
+                  type: string
+                  description: Payment reference to be used when making the payment
+                  example: REF-3003
+                method:
+                  type: string
+                  description: Payment method to be used
+                  enum:
+                    - bank-transfer
+                    - swish
+                    - bankgiro
+                    - plusgiro
+                    - other
+          required:
+            - invoiceDate
+            - dueDate
+            - currency
+            - invoiceAmount
+      required:
+        - productInformation
     ProductSwish:
       allOf:
         - $ref: '#/components/schemas/ProductBase'
@@ -10178,11 +10283,13 @@ components:
     Product-2:
       type: object
       oneOf:
+        - $ref: '#/components/schemas/ProductPartyInvoice'
         - $ref: '#/components/schemas/ProductPartySwish'
         - $ref: '#/components/schemas/ProductPartyLineOfBusiness'
       discriminator:
         propertyName: productType
         mapping:
+          invoice: '#/components/schemas/ProductPartyInvoice'
           swish: '#/components/schemas/ProductPartySwish'
           lineOfBusiness: '#/components/schemas/ProductPartyLineOfBusiness'
     entityTypes:
@@ -10203,6 +10310,7 @@ components:
       type: string
       description: Type of product
       enum:
+        - invoice
         - swish
         - lineOfBusiness
     productPartyRoles:
