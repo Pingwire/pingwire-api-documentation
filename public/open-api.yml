@@ -72,7 +72,7 @@ paths:
   /account-entities/customId/{customId}:
     $ref: './paths/accountEntities/account-entities-custom-id.yml'
   /auth/login:
-    $ref: './paths/auth/auth.yml'
+    $ref: './paths/auth/login.yml'
   /auth/refresh-token:
     $ref: './paths/auth/refreshToken.yml'
   /individuals:
