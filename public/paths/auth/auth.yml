@@ -1,7 +1,7 @@
 post:
   tags:
   - Auth
-  summary: Receive access token
+  summary: Login
   operationId: login
   description: |
    The Pingwire API uses OAuth as an authentication mechanism. This operation allows you to retrieve an access token by posting clientId and clientSecret as request body.
@@ -29,18 +29,27 @@ post:
       content:
         application/json:
           schema:
-           type: object
-           required:
-           - token
-           - expires
-           properties:
-            token:
-              type: string
-              description: Authentication token. Should be used by the client as a bearer token for all authenticated requests.
-            expires:
-              description: Date when the auth token expires. The token should be cached on the client side until it expires.
-              type: string
-              format: date-time
+            type: object
+            required:
+            - token
+            - expires
+            - refreshToken
+            - refreshTokenExpires
+            properties:
+              token:
+                type: string
+                description: Authentication token. Should be used by the client as a bearer token for all authenticated requests.
+              expires:
+                description: Date when the auth token expires. The token should be cached on the client side until it expires.
+                type: string
+                format: date-time
+              refreshToken:
+                type: string
+                description: Refresh token to get a new access token using the refresh token endpoint.
+              refreshTokenExpires:
+                type: string
+                format: date-time
+                description: Expiry date of the refresh token. The refresh token should be cached on the client side until it expires.
 
     400:
       description: Invalid parameters
