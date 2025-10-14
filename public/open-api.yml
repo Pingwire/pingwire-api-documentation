@@ -20,6 +20,9 @@ tags:
   - name: Forms
     description:
       $ref: './paths/forms/form.md'
+  - name: Auth
+    description:
+      $ref: './paths/auth/auth.md'
 x-tagGroups:
   - name: Get started
     tags:

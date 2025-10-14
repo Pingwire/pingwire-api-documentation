@@ -32,7 +32,7 @@ post:
             properties:
               token:
                 type: string
-                description: Authentication token. Should be used by the client as a bearer token for all authenticated requests.
+                description: Access token. Should be used by the client as a bearer token for all authenticated requests.
               expires:
                 description: Date when the access token expires. The token should be cached on the client side until it expires.
                 type: string
