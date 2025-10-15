@@ -12,18 +12,17 @@ properties:
     type: string
   email:
     type: string
-    format: e-mail   
+    format: e-mail
     externalDocs:
       description: Unique identifier
-      url: '/#section/Introduction/Unique-Identifier' 
-  permissionRoles:
+      url: '/#section/Introduction/Unique-Identifier'
+  permissionRoleIds:
     type: array
-    items: 
+    description: Array of Permission Role IDs assigned to the member
+    items:
       type: string
-      enum:
-      - ReadOnly
-      - ReadWrite
-      - Manager
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
   active:
       type: boolean
   birthDate:
@@ -40,11 +39,10 @@ properties:
   residence:
     type: string
     format: ISO 3166 ALPHA-3
-  foreignId: 
+  foreignId:
     type: string
     description: Foreign personal identity number
   foreignIdCountry:
     type: string
     format: ISO 3166 ALPHA-3
     description: Foreign personal identity country
-  
