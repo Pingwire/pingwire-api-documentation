@@ -1,0 +1,60 @@
+post:
+  tags:
+  - Auth
+  summary: Refresh token
+  operationId: RefreshToken
+  description: |
+    The refresh token can be used to obtain a new access token when the current access token expires. To use the refresh token, call this endpoint with the refresh token obtained from the login endpoint.
+
+    The refresh token endpoint should be prioritized over the login endpoint to obtain a new access token when the current access token expires, as it does not require the clientId and clientSecret to be sent again.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - refreshToken
+          properties:
+            refreshToken:
+              type: string
+              description: The refresh token obtained from the login endpoint
+
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - token
+            - expires
+            properties:
+              token:
+                type: string
+                description: Access token. Should be used by the client as a bearer token for all authenticated requests.
+              expires:
+                description: Date when the access token expires. The token should be cached on the client side until it expires.
+                type: string
+                format: date-time
+
+    401:
+      description: Invalid refresh token
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security: []
