@@ -20,6 +20,9 @@ tags:
   - name: Forms
     description:
       $ref: './paths/forms/form.md'
+  - name: Auth
+    description:
+      $ref: './paths/auth/auth.md'
 x-tagGroups:
   - name: Get started
     tags:
@@ -69,7 +72,9 @@ paths:
   /account-entities/customId/{customId}:
     $ref: './paths/accountEntities/account-entities-custom-id.yml'
   /auth/login:
-    $ref: './paths/auth/auth.yml'
+    $ref: './paths/auth/login.yml'
+  /auth/refresh-token:
+    $ref: './paths/auth/refreshToken.yml'
   /individuals:
     $ref: './paths/individuals/individuals.yml'
   /individuals/{id}:

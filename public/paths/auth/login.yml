@@ -1,0 +1,77 @@
+post:
+  tags:
+  - Auth
+  summary: Login
+  operationId: login
+  description: |
+   This endpoint allows you to retrieve an access token by posting clientId and clientSecret as request body.
+
+   This token can be used on subsequent API calls for authentication. Endpoints that require authentication will expect the access token in an HTTP Authorization header like this: `Authorization: Bearer <access token>`.
+
+   This endpoint also returns a refresh token that can be used to obtain a new access token when the current access token expires. To use the refresh token, call the [refresh token endpoint](/#tag/Auth/operation/RefreshToken). The refresh token has a significantly longer expiry time than the access token.
+
+   The login endpoint should only be used to obtain an access token when no refresh tokens are available. Once you have an access token and a refresh token, you should use the refresh token endpoint to obtain a new access token when the current access token expires, as it does not require the clientId and clientSecret to be sent again.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+          - clientId
+          - clientSecret
+          properties:
+            clientId:
+              type: string
+              description: Client ID of the API key
+            clientSecret:
+              type: string
+              description: Client secret of the API key
+
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - token
+            - expires
+            - refreshToken
+            - refreshTokenExpires
+            properties:
+              token:
+                type: string
+                description: Access token. Should be used by the client as a bearer token for all authenticated requests.
+              expires:
+                description: Date when the access token expires. The token should be cached on the client side until it expires.
+                type: string
+                format: date-time
+              refreshToken:
+                type: string
+                description: Refresh token to get a new access token using the refresh token endpoint.
+              refreshTokenExpires:
+                type: string
+                format: date-time
+                description: Expiry date of the refresh token. The refresh token should be cached on the client side until it expires.
+
+    401:
+      description: Invalid clientId or clientSecret
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security: []

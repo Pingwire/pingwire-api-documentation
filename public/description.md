@@ -33,7 +33,7 @@ The following flowchart illustrates a typical request process.
 
 # Test objects
 
-The Pingwire system provides two rules which can be used for test purposes: "Test Review" and "Test Block". When these rules are published for a specific process, they will trigger for every requests sent on that process which has a targetted entity in the list of test objects bellow. These rules can therefore be used to test the integration for a specific recommendation or even a specific signal (if signals are used on the test rules). 
+The Pingwire system provides two rules which can be used for test purposes: "Test Review" and "Test Block". When these rules are published for a specific process, they will trigger for every requests sent on that process which has a targeted entity in the list of test objects bellow. These rules can therefore be used to test the integration for a specific recommendation or even a specific signal (if signals are used on the test rules).
 
 |   | Environment | Identification | Entity type  | Recommendation | Create ping |
 |---|------------|--------------------------------|--------------|----------------|-------------|
