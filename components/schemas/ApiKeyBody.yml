@@ -1,12 +1,11 @@
 type: object
-properties: 
-  permissionRoles:
+properties:
+  permissionRoleIds:
     type: array
-    items: 
+    description: Array of Permission Role IDs assigned to the api key
+    items:
       type: string
-      enum:
-      - ReadOnly
-      - ReadWrite
-      - Manager
+      format: ObjectId
+      example: 62b9437318fe4517089b2833
 required:
-  - permissionRoles
+  - permissionRoleIds

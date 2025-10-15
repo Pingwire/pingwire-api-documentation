@@ -6293,14 +6293,13 @@ components:
           externalDocs:
             description: Unique identifier
             url: /#section/Introduction/Unique-Identifier
-        permissionRoles:
+        permissionRoleIds:
           type: array
+          description: Array of Permission Role IDs assigned to the member
           items:
             type: string
-            enum:
-              - ReadOnly
-              - ReadWrite
-              - Manager
+            format: ObjectId
+            example: 62b9437318fe4517089b2833
         active:
           type: boolean
         birthDate:
@@ -6358,19 +6357,18 @@ components:
           type: string
           format: ISO 3166 ALPHA-3
           description: Foreign personal identity country
-        permissionRoles:
+        permissionRoleIds:
           type: array
+          description: Array of Permission Role IDs assigned to the member
           items:
             type: string
-            enum:
-              - ReadOnly
-              - ReadWrite
-              - Manager
+            format: ObjectId
+            example: 62b9437318fe4517089b2833
       required:
         - firstName
         - lastName
         - email
-        - permissionRoles
+        - permissionRoleIds
     Rule:
       type: object
       properties:
