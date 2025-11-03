@@ -9406,6 +9406,10 @@ components:
                 market:
                   type: string
                   description: The financial market where the business is listed. Only used if "option" is "yes".
+            merchantCategoryCode:
+              type: string
+              format: ISO 18245 code
+              description: Merchant category code
             operationStartDate:
               type: string
               format: date-time
