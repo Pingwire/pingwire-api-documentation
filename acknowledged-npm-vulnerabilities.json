@@ -11,7 +11,7 @@
       }
     },
     {
-      "1094544": {
+      "1109574": {
         "name": "postcss",
         "dependency": "react-scripts",
         "title": "PostCSS line return parsing error",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "1105256": {
+      "1108429": {
         "name": "webpack-dev-server",
         "dependency": "react-scripts",
         "title": "webpack-dev-server users' source code may be stolen when they access a malicious web site with non-Chromium based browser webpack-dev-server users' source code may be stolen when they access a malicious web site",
@@ -31,7 +31,7 @@
       }
     },
     {
-      "1105257": {
+      "1108430": {
         "name": "webpack-dev-server",
         "dependency": "react-scripts",
         "title": "webpack-dev-server users' source code may be stolen when they access a malicious web site with non-Chromium based browser webpack-dev-server users' source code may be stolen when they access a malicious web site",
