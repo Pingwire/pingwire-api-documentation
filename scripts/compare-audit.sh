@@ -18,7 +18,7 @@ cd $path
 
 npm ci --silent
 
-npm audit --json > "${npm-audit-report}"
+npm audit --json > "$npm_audit_report"
 
 # Check if ack_file exists
 if [ ! -f "$ack_file" ]; then
