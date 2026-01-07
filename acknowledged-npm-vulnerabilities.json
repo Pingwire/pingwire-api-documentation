@@ -1,5 +1,5 @@
 {
-  "acknoledgedVulnerabilities": [
+  "acknowledgedVulnerabilities": [
     {
       "1095141": {
         "name": "nth-check",

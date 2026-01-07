@@ -27,7 +27,7 @@ if [ ! -f "$ack_file" ]; then
 fi
 
 # Extract acknowledged vulnerability IDs
-ack_ids=$(jq -r '.acknoledgedVulnerabilities[] | to_entries[] | .key' "$ack_file")
+ack_ids=$(jq -r '.acknowledgedVulnerabilities[] | to_entries[] | .key' "$ack_file")
 
 # Extract current vulnerabilities names
 current_vuln_names=$(jq -r '.vulnerabilities | to_entries[] | .value.via[] | select(type == "object") | .name' "$npm_audit_report")
