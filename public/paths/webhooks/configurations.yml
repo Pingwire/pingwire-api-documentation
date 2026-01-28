@@ -1,0 +1,101 @@
+get:
+  tags:
+    - Webhook configurations
+  summary: List webhook configurations
+  operationId: listWebhookConfigurations
+  description: Receive list of webhook configurations saved in the database.
+  parameters:
+  - in: query
+    name: _sort
+    required: false
+    example: 'id'
+    schema:
+      type: string
+      enum:
+      - id
+      - createdAt
+  - in: query
+    name: _order
+    description: Order of list (DESC or ASC) based on the sorting parameter.
+    required: false
+    schema:
+      type: string
+      enum:
+      - DESC
+      - ASC
+  - in: query
+    name: active
+    description: Filter list of webhook configurations by active status.
+    required: false
+    example: true
+    schema:
+      type: boolean
+  - in: query
+    name: _start
+    description: The start number of the webhook configurations list.
+    required: false
+    example: 0
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the webhook configurations list.
+    required: false
+    example: 10
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TransactionType'
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Webhook configurations
+  summary: Create webhook configuration
+  operationId: createWebhookConfiguration
+  description: Create a new webhook configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/TransactionTypeBody"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/TransactionType"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
