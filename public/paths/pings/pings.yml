@@ -8,7 +8,8 @@ get:
   - in: query
     name: _sort
     required: false
-    example: 'id'
+    examples:
+    - 'id'
     schema:
       type: string
       enum:
@@ -20,7 +21,6 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example:
     schema:
       type: string
       enum:
@@ -30,7 +30,6 @@ get:
     name: status
     description: Filter list of pings by status.
     required: false
-    example:
     schema:
       type: string
       enum:
@@ -42,14 +41,16 @@ get:
     name: _start
     description: The start number of the pings list.
     required: false
-    example: '0'
+    examples:
+    - '0'
     schema:
       type: number
   - in: query
     name: _end
     description: The end number of the pings list.
     required: false
-    example: '10'
+    examples:
+    - '10'
     schema:
       type: number
   responses:
@@ -102,7 +103,8 @@ post:
                   id:
                     type: string
                     format: ObjectId
-                    example: 62b9437318fe4517089b2833
+                    examples:
+                    - 62b9437318fe4517089b2833
                     externalDocs:
                       description: Unique identifier
                       url: '/#section/Introduction/Unique-Identifier'

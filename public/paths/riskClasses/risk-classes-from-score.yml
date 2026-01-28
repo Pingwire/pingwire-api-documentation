@@ -7,7 +7,8 @@ get:
   parameters:
   - in: path
     name: score
-    example: 23
+    examples:
+    - 23
     required: true
     schema:
       type: integer

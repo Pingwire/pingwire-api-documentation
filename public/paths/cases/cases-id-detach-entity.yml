@@ -8,7 +8,8 @@ put:
   - in: path
     name: id
     description: Case object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -26,7 +27,8 @@ put:
               type: string
               format: ObjectId
               description: EntityId of the entity to detach from the case
-              example: 62b9437318fe4517089b2833
+              examples:
+              - 62b9437318fe4517089b2833
             entityType:
               $ref: '#/components/schemas/EntityTypes'
   responses:

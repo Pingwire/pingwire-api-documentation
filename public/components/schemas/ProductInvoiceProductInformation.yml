@@ -8,32 +8,39 @@ properties:
         type: string
         format: date
         description: Date when the invoice was issued
-        example: "2023-10-01"
+        examples:
+        - "2023-10-01"
       dueDate:
         type: string
         format: date
         description: Date when the invoice is due
-        example: "2023-10-30"
+        examples:
+        - "2023-10-30"
       currency:
         type: string
         description: Currency code in ISO 4217 format
-        example: "USD"
+        examples:
+        - "USD"
       invoiceAmount:
         type: number
         description: Total amount of the invoice including VAT
-        example: 1000.00
+        examples:
+        - 1000.00
       vatAmount:
         type: number
         description: Amount of VAT included in the invoice
-        example: 250.00
+        examples:
+        - 250.00
       invoiceNumber:
         type: string
         description: Unique identifier for the invoice
-        example: "INV-1001"
+        examples:
+        - "INV-1001"
       customerNumber:
         type: string
         description: Unique identifier for the customer as stated on the invoice
-        example: "CUST-2002"
+        examples:
+        - "CUST-2002"
       issuer:
         type: object
         description: Information about the issuer of the invoice
@@ -51,7 +58,8 @@ properties:
             type: string
             format: ObjectId
             description: Unique identifier of the issuer in the system
-            example: "62b9437318fe4517089b2833"
+            examples:
+            - "62b9437318fe4517089b2833"
       paymentDetails:
         type: object
         description: Payment details for the invoice
@@ -59,11 +67,13 @@ properties:
           accountNumber:
             type: string
             description: Account number to which the payment should be made. Format depends on the method of payment.
-            example: "1234567890"
+            examples:
+            - "1234567890"
           reference:
             type: string
             description: Payment reference to be used when making the payment
-            example: "REF-3003"
+            examples:
+            - "REF-3003"
           method:
             type: string
             description: Payment method to be used

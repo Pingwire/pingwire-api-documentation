@@ -8,7 +8,8 @@ get:
   - in: path
     name: id
     description: Rule object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -43,7 +44,8 @@ put:
   - in: path
     name: id
     description: Rule object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -84,7 +86,8 @@ delete:
   - in: path
     name: id
     description: Rule object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string

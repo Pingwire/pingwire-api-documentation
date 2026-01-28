@@ -9,7 +9,8 @@ get:
     name: entityType
     required: true
     description: Entity type for which to get the table setup
-    example: business
+    examples:
+    - business
     schema:
       $ref: '#/components/schemas/EntityTypes'
 

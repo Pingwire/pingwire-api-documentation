@@ -8,7 +8,8 @@ get:
   - in: path
     name: id
     description: Ping object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -34,7 +35,7 @@ get:
             $ref: "#/components/schemas/ErrorBody"
   security:
   - bearerAuth: []
-put: 
+put:
   tags:
   - Pings
   summary: Update ping
@@ -44,7 +45,8 @@ put:
   - in: path
     name: id
     description: Ping object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -75,4 +77,3 @@ put:
             $ref: "#/components/schemas/ErrorBody"
   security:
   - bearerAuth: []
-  

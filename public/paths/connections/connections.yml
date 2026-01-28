@@ -13,7 +13,8 @@ get:
       type: string
       format: ObjectId
       description: ID of the 'from' entity
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   - in: query
     name: to
     description: Target entity, used to have all connections with this entity as a target. It cannot be used with entity.
@@ -22,7 +23,8 @@ get:
       type: string
       format: ObjectId
       description: ID of the 'to' entity
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   - in: query
     name: entity
     description: Entity id, used to have all connections for this entity (either source or target of the connection). Must be used with type and cannot be used with from or to.
@@ -31,7 +33,8 @@ get:
       type: string
       format: ObjectId
       description: ID of entity
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   - in: query
     name: type
     description: Type of connection.

@@ -18,7 +18,8 @@ properties:
       country:
         type: string
         format: ISO 3166 ALPHA-3
-        example: SWE
+        examples:
+        - SWE
         description: Country of the PEP role
       role:
         type: string

@@ -7,4 +7,5 @@ properties:
       phoneNumber:
         type: string
         description: Phone number associated to the swish product
-        example: "0701234567"
+        examples:
+        - "0701234567"

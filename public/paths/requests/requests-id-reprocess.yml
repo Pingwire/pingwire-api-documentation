@@ -8,7 +8,8 @@ put:
   - in: path
     name: id
     description: Request object id
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string

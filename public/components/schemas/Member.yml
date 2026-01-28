@@ -22,14 +22,16 @@ properties:
     items:
       type: string
       format: ObjectId
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   active:
       type: boolean
   birthDate:
     type: string
   occupation:
     type: string
-    example: Developer
+    examples:
+    - Developer
   swedishSocialSecurityNumber:
     type: string
     format: yyyymmddxxxx

@@ -8,7 +8,8 @@ get:
   - in: path
     name: formAnswerId
     description: Form answer object id. It can be retrieved as part of the information provided as feedback when the form is submitted. For details on how it is provided, see the section [Setups for presenting forms](#section/Setups-for-presenting-forms)
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -44,7 +45,8 @@ put:
   - in: path
     name: formAnswerId
     description: Form answer object id. It can be retrieved as part of the information provided as feedback when the form is submitted. For details on how it is provided, see the section [Setups for presenting forms](#section/Setups-for-presenting-forms)
-    example: 620a2958bfc1d7a803398a6d
+    examples:
+    - 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
