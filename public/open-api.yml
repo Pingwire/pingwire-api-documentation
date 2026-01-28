@@ -23,15 +23,20 @@ tags:
   - name: Auth
     description:
       $ref: './paths/auth/auth.md'
+  - name: Get started with Webhooks
+    description:
+      $ref: './paths/webhooks/webhooks.md'
 x-tagGroups:
   - name: Get started
     tags:
       - Auth
+
   - name: Risk Management
     tags:
       - Requests
       - Pings
       - Cases
+
   - name: Entities
     tags:
       - Individuals
@@ -39,10 +44,12 @@ x-tagGroups:
       - Cars
       - Accounts
       - Products
+
   - name: KYC Forms
     tags:
       - Forms
       - Form answers
+
   - name: KYC Data
     tags:
       - Population Register
@@ -50,6 +57,12 @@ x-tagGroups:
       - Beneficial Owners
       - Board Members
       - Signatories
+
+  - name: Webhooks
+    tags:
+      - Get started with Webhooks
+      - Webhook configurations
+      - Testing webhooks
 
   - name: Other resources
     tags:
@@ -211,6 +224,8 @@ paths:
       $ref: './paths/transactionTypes/transaction-types-id.yml'
   /transaction-types/activation/{id}:
       $ref: './paths/transactionTypes/transaction-types-activation-id.yml'
+  /webhooks/configurations:
+      $ref: './paths/webhooks/configurations.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
   /individuals/population-register/v2/manual-insert/{id}:
