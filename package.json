@@ -10,7 +10,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
-    "redoc": "^2.0.0-rc.76",
+    "redoc": "^2.5.2",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"
   },
