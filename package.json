@@ -58,7 +58,7 @@
     ]
   },
   "devDependencies": {
-    "@redocly/cli": "^2.5.0",
+    "@redocly/cli": "^2.15.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-jsx-a11y": "^6.5.1",
