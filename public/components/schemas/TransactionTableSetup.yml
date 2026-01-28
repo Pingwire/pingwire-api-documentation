@@ -16,12 +16,13 @@ properties:
         id:
           type: string
           format: objectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
           description: Id of the row
         transactionTypeConfiguration:
           $ref: "#/components/schemas/TransactionTypeConfiguration"
   columns:
-    $ref: "#/components/schemas/TransactionTableSetupColumns"  
+    $ref: "#/components/schemas/TransactionTableSetupColumns"
   rowToShowInGraph:
     type: string
     format: objectId

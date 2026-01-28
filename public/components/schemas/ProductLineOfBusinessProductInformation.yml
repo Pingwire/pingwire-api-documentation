@@ -7,7 +7,7 @@ properties:
       adress:
         type: object
         description: Address associated to the lineOfBusiness product
-        properties: 
+        properties:
           streetAdress:
             type: string
             description: Street part of the address. Typically street name and house number
@@ -21,13 +21,16 @@ properties:
             type: string
             format: ISO 3166 ALPHA-3
             description: Country
-            example: SWE
+            examples:
+            - SWE
       email:
         type: string
         format: email
         description: Contact email associated to the lineOfBusiness product
-        example: test@test.com
+        examples:
+        - test@test.com
       phone:
         type: string
         description: Phone number associated to the lineOfBusiness product
-        example: "0701234567"
+        examples:
+        - "0701234567"

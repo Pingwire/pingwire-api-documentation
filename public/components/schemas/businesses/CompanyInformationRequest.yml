@@ -14,7 +14,8 @@ properties:
         properties:
           registrationCountry:
             type: string
-            example: SWE
+            examples:
+            - SWE
             format: ISO 3166 ALPHA-3
             description: Country of registration
           registrationNumber:
@@ -80,7 +81,8 @@ properties:
           naceCode:
             type: string
             description: NACE code of the company industry. The NACE code can either be a section (e.g. A), a division (e.g. A1), a group (e.g. A1.1) or a class (e.g. A1.1.1)
-            example: A1.1.1
+            examples:
+            - A1.1.1
           naceDescription:
             type: string
             description: Description of the company industry according to its NACE code.
@@ -139,7 +141,8 @@ properties:
                 description: State
               country:
                 type: string
-                example: SWE
+                examples:
+                - SWE
                 format: ISO 3166 ALPHA-3
                 description: country
             required:
@@ -169,7 +172,8 @@ properties:
                   description: State
                 country:
                   type: string
-                  example: SWE
+                  examples:
+                  - SWE
                   format: ISO 3166 ALPHA-3
                   description: country
               required:
@@ -199,7 +203,8 @@ properties:
                   description: State
                 country:
                   type: string
-                  example: SWE
+                  examples:
+                  - SWE
                   format: ISO 3166 ALPHA-3
                   description: country
               required:

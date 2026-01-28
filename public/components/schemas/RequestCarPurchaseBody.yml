@@ -9,10 +9,12 @@ allOf:
         properties:
           amount:
             type: number
-            example: 1000
+            examples:
+            - 1000
           valuation:
             type: number
-            example: 1000
+            examples:
+            - 1000
           currency:
             type: string
             description: ISO 4217 code.

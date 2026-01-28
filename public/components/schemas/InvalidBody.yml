@@ -6,7 +6,8 @@ properties:
   status:
     type: integer
     description: HTTP status code
-    example: 400
+    examples:
+    - 400
   message:
     type: string
     description: Main error reason

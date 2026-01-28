@@ -8,7 +8,8 @@ allOf:
       id:
         type: string
         format: ObjectId
-        example: 620a2958bfc1d7a803398a6d
+        examples:
+        - 620a2958bfc1d7a803398a6d
         description: Form answer object id
       createdAt:
         type: string

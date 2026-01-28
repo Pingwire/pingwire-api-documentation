@@ -20,7 +20,8 @@ allOf:
             type: string
             format: ISO 3166 ALPHA-3
             description: Country of citizenship in alpha-3 iso format
-            example: SWE
+            examples:
+            - SWE
           connections:
             type: array
             items:
@@ -38,7 +39,8 @@ allOf:
       items:
         type: string
         format: ISO 3166 ALPHA-3
-        example: SWE
+        examples:
+        - SWE
     dateOfBirth:
       type: string
       format: date-time
@@ -63,7 +65,8 @@ allOf:
       items:
         type: string
         format: ISO 3166 ALPHA-3
-        example: SWE
+        examples:
+        - SWE
     isPep:
       description: If the related individual is a PEP or not (including related to a PEP individual)
     pep:

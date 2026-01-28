@@ -4,27 +4,30 @@ properties:
     type: string
     format: ObjectId
     description: ID of the connection
-    example: 62b9437318fe4517089b2833
+    examples:
+    - 62b9437318fe4517089b2833
   from:
     description: Source entity
     type: object
     properties:
-      id: 
+      id:
         type: string
         format: ObjectId
         description: ID of the 'from' entity
-        example: 62b9437318fe4517089b2833
+        examples:
+        - 62b9437318fe4517089b2833
       type:
         $ref: '#/components/schemas/EntityTypes'
   to:
     description: Target entity
     type: object
     properties:
-      id: 
+      id:
         type: string
         format: ObjectId
         description: ID of the 'to' entity
-        example: 62b9437318fe4517089b2833
+        examples:
+        - 62b9437318fe4517089b2833
       type:
         $ref: '#/components/schemas/EntityTypes'
   type:
@@ -36,6 +39,6 @@ properties:
   connectionInfo:
     type: object
     properties:
-      description: 
+      description:
         type: string
         description: Description of the connection

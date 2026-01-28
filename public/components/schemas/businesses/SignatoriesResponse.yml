@@ -5,7 +5,8 @@ allOf:
         type: string
         format: ObjectId
         description: Id of the new board members information object
-        example: 620a2958bfc1d7a803398a6d
+        examples:
+        - 620a2958bfc1d7a803398a6d
       fetchedAt:
         type: string
         format: date-time
@@ -18,7 +19,8 @@ allOf:
         type: string
         format: ObjectId
         description: Id of the entity linked to the board members information object
-        example: 620a2958bfc1d7a803398a6d
+        examples:
+        - 620a2958bfc1d7a803398a6d
       entityType:
         type: string
         enum:

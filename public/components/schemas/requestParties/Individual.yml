@@ -27,7 +27,8 @@ properties:
       url: '/#section/Introduction/Unique-Identifier'
   residence:
     type: string
-    example: SWE
+    examples:
+    - SWE
     format: ISO 3166 ALPHA-3
     description: Country of residence
   nationalIdentifier:

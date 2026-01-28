@@ -18,7 +18,8 @@ post:
                 type: string
                 description: list of case object ids to merge.
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                - 62b9437318fe4517089b2833
   responses:
       200:
         description: Successful operation
