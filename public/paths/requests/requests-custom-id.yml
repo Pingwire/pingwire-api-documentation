@@ -8,8 +8,7 @@ get:
   - in: path
     name: customId
     description: Request customId
-    examples:
-    - abc123
+    example: abc123
     required: true
     schema:
       type: string

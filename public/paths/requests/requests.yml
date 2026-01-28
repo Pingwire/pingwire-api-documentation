@@ -8,8 +8,7 @@ get:
   - in: query
     name: _sort
     required: false
-    examples:
-    - 'id'
+    example: 'id'
     schema:
       type: string
       enum:
@@ -40,8 +39,7 @@ get:
     name: id
     description: Filter list of requests by id of request. Either this query parameter or requestType query parameter must be defined.
     required: false
-    examples:
-    - 679b5a44b82f37f3cf378ea5
+    example: 679b5a44b82f37f3cf378ea5
     schema:
       type: string
       format: ObjectId
@@ -49,8 +47,7 @@ get:
     name: requestType
     description: Filter list of requests by requestType. Either this query parameter or the id query paramter must be defined.
     required: false
-    examples:
-    - transaction
+    example: transaction
     schema:
       type: string
       enum:
@@ -63,16 +60,14 @@ get:
     name: _start
     description: The start number of the requests list.
     required: false
-    examples:
-    - '0'
+    example: 0
     schema:
       type: number
   - in: query
     name: _end
     description: The end number of the requests list.
     required: false
-    examples:
-    - '10'
+    example: 10
     schema:
       type: number
   responses:

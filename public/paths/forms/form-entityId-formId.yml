@@ -8,8 +8,7 @@ get:
   - in: path
     name: entityId
     description:  entity object id
-    examples:
-    - 620a2958bfc1d7a803398a6d
+    example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string
@@ -17,8 +16,7 @@ get:
   - in: path
     name: formId
     description:  form object id
-    examples:
-    - 620a2958bfc1d7a803398a6d
+    example: 620a2958bfc1d7a803398a6d
     required: true
     schema:
       type: string

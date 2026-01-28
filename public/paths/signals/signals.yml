@@ -8,8 +8,7 @@ get:
   - in: query
     name: _sort
     required: false
-    examples:
-    - 'id'
+    example: 'id'
     schema:
       type: string
       enum:
@@ -28,24 +27,21 @@ get:
     name: active
     description: Filter list of signals by active status.
     required: false
-    examples:
-    - true
+    example: true
     schema:
       type: boolean
   - in: query
     name: _start
     description: The start number of the signals list.
     required: false
-    examples:
-    - '0'
+    example: 0
     schema:
       type: number
   - in: query
     name: _end
     description: The end number of the signals list.
     required: false
-    examples:
-    - '10'
+    example: 10
     schema:
       type: number
   responses:
