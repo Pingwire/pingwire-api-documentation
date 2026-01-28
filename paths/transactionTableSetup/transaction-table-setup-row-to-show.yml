@@ -20,7 +20,8 @@ put:
             rowToShowInGraph:
               type: string
               format: objectId
-              example: 62b9437318fe4517089b2833
+              examples:
+              - 62b9437318fe4517089b2833
               description: Id of the row to show in graph
 
   responses:

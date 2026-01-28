@@ -29,5 +29,6 @@ properties:
     format: ObjectId
   requestType:
     description: Type of the request. Each type is associated to a custom extraInformation schema.
-    example: transaction
+    examples:
+    - transaction
     type: string

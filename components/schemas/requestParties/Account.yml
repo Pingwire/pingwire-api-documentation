@@ -77,7 +77,8 @@ properties:
     type: string
     description: Currency of the account
     format: ISO 4217 code
-    example: USD
+    examples:
+    - USD
   accountName:
     type: string
     description: The name of the account.

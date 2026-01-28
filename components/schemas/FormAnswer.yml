@@ -14,7 +14,8 @@ allOf:
           id:
             type: string
             format: ObjectId
-            example: 620a2958bfc1d7a803398a6d
+            examples:
+            - 620a2958bfc1d7a803398a6d
             description: Id of the entity
           type:
             type: string
@@ -27,7 +28,8 @@ allOf:
       formId:
         type: string
         format: ObjectId
-        example: 620a2958bfc1d7a803398a6d
+        examples:
+        - 620a2958bfc1d7a803398a6d
         description: Form that was used to submit the answers
       submittedAt:
         type: string
@@ -89,7 +91,8 @@ allOf:
               type: string
               format: ISO 3166 ALPHA-3
               description: Country of citizenship in alpha-3 iso format
-              example: SWE
+              examples:
+              - SWE
             connections:
               type: array
               items:
@@ -176,7 +179,8 @@ allOf:
                               type: string
                               description: ID of the transaction type to consider
                               format: ObjectId
-                              example: 620a2958bfc1d7a803398a6d
+                              examples:
+                              - 620a2958bfc1d7a803398a6d
             incoming:
               allOf:
               - type: object
@@ -213,7 +217,8 @@ allOf:
           currency:
             type: string
             description: Currency in the 3 letters format from ISO 4217
-            example: USD
+            examples:
+            - USD
       industry:
         type: string
         description: Industry of the business
@@ -306,7 +311,8 @@ allOf:
             type: string
             format: ISO 3166 ALPHA-3
             description: Country of registration in alpha-3 iso format
-            example: SWE
+            examples:
+            - SWE
           registrationNumber:
             type: string
             description: The registration number. The format depends of the country chosen.
@@ -338,7 +344,8 @@ allOf:
           currency:
             type: string
             description: Currency in the 3 letters format from ISO 4217
-            example: USD
+            examples:
+            - USD
       products:
         type: object
         description: Products used by the individual or the business.
@@ -373,7 +380,8 @@ allOf:
         items:
           type: string
           format: ISO 3166 ALPHA-3
-          example: SWE
+          examples:
+          - SWE
       salary:
         type: object
         description: Monthly gross salary of the individual
@@ -387,7 +395,8 @@ allOf:
           currency:
             type: string
             description: Currency in the 3 letters format from ISO 4217
-            example: USD
+            examples:
+            - USD
       signatories:
         type: array
         description: Signatories of the business
@@ -467,7 +476,8 @@ allOf:
           currency:
             type: string
             description: Currency in the 3 letters format from ISO 4217
-            example: USD
+            examples:
+            - USD
       stateOwned:
         type: string
         description: Whether the business is state owned
@@ -480,7 +490,8 @@ allOf:
         items:
           type: string
           format: ISO 3166 ALPHA-3
-          example: SWE
+          examples:
+          - SWE
       tin:
         type: string
         description: Tax identification number

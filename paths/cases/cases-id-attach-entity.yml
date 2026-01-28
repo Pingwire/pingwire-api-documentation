@@ -26,7 +26,8 @@ put:
               type: string
               format: ObjectId
               description: EntityId of the entity to attach to the case
-              example: 62b9437318fe4517089b2833
+              examples:
+              - 62b9437318fe4517089b2833
             entityType:
               $ref: '#/components/schemas/EntityTypes'
   responses:

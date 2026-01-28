@@ -16,7 +16,8 @@ properties:
     type: string
     format: ObjectId
     description: ID of the case
-    example: 62b9437318fe4517089b2833
+    examples:
+    - 62b9437318fe4517089b2833
   entities:
     type: array
     description: Entities included in the case
@@ -30,7 +31,8 @@ properties:
           type: string
           description: ID of the entity
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
         type:
           $ref: '#/components/schemas/EntityTypes'
   requests:
@@ -39,7 +41,8 @@ properties:
     items:
       type: string
       format: ObjectId
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   pings:
     type: array
     description: Pings included in the case
@@ -52,19 +55,22 @@ properties:
           type: string
           description: ID of the ping
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
         rule:
           type: string
           description: ID of the rule that generated the ping
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
   fipoReports:
     type: array
     description: Financial police reports included in the case
     items:
       type: string
       format: ObjectId
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   comments:
     type: array
     description: Comments in the case
@@ -98,7 +104,8 @@ properties:
     type: string
     description: ID of the case that this case have been merged into.
     format: ObjectId
-    example: 62b9437318fe4517089b2833
+    examples:
+    - 62b9437318fe4517089b2833
   status:
     $ref: '#/components/schemas/CaseStatuses'
   priority:
@@ -109,7 +116,8 @@ properties:
     items:
       type: string
       format: ObjectId
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   closedAt:
     type: string
     format: date-time
@@ -122,7 +130,8 @@ properties:
         type: string
         description: ID of the member the case is currently assigned to.
         format: ObjectId
-        example: 62b9437318fe4517089b2833
+        examples:
+        - 62b9437318fe4517089b2833
   escalation:
     type: object
     description: Escalation details of the case
@@ -131,10 +140,12 @@ properties:
         type: string
         description: ID of the member the case is currently escalated to.
         format: ObjectId
-        example: 62b9437318fe4517089b2833
+        examples:
+        - 62b9437318fe4517089b2833
       requestedBy:
         type: string
         description: ID of the member who requested the escalation.
         format: ObjectId
-        example: 62b9437318fe4517089b2833
+        examples:
+        - 62b9437318fe4517089b2833
 

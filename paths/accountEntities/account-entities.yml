@@ -17,7 +17,6 @@ get:
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
     required: false
-    example:
     schema:
       type: string
       enum:
@@ -27,14 +26,14 @@ get:
     name: _start
     description: The start number of the accounts list.
     required: false
-    example: '0'
+    example: 0
     schema:
       type: number
   - in: query
     name: _end
     description: The end number of the accounts list.
     required: false
-    example: '10'
+    example: 10
     schema:
       type: number
   responses:

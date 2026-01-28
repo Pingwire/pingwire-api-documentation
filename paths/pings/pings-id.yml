@@ -34,7 +34,7 @@ get:
             $ref: "#/components/schemas/ErrorBody"
   security:
   - bearerAuth: []
-put: 
+put:
   tags:
   - Pings
   summary: Update ping
@@ -75,4 +75,3 @@ put:
             $ref: "#/components/schemas/ErrorBody"
   security:
   - bearerAuth: []
-  

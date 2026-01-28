@@ -8,12 +8,14 @@ properties:
   _id:
     type: string
     format: ObjectId
-    example: 62b9437318fe4517089b2833
+    examples:
+    - 62b9437318fe4517089b2833
     description: ID of the comment
   member:
     type: string
     format: ObjectId
-    example: 62b9437318fe4517089b2833
+    examples:
+    - 62b9437318fe4517089b2833
     description: ID of the member who created the comment
   message:
     type: string
@@ -34,7 +36,8 @@ properties:
         member:
           type: string
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
           description: ID of the member who edited the comment
         message:
           type: string

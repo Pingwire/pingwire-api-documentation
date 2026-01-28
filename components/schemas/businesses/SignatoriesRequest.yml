@@ -22,7 +22,8 @@ properties:
                   type: string
                   format: ObjectId
                   description: Id of the entity that is the signatory. Use this to link it to a previously created entity.
-                  example: 620a2958bfc1d7a803398a6d
+                  examples:
+                  - 620a2958bfc1d7a803398a6d
                   externalDocs:
                     description: Unique Identifier
                     url: '/#section/Introduction/Unique-Identifier'
@@ -70,17 +71,20 @@ properties:
                   items:
                     type: string
                     format: ObjectId
-                    example: 620a2958bfc1d7a803398a6d
+                    examples:
+                    - 620a2958bfc1d7a803398a6d
                 citizenship:
                   type: array
                   description: List of the countries of citizenship of the signatory
                   items:
                     type: string
-                    example: SWE
+                    examples:
+                    - SWE
                     format: ISO 3166 ALPHA-3
                 countryResidence:
                   type: string
-                  example: SWE
+                  examples:
+                  - SWE
                   format: ISO 3166 ALPHA-3
                   description: Country of residence of the signatory
             roles:

@@ -7,7 +7,8 @@ allOf:
       type: string
       format: ObjectId
       description: ID of the car
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
       externalDocs:
         description: Unique identifier
         url: '/#section/Introduction/Unique-Identifier'
@@ -27,7 +28,8 @@ allOf:
         id:
           type: string
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
           description: ID of the owner
           externalDocs:
             description: Unique identifier

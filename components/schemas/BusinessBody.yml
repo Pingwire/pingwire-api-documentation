@@ -13,7 +13,8 @@ properties:
     deprecated: true
     type: string
     format: xxxxxxxxxx
-    example: xxxxxxxxxx
+    examples:
+    - '5566778899'
     description: The Swedish company registration number. Deprecated, use "registrationNumber" and "residence" instead
     externalDocs:
       description: Unique identifier
@@ -27,7 +28,8 @@ properties:
   residence:
     type: string
     format: ISO 3166 ALPHA-3
-    example: SWE
+    examples:
+    - SWE
     description: The country of registration of the business. Required if "registrationNumber" is used
   email:
     type: string
@@ -42,7 +44,8 @@ properties:
     items:
       type: string
       format: ObjectId
-      example: 620a2958bfc1d7a803398a6d
+      examples:
+      - 620a2958bfc1d7a803398a6d
   kycApprovedAt:
     type: string
     format: date-time

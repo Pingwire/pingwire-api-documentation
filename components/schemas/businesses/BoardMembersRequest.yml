@@ -69,17 +69,20 @@ properties:
                   items:
                     type: string
                     format: ObjectId
-                    example: 620a2958bfc1d7a803398a6d
+                    examples:
+                    - 620a2958bfc1d7a803398a6d
                 citizenship:
                   type: array
                   description: List of the countries of citizenship of the board member
                   items:
                     type: string
-                    example: SWE
+                    examples:
+                    - SWE
                     format: ISO 3166 ALPHA-3
                 countryResidence:
                   type: string
-                  example: SWE
+                  examples:
+                  - SWE
                   format: ISO 3166 ALPHA-3
                   description: Country of residence of the board member
             roles:

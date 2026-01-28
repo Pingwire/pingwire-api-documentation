@@ -2,7 +2,8 @@ type: object
 properties:
   amount:
     type: number
-    example: 1000
+    examples:
+    - 1000
     description: Amount of the transaction
   currency:
     type: string
@@ -22,7 +23,8 @@ properties:
       type: string
       format: ObjectId
       description: ID of the transaction type
-      example: 62b9437318fe4517089b2833
+      examples:
+      - 62b9437318fe4517089b2833
   transactionChannel:
     type: string
     enum:

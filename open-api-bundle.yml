@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.1
 info:
   title: Pingwire API
   version: 1.0.0
@@ -145,7 +145,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -155,14 +154,14 @@ paths:
           name: _start
           description: The start number of the accounts list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the accounts list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -490,7 +489,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -500,14 +498,14 @@ paths:
           name: _start
           description: The start number of the individuals list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the individuals list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -701,7 +699,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -711,14 +708,14 @@ paths:
           name: _start
           description: The start number of the businesses list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the businesses list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -1080,7 +1077,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -1090,14 +1086,14 @@ paths:
           name: _start
           description: The start number of the cars list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the cars list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -1284,7 +1280,8 @@ paths:
             type: string
             format: ObjectId
             description: ID of the 'from' entity
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         - in: query
           name: to
           description: Target entity, used to have all connections with this entity as a target. It cannot be used with entity.
@@ -1293,7 +1290,8 @@ paths:
             type: string
             format: ObjectId
             description: ID of the 'to' entity
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         - in: query
           name: entity
           description: Entity id, used to have all connections for this entity (either source or target of the connection). Must be used with type and cannot be used with from or to.
@@ -1302,7 +1300,8 @@ paths:
             type: string
             format: ObjectId
             description: ID of entity
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         - in: query
           name: type
           description: Type of connection.
@@ -1424,7 +1423,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -1434,7 +1432,6 @@ paths:
           name: status
           description: Filter list of pings by status.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -1446,14 +1443,14 @@ paths:
           name: _start
           description: The start number of the pings list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the pings list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -1506,7 +1503,8 @@ paths:
                       id:
                         type: string
                         format: ObjectId
-                        example: 62b9437318fe4517089b2833
+                        examples:
+                          - 62b9437318fe4517089b2833
                         externalDocs:
                           description: Unique identifier
                           url: /#section/Introduction/Unique-Identifier
@@ -1786,7 +1784,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -1796,14 +1793,14 @@ paths:
           name: _start
           description: The start number of the cases list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the cases list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
         - in: query
@@ -1888,7 +1885,8 @@ paths:
                   type: string
                   format: ObjectId
                   description: EntityId of the entity to create a case for
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
                 entityType:
                   $ref: '#/components/schemas/EntityTypes'
       responses:
@@ -1933,7 +1931,8 @@ paths:
                     type: string
                     description: list of case object ids to merge.
                     format: ObjectId
-                    example: 62b9437318fe4517089b2833
+                    examples:
+                      - 62b9437318fe4517089b2833
       responses:
         '200':
           description: Successful operation
@@ -2021,7 +2020,8 @@ paths:
                   type: string
                   format: ObjectId
                   description: EntityId of the entity to attach to the case
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
                 entityType:
                   $ref: '#/components/schemas/EntityTypes'
       responses:
@@ -2074,7 +2074,8 @@ paths:
                   type: string
                   format: ObjectId
                   description: EntityId of the entity to detach from the case
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
                 entityType:
                   $ref: '#/components/schemas/EntityTypes'
       responses:
@@ -2218,7 +2219,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -2228,7 +2228,6 @@ paths:
           name: recommendation
           description: Filter list of requests by recommendation.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -2260,14 +2259,14 @@ paths:
           name: _start
           description: The start number of the requests list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the requests list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -2561,7 +2560,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -2571,14 +2569,14 @@ paths:
           name: _start
           description: The start number of the members list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the members list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -2819,7 +2817,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -2836,14 +2833,14 @@ paths:
           name: _start
           description: The start number of the processes list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the processes list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -3037,7 +3034,7 @@ paths:
         - in: query
           name: _sort
           required: false
-          example: id
+          example: createdAt
           schema:
             type: string
             enum:
@@ -3047,7 +3044,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -3057,14 +3053,14 @@ paths:
           name: _start
           description: The start number of the products list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the products list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -3221,7 +3217,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -3238,14 +3233,14 @@ paths:
           name: _start
           description: The start number of the groups list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the groups list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -3451,7 +3446,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -3461,14 +3455,14 @@ paths:
           name: _start
           description: The start number of the risk classes list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the risk classes list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -3905,7 +3899,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -3947,14 +3940,14 @@ paths:
           name: _start
           description: The start number of the rules list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the rules list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -4147,7 +4140,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -4164,14 +4156,14 @@ paths:
           name: _start
           description: The start number of the signals list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the signals list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -4417,7 +4409,7 @@ paths:
           name: entityType
           required: true
           description: Entity type for which to get the table setup
-          example: business
+          example: Business
           schema:
             $ref: '#/components/schemas/EntityTypes'
       responses:
@@ -4554,7 +4546,8 @@ paths:
                 rowToShowInGraph:
                   type: string
                   format: objectId
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
                   description: Id of the row to show in graph
       responses:
         '200':
@@ -4598,7 +4591,8 @@ paths:
           schema:
             type: string
             format: objectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
       responses:
         '200':
           description: Successful operation
@@ -4641,7 +4635,6 @@ paths:
           name: _order
           description: Order of list (DESC or ASC) based on the sorting parameter.
           required: false
-          example: null
           schema:
             type: string
             enum:
@@ -4658,14 +4651,14 @@ paths:
           name: _start
           description: The start number of the transaction types list.
           required: false
-          example: '0'
+          example: 0
           schema:
             type: number
         - in: query
           name: _end
           description: The end number of the transaction types list.
           required: false
-          example: '10'
+          example: 10
           schema:
             type: number
       responses:
@@ -5007,7 +5000,8 @@ components:
               id:
                 type: string
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
                 description: ID of the entity
             required:
               - type
@@ -5132,7 +5126,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the account
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
               externalDocs:
                 description: Unique identifier
                 url: /#section/Introduction/Unique-Identifier
@@ -5186,7 +5181,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the individual
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
               externalDocs:
                 description: Unique identifier
                 url: /#section/Introduction/Unique-Identifier
@@ -5213,7 +5209,8 @@ components:
           deprecated: true
           type: string
           format: xxxxxxxxxx
-          example: xxxxxxxxxx
+          examples:
+            - '5566778899'
           description: The Swedish company registration number. Deprecated, use "registrationNumber" and "residence" instead
           externalDocs:
             description: Unique identifier
@@ -5227,7 +5224,8 @@ components:
         residence:
           type: string
           format: ISO 3166 ALPHA-3
-          example: SWE
+          examples:
+            - SWE
           description: The country of registration of the business. Required if "registrationNumber" is used
         email:
           type: string
@@ -5242,7 +5240,8 @@ components:
           items:
             type: string
             format: ObjectId
-            example: 620a2958bfc1d7a803398a6d
+            examples:
+              - 620a2958bfc1d7a803398a6d
         kycApprovedAt:
           type: string
           format: date-time
@@ -5275,7 +5274,8 @@ components:
             id:
               type: string
               format: ObjectId
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
               description: ID of the business
               externalDocs:
                 description: Unique identifier
@@ -5299,7 +5299,8 @@ components:
                     type: string
                     description: ID of the individual who conducted a transaction
                     format: ObjectId
-                    example: 62b9437318fe4517089b2833
+                    examples:
+                      - 62b9437318fe4517089b2833
                   conductorType:
                     type: string
                     description: Type of conductor
@@ -5313,7 +5314,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the car
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
               externalDocs:
                 description: Unique identifier
                 url: /#section/Introduction/Unique-Identifier
@@ -5333,7 +5335,8 @@ components:
                 id:
                   type: string
                   format: ObjectId
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
                   description: ID of the owner
                   externalDocs:
                     description: Unique identifier
@@ -5351,7 +5354,8 @@ components:
           type: string
           format: ObjectId
           description: ID of the connection
-          example: 62b9437318fe4517089b2833
+          examples:
+            - 62b9437318fe4517089b2833
         from:
           description: Source entity
           type: object
@@ -5360,7 +5364,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the 'from' entity
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         to:
@@ -5371,7 +5376,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the 'to' entity
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         type:
@@ -5397,7 +5403,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the 'from' entity
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         to:
@@ -5408,7 +5415,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the 'to' entity
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         entity1:
@@ -5419,7 +5427,8 @@ components:
               type: string
               format: ObjectId
               description: ID of entity1
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         entity2:
@@ -5430,7 +5439,8 @@ components:
               type: string
               format: ObjectId
               description: ID of entity2
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             type:
               $ref: '#/components/schemas/EntityTypes'
         description:
@@ -5447,12 +5457,14 @@ components:
         _id:
           type: string
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+            - 62b9437318fe4517089b2833
           description: ID of the comment
         member:
           type: string
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+            - 62b9437318fe4517089b2833
           description: ID of the member who created the comment
         message:
           type: string
@@ -5473,7 +5485,8 @@ components:
               member:
                 type: string
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
                 description: ID of the member who edited the comment
               message:
                 type: string
@@ -5544,7 +5557,8 @@ components:
               items:
                 type: string
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
     Case:
       type: object
       required:
@@ -5564,7 +5578,8 @@ components:
           type: string
           format: ObjectId
           description: ID of the case
-          example: 62b9437318fe4517089b2833
+          examples:
+            - 62b9437318fe4517089b2833
         entities:
           type: array
           description: Entities included in the case
@@ -5578,7 +5593,8 @@ components:
                 type: string
                 description: ID of the entity
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
               type:
                 $ref: '#/components/schemas/EntityTypes'
         requests:
@@ -5587,7 +5603,8 @@ components:
           items:
             type: string
             format: ObjectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         pings:
           type: array
           description: Pings included in the case
@@ -5600,19 +5617,22 @@ components:
                 type: string
                 description: ID of the ping
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
               rule:
                 type: string
                 description: ID of the rule that generated the ping
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
         fipoReports:
           type: array
           description: Financial police reports included in the case
           items:
             type: string
             format: ObjectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         comments:
           type: array
           description: Comments in the case
@@ -5646,7 +5666,8 @@ components:
           type: string
           description: ID of the case that this case have been merged into.
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+            - 62b9437318fe4517089b2833
         status:
           $ref: '#/components/schemas/CaseStatuses'
         priority:
@@ -5657,7 +5678,8 @@ components:
           items:
             type: string
             format: ObjectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         closedAt:
           type: string
           format: date-time
@@ -5670,7 +5692,8 @@ components:
               type: string
               description: ID of the member the case is currently assigned to.
               format: ObjectId
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
         escalation:
           type: object
           description: Escalation details of the case
@@ -5679,12 +5702,14 @@ components:
               type: string
               description: ID of the member the case is currently escalated to.
               format: ObjectId
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
             requestedBy:
               type: string
               description: ID of the member who requested the escalation.
               format: ObjectId
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
     InvalidBody:
       type: object
       required:
@@ -5694,7 +5719,8 @@ components:
         status:
           type: integer
           description: HTTP status code
-          example: 400
+          examples:
+            - 400
         message:
           type: string
           description: Main error reason
@@ -5712,7 +5738,8 @@ components:
         status:
           type: integer
           description: HTTP status code
-          example: 500
+          examples:
+            - 500
         message:
           type: string
           description: Main error reason
@@ -5734,7 +5761,8 @@ components:
                     description: Unique identifier
                     url: /#section/Introduction/Unique-Identifier
                   description: ID of the transaction
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
     RequestCarKyc:
       description: A representation of a carKyc
       allOf:
@@ -5827,7 +5855,8 @@ components:
                     description: Unique identifier
                     url: /#section/Introduction/Unique-Identifier
                   description: ID of the transaction
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
     RequestTransactionBody:
       description: A representation of a transaction
       allOf:
@@ -5867,10 +5896,12 @@ components:
               properties:
                 amount:
                   type: number
-                  example: 1000
+                  examples:
+                    - 1000
                 valuation:
                   type: number
-                  example: 1000
+                  examples:
+                    - 1000
                 currency:
                   type: string
                   description: ISO 4217 code.
@@ -5964,7 +5995,8 @@ components:
           format: ObjectId
         requestType:
           description: Type of the request. Each type is associated to a custom extraInformation schema.
-          example: transaction
+          examples:
+            - transaction
           type: string
     Request:
       allOf:
@@ -6001,7 +6033,8 @@ components:
               description: Date when the request was created
             processStopped:
               type: boolean
-              example: false
+              examples:
+                - false
               deprecated: true
               description: For internal use only
             step:
@@ -6009,7 +6042,8 @@ components:
               enum:
                 - created
                 - processed
-              example: processed
+              examples:
+                - processed
               description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request has reached the processed step. This guarantees that recommendation and signals are always available in the response object.
             recommendation:
               type: string
@@ -6062,7 +6096,8 @@ components:
           type: string
           format: ISO 3166 ALPHA-3
           description: Country of residence
-          example: SWE
+          examples:
+            - SWE
         email:
           type: string
           format: email
@@ -6299,14 +6334,16 @@ components:
           items:
             type: string
             format: ObjectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         active:
           type: boolean
         birthDate:
           type: string
         occupation:
           type: string
-          example: Developer
+          examples:
+            - Developer
         swedishSocialSecurityNumber:
           type: string
           format: yyyymmddxxxx
@@ -6340,7 +6377,8 @@ components:
           type: string
         occupation:
           type: string
-          example: Developer
+          examples:
+            - Developer
         swedishSocialSecurityNumber:
           type: string
           format: yyyymmddxxxx
@@ -6363,7 +6401,8 @@ components:
           items:
             type: string
             format: ObjectId
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
       required:
         - firstName
         - lastName
@@ -6544,7 +6583,8 @@ components:
       properties:
         amount:
           type: number
-          example: 1000
+          examples:
+            - 1000
           description: Amount of the transaction
         currency:
           type: string
@@ -6564,7 +6604,8 @@ components:
             type: string
             format: ObjectId
             description: ID of the transaction type
-            example: 62b9437318fe4517089b2833
+            examples:
+              - 62b9437318fe4517089b2833
         transactionChannel:
           type: string
           enum:
@@ -6806,7 +6847,8 @@ components:
                 description: Unique identifier
                 url: /#section/Introduction/Unique-Identifier
               description: ID of the transaction
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
         - $ref: '#/components/schemas/TransactionBody'
     TransactionTableSetup:
       type: object
@@ -6827,7 +6869,8 @@ components:
               id:
                 type: string
                 format: objectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
                 description: Id of the row
               transactionTypeConfiguration:
                 $ref: '#/components/schemas/TransactionTypeConfiguration'
@@ -8068,7 +8111,8 @@ components:
               type: string
               format: ObjectId
               description: ID of the individual
-              example: 62b9437318fe4517089b2833
+              examples:
+                - 62b9437318fe4517089b2833
               externalDocs:
                 description: Unique identifier
                 url: /#section/Introduction/Unique-Identifier
@@ -8119,7 +8163,8 @@ components:
               id:
                 type: string
                 format: ObjectId
-                example: 62b9437318fe4517089b2833
+                examples:
+                  - 62b9437318fe4517089b2833
                 description: ID of the entity
               role:
                 $ref: '#/components/schemas/ProductPartyRoles'
@@ -8234,32 +8279,39 @@ components:
               type: string
               format: date
               description: Date when the invoice was issued
-              example: '2023-10-01'
+              examples:
+                - '2023-10-01'
             dueDate:
               type: string
               format: date
               description: Date when the invoice is due
-              example: '2023-10-30'
+              examples:
+                - '2023-10-30'
             currency:
               type: string
               description: Currency code in ISO 4217 format
-              example: USD
+              examples:
+                - USD
             invoiceAmount:
               type: number
               description: Total amount of the invoice including VAT
-              example: 1000
+              examples:
+                - 1000
             vatAmount:
               type: number
               description: Amount of VAT included in the invoice
-              example: 250
+              examples:
+                - 250
             invoiceNumber:
               type: string
               description: Unique identifier for the invoice
-              example: INV-1001
+              examples:
+                - INV-1001
             customerNumber:
               type: string
               description: Unique identifier for the customer as stated on the invoice
-              example: CUST-2002
+              examples:
+                - CUST-2002
             issuer:
               type: object
               description: Information about the issuer of the invoice
@@ -8277,7 +8329,8 @@ components:
                   type: string
                   format: ObjectId
                   description: Unique identifier of the issuer in the system
-                  example: 62b9437318fe4517089b2833
+                  examples:
+                    - 62b9437318fe4517089b2833
             paymentDetails:
               type: object
               description: Payment details for the invoice
@@ -8285,11 +8338,13 @@ components:
                 accountNumber:
                   type: string
                   description: Account number to which the payment should be made. Format depends on the method of payment.
-                  example: '1234567890'
+                  examples:
+                    - '1234567890'
                 reference:
                   type: string
                   description: Payment reference to be used when making the payment
-                  example: REF-3003
+                  examples:
+                    - REF-3003
                 method:
                   type: string
                   description: Payment method to be used
@@ -8328,7 +8383,8 @@ components:
             phoneNumber:
               type: string
               description: Phone number associated to the swish product
-              example: '0701234567'
+              examples:
+                - '0701234567'
     ProductLineOfBusiness:
       allOf:
         - $ref: '#/components/schemas/ProductBase'
@@ -8365,16 +8421,19 @@ components:
                   type: string
                   format: ISO 3166 ALPHA-3
                   description: Country
-                  example: SWE
+                  examples:
+                    - SWE
             email:
               type: string
               format: email
               description: Contact email associated to the lineOfBusiness product
-              example: test@test.com
+              examples:
+                - test@test.com
             phone:
               type: string
               description: Phone number associated to the lineOfBusiness product
-              example: '0701234567'
+              examples:
+                - '0701234567'
     CompanyInformationRequest:
       type: object
       properties:
@@ -8392,7 +8451,8 @@ components:
               properties:
                 registrationCountry:
                   type: string
-                  example: SWE
+                  examples:
+                    - SWE
                   format: ISO 3166 ALPHA-3
                   description: Country of registration
                 registrationNumber:
@@ -8458,7 +8518,8 @@ components:
                 naceCode:
                   type: string
                   description: NACE code of the company industry. The NACE code can either be a section (e.g. A), a division (e.g. A1), a group (e.g. A1.1) or a class (e.g. A1.1.1)
-                  example: A1.1.1
+                  examples:
+                    - A1.1.1
                 naceDescription:
                   type: string
                   description: Description of the company industry according to its NACE code.
@@ -8517,7 +8578,8 @@ components:
                       description: State
                     country:
                       type: string
-                      example: SWE
+                      examples:
+                        - SWE
                       format: ISO 3166 ALPHA-3
                       description: country
                   required:
@@ -8547,7 +8609,8 @@ components:
                         description: State
                       country:
                         type: string
-                        example: SWE
+                        examples:
+                          - SWE
                         format: ISO 3166 ALPHA-3
                         description: country
                     required:
@@ -8577,7 +8640,8 @@ components:
                         description: State
                       country:
                         type: string
-                        example: SWE
+                        examples:
+                          - SWE
                         format: ISO 3166 ALPHA-3
                         description: country
                     required:
@@ -8699,17 +8763,20 @@ components:
                         items:
                           type: string
                           format: ObjectId
-                          example: 620a2958bfc1d7a803398a6d
+                          examples:
+                            - 620a2958bfc1d7a803398a6d
                       citizenship:
                         type: array
                         description: List of the countries of citizenship of the beneficial owner
                         items:
                           type: string
-                          example: SWE
+                          examples:
+                            - SWE
                           format: ISO 3166 ALPHA-3
                       countryResidence:
                         type: string
-                        example: SWE
+                        examples:
+                          - SWE
                         format: ISO 3166 ALPHA-3
                         description: Country of residence of the beneficial owner
                   extentOfOwnership:
@@ -8876,17 +8943,20 @@ components:
                         items:
                           type: string
                           format: ObjectId
-                          example: 620a2958bfc1d7a803398a6d
+                          examples:
+                            - 620a2958bfc1d7a803398a6d
                       citizenship:
                         type: array
                         description: List of the countries of citizenship of the board member
                         items:
                           type: string
-                          example: SWE
+                          examples:
+                            - SWE
                           format: ISO 3166 ALPHA-3
                       countryResidence:
                         type: string
-                        example: SWE
+                        examples:
+                          - SWE
                         format: ISO 3166 ALPHA-3
                         description: Country of residence of the board member
                   roles:
@@ -8977,7 +9047,8 @@ components:
                         type: string
                         format: ObjectId
                         description: Id of the entity that is the signatory. Use this to link it to a previously created entity.
-                        example: 620a2958bfc1d7a803398a6d
+                        examples:
+                          - 620a2958bfc1d7a803398a6d
                         externalDocs:
                           description: Unique Identifier
                           url: /#section/Introduction/Unique-Identifier
@@ -9025,17 +9096,20 @@ components:
                         items:
                           type: string
                           format: ObjectId
-                          example: 620a2958bfc1d7a803398a6d
+                          examples:
+                            - 620a2958bfc1d7a803398a6d
                       citizenship:
                         type: array
                         description: List of the countries of citizenship of the signatory
                         items:
                           type: string
-                          example: SWE
+                          examples:
+                            - SWE
                           format: ISO 3166 ALPHA-3
                       countryResidence:
                         type: string
-                        example: SWE
+                        examples:
+                          - SWE
                         format: ISO 3166 ALPHA-3
                         description: Country of residence of the signatory
                   roles:
@@ -9085,7 +9159,8 @@ components:
               type: string
               format: ObjectId
               description: Id of the new board members information object
-              example: 620a2958bfc1d7a803398a6d
+              examples:
+                - 620a2958bfc1d7a803398a6d
             fetchedAt:
               type: string
               format: date-time
@@ -9098,7 +9173,8 @@ components:
               type: string
               format: ObjectId
               description: Id of the entity linked to the board members information object
-              example: 620a2958bfc1d7a803398a6d
+              examples:
+                - 620a2958bfc1d7a803398a6d
             entityType:
               type: string
               enum:
@@ -9133,7 +9209,8 @@ components:
                 id:
                   type: string
                   format: ObjectId
-                  example: 620a2958bfc1d7a803398a6d
+                  examples:
+                    - 620a2958bfc1d7a803398a6d
                   description: Id of the entity
                 type:
                   type: string
@@ -9146,7 +9223,8 @@ components:
             formId:
               type: string
               format: ObjectId
-              example: 620a2958bfc1d7a803398a6d
+              examples:
+                - 620a2958bfc1d7a803398a6d
               description: Form that was used to submit the answers
             submittedAt:
               type: string
@@ -9208,7 +9286,8 @@ components:
                     type: string
                     format: ISO 3166 ALPHA-3
                     description: Country of citizenship in alpha-3 iso format
-                    example: SWE
+                    examples:
+                      - SWE
                   connections:
                     type: array
                     items:
@@ -9295,7 +9374,8 @@ components:
                                     type: string
                                     description: ID of the transaction type to consider
                                     format: ObjectId
-                                    example: 620a2958bfc1d7a803398a6d
+                                    examples:
+                                      - 620a2958bfc1d7a803398a6d
                   incoming:
                     allOf:
                       - type: object
@@ -9332,7 +9412,8 @@ components:
                 currency:
                   type: string
                   description: Currency in the 3 letters format from ISO 4217
-                  example: USD
+                  examples:
+                    - USD
             industry:
               type: string
               description: Industry of the business
@@ -9425,7 +9506,8 @@ components:
                   type: string
                   format: ISO 3166 ALPHA-3
                   description: Country of registration in alpha-3 iso format
-                  example: SWE
+                  examples:
+                    - SWE
                 registrationNumber:
                   type: string
                   description: The registration number. The format depends of the country chosen.
@@ -9457,7 +9539,8 @@ components:
                 currency:
                   type: string
                   description: Currency in the 3 letters format from ISO 4217
-                  example: USD
+                  examples:
+                    - USD
             products:
               type: object
               description: Products used by the individual or the business.
@@ -9492,7 +9575,8 @@ components:
               items:
                 type: string
                 format: ISO 3166 ALPHA-3
-                example: SWE
+                examples:
+                  - SWE
             salary:
               type: object
               description: Monthly gross salary of the individual
@@ -9506,7 +9590,8 @@ components:
                 currency:
                   type: string
                   description: Currency in the 3 letters format from ISO 4217
-                  example: USD
+                  examples:
+                    - USD
             signatories:
               type: array
               description: Signatories of the business
@@ -9586,7 +9671,8 @@ components:
                 currency:
                   type: string
                   description: Currency in the 3 letters format from ISO 4217
-                  example: USD
+                  examples:
+                    - USD
             stateOwned:
               type: string
               description: Whether the business is state owned
@@ -9599,7 +9685,8 @@ components:
               items:
                 type: string
                 format: ISO 3166 ALPHA-3
-                example: SWE
+                examples:
+                  - SWE
             tin:
               type: string
               description: Tax identification number
@@ -9654,7 +9741,8 @@ components:
             id:
               type: string
               format: ObjectId
-              example: 620a2958bfc1d7a803398a6d
+              examples:
+                - 620a2958bfc1d7a803398a6d
               description: Form answer object id
             createdAt:
               type: string
@@ -9708,7 +9796,8 @@ components:
                     type: string
                     format: ISO 3166 ALPHA-3
                     description: Country of citizenship in alpha-3 iso format
-                    example: SWE
+                    examples:
+                      - SWE
                   connections:
                     type: array
                     items:
@@ -9726,7 +9815,8 @@ components:
               items:
                 type: string
                 format: ISO 3166 ALPHA-3
-                example: SWE
+                examples:
+                  - SWE
             dateOfBirth:
               type: string
               format: date-time
@@ -9751,7 +9841,8 @@ components:
               items:
                 type: string
                 format: ISO 3166 ALPHA-3
-                example: SWE
+                examples:
+                  - SWE
             isPep:
               description: If the related individual is a PEP or not (including related to a PEP individual)
             pep:
@@ -9893,7 +9984,8 @@ components:
                       transactionTypeId:
                         type: string
                         format: ObjectId
-                        example: 62b9437318fe4517089b2833
+                        examples:
+                          - 62b9437318fe4517089b2833
                         description: ID of he transaction type to include/exclude
     Pep:
       type: object
@@ -9916,7 +10008,8 @@ components:
             country:
               type: string
               format: ISO 3166 ALPHA-3
-              example: SWE
+              examples:
+                - SWE
               description: Country of the PEP role
             role:
               type: string
@@ -9999,7 +10092,8 @@ components:
         country:
           type: string
           format: ISO 3166 ALPHA-3
-          example: SWE
+          examples:
+            - SWE
           description: Country of the national identifier
         identifier:
           type: string
@@ -10092,7 +10186,8 @@ components:
             url: /#section/Introduction/Unique-Identifier
         residence:
           type: string
-          example: SWE
+          examples:
+            - SWE
           format: ISO 3166 ALPHA-3
           description: Country of residence
         nationalIdentifier:
@@ -10208,7 +10303,8 @@ components:
           type: string
           description: Currency of the account
           format: ISO 4217 code
-          example: USD
+          examples:
+            - USD
         accountName:
           type: string
           description: The name of the account.

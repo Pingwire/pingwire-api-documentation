@@ -32,7 +32,8 @@ allOf:
       description: Date when the request was created
     processStopped:
       type: boolean
-      example: false
+      examples:
+      - false
       deprecated: true
       description: For internal use only
     step:
@@ -40,7 +41,8 @@ allOf:
       enum:
       - created
       - processed
-      example: processed
+      examples:
+      - processed
       description: Indicate the step the request is at. It starts as created and is later updated as processed once the recommendation and signals are available. From the create request endpoint, the response is not returned before the request has reached the processed step. This guarantees that recommendation and signals are always available in the response object.
     recommendation:
       type: string

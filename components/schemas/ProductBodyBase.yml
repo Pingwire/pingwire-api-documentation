@@ -28,7 +28,8 @@ properties:
         id:
           type: string
           format: ObjectId
-          example: 62b9437318fe4517089b2833
+          examples:
+          - 62b9437318fe4517089b2833
           description: ID of the entity
         role:
           $ref: '#/components/schemas/ProductPartyRoles'
