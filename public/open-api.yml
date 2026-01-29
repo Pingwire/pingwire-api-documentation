@@ -228,6 +228,8 @@ paths:
       $ref: './paths/webhooks/configurations.yml'
   /webhooks/configurations/{eventType}:
       $ref: './paths/webhooks/configurations-event-type.yml'
+  /webhooks/trigger-test-event:
+    $ref: './paths/webhooks/trigger-test-event.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
   /individuals/population-register/v2/manual-insert/{id}:
@@ -445,6 +447,10 @@ components:
       $ref: "./components/schemas/webhooks/WebhookConfigurationBase.yml"
     WebhookConfigurationUpdateBody:
       $ref: "./components/schemas/webhooks/WebhookConfigurationUpdateBody.yml"
+    WebhookTriggerTestEventRequest:
+      $ref: "./components/schemas/webhooks/WebhookTriggerTestEventRequest.yml"
+    WebhookTriggerTestEventResponse:
+      $ref: "./components/schemas/webhooks/WebhookTriggerTestEventResponse.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
