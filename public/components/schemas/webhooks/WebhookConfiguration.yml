@@ -28,4 +28,9 @@ allOf:
       required:
       - url
       - signing
+      properties:
+        url:
+          type: string
+        signing:
+          type: object
 - $ref: '#/components/schemas/WebhookConfigurationBase'

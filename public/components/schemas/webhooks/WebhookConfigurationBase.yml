@@ -29,8 +29,8 @@ properties:
       timeout:
         type: number
         description: 'Number of seconds to wait for the webhook endpoint to acknowledge the delivery. Default: 5s'
-        max: 20
-        min: 1
+        maximum: 20
+        minimum: 1
         examples:
         - 5
       retry:
@@ -40,28 +40,28 @@ properties:
           attempts:
             type: number
             description: 'Number of delivery attempts to be made for a single event before backing off. Default: 5'
-            max: 10
-            min: 1
+            maximum: 10
+            minimum: 1
             examples:
             - 5
           baseDelay:
             type: number
             description: 'Number of seconds used as the base delay between attempts. Default 5s'
-            max: 900
-            min: 1
+            maximum: 900
+            minimum: 1
             examples:
             - 5
           delayFactor:
             type: number
             description: 'Used to multiply the baseDelay for each attempt in order to achieve an exponential retry. Default: 2'
-            max: 10
-            min: 1
+            maximum: 10
+            minimum: 1
             examples:
             - 2
           jitterFactor:
             type: number
             description: 'Used to multiply the baseDelay to set the lower bound of the randomness. Use a value of 1 for no jitter and 0 for full jitter. Default: 0.75'
-            min: 0
-            max: 1
+            minimum: 0
+            maximum: 1
             examples:
             - 0.75

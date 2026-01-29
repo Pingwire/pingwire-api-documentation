@@ -10,9 +10,12 @@ allOf:
       - url
       - signing
       properties:
+        url:
+          type: string
         signing:
           type: object
           required:
           - secret
           properties:
-            secret
+            secret:
+              type: string
