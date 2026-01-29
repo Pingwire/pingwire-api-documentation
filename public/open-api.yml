@@ -226,6 +226,8 @@ paths:
       $ref: './paths/transactionTypes/transaction-types-activation-id.yml'
   /webhooks/configurations:
       $ref: './paths/webhooks/configurations.yml'
+  /webhooks/configurations/{eventType}:
+      $ref: './paths/webhooks/configurations-event-type.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
   /individuals/population-register/v2/manual-insert/{id}:
@@ -435,6 +437,14 @@ components:
       $ref: "./components/schemas/requestParties/TransactionParty.yml"
     TransactionTypeConfiguration:
       $ref: "./components/schemas/TransactionTypeConfiguration.yml"
+    WebhookConfiguration:
+      $ref: "./components/schemas/webhooks/WebhookConfiguration.yml"
+    WebhookConfigurationBody:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationBody.yml"
+    WebhookConfigurationBase:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationBase.yml"
+    WebhookConfigurationUpdateBody:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationUpdateBody.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
@@ -464,6 +474,8 @@ components:
       $ref: "./components/schemas/enums/caseStatuses.yml"
     CasePriorities:
       $ref: "./components/schemas/enums/casePriorities.yml"
+    WebhookEventTypes:
+      $ref: "./components/schemas/enums/webhookEventTypes.yml"
 
   securitySchemes:
     bearerAuth:

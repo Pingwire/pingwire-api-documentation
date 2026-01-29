@@ -1,0 +1,18 @@
+allOf:
+- $ref: '#/components/schemas/WebhookConfigurationUpdateBody'
+- type: object
+  required:
+  - deliverySettings
+  properties:
+    deliverySettings:
+      type: object
+      required:
+      - url
+      - signing
+      properties:
+        signing:
+          type: object
+          required:
+          - secret
+          properties:
+            secret

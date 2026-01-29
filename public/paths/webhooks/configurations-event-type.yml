@@ -1,0 +1,142 @@
+get:
+  tags:
+  - Webhook configurations
+  summary: Get webhook configuration
+  operationId: getWebhookConfiguration
+  description: Get webhook configuration by ID.
+  parameters:
+  - in: path
+    name: eventType
+    required: true
+    schema:
+      $ref: '#/components/schemas/WebhookEventTypes'
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WebhookConfiguration"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+put:
+  tags:
+  - Webhook configurations
+  summary: Update webhook configuration
+  operationId: updateWebhookConfiguration
+  parameters:
+  - in: path
+    name: eventType
+    required: true
+    schema:
+      $ref: '#/components/schemas/WebhookEventTypes'
+  description: Update a webhook configuration.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/WebhookConfigurationUpdateBody"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WebhookConfiguration"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+post:
+  tags:
+  - Webhook configurations
+  summary: Create webhook configuration
+  operationId: createWebhookConfiguration
+  description: Create a new webhook configuration. Only one webhook configuration can be created for each event type. To update an existing configuration use the update endpoint.
+  parameters:
+  - in: path
+    name: eventType
+    required: true
+    schema:
+      $ref: '#/components/schemas/WebhookEventTypes'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/WebhookConfigurationBody"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WebhookConfiguration"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
+delete:
+  tags:
+  - Webhook configurations
+  summary: Delete webhook configuration
+  operationId: deleteWebhookConfiguration
+  description: Delete a webhook configuration
+  parameters:
+  - in: path
+    name: eventType
+    required: true
+    schema:
+      $ref: '#/components/schemas/WebhookEventTypes'
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            type: object
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

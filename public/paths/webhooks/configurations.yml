@@ -13,7 +13,6 @@ get:
       type: string
       enum:
       - id
-      - createdAt
   - in: query
     name: _order
     description: Order of list (DESC or ASC) based on the sorting parameter.
@@ -23,13 +22,6 @@ get:
       enum:
       - DESC
       - ASC
-  - in: query
-    name: active
-    description: Filter list of webhook configurations by active status.
-    required: false
-    example: true
-    schema:
-      type: boolean
   - in: query
     name: _start
     description: The start number of the webhook configurations list.
@@ -52,39 +44,7 @@ get:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/TransactionType'
-    400:
-      description: Invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/InvalidBody"
-    500:
-      description: Server Error
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorBody"
-  security:
-  - bearerAuth: []
-post:
-  tags:
-  - Webhook configurations
-  summary: Create webhook configuration
-  operationId: createWebhookConfiguration
-  description: Create a new webhook configuration.
-  requestBody:
-    content:
-      application/json:
-        schema:
-          $ref: "#/components/schemas/TransactionTypeBody"
-  responses:
-    200:
-      description: Successful operation
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/TransactionType"
+              $ref: '#/components/schemas/WebhookConfiguration'
     400:
       description: Invalid parameters
       content:
