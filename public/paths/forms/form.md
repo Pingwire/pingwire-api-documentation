@@ -39,10 +39,7 @@ When the end user is redirected to the callback URL, it will be done with severa
 |`ERROR`|There has been a technical error of some sort and the end user was not able to submit any answers.|
 - `state`: Will be present if a state was provided to the form URL as a query parameter. It will be exactly identical to that provided value.
 - `formAnswerId`: Will only be present if the `status` is `SUCCESS`. This id can be used to retrieve the answers submitted by the end user using the [Get form answer](#tag/Form-answers/paths/~1form-answers~1%7BformAnswerId%7D/get) endpoint.
-- `errorCode`: Will only be present if the `status` is `ERROR`. New code can be introduced at any time so the logic reading these codes should be able to handle an unexpected value. Unexpected values can be handled the same way as the code `unknown`. The possible values as of today are:
-|Error code|Description|
-|----------|-----------|
-|`unknown` |The cause of the error is unknown. In that case it is best to consider the form service to be unavailable at that time and handle that failure accordingly.|
+- `errorCode`: Will only be present if the `status` is `ERROR`. New code can be introduced at any time so the logic reading these codes should be able to handle an unexpected value. Unexpected values can be handled the same way as the code `unknown`. The possible values as of today are listed [here](#error-codes)
 
 ### Iframe
 
@@ -59,14 +56,17 @@ Schema of the `postMessage` events:
 
 |Event type|Description|Payload schema|
 |----------|-----------|--------------|
-|`SUCCESS`|Message sent when the end user successfully submitted the form. Sent by the `iframe window`.| `formAnswerId`: id of the form answer document which can be used to fetch the customer’s answers from our API (same as for the redirect flow)|
-|`CANCELLED`|Message sent when the end user cancel the form flow. Sent by the `iframe window`.| No payload|
-|`ERROR`|Message sent when the end user encountered an error that is not recoverable. Sent by the `iframe window`.| `errorCode`: same as for the redirect flow.|
-|`IFRAME_READY`|Message sent when the iframe has loaded and is ready to receive the `IFRAME_INIT` message. This message will be sent at regular interval until `IFRAME_INIT` is received. Sent by the `iframe window`.| No payload|
-|`IFRAME_INIT`|Message sent by the parent window to trigger the parent origin verification and start displaying the content of the iframe. Should be sent after the iframe has emitted `IFRAME_READY`. Sent by the `host window`.| No payload|
-|`IFRAME_ACK`|Message sent by the iframe after receiving `IFRAME_INIT` and after the parent origin has been validated. Sent by the `iframe window`.| No payload|
+|`SUCCESS`|Message sent when the end user successfully submitted the form| `formAnswerId`: id of the form answer document which can be used to fetch the customer’s answers from our API (same as for the redirect flow)|
+|`CANCELLED`|Message sent when the end user cancel the form flow| No payload|
+|`ERROR`|Message sent when the end user encountered an error that is not recoverable| `errorCode`: Possible error codes are listed [here](#error-codes).|
 
-The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. You can find below a code example of this handshake
+The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
+
+1) The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
+2) Once the `host window` has receive the `IFRAME_READY` event, it can sent the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
+3) After receiving the `IFRAME_READY` event the `iframe window` will sent the event `IFRAME_ACK` when the parent origin has been validated.
+
+You can find below a code example of this handshake.
 
 ```
 <!DOCTYPE html>
@@ -134,3 +134,9 @@ The iframe requires a handshake with the host window before rendering any useful
   </body>
 </html>
 ```
+
+### Error codes
+
+|Error code|Description|
+|----------|-----------|
+|`unknown` |The cause of the error is unknown. In that case it is best to consider the form service to be unavailable at that time and handle that failure accordingly.|
