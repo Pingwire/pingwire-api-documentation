@@ -43,15 +43,15 @@ When the end user is redirected to the callback URL, it will be done with severa
 
 ### Iframe
 
-In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional parameter `correlationId` can be used to identify several instances of our form iframes. To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
+In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional query parameter `correlationId` can be used to identify several instances of our form iframes. To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
 
 If using Content Security Policy (CSP) the form origin should be allowed in `form-src`:
 - https://form.pingwire.io on production
 - https://form.staging.pingwire.io on staging
 
 Schema of the `postMessage` events:
-- `type`: one of the types describe in the table below.
-- `correlationId`: optional, only used if specified in the iframe query params. Can be used to identify several instance of our form iframe.
+- `type`: one of the types described in the table below.
+- `correlationId`: optional, only used if specified in the iframe query parameters. Can be used to identify several instance of our form iframe.
 - `payload`: described in table below as well. Schema based on the event type.
 
 |Event type|Description|Payload schema|
@@ -62,9 +62,9 @@ Schema of the `postMessage` events:
 
 The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
 
-1) The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
-2) Once the `host window` has receive the `IFRAME_READY` event, it can sent the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
-3) After receiving the `IFRAME_READY` event the `iframe window` will sent the event `IFRAME_ACK` when the parent origin has been validated.
+1. The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
+2. Once the `host window` has received the `IFRAME_READY` event, it can send the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
+3. After receiving the `IFRAME_READY` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
 
 You can find below a code example of this handshake.
 
