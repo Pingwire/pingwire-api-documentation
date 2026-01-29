@@ -39,7 +39,104 @@ When the end user is redirected to the callback URL, it will be done with severa
 |`ERROR`|There has been a technical error of some sort and the end user was not able to submit any answers.|
 - `state`: Will be present if a state was provided to the form URL as a query parameter. It will be exactly identical to that provided value.
 - `formAnswerId`: Will only be present if the `status` is `SUCCESS`. This id can be used to retrieve the answers submitted by the end user using the [Get form answer](#tag/Form-answers/paths/~1form-answers~1%7BformAnswerId%7D/get) endpoint.
-- `errorCode`: Will only be present if the `status` is `ERROR`. New code can be introduced at any time so the logic reading these codes should be able to handle an unexpected value. Unexpected values can be handled the same way as the code `unknown`. The possible values as of today are:
+- `errorCode`: Will only be present if the `status` is `ERROR`. New code can be introduced at any time so the logic reading these codes should be able to handle an unexpected value. Unexpected values can be handled the same way as the code `unknown`. The possible values as of today are listed [here](#error-codes)
+
+### Iframe
+
+In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional query parameter `correlationId` can be used to identify several instances of our form iframes. To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
+
+If using Content Security Policy (CSP) the form origin should be allowed in `form-src`:
+- https://form.pingwire.io on production
+- https://form.staging.pingwire.io on staging
+
+Schema of the `postMessage` events:
+- `type`: one of the types described in the table below.
+- `correlationId`: optional, only used if specified in the iframe query parameters. Can be used to identify several instance of our form iframe.
+- `payload`: described in table below as well. Schema based on the event type.
+
+|Event type|Description|Payload schema|
+|----------|-----------|--------------|
+|`SUCCESS`|Message sent when the end user successfully submitted the form| `formAnswerId`: id of the form answer document which can be used to fetch the customer’s answers from our API (same as for the redirect flow)|
+|`CANCELLED`|Message sent when the end user cancel the form flow| No payload|
+|`ERROR`|Message sent when the end user encountered an error that is not recoverable| `errorCode`: Possible error codes are listed [here](#error-codes).|
+
+The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
+
+1. The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
+2. Once the `host window` has received the `IFRAME_READY` event, it can send the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
+3. After receiving the `IFRAME_READY` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
+
+You can find below a code example of this handshake.
+
+```
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="form-container"></div>
+
+    <script>
+      const formURL = 'https://form.pingwire.io/example/form/url'; // Form URL retrieved from the get form link endpoint
+      const allowedFormOrigin = 'https://form.pingwire.io'; // Staging: https://form.staging.pingwire.io
+
+      const correlationId = 'example-correlation-id'; // Optional unique correlation id for this iframe
+
+      const container = document.getElementById('form-container');
+      const iframeEl = document.createElement('iframe');
+      iframeEl.id = 'form-iframe';
+      iframeEl.src = `${formURL}?iframe=1&correlationId=${encodeURIComponent(correlationId)}`;
+      container.appendChild(iframeEl);
+
+      let initSent = false;
+      let handshakeTimeout;
+
+      window.addEventListener('message', function onMessage(event) {
+        if (event.origin !== allowedFormOrigin) return;
+        if (event.source !== iframeEl.contentWindow) return;
+
+        const data = event.data;
+        if (!data || typeof data !== 'object') return;
+        if (data.correlationId && data.correlationId !== correlationId) return;
+
+        switch (data.type) {
+          case 'IFRAME_READY':
+            if (iframeEl.contentWindow) {
+              iframeEl.contentWindow.postMessage({ type: 'IFRAME_INIT', correlationId }, allowedFormOrigin);
+              if (!initSent) {
+                handshakeTimeout = setTimeout(function onTimeout() {
+                  console.log(`Handshake timed out. Correlation ID: ${correlationId}`);
+                }, 5000);
+                initSent = true;
+              }
+            }
+            break;
+          case 'IFRAME_ACK':
+            if (handshakeTimeout) clearTimeout(handshakeTimeout);
+            break;
+          case 'SUCCESS':
+            console.log(`Form success fully submitted. Answers available from API using formAnswerId: ${data.payload.formAnswerId}. Correlation ID: ${data.correlationId}`);
+            break;
+          case 'ERROR':
+            if (handshakeTimeout) clearTimeout(handshakeTimeout);
+            console.log(`Error reported from form iframe with code: ${data.payload.errorCode}. Correlation ID: ${data.correlationId}`);
+            break;
+          case 'CANCELLED':
+            if (handshakeTimeout) clearTimeout(handshakeTimeout);
+            console.log(`User cancelled the form flow. Correlation ID: ${data.correlationId}`);
+            break;
+          default:
+            break;
+        }
+      });
+    </script>
+  </body>
+</html>
+```
+
+### Error codes
+
 |Error code|Description|
 |----------|-----------|
 |`unknown` |The cause of the error is unknown. In that case it is best to consider the form service to be unavailable at that time and handle that failure accordingly.|
