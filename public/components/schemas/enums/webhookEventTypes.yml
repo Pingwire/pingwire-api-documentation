@@ -1,4 +1,4 @@
 type: string
-description: Event type of the webhook configuration. New event types are to be introduced over time.
+description: Event type
 enum:
-- EntityGroupsUpdate
+- EntityGroupsUpdated

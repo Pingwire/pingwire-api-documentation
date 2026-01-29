@@ -63,6 +63,7 @@ x-tagGroups:
       - Get started with Webhooks
       - Webhook configurations
       - Testing webhooks
+      - Webhook Events
 
   - name: Other resources
     tags:
@@ -237,8 +238,13 @@ paths:
   /individuals/population-register/v2/{id}:
       $ref: './paths/populationRegisters/population-register.yml'
 
+webhooks:
+  EntityGroupsUpdated:
+    $ref: './webhooks/entity-groups-updated.yml'
+
 components:
   schemas:
+    # Endpoints
     AccountEntityBody:
       $ref: "./components/schemas/AccountEntityBody.yml"
     AccountEntityBodyUpdate:
@@ -460,6 +466,7 @@ components:
     ExpectedTransactionBehaviour:
       $ref: "./components/schemas/ExpectedTransactionBehaviour.yml"
 
+    # Enums
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
     ConnectionTypes:
@@ -482,6 +489,14 @@ components:
       $ref: "./components/schemas/enums/casePriorities.yml"
     WebhookEventTypes:
       $ref: "./components/schemas/enums/webhookEventTypes.yml"
+
+    # Webhooks events
+    BaseEvent:
+      $ref: "./components/schemas/webhooks/events/BaseEvent.yml"
+    BaseEventTestRequest:
+      $ref: "./components/schemas/webhooks/events/BaseEventTestRequest.yml"
+    EntityGroupsUpdated:
+      $ref: "./components/schemas/webhooks/events/EntityGroupsUpdated.yml"
 
   securitySchemes:
     bearerAuth:

@@ -1,15 +1,8 @@
 allOf:
 - type: object
+  required:
+  - event
   properties:
     event:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: string
-          format: ObjectId
-          description: ID of the event. This is also used as the idempotency key when delivered.
-          examples:
-          - 62b9437318fe4517089b2833
+      $ref: '#/components/schemas/BaseEvent'
 - $ref: '#/components/schemas/WebhookTriggerTestEventRequest'

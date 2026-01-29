@@ -1,0 +1,14 @@
+post:
+  tags:
+  - Webhook Events
+  summary: EntityGroupsUpdated
+  operationId: entityGroupsUpdated
+  description: Triggered when the groups of an entity are updated
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/EntityGroupsUpdated"
+  responses:
+    '200':
+      description: Return a 200 status to indicate that the data was received successfully
