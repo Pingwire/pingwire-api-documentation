@@ -1,0 +1,8 @@
+allOf:
+- type: object
+  required:
+  - event
+  properties:
+    event:
+      $ref: '#/components/schemas/BaseEvent'
+- $ref: '#/components/schemas/WebhookTriggerTestEventRequest'

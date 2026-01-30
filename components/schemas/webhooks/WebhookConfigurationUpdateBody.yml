@@ -1,0 +1,15 @@
+allOf:
+- $ref: '#/components/schemas/WebhookConfigurationBase'
+- type: object
+  properties:
+    deliverySettings:
+      type: object
+      properties:
+        signing:
+          type: object
+          properties:
+            secret:
+              type: string
+              description: The secret to be used for signing. It is interpreted as an UTF-8 string and the UTF-8 bytes of the secret exactly as provided are used as the HMAC key. It is recommended to generate the secret using a cryptographically secure random generator rather than choosing a human-readable value.
+              minLength: 32
+              maxLength: 128

@@ -221,6 +221,35 @@ tags:
       3. When both the access token and the refresh token are expired then start the flow again from step 1.
 
       The refresh token endpoint is to be prioritized over the login endpoint when a refresh token is available as it does not require the client ID and client secret to be sent again. The refresh token is less sensitive than the client ID and client secret as it is only valid for a limited period of time.
+  - name: Get started with Webhooks
+    description: |
+      Webhooks can be used to receive notifications about specific events from the Pingwire system. This is useful when you need to react to events triggered by our system that do not result from any direct API interaction.
+
+      Parameters regarding which events to subscribe to and how the events shall be delivered can be configured using our [webhook configurations endpoints](./#tag/Webhook-configurations). They can be used to configure:
+      - the webhook delivery URL
+      - the secret used to sign the delivered events (generated and managed by you)
+      - the timeout and retry policy to be used when delivering events
+      - which headers to use for events signatures and idempotency
+
+      ### Webhook delivery signing
+      All events sent from the Pingwire system are signed so that their authenticity and integrity can be easily verified.
+
+      The secret provided when creating the webhook configuration will be used to sign the deliveries. The signature will be present in each delivery as an HTTP header which can be configured in the webhook configuration (default: X-Pingwire-Signature). The delivery will also have a timestamp which will be provided as an HTTP header as well (default X-Pingwire-Timestamp). The signature is a SHA256 HMAC hex digest of the concatenation of the delivery timestamp in unix format, a UTF-8 `.` character and the raw HTTP request body of the delivery.
+
+      To verify a webhook delivery follow the following steps:
+      - Extract the delivery timestamp from the correct header (default X-Pingwire-Timestamp). Check that the timestamp is within an acceptable time range (for example ± 5 min), if not reject the delivery. This is to prevent a malicious actor from replaying deliveries.
+      - Extract the signature from the correct header (default: X-Pingwire-Signature). The header value will always start with `sha256=`, the part after the `=` is the signature.
+      - Recreate the signature payload by concatenating the timestamp, a `.` and the delivery raw HTTP request body.
+      - Compute a SHA256 HMAC hex digest using the signature payload and the shared secret: `expected = HMAC_SHA256(secret, timestamp + "." + raw_body)`
+      - Compare the obtained signature with the one provided in the header. If they do not match reject the delivery.
+
+      ### Idempotency
+
+      Webhook deliveries are sent with at-least-once semantics. Ordering is not guaranteed. The same event may be delivered multiple times and consumers must rely on idempotency.
+
+      Each webhook delivery includes an idempotency key in an HTTP header (default: `Idempotency-Key`). The value of this header is the unique event identifier.
+
+      The same idempotency key is reused across retries of the same event. Consumers are expected to use this key to safely deduplicate duplicate deliveries.
 paths:
   /account-entities:
     get:
@@ -4938,6 +4967,244 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
+  /webhooks/configurations:
+    get:
+      tags:
+        - Webhook configurations
+      summary: List webhook configurations
+      operationId: listWebhookConfigurations
+      description: Receive list of webhook configurations saved in the database.
+      parameters:
+        - in: query
+          name: _sort
+          required: false
+          example: id
+          schema:
+            type: string
+            enum:
+              - id
+        - in: query
+          name: _order
+          description: Order of list (DESC or ASC) based on the sorting parameter.
+          required: false
+          schema:
+            type: string
+            enum:
+              - DESC
+              - ASC
+        - in: query
+          name: _start
+          description: The start number of the webhook configurations list.
+          required: false
+          example: 0
+          schema:
+            type: number
+        - in: query
+          name: _end
+          description: The end number of the webhook configurations list.
+          required: false
+          example: 10
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WebhookConfiguration'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /webhooks/configurations/{eventType}:
+    get:
+      tags:
+        - Webhook configurations
+      summary: Get webhook configuration
+      operationId: getWebhookConfiguration
+      description: Get webhook configuration by ID.
+      parameters:
+        - in: path
+          name: eventType
+          required: true
+          schema:
+            $ref: '#/components/schemas/WebhookEventTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookConfiguration'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+    put:
+      tags:
+        - Webhook configurations
+      summary: Update webhook configuration
+      operationId: updateWebhookConfiguration
+      parameters:
+        - in: path
+          name: eventType
+          required: true
+          schema:
+            $ref: '#/components/schemas/WebhookEventTypes'
+      description: Update a webhook configuration.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookConfigurationUpdateBody'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookConfiguration'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+    post:
+      tags:
+        - Webhook configurations
+      summary: Create webhook configuration
+      operationId: createWebhookConfiguration
+      description: Create a new webhook configuration. Only one webhook configuration can be created for each event type. To update an existing configuration use the update endpoint.
+      parameters:
+        - in: path
+          name: eventType
+          required: true
+          schema:
+            $ref: '#/components/schemas/WebhookEventTypes'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookConfigurationBody'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookConfiguration'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+    delete:
+      tags:
+        - Webhook configurations
+      summary: Delete webhook configuration
+      operationId: deleteWebhookConfiguration
+      description: Delete a webhook configuration
+      parameters:
+        - in: path
+          name: eventType
+          required: true
+          schema:
+            $ref: '#/components/schemas/WebhookEventTypes'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /webhooks/trigger-test-event:
+    post:
+      tags:
+        - Testing webhooks
+      summary: Trigger test event
+      operationId: triggerTestEvent
+      description: Triggers a test event that will be delivered according to the current webhook configuration for that event type. If there is no configuration for that event type, this endpoint will return a 400 error response.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookTriggerTestEventRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTriggerTestEventResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
   /individual/population-register/manual-insert:
     post:
       deprecated: true
@@ -5051,6 +5318,23 @@ paths:
                 $ref: '#/components/schemas/ErrorBody'
       security:
         - bearerAuth: []
+webhooks:
+  EntityGroupsUpdated:
+    post:
+      tags:
+        - Webhook Events
+      summary: EntityGroupsUpdated
+      operationId: entityGroupsUpdated
+      description: Triggered when the groups of an entity are updated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EntityGroupsUpdated'
+      responses:
+        '200':
+          description: Return a 200 status to indicate that the data was received successfully
+      security: []
 components:
   schemas:
     AccountEntityBody:
@@ -10084,6 +10368,167 @@ components:
                         examples:
                           - 62b9437318fe4517089b2833
                         description: ID of he transaction type to include/exclude
+    WebhookConfiguration:
+      allOf:
+        - type: object
+          required:
+            - id
+            - createdAt
+            - updatedAt
+            - eventType
+            - deliverySettings
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the event configuration
+              examples:
+                - 62b9437318fe4517089b2833
+            createdAt:
+              description: Date when the webhook configuration was created
+              type: string
+              format: date-time
+            updatedAt:
+              description: Date when the webhook configuration was last updated
+              type: string
+              format: date-time
+            eventType:
+              $ref: '#/components/schemas/WebhookEventTypes'
+            deliverySettings:
+              type: object
+              required:
+                - url
+                - signing
+              properties:
+                url:
+                  type: string
+                signing:
+                  type: object
+        - $ref: '#/components/schemas/WebhookConfigurationBase'
+    WebhookConfigurationBody:
+      allOf:
+        - $ref: '#/components/schemas/WebhookConfigurationUpdateBody'
+        - type: object
+          required:
+            - deliverySettings
+          properties:
+            deliverySettings:
+              type: object
+              required:
+                - url
+                - signing
+              properties:
+                url:
+                  type: string
+                signing:
+                  type: object
+                  required:
+                    - secret
+                  properties:
+                    secret:
+                      type: string
+    WebhookConfigurationBase:
+      type: object
+      properties:
+        deliverySettings:
+          type: object
+          description: Settings regarding how events should be delivered
+          properties:
+            url:
+              type: string
+              description: URL of the endpoint to be used for events delivery
+            signing:
+              type: object
+              description: Parameters about signing
+              properties:
+                signatureHeader:
+                  type: string
+                  description: 'The HTTP header to be used for sending the signature of the delivery. Default: X-Pingwire-Signature'
+                  examples:
+                    - X-Pingwire-Signature
+                timestampHeader:
+                  type: string
+                  description: 'The HTTP header to be used for sending the timestamp of the delivery. Default: X-Pingwire-Timestamp'
+                  examples:
+                    - X-Pingwire-Timestamp
+            idempotencyHeader:
+              type: string
+              description: 'The HTTP header to be used for sending the idempotency key of the delivery. Default: Idempotency-Key'
+              examples:
+                - Idempotency-Key
+            timeout:
+              type: number
+              description: 'Number of seconds to wait for the webhook endpoint to acknowledge the delivery. Default: 5s'
+              maximum: 20
+              minimum: 1
+              examples:
+                - 5
+            retry:
+              type: object
+              description: Parameters of the retry logic
+              properties:
+                attempts:
+                  type: number
+                  description: 'Number of delivery attempts to be made for a single event before backing off. Default: 5'
+                  maximum: 10
+                  minimum: 1
+                  examples:
+                    - 5
+                baseDelay:
+                  type: number
+                  description: Number of seconds used as the base delay between attempts. Default 5s
+                  maximum: 900
+                  minimum: 1
+                  examples:
+                    - 5
+                delayFactor:
+                  type: number
+                  description: 'Used to multiply the baseDelay for each attempt in order to achieve an exponential retry. Default: 2'
+                  maximum: 10
+                  minimum: 1
+                  examples:
+                    - 2
+                jitterFactor:
+                  type: number
+                  description: 'Used to multiply the baseDelay to set the lower bound of the randomness. Use a value of 1 for no jitter and 0 for full jitter. Default: 0.75'
+                  minimum: 0
+                  maximum: 1
+                  examples:
+                    - 0.75
+    WebhookConfigurationUpdateBody:
+      allOf:
+        - $ref: '#/components/schemas/WebhookConfigurationBase'
+        - type: object
+          properties:
+            deliverySettings:
+              type: object
+              properties:
+                signing:
+                  type: object
+                  properties:
+                    secret:
+                      type: string
+                      description: The secret to be used for signing. It is interpreted as an UTF-8 string and the UTF-8 bytes of the secret exactly as provided are used as the HMAC key. It is recommended to generate the secret using a cryptographically secure random generator rather than choosing a human-readable value.
+                      minLength: 32
+                      maxLength: 128
+    WebhookTriggerTestEventRequest:
+      type: object
+      required:
+        - event
+      properties:
+        event:
+          allOf:
+            - $ref: '#/components/schemas/BaseEventTestRequest'
+            - description: Event to be sent as a test delivery. For a list of all the supported events and their schema see the [webhook events section](./#tag/Webhook-Events)
+    WebhookTriggerTestEventResponse:
+      allOf:
+        - type: object
+          required:
+            - event
+          properties:
+            event:
+              $ref: '#/components/schemas/BaseEvent'
+        - $ref: '#/components/schemas/WebhookTriggerTestEventRequest'
     Pep:
       type: object
       description: Information about the PEP status of the individual
@@ -10253,6 +10698,77 @@ components:
       $ref: '#/components/schemas/caseStatuses'
     CasePriorities:
       $ref: '#/components/schemas/casePriorities'
+    WebhookEventTypes:
+      $ref: '#/components/schemas/webhookEventTypes'
+    BaseEvent:
+      allOf:
+        - type: object
+          required:
+            - id
+          properties:
+            id:
+              type: string
+              format: ObjectId
+              description: ID of the event. This is also used as the idempotency key when delivered.
+              examples:
+                - 62b9437318fe4517089b2833
+        - $ref: '#/components/schemas/BaseEventTestRequest'
+    BaseEventTestRequest:
+      type: object
+      required:
+        - eventType
+        - eventDate
+        - eventPayload
+      properties:
+        eventType:
+          type: string
+          description: Type of the event
+        eventDate:
+          type: string
+          format: date-time
+          description: Date when the event was generated by the event producer
+        eventPayload:
+          type: object
+          description: Payload of the event. The schema depends of the event type.
+    EntityGroupsUpdated:
+      allOf:
+        - $ref: '#/components/schemas/BaseEvent'
+        - type: object
+          required:
+            - eventType
+            - eventPayload
+          properties:
+            eventType:
+              type: string
+              description: Event type
+              enum:
+                - EntityGroupsUpdated
+            eventPayload:
+              type: object
+              required:
+                - entityId
+                - entityType
+                - groups
+              properties:
+                entityId:
+                  type: string
+                  format: ObjectId
+                  description: ID of the entity that had its groups updated
+                  examples:
+                    - 62b9437318fe4517089b2833
+                entityType:
+                  allOf:
+                    - description: Type of the entity that had its groups updated
+                    - $ref: '#/components/schemas/EntityTypes'
+                groups:
+                  type: array
+                  description: List of the groups of the entity immediately after the update
+                  items:
+                    type: string
+                    format: ObjectId
+                    description: ID of the group
+                    examples:
+                      - 62b9437318fe4517089b2833
     Individual-2:
       type: object
       properties:
@@ -10723,6 +11239,11 @@ components:
         - normal
         - high
         - urgent
+    webhookEventTypes:
+      type: string
+      description: Event type
+      enum:
+        - EntityGroupsUpdated
   securitySchemes:
     bearerAuth:
       type: http
@@ -10754,6 +11275,12 @@ x-tagGroups:
       - Beneficial Owners
       - Board Members
       - Signatories
+  - name: Webhooks
+    tags:
+      - Get started with Webhooks
+      - Webhook configurations
+      - Testing webhooks
+      - Webhook Events
   - name: Other resources
     tags:
       - Risk Classes
