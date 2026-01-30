@@ -110,7 +110,7 @@ tags:
 
       In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional query parameter `correlationId` can be used to identify several instances of our form iframes. To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
 
-      If using Content Security Policy (CSP) the form origin should be allowed in `form-src`:
+      If using Content Security Policy (CSP) the form origin should be allowed in `frame-src`:
       - https://form.pingwire.io on production
       - https://form.staging.pingwire.io on staging
 
