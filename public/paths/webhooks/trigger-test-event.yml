@@ -1,0 +1,32 @@
+post:
+  tags:
+  - Testing webhooks
+  summary: Trigger test event
+  operationId: triggerTestEvent
+  description: Triggers a test event that will be delivered according to the current webhook configuration for that event type. If there is no configuration for that event type, this endpoint will return a 400 error response.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/WebhookTriggerTestEventRequest"
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/WebhookTriggerTestEventResponse"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

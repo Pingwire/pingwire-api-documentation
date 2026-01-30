@@ -1,0 +1,8 @@
+type: object
+required:
+- event
+properties:
+  event:
+    allOf:
+    - $ref: '#/components/schemas/BaseEventTestRequest'
+    - description: Event to be sent as a test delivery. For a list of all the supported events and their schema see the [webhook events section](./#tag/Webhook-Events)

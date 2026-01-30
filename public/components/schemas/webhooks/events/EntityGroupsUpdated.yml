@@ -1,0 +1,39 @@
+allOf:
+- $ref: '#/components/schemas/BaseEvent'
+- type: object
+  required:
+  - eventType
+  - eventPayload
+  properties:
+    eventType:
+      type: string
+      description: Event type
+      enum:
+      - EntityGroupsUpdated
+    eventPayload:
+      type: object
+      required:
+      - entityId
+      - entityType
+      - groups
+      properties:
+        entityId:
+          type: string
+          format: ObjectId
+          description: ID of the entity that had its groups updated
+          examples:
+          - 62b9437318fe4517089b2833
+        entityType:
+          allOf:
+          - description: Type of the entity that had its groups updated
+          - $ref: '#/components/schemas/EntityTypes'
+        groups:
+          type: array
+          description: List of the groups of the entity immediately after the update
+          items:
+            type: string
+            format: ObjectId
+            description: ID of the group
+            examples:
+            - 62b9437318fe4517089b2833
+

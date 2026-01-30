@@ -23,15 +23,20 @@ tags:
   - name: Auth
     description:
       $ref: './paths/auth/auth.md'
+  - name: Get started with Webhooks
+    description:
+      $ref: './paths/webhooks/webhooks.md'
 x-tagGroups:
   - name: Get started
     tags:
       - Auth
+
   - name: Risk Management
     tags:
       - Requests
       - Pings
       - Cases
+
   - name: Entities
     tags:
       - Individuals
@@ -39,10 +44,12 @@ x-tagGroups:
       - Cars
       - Accounts
       - Products
+
   - name: KYC Forms
     tags:
       - Forms
       - Form answers
+
   - name: KYC Data
     tags:
       - Population Register
@@ -50,6 +57,13 @@ x-tagGroups:
       - Beneficial Owners
       - Board Members
       - Signatories
+
+  - name: Webhooks
+    tags:
+      - Get started with Webhooks
+      - Webhook configurations
+      - Testing webhooks
+      - Webhook Events
 
   - name: Other resources
     tags:
@@ -211,6 +225,12 @@ paths:
       $ref: './paths/transactionTypes/transaction-types-id.yml'
   /transaction-types/activation/{id}:
       $ref: './paths/transactionTypes/transaction-types-activation-id.yml'
+  /webhooks/configurations:
+      $ref: './paths/webhooks/configurations.yml'
+  /webhooks/configurations/{eventType}:
+      $ref: './paths/webhooks/configurations-event-type.yml'
+  /webhooks/trigger-test-event:
+    $ref: './paths/webhooks/trigger-test-event.yml'
   /individual/population-register/manual-insert:
       $ref: './paths/populationRegisters/manual-insert-old.yml'
   /individuals/population-register/v2/manual-insert/{id}:
@@ -218,8 +238,13 @@ paths:
   /individuals/population-register/v2/{id}:
       $ref: './paths/populationRegisters/population-register.yml'
 
+webhooks:
+  EntityGroupsUpdated:
+    $ref: './webhooks/entity-groups-updated.yml'
+
 components:
   schemas:
+    # Endpoints
     AccountEntityBody:
       $ref: "./components/schemas/AccountEntityBody.yml"
     AccountEntityBodyUpdate:
@@ -420,6 +445,18 @@ components:
       $ref: "./components/schemas/requestParties/TransactionParty.yml"
     TransactionTypeConfiguration:
       $ref: "./components/schemas/TransactionTypeConfiguration.yml"
+    WebhookConfiguration:
+      $ref: "./components/schemas/webhooks/WebhookConfiguration.yml"
+    WebhookConfigurationBody:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationBody.yml"
+    WebhookConfigurationBase:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationBase.yml"
+    WebhookConfigurationUpdateBody:
+      $ref: "./components/schemas/webhooks/WebhookConfigurationUpdateBody.yml"
+    WebhookTriggerTestEventRequest:
+      $ref: "./components/schemas/webhooks/WebhookTriggerTestEventRequest.yml"
+    WebhookTriggerTestEventResponse:
+      $ref: "./components/schemas/webhooks/WebhookTriggerTestEventResponse.yml"
     Pep:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
@@ -429,6 +466,7 @@ components:
     ExpectedTransactionBehaviour:
       $ref: "./components/schemas/ExpectedTransactionBehaviour.yml"
 
+    # Enums
     EntityTypes:
       $ref: "./components/schemas/enums/entityTypes.yml"
     ConnectionTypes:
@@ -449,6 +487,16 @@ components:
       $ref: "./components/schemas/enums/caseStatuses.yml"
     CasePriorities:
       $ref: "./components/schemas/enums/casePriorities.yml"
+    WebhookEventTypes:
+      $ref: "./components/schemas/enums/webhookEventTypes.yml"
+
+    # Webhooks events
+    BaseEvent:
+      $ref: "./components/schemas/webhooks/events/BaseEvent.yml"
+    BaseEventTestRequest:
+      $ref: "./components/schemas/webhooks/events/BaseEventTestRequest.yml"
+    EntityGroupsUpdated:
+      $ref: "./components/schemas/webhooks/events/EntityGroupsUpdated.yml"
 
   securitySchemes:
     bearerAuth:

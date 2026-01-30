@@ -1,0 +1,36 @@
+allOf:
+- type: object
+  required:
+  - id
+  - createdAt
+  - updatedAt
+  - eventType
+  - deliverySettings
+  properties:
+    id:
+      type: string
+      format: ObjectId
+      description: ID of the event configuration
+      examples:
+      - 62b9437318fe4517089b2833
+    createdAt:
+      description: Date when the webhook configuration was created
+      type: string
+      format: date-time
+    updatedAt:
+      description: Date when the webhook configuration was last updated
+      type: string
+      format: date-time
+    eventType:
+      $ref: '#/components/schemas/WebhookEventTypes'
+    deliverySettings:
+      type: object
+      required:
+      - url
+      - signing
+      properties:
+        url:
+          type: string
+        signing:
+          type: object
+- $ref: '#/components/schemas/WebhookConfigurationBase'
