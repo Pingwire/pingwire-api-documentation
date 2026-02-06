@@ -105,34 +105,42 @@ You can find below a code example of this handshake.
         if (data.correlationId && data.correlationId !== correlationId) return;
 
         switch (data.type) {
-          case 'IFRAME_READY':
-            if (iframeEl.contentWindow) {
-              iframeEl.contentWindow.postMessage({ type: 'IFRAME_INIT', correlationId }, allowedFormOrigin);
-              if (!initSent) {
-                handshakeTimeout = setTimeout(function onTimeout() {
-                  console.log(`Handshake timed out. Correlation ID: ${correlationId}`);
-                }, 5000);
-                initSent = true;
+            case 'IFRAME_READY':
+              if (iframeEl.contentWindow) {
+                iframeEl.contentWindow.postMessage({ type: 'IFRAME_INIT', correlationId }, allowedFormOrigin);
+                if (!initSent) {
+                  handshakeTimeout = setTimeout(function onTimeout() {
+                    console.log(`Handshake timed out. Correlation ID: ${correlationId}`);
+                  }, 5000);
+                  initSent = true;
+                }
               }
-            }
-            break;
-          case 'IFRAME_ACK':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            break;
-          case 'SUCCESS':
-            console.log(`Form success fully submitted. Answers available from API using formAnswerId: ${data.payload.formAnswerId}. Correlation ID: ${data.correlationId}`);
-            break;
-          case 'ERROR':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            console.log(`Error reported from form iframe with code: ${data.payload.errorCode}. Correlation ID: ${data.correlationId}`);
-            break;
-          case 'CANCELLED':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            console.log(`User cancelled the form flow. Correlation ID: ${data.correlationId}`);
-            break;
-          default:
-            break;
-        }
+              break;
+            case 'IFRAME_ACK':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              break;
+            case 'IFRAME_RESIZE':
+              iframeEl.height = `${data.payload.height}px`;
+              break;
+            case 'SUCCESS':
+              const successEl = document.createElement('div');
+              successEl.width = '100%';
+              successEl.style = 'text-align: center;'
+              successEl.textContent = `Form success fully submitted. Answers available from API using formAnswerId: ${data.payload.formAnswerId}. Correlation ID: ${data.correlationId}`;
+              container.removeChild(iframeEl);
+              container.appendChild(successEl);
+              break;
+            case 'ERROR':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              console.log(`Error reported from form iframe with code: ${data.payload.errorCode}. Correlation ID: ${data.correlationId}`);
+              break;
+            case 'CANCELLED':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              console.log(`User cancelled the form flow. Correlation ID: ${data.correlationId}`);
+              break;
+            default:
+              break;
+          }
       });
     </script>
   </body>
