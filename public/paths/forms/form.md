@@ -68,7 +68,7 @@ The iframe requires a handshake with the host window before rendering any useful
 
 1. The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
 2. Once the `host window` has received the `IFRAME_READY` event, it can send the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
-3. After receiving the `IFRAME_READY` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
+3. After receiving the `IFRAME_INIT` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
 
 You can find below a code example of this handshake.
 
