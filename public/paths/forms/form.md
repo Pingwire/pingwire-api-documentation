@@ -59,6 +59,10 @@ Schema of the `postMessage` events:
 |`SUCCESS`|Message sent when the end user successfully submitted the form| `formAnswerId`: id of the form answer document which can be used to fetch the customer’s answers from our API (same as for the redirect flow)|
 |`CANCELLED`|Message sent when the end user cancel the form flow| No payload|
 |`ERROR`|Message sent when the end user encountered an error that is not recoverable| `errorCode`: Possible error codes are listed [here](#error-codes).|
+|`IFRAME_READY`|Message sent by the iframe when it is ready to receive the `IFRAME_INIT` message. This message will be sent at regular interval until `IFRAME_INIT` message is received. | No payload|
+|`IFRAME_INIT`|Message sent by the host window trigger the parent origin verification when it receive the `IFRAME_READY` message| No payload|
+|`IFRAME_ACK`|Message sent by the iframe when the parent origin has been validated| No payload|
+|`IFRAME_RESIZE`|Message sent by the iframe to give the new height of the iframe| `height`: height of the iframe (in px)|
 
 The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
 
