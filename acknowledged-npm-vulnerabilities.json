@@ -39,6 +39,16 @@
         "severity": "moderate",
         "comment": "Dependency of react-react scripts which is deprecated. It is only used during build time and not in production. Ticket created to migrate away from react-scripts: https://trello.com/c/Rx3V8YIW/2622-as-a-dev-i-can-see-that-we-are-not-using-the-deprecated-react-scripts-for-the-documentation-repository-so-that-vulnerabilities-a"
       }
+    },
+    {
+      "1112708": {
+        "name": "fast-xml-parser",
+        "dependency": "redoc",
+        "title": "fast-xml-parser has RangeError DoS Numeric Entities Bug",
+        "url": "https://github.com/advisories/GHSA-37qj-frw5-hhjh",
+        "severity": "high",
+        "comment": "Dependency of redoc which is only used for documentation generation. We need to wait until Redoc is updating their dependencies. Here is the issue: https://github.com/Redocly/redocly-cli/issues/2533"
+      }
     }
   ]
 }
