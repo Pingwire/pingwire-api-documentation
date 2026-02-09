@@ -59,12 +59,16 @@ Schema of the `postMessage` events:
 |`SUCCESS`|Message sent when the end user successfully submitted the form| `formAnswerId`: id of the form answer document which can be used to fetch the customer’s answers from our API (same as for the redirect flow)|
 |`CANCELLED`|Message sent when the end user cancel the form flow| No payload|
 |`ERROR`|Message sent when the end user encountered an error that is not recoverable| `errorCode`: Possible error codes are listed [here](#error-codes).|
+|`IFRAME_READY`|Message sent by the iframe when it is ready to receive the `IFRAME_INIT` message. This message will be sent at regular interval until `IFRAME_INIT` message is received. | No payload|
+|`IFRAME_INIT`|Message sent by the host window trigger the parent origin verification when it receive the `IFRAME_READY` message| No payload|
+|`IFRAME_ACK`|Message sent by the iframe when the parent origin has been validated| No payload|
+|`IFRAME_RESIZE`|Message sent by the iframe to give the new height of the iframe| `height`: height of the iframe (in px)|
 
 The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
 
 1. The `iframe window` will first send the event `IFRAME_READY` at regular interval until `IFRAME_INIT` is received. It means the iframe has loaded and is ready to receive the `IFRAME_INIT` message.
 2. Once the `host window` has received the `IFRAME_READY` event, it can send the `IFRAME_INIT` event to trigger the parent origin verification and start displaying the content of the iframe.
-3. After receiving the `IFRAME_READY` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
+3. After receiving the `IFRAME_INIT` event, the `iframe window` will send the event `IFRAME_ACK` when the parent origin has been validated.
 
 You can find below a code example of this handshake.
 
@@ -101,34 +105,42 @@ You can find below a code example of this handshake.
         if (data.correlationId && data.correlationId !== correlationId) return;
 
         switch (data.type) {
-          case 'IFRAME_READY':
-            if (iframeEl.contentWindow) {
-              iframeEl.contentWindow.postMessage({ type: 'IFRAME_INIT', correlationId }, allowedFormOrigin);
-              if (!initSent) {
-                handshakeTimeout = setTimeout(function onTimeout() {
-                  console.log(`Handshake timed out. Correlation ID: ${correlationId}`);
-                }, 5000);
-                initSent = true;
+            case 'IFRAME_READY':
+              if (iframeEl.contentWindow) {
+                iframeEl.contentWindow.postMessage({ type: 'IFRAME_INIT', correlationId }, allowedFormOrigin);
+                if (!initSent) {
+                  handshakeTimeout = setTimeout(function onTimeout() {
+                    console.log(`Handshake timed out. Correlation ID: ${correlationId}`);
+                  }, 5000);
+                  initSent = true;
+                }
               }
-            }
-            break;
-          case 'IFRAME_ACK':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            break;
-          case 'SUCCESS':
-            console.log(`Form success fully submitted. Answers available from API using formAnswerId: ${data.payload.formAnswerId}. Correlation ID: ${data.correlationId}`);
-            break;
-          case 'ERROR':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            console.log(`Error reported from form iframe with code: ${data.payload.errorCode}. Correlation ID: ${data.correlationId}`);
-            break;
-          case 'CANCELLED':
-            if (handshakeTimeout) clearTimeout(handshakeTimeout);
-            console.log(`User cancelled the form flow. Correlation ID: ${data.correlationId}`);
-            break;
-          default:
-            break;
-        }
+              break;
+            case 'IFRAME_ACK':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              break;
+            case 'IFRAME_RESIZE':
+              iframeEl.height = `${data.payload.height}px`;
+              break;
+            case 'SUCCESS':
+              const successEl = document.createElement('div');
+              successEl.width = '100%';
+              successEl.style = 'text-align: center;'
+              successEl.textContent = `Form success fully submitted. Answers available from API using formAnswerId: ${data.payload.formAnswerId}. Correlation ID: ${data.correlationId}`;
+              container.removeChild(iframeEl);
+              container.appendChild(successEl);
+              break;
+            case 'ERROR':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              console.log(`Error reported from form iframe with code: ${data.payload.errorCode}. Correlation ID: ${data.correlationId}`);
+              break;
+            case 'CANCELLED':
+              if (handshakeTimeout) clearTimeout(handshakeTimeout);
+              console.log(`User cancelled the form flow. Correlation ID: ${data.correlationId}`);
+              break;
+            default:
+              break;
+          }
       });
     </script>
   </body>
