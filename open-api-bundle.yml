@@ -9719,6 +9719,8 @@ components:
               enum:
                 - fullTime
                 - partTime
+                - self-employed
+                - variable-hours-employed
                 - student
                 - unemployed
                 - retired
