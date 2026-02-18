@@ -4,10 +4,18 @@ ack_file=${ACK_FILE:-acknowledged-npm-vulnerabilities.json}
 
 find_effects() {
   names=$1
+  depth=${2:-0}
+
+  # prevent infinite recursion by limiting depth
+  if [ "$depth" -ge 10 ]; then
+    echo "[max depth reached]"
+    return
+  fi
+
   for name in $names; do
     echo $name
     effects=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | select(.value.name == $name) | .value.effects[]' "$npm_audit_report")
-    echo $(find_effects $effects)
+    echo $(find_effects "$effects" $((depth + 1)))
   done
 }
 
@@ -44,7 +52,7 @@ for name in $current_vuln_names; do
   url=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .url else empty end' "$npm_audit_report")
   severity=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .severity else empty end' "$npm_audit_report")
   effects=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | select(.value.name == $name) | .value.effects[]' "$npm_audit_report")
-  all_effects=$(find_effects $effects)
+  all_effects=$(find_effects "$effects")
 
   if [ ${#all_effects[@]} -eq 0 ] || [ -z "${all_effects[0]}" ]; then
     used="Package is used at root level"
