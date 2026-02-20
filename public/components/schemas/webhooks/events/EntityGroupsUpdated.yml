@@ -16,6 +16,7 @@ allOf:
       - entityId
       - entityType
       - groups
+      - customIds
       properties:
         entityId:
           type: string
@@ -36,4 +37,12 @@ allOf:
             description: ID of the group
             examples:
             - 62b9437318fe4517089b2833
+        customIds:
+          type: array
+          description: List of all unique customID of the entity
+          items:
+            type: string
+          externalDocs:
+            description: Unique identifier
+            url: '/#section/Introduction/Unique-Identifier'
 
