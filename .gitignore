@@ -12,7 +12,7 @@ npm-audit-report.json
 /coverage
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
