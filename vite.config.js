@@ -18,6 +18,9 @@ function fullReloadOnPublicYamlChange() {
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), fullReloadOnPublicYamlChange()],
+  optimizeDeps: {
+    include: ['redoc', 'yaml'],
+  },
   server: {
     port: 3000,
     open: true,
