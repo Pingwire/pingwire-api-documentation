@@ -12,7 +12,7 @@ function App() {
     <>
       <GlobalStyle />
       <RedocStandalone
-        specUrl={process.env.REACT_APP_SPEC_URL}
+        specUrl={import.meta.env.VITE_SPEC_URL}
         options={{
           theme: {
             colors: { primary: { main: '#238061' } },
