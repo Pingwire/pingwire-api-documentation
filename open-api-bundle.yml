@@ -108,7 +108,7 @@ tags:
 
       ### Iframe
 
-      In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional query parameter `correlationId` can be used to identify several instances of our form iframes. To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
+      In the iframe setup, the iframe should be rendered with a query parameter `iframe=1`. An optional query parameter `correlationId` can be used to identify several instances of our form iframes. An optional query parameter `autoHeight=1` can be used to enable automatic height adjustment of the iframe (see [Iframe height](#iframe-height) below). To use this setup the parent origins must be allowed in our form configuration to prevent phishing.
 
       If using Content Security Policy (CSP) the form origin should be allowed in `frame-src`:
       - https://form.pingwire.io on production
@@ -127,7 +127,16 @@ tags:
       |`IFRAME_READY`|Message sent by the iframe when it is ready to receive the `IFRAME_INIT` message. This message will be sent at regular interval until `IFRAME_INIT` message is received. | No payload|
       |`IFRAME_INIT`|Message sent by the host window trigger the parent origin verification when it receive the `IFRAME_READY` message| No payload|
       |`IFRAME_ACK`|Message sent by the iframe when the parent origin has been validated| No payload|
-      |`IFRAME_RESIZE`|Message sent by the iframe to give the new height of the iframe| `height`: height of the iframe (in px)|
+      |`IFRAME_RESIZE`|Message sent by the iframe to give the new height of the iframe. Only emitted when the `autoHeight=1` query parameter is passed.| `height`: height of the iframe (in px)|
+
+      #### Iframe height
+
+      The recommended iframe height depends on whether the `autoHeight` query parameter is used:
+
+      - **Without `autoHeight`**: Set a fixed height of `100dvh` on the `<iframe>` element so the form fills the full viewport height.
+      - **With `autoHeight=1`**: Do not set a fixed height on the `<iframe>`. Instead, listen for `IFRAME_RESIZE` messages and update the iframe height dynamically from `data.payload.height`. This is useful when the form is embedded inline in a page and should grow or shrink to match its content.
+
+      The `IFRAME_RESIZE` event is **only emitted** when the `autoHeight=1` query parameter is present.
 
       The iframe requires a handshake with the host window before rendering any useful content. This is as a security measure so that we can verify that the host window is one of the allowed parent origins. The handshake will follow the following flow:
 
