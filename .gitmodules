@@ -1,0 +1,3 @@
+[submodule "pingwire"]
+	path = pingwire
+	url = git@github.com:Pingwire/pingwire.git
