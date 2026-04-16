@@ -4,11 +4,21 @@ properties:
     type: object
     description: Information about the product
     properties:
-      adress:
+      name:
+        type: string
+        description: Name of the line of business
+      type:
+        type: string
+        description: Type of the line of business
+        enum:
+        - physical
+        - digital
+        - hybrid
+      address:
         type: object
-        description: Address associated to the lineOfBusiness product
+        description: Address associated to the line of business
         properties:
-          streetAdress:
+          streetAddress:
             type: string
             description: Street part of the address. Typically street name and house number
           postalCode:
@@ -26,11 +36,11 @@ properties:
       email:
         type: string
         format: email
-        description: Contact email associated to the lineOfBusiness product
+        description: Contact email associated to the line of business
         examples:
         - test@test.com
       phone:
         type: string
-        description: Phone number associated to the lineOfBusiness product
+        description: Phone number associated to the line of business
         examples:
         - "0701234567"
