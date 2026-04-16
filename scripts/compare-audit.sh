@@ -2,23 +2,6 @@
 npm_audit_report=${NPM_AUDIT_REPORT:-npm-audit-report.json}
 ack_file=${ACK_FILE:-acknowledged-npm-vulnerabilities.json}
 
-find_effects() {
-  names=$1
-  depth=${2:-0}
-
-  # prevent infinite recursion by limiting depth
-  if [ "$depth" -ge 10 ]; then
-    echo "[max depth reached]"
-    return
-  fi
-
-  for name in $names; do
-    echo $name
-    effects=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | select(.value.name == $name) | .value.effects[]' "$npm_audit_report")
-    echo $(find_effects "$effects" $((depth + 1)))
-  done
-}
-
 service_name=$1
 path=$2
 echo "Running npm audit for $service_name service located at $path"
@@ -37,30 +20,30 @@ fi
 # Extract acknowledged vulnerability IDs
 ack_ids=$(jq -r '.acknowledgedVulnerabilities[] | to_entries[] | .key' "$ack_file")
 
-# Extract current vulnerabilities names
-current_vuln_names=$(jq -r '.vulnerabilities | to_entries[] | .value.via[] | select(type == "object") | .name' "$npm_audit_report")
-
 # Find new, unacknowledged vulnerabilities
 new_vulns=0
 vulnerability_msg="⚠️ New Unacknowledged Vulnerabilities Detected for $service_name service:
 
 "
-for name in $current_vuln_names; do
-  id=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .source else empty end' "$npm_audit_report")
-  dependency=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .dependency else empty end' "$npm_audit_report")
-  title=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .title else empty end' "$npm_audit_report")
-  url=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .url else empty end' "$npm_audit_report")
-  severity=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name then .severity else empty end' "$npm_audit_report")
-  effects=$(jq -r --arg name "$name" '.vulnerabilities | to_entries[] | select(.value.name == $name) | .value.effects[]' "$npm_audit_report")
-  all_effects=$(find_effects "$effects")
+while IFS=$'\t' read -r name id; do
+  dependency=$(jq -r --arg name "$name" --argjson id "$id" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name and .source == $id then .dependency else empty end' "$npm_audit_report")
+  title=$(jq -r --arg name "$name" --argjson id "$id" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name and .source == $id then .title else empty end' "$npm_audit_report")
+  url=$(jq -r --arg name "$name" --argjson id "$id" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name and .source == $id then .url else empty end' "$npm_audit_report")
+  severity=$(jq -r --arg name "$name" --argjson id "$id" '.vulnerabilities | to_entries[] | .value.via[] | if type == "object" and .name == $name and .source == $id then .severity else empty end' "$npm_audit_report")
+  is_direct=$(jq -r --arg name "$name" 'if .vulnerabilities[$name].isDirect then "yes" else "no" end' "$npm_audit_report")
 
-  if [ ${#all_effects[@]} -eq 0 ] || [ -z "${all_effects[0]}" ]; then
-    used="Package is used at root level"
+  if [ "$is_direct" = "yes" ]; then
+    used="Package is a direct dependency"
   else
-    used="Package is used in:"
-    for effect in $all_effects; do
-      used+=" $effect"
-    done
+    parents=$(jq -r --arg name "$name" '
+      .packages | to_entries[] |
+      select(
+        ((.value.dependencies // {}) | has($name)) or
+        ((.value.devDependencies // {}) | has($name))
+      ) |
+      .key | ltrimstr("node_modules/") | select(. != "")
+    ' package-lock.json | sort -u | tr '\n' ' ' | sed 's/ $//')
+    used="Package is a transitive dependency pulled in by: $parents"
   fi
 
   case "$severity" in
@@ -88,7 +71,7 @@ for name in $current_vuln_names; do
     - More information can be found here: $url.
 "
   fi
-done
+done < <(jq -r '.vulnerabilities | to_entries[] | .value.via[] | select(type == "object") | "\(.name)\t\(.source)"' "$npm_audit_report" | sort -u)
 
 # Format Slack message
 if [ "$new_vulns" -eq 0 ]; then
