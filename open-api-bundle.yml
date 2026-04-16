@@ -114,6 +114,12 @@ tags:
       - https://form.pingwire.io on production
       - https://form.staging.pingwire.io on staging
 
+      If using the `sandbox` attribute on the `<iframe>` element, the following sandbox directives are required:
+      - `allow-scripts`: the iframe needs to run JavaScript
+      - `allow-same-origin`: the iframe needs to make cross-origin API calls with its correct origin so that the backend can verify the requests come from an expected origin (CORS checks)
+
+      > **Note:** Combining `allow-scripts` and `allow-same-origin` is generally discouraged because it can, in some cases, allow the iframe to remove its own sandbox restrictions using scripts (e.g. via `document.domain` manipulation). However, this attack vector only applies when the iframe and the parent page share the same origin. Since our form is always served from a dedicated origin (`form.pingwire.io` or `form.staging.pingwire.io`) which will differ from your application's origin, this risk does not apply here.
+
       Schema of the `postMessage` events:
       - `type`: one of the types described in the table below.
       - `correlationId`: optional, only used if specified in the iframe query parameters. Can be used to identify several instance of our form iframe.
