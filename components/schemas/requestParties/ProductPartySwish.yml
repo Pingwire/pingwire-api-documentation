@@ -1,3 +1,9 @@
+description: |-
+  Swish product reference in a request payload.
+
+  Parties can be specified with roles:
+  - `product-holder` - The primary account holder
+  - `connected-account` - An associated account entity
 allOf:
   - $ref: '#/components/schemas/ProductPartyBase'
   - $ref: '#/components/schemas/ProductSwishProductInformation'

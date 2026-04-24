@@ -1,0 +1,4 @@
+description: A representation of a kyc request
+allOf:
+  - $ref: '#/components/schemas/RequestKycBody'
+  - $ref: '#/components/schemas/Request'

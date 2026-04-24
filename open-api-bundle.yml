@@ -6177,12 +6177,20 @@ components:
         - $ref: '#/components/schemas/RequestCarKycBody'
         - $ref: '#/components/schemas/Request'
     RequestIndividualKyc:
-      description: A representation of a individualKyc
+      deprecated: true
+      description: |-
+        **[DEPRECATED]** A representation of an individualKyc request.
+
+        Use `RequestKyc` instead, which accepts any entity type including individuals.
       allOf:
         - $ref: '#/components/schemas/RequestIndividualKycBody'
         - $ref: '#/components/schemas/Request'
     RequestIndividualKycBody:
-      description: A representation of a individualKyc
+      deprecated: true
+      description: |-
+        **[DEPRECATED]** A representation of an individualKyc request payload.
+
+        Use `RequestKycBody` instead, which accepts any entity type including individuals.
       allOf:
         - $ref: '#/components/schemas/RequestBody'
         - type: object
@@ -6213,12 +6221,20 @@ components:
               required:
                 - entity
     RequestBusinessKyc:
-      description: A representation of a businessKyc
+      deprecated: true
+      description: |-
+        **[DEPRECATED]** A representation of a businessKyc request.
+
+        Use `RequestKyc` instead, which accepts any entity type including businesses.
       allOf:
         - $ref: '#/components/schemas/RequestBusinessKycBody'
         - $ref: '#/components/schemas/Request'
     RequestBusinessKycBody:
-      description: A representation of a businessKyc
+      deprecated: true
+      description: |-
+        **[DEPRECATED]** A representation of a businessKyc request payload.
+
+        Use `RequestKycBody` instead, which accepts any entity type including businesses.
       allOf:
         - $ref: '#/components/schemas/RequestBody'
         - type: object
@@ -6371,6 +6387,34 @@ components:
                 - amount
                 - date
                 - currency
+    RequestKyc:
+      description: A representation of a kyc request
+      allOf:
+        - $ref: '#/components/schemas/RequestKycBody'
+        - $ref: '#/components/schemas/Request'
+    RequestKycBody:
+      description: A representation of a kyc request payload
+      allOf:
+        - $ref: '#/components/schemas/RequestBody'
+        - type: object
+          properties:
+            extraInformation:
+              type: object
+              description: Payload of the request. Its schema depends of the requestType
+              properties:
+                entity:
+                  description: |-
+                    Entity that is subject of the KYC.
+
+                    Accepts any entity type: Individual, Business, Car, Account, or Product.
+                  oneOf:
+                    - $ref: '#/components/schemas/IndividualRequestParty'
+                    - $ref: '#/components/schemas/BusinessRequestParty'
+                    - $ref: '#/components/schemas/CarRequestParty'
+                    - $ref: '#/components/schemas/AccountRequestParty'
+                    - $ref: '#/components/schemas/Product'
+              required:
+                - entity
     RequestBody:
       type: object
       required:
@@ -6383,6 +6427,7 @@ components:
           transaction: '#/components/schemas/RequestTransactionBody'
           carKyc: '#/components/schemas/RequestCarKycBody'
           carPurchase: '#/components/schemas/RequestCarPurchaseBody'
+          kyc: '#/components/schemas/RequestKycBody'
           individualKyc: '#/components/schemas/RequestIndividualKycBody'
           businessKyc: '#/components/schemas/RequestBusinessKycBody'
       properties:
@@ -6402,7 +6447,10 @@ components:
           description: Segment has been renamed to process. Use the field process instead.
           format: ObjectId
         requestType:
-          description: Type of the request. Each type is associated to a custom extraInformation schema.
+          description: |-
+            Type of the request. Each type is associated to a custom extraInformation schema.
+
+            Prefer `kyc` for new KYC requests. `individualKyc` and `businessKyc` are deprecated.
           examples:
             - transaction
           type: string
@@ -6432,6 +6480,7 @@ components:
               transaction: '#/components/schemas/RequestTransaction'
               carKyc: '#/components/schemas/RequestCarKyc'
               carPurchase: '#/components/schemas/RequestCarPurchase'
+              kyc: '#/components/schemas/RequestKyc'
               individualKyc: '#/components/schemas/RequestIndividualKyc'
               businessKyc: '#/components/schemas/RequestBusinessKyc'
           properties:
@@ -8619,14 +8668,34 @@ components:
     ProductParty:
       $ref: '#/components/schemas/Product-2'
     ProductPartyInvoice:
+      description: |-
+        Invoice product reference in a request payload.
+
+        Parties can be specified with roles:
+        - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+        - `issuer` - The entity that issued the invoice
+        - `connected-account` - An associated account entity
+        - `product-holder` - Legacy role, deprecated in favor of debtor
       allOf:
         - $ref: '#/components/schemas/ProductPartyBase'
         - $ref: '#/components/schemas/ProductInvoiceProductInformation'
     ProductPartySwish:
+      description: |-
+        Swish product reference in a request payload.
+
+        Parties can be specified with roles:
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductPartyBase'
         - $ref: '#/components/schemas/ProductSwishProductInformation'
     ProductPartyLineOfBusiness:
+      description: |-
+        Line of Business product reference in a request payload.
+
+        Parties can be specified with roles:
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductPartyBase'
         - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
@@ -8658,6 +8727,32 @@ components:
           description: Number of the product
         productType:
           $ref: '#/components/schemas/ProductTypes'
+        parties:
+          type: array
+          items:
+            type: object
+            properties:
+              type:
+                $ref: '#/components/schemas/EntityTypes'
+              id:
+                type: string
+                format: ObjectId
+                examples:
+                  - 62b9437318fe4517089b2833
+                description: ID of the entity
+              role:
+                $ref: '#/components/schemas/ProductPartyRoles'
+            required:
+              - type
+              - id
+              - role
+          description: |-
+            List of entities (parties) linked to this product.
+
+            **Note:** Available roles depend on the product type:
+            - **swish**: product-holder, connected-account
+            - **lineOfBusiness**: product-holder, connected-account
+            - **invoice**: debtor, issuer, connected-account, product-holder (deprecated for this type)
         groups:
           description: List of groups the entity should be associated to
           type: array
@@ -8665,14 +8760,38 @@ components:
             type: string
             format: ObjectId
     ProductInvoice:
+      description: |
+        Invoice product.
+
+        **Allowed party roles:**
+        - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+        - `issuer` - The entity that issued the invoice (recommended over productInformation.issuer)
+        - `connected-account` - An associated account entity
+        - `product-holder` - Legacy role, deprecated in favor of debtor
       allOf:
         - $ref: '#/components/schemas/ProductBase'
         - $ref: '#/components/schemas/ProductInvoiceProductInformation'
     ProductInvoiceBody:
+      description: |
+        Invoice product creation payload.
+
+        **Allowed party roles:**
+        - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+        - `issuer` - The entity that issued the invoice (recommended over productInformation.issuer)
+        - `connected-account` - An associated account entity
+        - `product-holder` - Legacy role, deprecated in favor of debtor
       allOf:
         - $ref: '#/components/schemas/ProductBodyBase'
         - $ref: '#/components/schemas/ProductInvoiceProductInformation'
     ProductInvoiceBodyUpdate:
+      description: |
+        Invoice product update payload.
+
+        **Allowed party roles:**
+        - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+        - `issuer` - The entity that issued the invoice (recommended over productInformation.issuer)
+        - `connected-account` - An associated account entity
+        - `product-holder` - Legacy role, deprecated in favor of debtor
       allOf:
         - $ref: '#/components/schemas/ProductBodyUpdateBase'
         - $ref: '#/components/schemas/ProductInvoiceProductInformation'
@@ -8722,7 +8841,11 @@ components:
                 - CUST-2002
             issuer:
               type: object
-              description: Information about the issuer of the invoice
+              deprecated: true
+              description: |
+                **[DEPRECATED]** Information about the issuer of the invoice.
+
+                This field is deprecated. Use a party with role `issuer` in the product's `parties` array instead.
               required:
                 - type
                 - id
@@ -8770,14 +8893,32 @@ components:
       required:
         - productInformation
     ProductSwish:
+      description: |
+        Swish product.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBase'
         - $ref: '#/components/schemas/ProductSwishProductInformation'
     ProductSwishBody:
+      description: |
+        Swish product creation payload.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBodyBase'
         - $ref: '#/components/schemas/ProductSwishProductInformation'
     ProductSwishBodyUpdate:
+      description: |
+        Swish product update payload.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBodyUpdateBase'
         - $ref: '#/components/schemas/ProductSwishProductInformation'
@@ -8794,14 +8935,32 @@ components:
               examples:
                 - '0701234567'
     ProductLineOfBusiness:
+      description: |
+        Line of Business product.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBase'
         - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
     ProductLineOfBusinessBody:
+      description: |
+        Line of Business product creation payload.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBodyBase'
         - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
     ProductLineOfBusinessBodyUpdate:
+      description: |
+        Line of Business product update payload.
+
+        **Allowed party roles:**
+        - `product-holder` - The primary account holder
+        - `connected-account` - An associated account entity
       allOf:
         - $ref: '#/components/schemas/ProductBodyUpdateBase'
         - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'
@@ -11134,6 +11293,10 @@ components:
         - type
     Product-2:
       type: object
+      description: |-
+        Product reference in a request payload.
+
+        Supports specifying the product's parties array, allowing you to define the roles of entities (debtor, issuer, product-holder, connected-account) associated with the product at the time of creation.
       oneOf:
         - $ref: '#/components/schemas/ProductPartyInvoice'
         - $ref: '#/components/schemas/ProductPartySwish'
@@ -11167,10 +11330,18 @@ components:
         - lineOfBusiness
     productPartyRoles:
       type: string
-      description: Role of a product party
+      description: |
+        Role of a product party.
+
+        **Role availability by product type:**
+        - **swish**: product-holder, connected-account
+        - **lineOfBusiness**: product-holder, connected-account
+        - **invoice**: debtor, issuer, connected-account, product-holder (deprecated for this type, use debtor instead)
       enum:
         - product-holder
         - connected-account
+        - issuer
+        - debtor
     sourceOfFunds:
       type: string
       enum:

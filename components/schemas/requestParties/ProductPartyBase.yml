@@ -25,6 +25,32 @@ properties:
     description: Number of the product
   productType:
     $ref: '#/components/schemas/ProductTypes'
+  parties:
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/EntityTypes'
+        id:
+          type: string
+          format: ObjectId
+          examples:
+          - 62b9437318fe4517089b2833
+          description: ID of the entity
+        role:
+          $ref: '#/components/schemas/ProductPartyRoles'
+      required:
+      - type
+      - id
+      - role
+    description: |-
+      List of entities (parties) linked to this product.
+
+      **Note:** Available roles depend on the product type:
+      - **swish**: product-holder, connected-account
+      - **lineOfBusiness**: product-holder, connected-account
+      - **invoice**: debtor, issuer, connected-account, product-holder (deprecated for this type)
   groups:
       description: List of groups the entity should be associated to
       type: array

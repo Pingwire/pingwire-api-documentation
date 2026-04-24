@@ -1,3 +1,9 @@
+description: |
+  Swish product.
+
+  **Allowed party roles:**
+  - `product-holder` - The primary account holder
+  - `connected-account` - An associated account entity
 allOf:
   - $ref: '#/components/schemas/ProductBase'
   - $ref: '#/components/schemas/ProductSwishProductInformation'

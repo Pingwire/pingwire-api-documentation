@@ -1,4 +1,8 @@
-description: A representation of a businessKyc
+deprecated: true
+description: |-
+  **[DEPRECATED]** A representation of a businessKyc request.
+
+  Use `RequestKyc` instead, which accepts any entity type including businesses.
 allOf:
   - $ref: '#/components/schemas/RequestBusinessKycBody'
   - $ref: '#/components/schemas/Request'

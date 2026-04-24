@@ -23,6 +23,7 @@ allOf:
       transaction: '#/components/schemas/RequestTransaction'
       carKyc: '#/components/schemas/RequestCarKyc'
       carPurchase: '#/components/schemas/RequestCarPurchase'
+      kyc: '#/components/schemas/RequestKyc'
       individualKyc: '#/components/schemas/RequestIndividualKyc'
       businessKyc: '#/components/schemas/RequestBusinessKyc'
   properties:

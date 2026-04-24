@@ -1,4 +1,8 @@
 type: object
+description: |-
+  Product reference in a request payload.
+
+  Supports specifying the product's parties array, allowing you to define the roles of entities (debtor, issuer, product-holder, connected-account) associated with the product at the time of creation.
 oneOf:
   - $ref: '#/components/schemas/ProductPartyInvoice'
   - $ref: '#/components/schemas/ProductPartySwish'
