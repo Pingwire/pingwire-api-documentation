@@ -299,6 +299,10 @@ components:
       $ref: "./components/schemas/RequestCarKycBody.yml"
     RequestCarPurchaseBody:
       $ref: "./components/schemas/RequestCarPurchaseBody.yml"
+    RequestKyc:
+      $ref: "./components/schemas/RequestKyc.yml"
+    RequestKycBody:
+      $ref: "./components/schemas/RequestKycBody.yml"
     RequestBody:
       $ref: "./components/schemas/RequestBody.yml"
     Request:

@@ -1,0 +1,22 @@
+description: A representation of a kyc request payload
+allOf:
+  - $ref: '#/components/schemas/RequestBody'
+  - type: object
+    properties:
+      extraInformation:
+        type: object
+        description: Payload of the request. Its schema depends of the requestType
+        properties:
+          entity:
+            description: |-
+              Entity that is subject of the KYC.
+
+              Accepts any entity type: Individual, Business, Car, Account, or Product.
+            oneOf:
+            - $ref: '#/components/schemas/IndividualRequestParty'
+            - $ref: '#/components/schemas/BusinessRequestParty'
+            - $ref: '#/components/schemas/CarRequestParty'
+            - $ref: '#/components/schemas/AccountRequestParty'
+            - $ref: '#/components/schemas/Product'
+        required:
+          - entity

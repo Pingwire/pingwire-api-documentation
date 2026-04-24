@@ -9,6 +9,7 @@ discriminator:
     transaction: '#/components/schemas/RequestTransactionBody'
     carKyc: '#/components/schemas/RequestCarKycBody'
     carPurchase: '#/components/schemas/RequestCarPurchaseBody'
+    kyc: '#/components/schemas/RequestKycBody'
     individualKyc: '#/components/schemas/RequestIndividualKycBody'
     businessKyc: '#/components/schemas/RequestBusinessKycBody'
 properties:
@@ -28,7 +29,10 @@ properties:
     description: Segment has been renamed to process. Use the field process instead.
     format: ObjectId
   requestType:
-    description: Type of the request. Each type is associated to a custom extraInformation schema.
+    description: |-
+      Type of the request. Each type is associated to a custom extraInformation schema.
+
+      Prefer `kyc` for new KYC requests. `individualKyc` and `businessKyc` are deprecated.
     examples:
     - transaction
     type: string
