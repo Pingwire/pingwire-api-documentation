@@ -1,3 +1,11 @@
+description: |
+  Invoice product.
+
+  **Allowed party roles:**
+  - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+  - `issuer` - The entity that issued the invoice (recommended over productInformation.issuer)
+  - `connected-account` - An associated account entity
+  - `product-holder` - Legacy role, deprecated in favor of debtor
 allOf:
   - $ref: '#/components/schemas/ProductBase'
   - $ref: '#/components/schemas/ProductInvoiceProductInformation'

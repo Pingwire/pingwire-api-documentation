@@ -1,3 +1,11 @@
+description: |-
+  Invoice product reference in a request payload.
+
+  Parties can be specified with roles:
+  - `debtor` - The entity that owes the invoice (replaces the deprecated product-holder role)
+  - `issuer` - The entity that issued the invoice
+  - `connected-account` - An associated account entity
+  - `product-holder` - Legacy role, deprecated in favor of debtor
 allOf:
   - $ref: '#/components/schemas/ProductPartyBase'
   - $ref: '#/components/schemas/ProductInvoiceProductInformation'
