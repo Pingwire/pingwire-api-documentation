@@ -1,3 +1,9 @@
+description: |
+  Line of Business product creation payload.
+
+  **Allowed party roles:**
+  - `product-holder` - The primary account holder
+  - `connected-account` - An associated account entity
 allOf:
   - $ref: '#/components/schemas/ProductBodyBase'
   - $ref: '#/components/schemas/ProductLineOfBusinessProductInformation'

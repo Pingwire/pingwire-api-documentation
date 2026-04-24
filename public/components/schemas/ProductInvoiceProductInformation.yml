@@ -43,7 +43,11 @@ properties:
         - "CUST-2002"
       issuer:
         type: object
-        description: Information about the issuer of the invoice
+        deprecated: true
+        description: |
+          **[DEPRECATED]** Information about the issuer of the invoice.
+
+          This field is deprecated. Use a party with role `issuer` in the product's `parties` array instead.
         required:
           - type
           - id

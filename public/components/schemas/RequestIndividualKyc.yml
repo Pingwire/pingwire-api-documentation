@@ -1,4 +1,8 @@
-description: A representation of a individualKyc
+deprecated: true
+description: |-
+  **[DEPRECATED]** A representation of an individualKyc request.
+
+  Use `RequestKyc` instead, which accepts any entity type including individuals.
 allOf:
   - $ref: '#/components/schemas/RequestIndividualKycBody'
   - $ref: '#/components/schemas/Request'
