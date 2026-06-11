@@ -465,8 +465,6 @@ components:
       $ref: "./components/schemas/Pep.yml"
     NationalIdentifier:
       $ref: "./components/schemas/NationalIdentifier.yml"
-    NationalIdentifierRestricted:
-      $ref: "./components/schemas/NationalIdentifierRestricted.yml"
     ExpectedTransactionBehaviour:
       $ref: "./components/schemas/ExpectedTransactionBehaviour.yml"
 

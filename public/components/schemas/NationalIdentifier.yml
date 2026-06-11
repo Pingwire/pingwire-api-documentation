@@ -1,5 +1,3 @@
-allOf:
- - $ref: '#/components/schemas/NationalIdentifierRestricted'
 type: object
 required:
 - type
@@ -15,7 +13,9 @@ oneOf:
         enum: [SWE, FIN, DKK, GBR, ZAF]
       type:
         type: string
-        enum: [socialSecurityNumber]
+        enum: 
+        - socialSecurityNumber
+        - coordinationNumber
         description: Type of the national identifier.
   - type: object
     title: Other countries national identifiers
@@ -25,10 +25,5 @@ oneOf:
       type:
         type: string
         enum: 
-        - socialSecurityNumber
-        - nationalInsuranceNumber
-        - nationalID
         - passportNumber
-        - driversLicenseNumber
-        - other
         description: Type of the national identifier.

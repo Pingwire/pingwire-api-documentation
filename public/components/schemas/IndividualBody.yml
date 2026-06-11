@@ -19,7 +19,7 @@ properties:
     type: array
     description: National identifiers of the individual
     items:
-      $ref: '#/components/schemas/NationalIdentifierRestricted'
+      $ref: '#/components/schemas/NationalIdentifier'
   birthDate:
     type: string
     format: date-time
