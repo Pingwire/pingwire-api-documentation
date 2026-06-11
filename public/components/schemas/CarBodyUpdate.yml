@@ -14,3 +14,15 @@ allOf:
       items:
         type: string
         format: ObjectId
+    addGroups:
+      description: List of group IDs to add to the entity.
+      type: array
+      items:
+        type: string
+        format: ObjectId
+    removeGroups:
+      description: List of group IDs to remove from the entity.
+      type: array
+      items:
+        type: string
+        format: ObjectId
