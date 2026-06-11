@@ -5524,6 +5524,18 @@ components:
               type: array
               items:
                 type: string
+            addGroups:
+              description: List of group IDs to add to the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            removeGroups:
+              description: List of group IDs to remove from the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
     AccountEntity:
       allOf:
         - type: object
@@ -5673,6 +5685,18 @@ components:
               type: array
               items:
                 type: string
+            addGroups:
+              description: List of group IDs to add to the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            removeGroups:
+              description: List of group IDs to remove from the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
     Business:
       allOf:
         - type: object
@@ -6591,6 +6615,18 @@ components:
               type: array
               items:
                 type: string
+            addGroups:
+              description: List of group IDs to add to the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            removeGroups:
+              description: List of group IDs to remove from the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
     AccountRequestParty:
       $ref: '#/components/schemas/Account'
     BusinessRequestParty:
@@ -6636,6 +6672,18 @@ components:
                 - Blocked
             groups:
               description: List of groups the entity should be associated to
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            addGroups:
+              description: List of group IDs to add to the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            removeGroups:
+              description: List of group IDs to remove from the entity.
               type: array
               items:
                 type: string
@@ -8665,6 +8713,18 @@ components:
               type: array
               items:
                 type: string
+            addGroups:
+              description: List of group IDs to add to the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
+            removeGroups:
+              description: List of group IDs to remove from the entity.
+              type: array
+              items:
+                type: string
+                format: ObjectId
     ProductParty:
       $ref: '#/components/schemas/Product-2'
     ProductPartyInvoice:
