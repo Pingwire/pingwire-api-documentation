@@ -38,7 +38,7 @@ properties:
       url: '/#section/Introduction/Unique-Identifier'
     type: array
     items:
-      $ref: '#/components/schemas/NationalIdentifierRestricted'
+      $ref: '#/components/schemas/NationalIdentifier'
   firstName:
     type: string
     description: First name of the individual

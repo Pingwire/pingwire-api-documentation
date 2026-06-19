@@ -12,3 +12,9 @@ properties:
   identifier:
     type: string
     description: Identification number. The format depends of the country chosen.
+  type:
+    type: string
+    enum: 
+    - socialSecurityNumber
+    - passportNumber
+    description: Type of the national identifier. The format depends of the country chosen. Optional, default to socialSecurityNumber if country is SWE, FIN, DKK, GBR, ZAF and passportNumber for other country.
