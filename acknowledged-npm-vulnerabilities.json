@@ -1,3 +1,16 @@
 {
-  "acknowledgedVulnerabilities": []
+  "acknowledgedVulnerabilities": [
+    {
+      "1124334": {
+        "name": "brace-expansion",
+        "dependency": "redoc",
+        "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+        "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+        "severity": "high",
+        "reason": "redoc@2.5.3 pins @redocly/openapi-core to ^1.34.15, which depends on the vulnerable minimatch/brace-expansion chain; npm audit fix --force would only resolve this by downgrading redoc to 1.22.3, a breaking major-version regression",
+        "impact": "brace-expansion is only exercised by @redocly/openapi-core's CLI glob matching during local bundling and CI; it never processes user-controlled input in the deployed docs site",
+        "wayForward": "Monitor redoc for a release that upgrades its @redocly/openapi-core dependency to 2.x (which already uses a patched minimatch/brace-expansion)"
+      }
+    }
+  ]
 }
