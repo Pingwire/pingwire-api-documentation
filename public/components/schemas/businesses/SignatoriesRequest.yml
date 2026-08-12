@@ -42,7 +42,7 @@ properties:
                   type: array
                   description: National identifier of the signatory. This can be used to link it to a previously created entity.
                   items:
-                    $ref: '#/components/schemas/NationalIdentifierRestricted'
+                    $ref: '#/components/schemas/NationalIdentifier'
                   externalDocs:
                     description: Unique Identifier
                     url: '/#section/Introduction/Unique-Identifier'
