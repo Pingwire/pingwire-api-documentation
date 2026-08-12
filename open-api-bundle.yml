@@ -6568,7 +6568,7 @@ components:
           type: array
           description: National identifiers of the individual
           items:
-            $ref: '#/components/schemas/NationalIdentifierRestricted'
+            $ref: '#/components/schemas/NationalIdentifier'
         birthDate:
           type: string
           format: date-time
@@ -9371,7 +9371,7 @@ components:
                         type: array
                         description: National identifier of the beneficial owner. This can be used to link it to a previously created entity.
                         items:
-                          $ref: '#/components/schemas/NationalIdentifierRestricted'
+                          $ref: '#/components/schemas/NationalIdentifier'
                         externalDocs:
                           description: Unique Identifier
                           url: /#section/Introduction/Unique-Identifier
@@ -9551,7 +9551,7 @@ components:
                         type: array
                         description: National identifier of the board member. This can be used to link it to a previously created entity.
                         items:
-                          $ref: '#/components/schemas/NationalIdentifierRestricted'
+                          $ref: '#/components/schemas/NationalIdentifier'
                         externalDocs:
                           description: Unique Identifier
                           url: /#section/Introduction/Unique-Identifier
@@ -9704,7 +9704,7 @@ components:
                         type: array
                         description: National identifier of the signatory. This can be used to link it to a previously created entity.
                         items:
-                          $ref: '#/components/schemas/NationalIdentifierRestricted'
+                          $ref: '#/components/schemas/NationalIdentifier'
                         externalDocs:
                           description: Unique Identifier
                           url: /#section/Introduction/Unique-Identifier
@@ -10843,8 +10843,6 @@ components:
               format: date-time
               description: End date of the PEP role
     NationalIdentifier:
-      allOf:
-        - $ref: '#/components/schemas/NationalIdentifierRestricted'
       type: object
       required:
         - type
@@ -10867,6 +10865,7 @@ components:
               type: string
               enum:
                 - socialSecurityNumber
+                - coordinationNumber
               description: Type of the national identifier.
         - type: object
           title: Other countries national identifiers
@@ -10876,28 +10875,8 @@ components:
             type:
               type: string
               enum:
-                - socialSecurityNumber
-                - nationalInsuranceNumber
-                - nationalID
                 - passportNumber
-                - driversLicenseNumber
-                - other
               description: Type of the national identifier.
-    NationalIdentifierRestricted:
-      type: object
-      required:
-        - country
-        - identifier
-      properties:
-        country:
-          type: string
-          format: ISO 3166 ALPHA-3
-          examples:
-            - SWE
-          description: Country of the national identifier
-        identifier:
-          type: string
-          description: Identification number. The format depends of the country chosen.
     ExpectedTransactionBehaviour:
       type: object
       properties:
@@ -11077,7 +11056,7 @@ components:
             url: /#section/Introduction/Unique-Identifier
           type: array
           items:
-            $ref: '#/components/schemas/NationalIdentifierRestricted'
+            $ref: '#/components/schemas/NationalIdentifier'
         firstName:
           type: string
           description: First name of the individual
