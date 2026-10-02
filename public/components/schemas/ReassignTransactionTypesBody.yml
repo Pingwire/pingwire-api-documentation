@@ -1,0 +1,22 @@
+type: object
+description: |
+  Transaction Types to add to and/or remove from the Transaction. At least one of `toAdd` and `toRemove` is required,
+  and the same id may not appear in both. Every id must be a Transaction Type of your Account. Inactive Transaction Types are accepted.
+properties:
+  toAdd:
+    type: array
+    description: Transaction Type object ids to add to the Transaction.
+    items:
+      type: string
+      format: ObjectId
+    example: ['65f1c0a2b3d4e5f6a7b8c9d0']
+  toRemove:
+    type: array
+    description: Transaction Type object ids to remove from the Transaction.
+    items:
+      type: string
+      format: ObjectId
+    example: ['65f1c0a2b3d4e5f6a7b8c9d1']
+anyOf:
+  - required: [toAdd]
+  - required: [toRemove]

@@ -1,0 +1,76 @@
+post:
+  tags:
+    - Requests
+  summary: Reassign transaction types
+  operationId: reassignRequestTransactionTypes
+  description: |
+    Add or remove Transaction Types on an existing Transaction, without touching the rest of the Transaction.
+
+    Use this endpoint rather than updating the Request to correct the Transaction Types of a Transaction:
+    updating the Request replaces `extraInformation` as a whole, while this endpoint only changes the
+    Transaction Types and keeps the transaction statistics consistent.
+
+    - Existing Transaction Types that are not listed in `toAdd` or `toRemove` are kept.
+    - Repeating a call is a no-op, so it is safe to retry.
+    - Only `transaction` Requests are supported.
+    - Transaction statistics are updated.
+    - Rules are **not** re-run on the Transaction.
+    - The change is recorded in the Audit Trail.
+    - Requires the `RequestUpdate` permission.
+  parameters:
+  - in: path
+    name: id
+    description: Request (Transaction) object id
+    example: 620a2958bfc1d7a803398a6d
+    required: true
+    schema:
+      type: string
+      format: ObjectId
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: "#/components/schemas/ReassignTransactionTypesBody"
+        example:
+          toAdd:
+            - 65f1c0a2b3d4e5f6a7b8c9d0
+          toRemove:
+            - 65f1c0a2b3d4e5f6a7b8c9d1
+  responses:
+    200:
+      description: Successful operation. Returns the resulting set of Transaction Types of the Transaction.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              transactionTypes:
+                type: array
+                description: Transaction Type object ids of the Transaction after the reassignment
+                items:
+                  type: string
+                  format: ObjectId
+          example:
+            transactionTypes:
+              - 65f1c0a2b3d4e5f6a7b8c9d0
+    400:
+      description: Invalid body, unknown Transaction Type or Transaction Type belonging to another Account, or the Request is not a `transaction` Request
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    403:
+      description: Missing `RequestUpdate` permission
+    404:
+      description: Request not found
+    409:
+      description: The Transaction was modified concurrently or another reassignment is in progress. Retry the call.
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
