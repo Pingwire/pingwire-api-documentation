@@ -26,6 +26,11 @@ tags:
   - name: Get started with Webhooks
     description:
       $ref: './paths/webhooks/webhooks.md'
+  - name: Transaction Types
+    description: |
+      To change the Transaction Types of an existing Transaction, use
+      [Reassign transaction types](#operation/reassignRequestTransactionTypes)
+      (`POST /requests/{id}/reassign-transaction-types`).
 x-tagGroups:
   - name: Get started
     tags:
@@ -153,6 +158,8 @@ paths:
     $ref: './paths/requests/requests-id-comments.yml'
   /requests/{id}/reprocess:
     $ref: './paths/requests/requests-id-reprocess.yml'
+  /requests/{id}/reassign-transaction-types:
+    $ref: './paths/requests/requests-id-reassign-transaction-types.yml'
   /members:
       $ref: './paths/members/members.yml'
   /members/{id}:
@@ -305,6 +312,8 @@ components:
       $ref: "./components/schemas/RequestKycBody.yml"
     RequestBody:
       $ref: "./components/schemas/RequestBody.yml"
+    ReassignTransactionTypesBody:
+      $ref: "./components/schemas/ReassignTransactionTypesBody.yml"
     Request:
       $ref: "./components/schemas/Request.yml"
     # BankData:
