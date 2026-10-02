@@ -1,7 +1,7 @@
 type: object
 description: |
   Transaction Types to add to and/or remove from the Transaction. At least one of `toAdd` and `toRemove` is required,
-  and the same id may not appear in both. Every id must be a Transaction Type of your Account. Inactive Transaction Types are accepted.
+  and the same id may not appear in both. Every id must be an existing Transaction Type. Inactive Transaction Types are accepted.
 properties:
   toAdd:
     type: array

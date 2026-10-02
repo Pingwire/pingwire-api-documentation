@@ -30,7 +30,7 @@ tags:
     description: |
       To change the Transaction Types of an existing Transaction, use
       [Reassign transaction types](#operation/reassignRequestTransactionTypes)
-      (`POST /requests/{id}/reassign-transaction-types`) rather than updating the Request.
+      (`POST /requests/{id}/reassign-transaction-types`).
 x-tagGroups:
   - name: Get started
     tags:

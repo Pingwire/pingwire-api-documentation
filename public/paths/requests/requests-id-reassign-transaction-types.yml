@@ -6,10 +6,6 @@ post:
   description: |
     Add or remove Transaction Types on an existing Transaction, without touching the rest of the Transaction.
 
-    Use this endpoint rather than updating the Request to correct the Transaction Types of a Transaction:
-    updating the Request replaces `extraInformation` as a whole, while this endpoint only changes the
-    Transaction Types and keeps the transaction statistics consistent.
-
     - Existing Transaction Types that are not listed in `toAdd` or `toRemove` are kept.
     - Repeating a call is a no-op, so it is safe to retry.
     - Only `transaction` Requests are supported.
@@ -55,7 +51,7 @@ post:
             transactionTypes:
               - 65f1c0a2b3d4e5f6a7b8c9d0
     400:
-      description: Invalid body, unknown Transaction Type or Transaction Type belonging to another Account, or the Request is not a `transaction` Request
+      description: Invalid body, unknown Transaction Type, or the Request is not a `transaction` Request
       content:
         application/json:
           schema:
