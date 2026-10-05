@@ -277,6 +277,11 @@ tags:
       Each webhook delivery includes an idempotency key in an HTTP header (default: `Idempotency-Key`). The value of this header is the unique event identifier.
 
       The same idempotency key is reused across retries of the same event. Consumers are expected to use this key to safely deduplicate duplicate deliveries.
+  - name: Transaction Types
+    description: |
+      To change the Transaction Types of an existing Transaction, use
+      [Reassign transaction types](#operation/reassignRequestTransactionTypes)
+      (`POST /requests/{id}/reassign-transaction-types`).
 paths:
   /account-entities:
     get:
@@ -2683,6 +2688,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidBody'
+        '500':
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+      security:
+        - bearerAuth: []
+  /requests/{id}/reassign-transaction-types:
+    post:
+      tags:
+        - Requests
+      summary: Reassign transaction types
+      operationId: reassignRequestTransactionTypes
+      description: |
+        Add or remove Transaction Types on an existing Transaction, without touching the rest of the Transaction.
+
+        - Existing Transaction Types that are not listed in `toAdd` or `toRemove` are kept.
+        - Repeating a call is a no-op, so it is safe to retry.
+        - Only `transaction` Requests are supported.
+        - Transaction statistics are updated.
+        - Rules are **not** re-run on the Transaction.
+        - The change is recorded in the Audit Trail.
+        - Requires the `RequestUpdate` permission.
+      parameters:
+        - in: path
+          name: id
+          description: Request (Transaction) object id
+          example: 620a2958bfc1d7a803398a6d
+          required: true
+          schema:
+            type: string
+            format: ObjectId
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReassignTransactionTypesBody'
+            example:
+              toAdd:
+                - 65f1c0a2b3d4e5f6a7b8c9d0
+              toRemove:
+                - 65f1c0a2b3d4e5f6a7b8c9d1
+      responses:
+        '200':
+          description: Successful operation. Returns the resulting set of Transaction Types of the Transaction.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionTypes:
+                    type: array
+                    description: Transaction Type object ids of the Transaction after the reassignment
+                    items:
+                      type: string
+                      format: ObjectId
+              example:
+                transactionTypes:
+                  - 65f1c0a2b3d4e5f6a7b8c9d0
+        '400':
+          description: Invalid body, unknown Transaction Type, or the Request is not a `transaction` Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidBody'
+        '403':
+          description: Missing `RequestUpdate` permission
+        '404':
+          description: Request not found
+        '409':
+          description: The Transaction was modified concurrently or another reassignment is in progress. Retry the call.
         '500':
           description: Server Error
           content:
@@ -6478,6 +6556,33 @@ components:
           examples:
             - transaction
           type: string
+    ReassignTransactionTypesBody:
+      type: object
+      description: |
+        Transaction Types to add to and/or remove from the Transaction. At least one of `toAdd` and `toRemove` is required,
+        and the same id may not appear in both. Every id must be an existing Transaction Type. Inactive Transaction Types are accepted.
+      properties:
+        toAdd:
+          type: array
+          description: Transaction Type object ids to add to the Transaction.
+          items:
+            type: string
+            format: ObjectId
+          example:
+            - 65f1c0a2b3d4e5f6a7b8c9d0
+        toRemove:
+          type: array
+          description: Transaction Type object ids to remove from the Transaction.
+          items:
+            type: string
+            format: ObjectId
+          example:
+            - 65f1c0a2b3d4e5f6a7b8c9d1
+      anyOf:
+        - required:
+            - toAdd
+        - required:
+            - toRemove
     Request:
       allOf:
         - type: object
