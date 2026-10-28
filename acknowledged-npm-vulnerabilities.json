@@ -1,3 +1,16 @@
 {
-  "acknowledgedVulnerabilities": []
+  "acknowledgedVulnerabilities": [
+    {
+      "1240992": {
+        "name": "braces",
+        "dependency": "gh-pages",
+        "title": "braces vulnerable to stack-exhaustion denial of service through deeply nested patterns",
+        "url": "https://github.com/advisories/GHSA-vfj7-8cjw-p6xm",
+        "severity": "high",
+        "reason": "No patched version of braces available as of 2026-10-20 — every published version (<=3.0.3) is affected",
+        "impact": "braces is only reached through gh-pages (globby → fast-glob → micromatch), a dev dependency used by the deploy step to publish dist/ with globs from our own config, never on user input, and it is not part of the built docs site.",
+        "wayForward": "Wait for braces to publish a release above 3.0.3 (or for gh-pages/globby to drop it), then run npm audit fix and remove this acknowledgement"
+      }
+    }
+  ]
 }
