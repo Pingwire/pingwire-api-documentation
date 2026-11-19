@@ -1,3 +1,16 @@
 {
-  "acknowledgedVulnerabilities": []
+  "acknowledgedVulnerabilities": [
+    {
+      "1247710": {
+        "name": "picomatch",
+        "dependency": "vite, styled-components, gh-pages",
+        "title": "picomatch vulnerable to ReDoS through single-branch repeated extglobs",
+        "url": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+        "severity": "high",
+        "reason": "No patched version of picomatch available as of 2026-11-18 — the advisory covers every published version (<=4.0.7), and 2.3.2 and 4.0.7 are already the latest on their release lines. npm's suggested --force fix would downgrade vite from 8 to 6.2.7 without resolving it.",
+        "impact": "picomatch is only reached through build and deploy tooling: vite (directly and via tinyglobby/fdir), babel-plugin-styled-components (via styled-components), and gh-pages (globby → fast-glob → micromatch). It matches globs from our own config and file paths in the repo, never user input, and it is not part of the built docs site.",
+        "wayForward": "Wait for picomatch to publish a release above 4.0.7 (and a patched 2.x, or for babel-plugin-styled-components and gh-pages to move off picomatch 2), then run npm audit fix and remove this acknowledgement"
+      }
+    }
+  ]
 }
