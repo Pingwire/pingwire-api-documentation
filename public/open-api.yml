@@ -41,6 +41,7 @@ x-tagGroups:
       - Requests
       - Pings
       - Cases
+      - Risk Model
 
   - name: Entities
     tags:
@@ -192,6 +193,14 @@ paths:
       $ref: './paths/riskClasses/risk-classes-from-score.yml'
   /risk-classes/interval-coverage:
       $ref: './paths/riskClasses/risk-classes-interval-coverage.yml'
+  /risk-model:
+      $ref: './paths/riskModel/risk-model.yml'
+  /risk-model/versions:
+      $ref: './paths/riskModel/risk-model-versions.yml'
+  /risk-model/versions/{number}:
+      $ref: './paths/riskModel/risk-model-versions-number.yml'
+  /risk-model/draft:
+      $ref: './paths/riskModel/risk-model-draft.yml'
   /forms/{formId}/{entityId}/link:
       $ref: './paths/forms/form-entityId-formId.yml'
   /form-answers/{formAnswerId}:
@@ -346,6 +355,12 @@ components:
       $ref: "./components/schemas/RiskClass.yml"
     RiskClassBody:
       $ref: "./components/schemas/RiskClassBody.yml"
+    RiskModelVersion:
+      $ref: "./components/schemas/RiskModelVersion.yml"
+    RiskModelVersionSummary:
+      $ref: "./components/schemas/RiskModelVersionSummary.yml"
+    RiskModelDraft:
+      $ref: "./components/schemas/RiskModelDraft.yml"
     Member:
       $ref: "./components/schemas/Member.yml"
     MemberBody:

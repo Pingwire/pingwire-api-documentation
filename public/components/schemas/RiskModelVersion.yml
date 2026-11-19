@@ -1,0 +1,60 @@
+type: object
+properties:
+  id:
+    type: string
+    format: ObjectId
+    externalDocs:
+      description: Unique identifier
+      url: '/#section/Introduction/Unique-Identifier'
+  number:
+    type: integer
+    description: Version number, starting at 1. Absent when the Account has no Published Version.
+  publishedAt:
+    description: Date, iso 8601 format
+    type: string
+  publishedBy:
+    type: object
+    description: The authenticator that published the version. Empty for migrated versions.
+    properties:
+      id:
+        type: string
+        format: ObjectId
+        description: Id of the authenticator
+      type:
+        type: string
+        enum:
+        - Member
+        - ApiKey
+        - Service
+  description:
+    type: string
+  formula:
+    type: string
+    enum:
+    - probabilistic
+  riskFactors:
+    type: array
+    items:
+      type: object
+      properties:
+        groupId:
+          type: string
+          format: ObjectId
+        points:
+          type: number
+  riskClasses:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          format: ObjectId
+        name:
+          type: string
+        min:
+          type: integer
+          description: Between 0 and 100
+        max:
+          type: integer
+          description: Between 0 and 100
