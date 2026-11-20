@@ -1,0 +1,53 @@
+get:
+  tags:
+    - Risk Model
+  summary: List the Published Versions
+  operationId: listRiskModelVersions
+  description: |
+    Lists the Published Versions of the Risk Model, newest first, without their content.
+    The total number of Published Versions is returned in the `X-Total-Count` header.
+  parameters:
+  - in: query
+    name: _start
+    description: The start number of the versions list.
+    required: false
+    example: 0
+    schema:
+      type: number
+  - in: query
+    name: _end
+    description: The end number of the versions list.
+    required: false
+    example: 10
+    schema:
+      type: number
+  responses:
+    200:
+      description: Successful operation
+      headers:
+        X-Total-Count:
+          description: Total number of Published Versions
+          schema:
+            type: integer
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RiskModelVersionSummary'
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    403:
+      description: Missing `RiskModelGet` permission
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

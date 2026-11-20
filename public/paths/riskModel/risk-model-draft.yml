@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Risk Model
+  summary: Get the Draft
+  operationId: getRiskModelDraft
+  description: Returns the Draft of the Risk Model in full.
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RiskModelDraft"
+    403:
+      description: Missing `RiskModelGet` permission
+    404:
+      description: The Account has no Draft
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

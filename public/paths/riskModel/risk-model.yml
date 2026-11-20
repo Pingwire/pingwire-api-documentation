@@ -1,0 +1,25 @@
+get:
+  tags:
+    - Risk Model
+  summary: Get the Live Version
+  operationId: getRiskModel
+  description: |
+    Returns the Live Version of the Risk Model: the Published Version with the highest number.
+    An Account with no Published Version gets the empty probabilistic model, without `number`.
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RiskModelVersion"
+    403:
+      description: Missing `RiskModelGet` permission
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []

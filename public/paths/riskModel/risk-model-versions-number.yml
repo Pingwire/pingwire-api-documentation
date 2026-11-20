@@ -1,0 +1,40 @@
+get:
+  tags:
+    - Risk Model
+  summary: Get a Published Version
+  operationId: getRiskModelVersion
+  description: Returns one Published Version of the Risk Model in full.
+  parameters:
+  - in: path
+    name: number
+    description: Version number
+    example: 1
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+  responses:
+    200:
+      description: Successful operation
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/RiskModelVersion"
+    400:
+      description: Invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/InvalidBody"
+    403:
+      description: Missing `RiskModelGet` permission
+    404:
+      description: No Published Version with this number
+    500:
+      description: Server Error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorBody"
+  security:
+  - bearerAuth: []
